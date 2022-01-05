@@ -1,0 +1,13 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@{ Layout = "TopLevel.cshtml"; }
+
+
+
+    <main>
+        @{Html.RenderAction("RenderAbout", "Common", new { ipModel = Model });}
+        @{Html.RenderAction("RenderServices", "Common", new { ipModel = Model });}
+        @{Html.RenderAction("RenderGallery", "Common", new { ipModel = Model });}
+        @{Html.RenderAction("RenderTestimonials", "Common", new { ipModel = Model });}
+        @{Html.RenderAction("RenderCallToAction", "Common", new { ipModel = Model });}
+        @{Html.RenderAction("RenderContact", "Common", new { ipModel = Model });}
+    </main>

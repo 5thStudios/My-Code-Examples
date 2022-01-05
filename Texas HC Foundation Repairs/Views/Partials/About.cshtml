@@ -1,0 +1,46 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Models.About>
+
+
+<a name="about"></a>
+<section id="about-panel" class="grid-container">
+    <br />
+    <br class="show-for-large" />
+    <div class="grid-x grid-margin-x grid-padding-x">
+        <div class="cell medium-12 large-9 ">
+            <div class="text-center large-text-left">
+                <h2>What We Do</h2>
+                <img alt="" class="seperator-stars" src="~/images/common/seperator-stars.png" />
+            </div>
+            @Model.StrWhatWeDo
+            <br />
+            <div class="text-center large-text-left">
+                <a href="#services" class="button">Our Services</a>
+            </div>
+            <br class="show-for-medium-only" />
+        </div>
+        <div class="cell medium-12 large-6 text-center">
+            <br class="hide-for-large" />
+            <br class="hide-for-medium" />
+            <img alt="" class="featured-img" src="@Model.FeaturedImgUrl" />
+            <br class="hide-for-large" />
+            <br class="hide-for-large" />
+            <br class="hide-for-large" />
+        </div>
+        <div class="cell medium-24 large-9 ">
+            <div class="text-center large-text-left">
+                <h3>Who We Are</h3>
+                <img alt="" class="seperator-stripes" src="~/images/common/seperator-stripes.jpg" />
+            </div>
+            @Model.StrWhoWeAre
+            <br />
+            <br />
+            <div class="text-center large-text-left">
+                <h3>Free Consultation</h3>
+                <img alt="" class="seperator-stripes" src="~/images/common/seperator-stripes.jpg" />
+            </div>
+            @Model.StrFreeConsult
+        </div>
+    </div>
+    <br />
+    <br />
+</section>

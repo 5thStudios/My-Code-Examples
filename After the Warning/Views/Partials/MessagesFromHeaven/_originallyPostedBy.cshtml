@@ -1,0 +1,27 @@
+﻿@using Models;
+@using ContentModels = Umbraco.Web.PublishedModels;
+@inherits UmbracoViewPage<ContentModels.Message>
+
+
+
+
+@*Display original post by*@
+@if (!string.IsNullOrEmpty(Model.OriginallyPostedBy))
+{
+    <h4 class="originally-posted-by" style="text-align: right;">
+        <strong>Originally Posted By:</strong> <br />
+
+        @if (string.IsNullOrEmpty(Model.OriginalPostUrl))
+        {
+            <a href="#" target="_blank" rel="noopener">
+                @Model.OriginallyPostedBy
+            </a>
+        }
+        else
+        {
+            <a href="@Model.OriginalPostUrl" target="_blank" rel="noopener">
+                @Model.OriginallyPostedBy
+            </a>
+        }
+    </h4>
+}

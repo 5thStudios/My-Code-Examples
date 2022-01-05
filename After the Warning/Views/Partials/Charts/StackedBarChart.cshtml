@@ -1,0 +1,121 @@
+﻿@inherits UmbracoViewPage<Models.StackedBarChart>
+
+
+@{ string heightPx = Model.Height.ToString() + "px"; }
+
+
+<div class="grid-x">
+    <div class="cell">
+        <canvas id="Chart1" height="@Model.Height" style="height:@heightPx"></canvas>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        //Convert data into variables usable by chart
+        var labels = JSON.parse(@Html.Raw(Json.Encode(Model.Labels)));
+        var values_Heavenly = JSON.parse(@Html.Raw(Json.Encode(Model.Values_Heavenly)));
+        var values_Hellish = JSON.parse(@Html.Raw(Json.Encode(Model.Values_Hellish)));
+        var values_Purgatorial = JSON.parse(@Html.Raw(Json.Encode(Model.Values_Purgatorial)));
+        var values_Unknown = JSON.parse(@Html.Raw(Json.Encode(Model.Values_Unknown)));
+
+        var barOptions_stacked = {
+            tooltips: {
+                enabled: true,
+                callbacks: {
+                    label: function (tooltipItems, data) {
+                        return ' ' + data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index] + ' %';
+                    }
+                }
+            },
+            hover: {
+                animationDuration: 0
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        fontFamily: "'Open Sans Bold', sans-serif",
+                        fontSize: 12,
+                        callback: function (tick) {
+                            return tick.toString() + '%';
+                        }
+                    },
+                    scaleLabel: { display: true },
+                    gridLines: {},
+                    stacked: true
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display: false,
+                        color: "#fff",
+                        zeroLineColor: "#fff",
+                        zeroLineWidth: 0
+                    },
+                    ticks: {
+                        fontFamily: "'Open Sans Bold', sans-serif",
+                        fontSize: 12
+                    },
+                    stacked: true
+                }]
+            },
+            legend: {
+                display: true
+            },
+            animation: {
+                onComplete: function () {
+                    var chartInstance = this.chart;
+                    var ctx = chartInstance.ctx;
+                    ctx.textAlign = "left";
+                    ctx.font = "12px Open Sans";
+                    ctx.fillStyle = "#fff";
+
+                    Chart.helpers.each(this.data.datasets.forEach(function (dataset, i) {
+                        var meta = chartInstance.controller.getDatasetMeta(i);
+                        Chart.helpers.each(meta.data.forEach(function (bar, index) {
+                            data = dataset.data[index];
+                            //ctx.fillText(data + ' %', bar._model.x - 35, bar._model.y + 4);
+                            ctx.fillText('', bar._model.x - 35, bar._model.y + 4);
+                        }), this)
+                    }), this);
+                }
+            },
+            pointLabelFontFamily: "Quadon Extra Bold",
+            scaleFontFamily: "Quadon Extra Bold",
+        };
+
+
+        var ctx = document.getElementById("Chart1");
+        var myChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: labels,
+
+                datasets: [{
+                    label: "Heavenly",
+                    data: values_Heavenly,
+                    backgroundColor: "#4f81bc",
+                    hoverBackgroundColor: "#8CACD3"
+                }, {
+                    label: "Hellish",
+                    data: values_Hellish,
+                    backgroundColor: "#bf4b49",
+                    hoverBackgroundColor: "#D58987"
+                    }, {
+                    label: "Purgatorial",
+                    data: values_Purgatorial,
+                    backgroundColor: "#9bbb57",
+                    hoverBackgroundColor: "#BDD391"
+                    }, {
+                    label: "Unknown/Unsure",
+                    data: values_Unknown,
+                    backgroundColor: "#7f7f7f",
+                    hoverBackgroundColor: "#b9b9b9"
+                }]
+            },
+
+            options: barOptions_stacked,
+        });
+    });
+</script>

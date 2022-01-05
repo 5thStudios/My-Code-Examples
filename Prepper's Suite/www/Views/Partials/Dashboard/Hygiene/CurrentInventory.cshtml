@@ -1,0 +1,359 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<bl.Models.Inventory>
+
+
+<div class="grid-x grid-padding-x">
+    <div class="cell large-15">
+        <h3>Current Inventory</h3>
+        <h6><strong>Item Count: </strong>@Model.LstItems.Count()</h6>
+    </div>
+    <div class="cell small-3">
+        <br />
+        <a id="btn-expand-all" class="button small expanded active ">Expand All</a>
+    </div>
+    <div class="cell small-3">
+        <br />
+        <a id="btn-collapse-all" class="button small expanded active ">Collapse All</a>
+    </div>
+    <div class="cell small-3">
+        <br />
+        <a id="btn-add-item" class="button small expanded">Add Item</a>
+    </div>
+</div>
+
+@*<div class="grid-x grid-padding-x">
+        <div class="cell small-3 text-right">
+            Sort By
+        </div>
+        <div class="cell small-16">
+
+
+            <div class="grid-x pnlFilterBy grid-padding-x large-up-5">
+                <div class="cell text-center">
+                    <input type="radio" name="rbFilter" id="rbArticleType" value="" checked="checked" />
+                    <label for="rbArticleType">Article Type</label>
+                </div>
+                <div class="cell text-center">
+                    <input type="radio" name="rbFilter" id="rbGender" value="" />
+                    <label for="rbGender">Gender</label>
+                </div>
+                <div class="cell text-center">
+                    <input type="radio" name="rbFilter" id="rbSeason" value="" />
+                    <label for="rbSeason">Season</label>
+                </div>
+                <div class="cell text-center">
+                    <input type="radio" name="rbFilter" id="rbOwner" value="" />
+                    <label for="rbOwner">Owner</label>
+                </div>
+                <div class="cell text-center">
+                    <input type="radio" name="rbFilter" id="rbLocation" value="" />
+                    <label for="rbLocation">Location</label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br />*@
+
+<div class="grid-x grid-padding-x">
+    <div class="cell">
+
+        <br />
+        <div class="grid-x">
+            <div class="cell large-22 large-offset-2">
+                <div class="grid-x content-header" title="Description info to go here...">
+                    <div class="cell large-13 large-offset-1">
+                        Item Name
+                    </div>
+                    <div class="cell large-4">
+                        Gender
+                    </div>
+                    @*<div class="cell large-3">
+                        Season
+                    </div>                   
+                    <div class="cell large-3">
+                        Owner
+                    </div>*@
+                    <div class="cell large-3">
+                        Location
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        @using (Html.BeginUmbracoForm<www.Controllers.ToolsController>(bl.Models.Common.wwwAction.FormSubmit_CurrentInventory))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(m => m.MemberId)
+            @Html.HiddenFor(m => m.AccountId)
+            @Html.HiddenFor(m => m.ShowUpdateRecord)
+
+
+            <div class="accordion">
+                @{
+                    foreach (string _categoryTitle in Model.LstCategoryTitles.Where(x => x != null).ToList())
+                    {
+                        <h5 class="category">
+                            <span class="text">@_categoryTitle</span>
+                        </h5>
+                        <div class="content">
+                            <div class="content-tree">
+                                @foreach (var _item in Model.LstItems.Where(x => x.Category != null && x.Category.Name == _categoryTitle))
+                                {
+                                    @ForEachItem(_item);
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    if (Model.LstCategoryTitles.Contains(null))
+                    {
+                        <h5 class="category">
+                            <span class="text">Uncategorized Items</span>
+                        </h5>
+                        <div class="content">
+                            <div class="content-tree">
+                                @foreach (var _item in Model.LstItems.Where(x => x.Category == null))
+                                {
+                                    @ForEachItem(_item);
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+
+        }
+    </div>
+</div>
+
+
+
+@helper ForEachItem(bl.EF.Item _item)
+{
+    Boolean _alreadyAdded = false;
+    if (Model.LstDuplicateItems.Count > 0)
+    {
+        foreach (bl.Models.DuplicateItems _record in Model.LstDuplicateItems)
+        {
+            if (_record.ItemName == _item.Name)
+            {
+                if (_record.Category == _item.Category)
+                {
+                    _alreadyAdded = true;
+
+                    if (!_record.IsCompleted)
+                    {
+                        @AddSubAccordion(_record)
+                        _record.IsCompleted = true;
+                        break;
+                    }
+                    continue;
+                }
+            }
+        }
+
+    }
+
+    if (!_alreadyAdded)
+    {
+        @AddRecord(_item)
+    }
+}
+
+@helper AddRecord(bl.EF.Item _item)
+{
+    <div class="content-item grid-x">
+        <span class="cell shrink content-spacer"></span>
+        <div class="cell auto content-text grid-container">
+
+            <div class="grid-x" title="Description info to go here...">
+                <div class="cell large-14">
+                    @_item.Name
+                </div>
+                <div class="cell large-4">
+                    @(_item.Gender == null ? "" : _item.Gender.Name)
+                </div>
+                @*<div class="cell large-4">
+                    @(_item.Season == null ? "" : _item.Season.Name)
+                </div>
+                <div class="cell large-3">
+                    @(_item.Member == null ? "" : _item.Member.FirstName)
+                </div>*@
+                <div class="cell large-4">
+                    @(_item.Location == null ? "" : _item.Location.Name)
+                </div>
+                <div class="cell large-1">
+                    <button type="submit" name="btnUpdate" value="@_item.ItemId">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                </div>
+                <div class="cell large-1">
+                    <button type="submit" name="btnDelete" value="@_item.ItemId">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@helper AddSubAccordion(bl.Models.DuplicateItems _record)
+{
+    <div class="content-item grid-x subaccordion">
+        <span class="cell shrink content-spacer"></span>
+        <div class="cell auto content-text grid-container grouping">
+
+            <div class="grid-x heading" data-isopen="false">
+                <div class="cell large-13">
+                    <i class="fas fa-plus" aria-hidden="true"></i>
+                    <i class="fas fa-minus" aria-hidden="true" style="display:none;"></i>
+                    @_record.ItemName
+                    (x@_record.Count.ToString())
+                </div>
+            </div>
+
+            @foreach (bl.EF.Item _item in _record.LstItems)
+            {
+                <div class="grid-x record">
+                    <div class="cell large-14">
+                        @_item.Name
+                    </div>
+                    <div class="cell large-4">
+                        @(_item.Gender == null ? "" : _item.Gender.Name)
+                    </div>
+                    @*<div class="cell large-4">
+                        @_item.Season.Name
+                    </div>
+                    <div class="cell large-3">
+                        @_item.Member.FirstName
+                    </div>*@
+                    <div class="cell large-4">
+                        @(_item.Location == null ? "" : _item.Location.Name)
+                    </div>
+                    <div class="cell large-1">
+                        <button type="submit" name="btnUpdate" value="@_item.ItemId">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                    </div>
+                    <div class="cell large-1">
+                        <button type="submit" name="btnDelete" value="@_item.ItemId">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="grid-x grid-padding-x">
+        <div class="cell large-20">
+            <h3>Current Inventory</h3>
+        </div>
+        <div class="cell small-3">
+            <br />
+            <a id="btn-add-item" class="button small expanded">Add Item</a>
+        </div>
+    </div>
+
+    <div class="grid-x grid-padding-x">
+        <div class="cell">
+
+            <br />
+            <div class="grid-x">
+                <div class="cell large-22 large-offset-2">
+                    <div class="grid-x">
+                        <div class="cell large-7 large-offset-1">
+                            Item Name<i class="fas fa-sort"></i>
+                        </div>
+                        <div class="cell large-3">
+                            Gender<i class="fas fa-sort"></i>
+                        </div>
+                        <div class="cell large-2">
+                            Season<i class="fas fa-sort"></i>
+                        </div>
+                        <div class="cell large-2">
+                            Qty<i class="fas fa-sort"></i>
+                        </div>
+                        <div class="cell large-3">
+                            Owner<i class="fas fa-sort"></i>
+                        </div>
+                        <div class="cell large-3">
+                            Location<i class="fas fa-sort"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="accordion">
+                @{
+                    for (int i = 0; i < 4; i++)
+                    {
+                        <h5 class="category">
+                            <span class="text">Article Type &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
+                        </h5>
+                        <div class="content">
+                            <div class="content-tree">
+                                @{
+                                    for (int j = 0; j < 8; j++)
+                                    {
+                                        <div class="content-item grid-x">
+                                            <span class="cell shrink content-spacer"></span>
+                                            <div class="cell auto content-text grid-container">
+                                                <div class="grid-x" title="Description info to go here...">
+                                                    <div class="cell large-8">
+                                                        Item Name
+                                                    </div>
+                                                    <div class="cell large-3">
+                                                        Gender
+                                                    </div>
+                                                    <div class="cell large-3">
+                                                        Season
+                                                    </div>
+                                                    <div class="cell large-2">
+                                                        #
+                                                    </div>
+                                                    <div class="cell large-3">
+                                                        Owner
+                                                    </div>
+                                                    <div class="cell large-3">
+                                                        Location
+                                                    </div>
+                                                    <div class="cell large-1">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </div>
+                                                    <div class="cell large-1">
+                                                        <i class="fas fa-times"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>*@

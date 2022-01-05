@@ -1,0 +1,30 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<List<Models.Testimony>>
+
+
+<a name="testimonials"></a>
+<section id="testimonial-panel" class="grid-container">
+    <br />
+    <br />
+    <div class="grid-x">
+        <div class="cell large-16 large-offset-4 text-center">
+            <h2>Testimonials</h2>
+            <img alt="" class="seperator-stars" src="~/images/common/seperator-stars.png" />
+            <br />
+            <br />
+            <div class="testimonials">
+                @foreach (Models.Testimony testimony in Model)
+                {
+                    <div>
+                        <h5>&quot;@testimony.Quote&quot;</h5>
+                        <br />
+                        <cite>@testimony.Author @(testimony.ShowTitle ? Html.Raw(HttpUtility.HtmlDecode("&nbsp;&nbsp;|&nbsp;&nbsp;")) + testimony.Title : "")</cite>
+                        <br />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+</section>

@@ -1,0 +1,223 @@
+/*Color Palette
+----------------------------------------------------------*/
+COLORS {
+    color: #1a1a1a;     color: #333333;     color: #808080;     
+    color: #ffffff;     color: #f2f2f2;
+    color: #bf0a30;     color: #002868;
+}
+
+/*Font Families
+----------------------------------------------------------*/
+FONTS {
+    font-family: paralucent-stencil,sans-serif;font-weight: 200;font-style: normal;  /*Light*/
+    font-family: paralucent-stencil,sans-serif;font-weight: 500;font-style: normal;  /*Med*/
+    font-family: paralucent-stencil,sans-serif;font-weight: 900;font-style: normal;  /*Bold*/
+    
+    font-family: Arial, Helvetica, sans-serif;font-weight: 400;font-style: normal;  /*Reg*/
+    font-family: Arial, Helvetica, sans-serif;font-weight: 700;font-style: normal;  /*Bold*/
+}
+
+
+
+
+
+
+/* General
+----------------------------------------------------------*/
+html {scroll-behavior: smooth;}
+body {font-size:18px;margin:0;padding:0;}
+h1, h2, h3, h6 {font-family: paralucent-stencil,sans-serif;font-weight: 500;font-style: normal;}
+h4, h5 {font-family: Arial, Helvetica, sans-serif;font-weight: 400;font-style: normal;}
+
+h2 {font-size:42px;color: #bf0a30;}
+h3 {font-size:30px;color: #002868;}
+h4 {font-size:48px;color: #ffffff;margin: 0;}
+h5 {font-size:24px;color: #1a1a1a;}
+h6 {font-size:19px;line-height: 18px;font-weight: 200;color: #808080;}
+@media screen and (max-width: 39.9375em) {
+    h4 {font-size:32px;}
+}
+
+p   {font-family: Arial, Helvetica, sans-serif;font-weight: 400;font-style: normal;font-size:18px;color: #1a1a1a;}
+div {font-family: Arial, Helvetica, sans-serif;font-weight: 400;font-style: normal;font-size:18px;color: #1a1a1a;}
+address {font-family: Arial, Helvetica, sans-serif;font-weight: 400;font-style: normal;font-size:18px;color: #1a1a1a;}
+a, a:visited {color: #1a1a1a;transition:color .4s,background-color 0.4s ease;}
+a:hover {color: #002868;}
+nav a, nav a:visited {font-family: Arial, Helvetica, sans-serif;font-weight: 700;font-style: normal;font-size:18px;color: #ffffff;text-transform:uppercase;padding: 12px 24px;border-radius: 3px;}
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+    nav a {font-size:16px;}
+}
+nav a:hover  {color: #ffffff;background-color: rgba(255, 255, 255, 0.20);}
+h6 a, h6 a:hover, h6 a:visited {font-weight: 900;color: #808080;}
+cite {font-family: Arial, Helvetica, sans-serif;font-weight: 700;font-style: italic;font-size:20px;color: #333333;}
+
+[type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='time'], [type='url'], 
+[type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='color'], textarea     
+    {height: 3rem;padding: 1rem;font-size: 1.25rem;color: #1a1a1a;margin:0;}
+
+
+
+
+
+
+/* Buttons
+----------------------------------------------------------*/
+.button, .button:visited {font-family: Arial, Helvetica, sans-serif;font-weight: 700;font-style: normal;font-size:17px;background-color: #002868;color:#ffffff;}
+.button:hover {background-color: rgba(0, 40, 104, 0.5);}
+input[type=submit] {margin:0;}
+
+
+
+
+
+
+/* Header
+----------------------------------------------------------*/
+header {background-color: #ffffff;/*background-image: url('/images/temp/bg/bg-01.png');*/background-repeat: no-repeat;background-size: 100% 100%;}
+.supporter-of img {height:72px;width:auto;margin-left:24px;}
+
+@media screen and (max-width: 39.9375em) {
+    header {background-blend-mode: color;background-color: rgba(0,0,0, 0.20);}
+    header.grid-y {display:block;}
+    .supporter-of img {height:38px;margin:0;}
+}
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+    header {background-blend-mode: color;background-color: rgba(0,0,0, 0.20);}
+    header.grid-y {display:block;}
+    .supporter-of img {height:38px;margin:0 12px;}
+}
+@media screen and (min-width: 64em) {
+    header {min-height: 780px;}
+}
+
+
+
+
+
+
+/* About
+----------------------------------------------------------*/
+#about-panel {}
+#about-panel .featured-img {border-radius: 4px;}
+
+
+
+
+
+
+/* Services
+----------------------------------------------------------*/
+#services-panel {background-blend-mode: color;height: 100%;background-attachment: fixed;background-position: center;background-repeat: no-repeat;background-size: cover;}
+#services-panel .service-image {width:100%;height:auto;/*border-radius:24px 24px 24px 0;*/border-radius: 4px;border: 1px solid #333;}
+
+
+
+
+
+
+/* Project Gallery
+----------------------------------------------------------*/
+#project-gallery {background-color:#f2f2f2;}
+#gallery-filters {}
+#gallery-filters input {position: absolute !important;clip: rect(0, 0, 0, 0);height: 1px;width: 1px;border: 0;overflow: hidden;}
+#gallery-filters .button {text-transform:uppercase;font-size:16px;background-color:transparent;color: #1a1a1a;padding: 0.85em 0em;width: 98%;margin:0;}
+#gallery-filters input:checked + .button {background-color: #002868;color:#ffffff;}
+#gallery-filters .button:hover {color:#ffffff;background-color: rgba(0, 40, 104, 0.5);}
+#project-gallery .projects {}
+#project-gallery .projects .project {height: 300px;}
+#project-gallery .projects img {}
+
+.projects{position:relative;/*margin:0 auto;padding:1em 0 4em;max-width:1000px;list-style:none;text-align:center*/}
+.projects figure{position:relative;overflow:hidden;cursor:pointer}
+.projects figure img{position:relative;display:block;min-height:100%;max-width:100%;opacity:1}
+.projects figure figcaption{padding:2em;color:#fff;text-transform:uppercase;font-size:1.25em;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.projects figure figcaption div{width:100%}
+.projects figure figcaption::before,.projects figure figcaption::after{pointer-events:none}
+.projects figure figcaption,.projects figure figcaption > a{position:absolute;top:0;left:0;width:100%;height:100%}
+
+figure.effect-layla{background:#000000;height: 88%;border-radius: 4px;}
+figure.effect-layla img{}
+figure.effect-layla figcaption{padding:3em;}
+figure.effect-layla figcaption::before,figure.effect-layla figcaption::after{position:absolute;content:'';opacity:0}
+figure.effect-layla figcaption::before{top:50px;right:30px;bottom:50px;left:30px;border-top:1px solid #fff;border-bottom:1px solid #fff;-webkit-transform:scale(0,1);transform:scale(0,1);-webkit-transform-origin:0 0;transform-origin:0 0}
+figure.effect-layla figcaption::after{top:30px;right:50px;bottom:30px;left:50px;border-right:1px solid #fff;border-left:1px solid #fff;-webkit-transform:scale(1,0);transform:scale(1,0);-webkit-transform-origin:100% 0;transform-origin:100% 0}
+figure.effect-layla h3{-webkit-transition:-webkit-transform .35s;transition:transform .35s;color:#fff;opacity:0;}
+figure.effect-layla p{text-transform:none;opacity:0;-webkit-transform:translate3d(0,-10px,0);transform:translate3d(0,-10px,0);color:#fff;margin-bottom: 0;}
+figure.effect-layla img,figure.effect-layla h3{-webkit-transform:translate3d(0,-30px,0);transform:translate3d(0,-30px,0)}
+figure.effect-layla img,figure.effect-layla figcaption::before, figure.effect-layla h3,
+    figure.effect-layla figcaption::after,figure.effect-layla p{-webkit-transition:opacity 0.35s,-webkit-transform .35s;transition:opacity 0.35s,transform .35s}
+figure.effect-layla:hover img{opacity:.5;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+figure.effect-layla:hover figcaption::before,figure.effect-layla:hover figcaption::after{opacity:1;-webkit-transform:scale(1);transform:scale(1)}
+figure.effect-layla:hover h3,figure.effect-layla:hover p{opacity:1;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+figure.effect-layla:hover figcaption::after,figure.effect-layla:hover h3,figure.effect-layla:hover p,figure.effect-layla:hover img{-webkit-transition-delay:.15s;transition-delay:.15s; line-height: 26px;}
+@media screen and (max-width: 63.9375em) {
+    #project-gallery .projects .project {height: auto;margin-bottom:24px;}
+    figure.effect-layla{background:#000000;height: auto;}
+    figure.effect-layla img,figure.effect-layla h3{-webkit-transform:none;transform:none}
+    figure.effect-layla figcaption{padding:0.1em;}
+    figure.effect-layla:hover figcaption::before,figure.effect-layla:hover figcaption::after{opacity:0}
+}
+
+
+
+
+
+
+/* Testimonials
+----------------------------------------------------------*/
+.slick-dots li {margin:0 12px;}
+.slick-dots li img:nth-child(1) {display: block;}
+.slick-dots li img:nth-child(2) {display: none;}
+.slick-dots li.slick-active img:nth-child(1) {display: none;}
+.slick-dots li.slick-active img:nth-child(2) {display: block;}
+
+
+
+
+
+
+/* Call 2 Action
+----------------------------------------------------------*/
+.call2action {background-repeat: no-repeat;background-size: 100% 100%;}
+.call2action a {color: #ffffff;text-decoration: none;font-family: Arial, Helvetica, sans-serif;font-style: normal;}
+@media screen and (max-width: 63.9375em) {
+    .call2action {background-size: cover;background-position: center center;}
+}
+
+
+
+
+
+
+/* Contact Form
+----------------------------------------------------------*/
+#contact-form {background-blend-mode: color;height: 100%;background-attachment: fixed;background-position: center;background-repeat: no-repeat;background-size: cover;}
+#RecaptchaContainer.alert {border-width: 6px;border-style: solid;border-color: rgb(255 0 0 / 50%);background-color: hsl(0deg 100% 50% / 50%);display: inline-flex;}
+#RecaptchaContainer > div {width:auto !important;}
+#lblRecaptchaMessage {color: #ff0000;font-weight:900;display:none;}
+
+
+
+
+
+
+/* Footer
+----------------------------------------------------------*/
+footer {background-color:#333333;}
+
+
+
+
+
+
+/* Miscellanious
+----------------------------------------------------------*/
+@media print {
+    .noprint {display:none;}
+    .printFullWidth {width:100% !important;}
+    a[href]:after {content: none !important;}
+}
+.seperator-stars {width: 80px;height: auto;margin: 8px 0 24px 0;}
+.seperator-stripes {width: 80px;height: auto;margin: 8px 0 16px 0;}
+.carousel-dots img {width:20px;height:20px;margin:0 8px;cursor:pointer;}
+.alert {color:red;}

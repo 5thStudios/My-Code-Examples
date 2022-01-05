@@ -1,0 +1,1929 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountHolderId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Batteries">
+          <Key>
+            <PropertyRef Name="BatteriesId" />
+          </Key>
+          <Property Name="BatteriesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatteryTypeId" Type="int" />
+          <Property Name="BatteryQuantity" Type="int" />
+          <Property Name="HasBatteries" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BatteryTypes">
+          <Key>
+            <PropertyRef Name="BatteryTypeId" />
+          </Key>
+          <Property Name="BatteryTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="24" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ToolId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Colors">
+          <Key>
+            <PropertyRef Name="ColorId" />
+          </Key>
+          <Property Name="ColorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ColorCode" Type="nvarchar" MaxLength="24" Nullable="false" />
+          <Property Name="ColorName" Type="nvarchar" MaxLength="24" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FoodTypes">
+          <Key>
+            <PropertyRef Name="FoodTypeId" />
+          </Key>
+          <Property Name="FoodTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fuel">
+          <Key>
+            <PropertyRef Name="FuelId" />
+          </Key>
+          <Property Name="FuelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FuelTypeId" Type="int" />
+          <Property Name="HasFuel" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FuelTypes">
+          <Key>
+            <PropertyRef Name="FuelTypeId" />
+          </Key>
+          <Property Name="FuelTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="24" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="ToolId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="GenderId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="FoodTypeId" Type="int" />
+          <Property Name="PowerSourceId" Type="int" />
+          <Property Name="VolumeId" Type="int" />
+          <Property Name="SeasonId" Type="int" />
+          <Property Name="ExpirationDate" Type="date" />
+          <Property Name="CreatedTimestamp" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="LastUpdatedTimestamp" Type="datetime2" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" />
+          <Property Name="IsBugoutBag" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="MeasurementState">
+          <Key>
+            <PropertyRef Name="MeasurementStateId" />
+          </Key>
+          <Property Name="MeasurementStateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeasurementSystem">
+          <Key>
+            <PropertyRef Name="MeasurementSystemId" />
+          </Key>
+          <Property Name="MeasurementSystemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeasurementType">
+          <Key>
+            <PropertyRef Name="MeasurementTypeId" />
+          </Key>
+          <Property Name="MeasurementTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Abbr" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="BaseMetricValue" Type="decimal" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="BaseMetricType" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="BaseMetricAbbr" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="MeasurementSystemId" Type="int" Nullable="false" />
+          <Property Name="MeasurementStateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="IsAccountOwner" Type="bit" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastInitial" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="BirthYear" Type="int" />
+          <Property Name="GenderId" Type="int" />
+        </EntityType>
+        <EntityType Name="MemberTools">
+          <Key>
+            <PropertyRef Name="MemberToolId" />
+          </Key>
+          <Property Name="MemberToolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="ToolId" Type="int" Nullable="false" />
+          <Property Name="ColorId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PowerSources">
+          <Key>
+            <PropertyRef Name="PowerSourceId" />
+          </Key>
+          <Property Name="PowerSourceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatteriesId" Type="int" />
+          <Property Name="FuelId" Type="int" />
+          <Property Name="RequiresAC" Type="bit" Nullable="false" />
+          <Property Name="RequiresBatteries" Type="bit" Nullable="false" />
+          <Property Name="RequiresFuel" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScrumActivities">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardId" Type="int" />
+          <Property Name="Text" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedTimestamp" Type="datetime" />
+          <Property Name="LastUpdatedTimestamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ScrumCard">
+          <Key>
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="CardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="ToolId" Type="int" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="SortId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="CompletionDate" Type="date" />
+          <Property Name="IsComplete" Type="bit" Nullable="false" />
+          <Property Name="IsArchived" Type="bit" Nullable="false" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedTimestamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ScrumChecklists">
+          <Key>
+            <PropertyRef Name="EntryId" />
+          </Key>
+          <Property Name="EntryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardId" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsComplete" Type="bit" Nullable="false" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedTimestamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ScrumStatusList">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="SeasonId" />
+          </Key>
+          <Property Name="SeasonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tools">
+          <Key>
+            <PropertyRef Name="ToolId" />
+          </Key>
+          <Property Name="ToolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ColorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Volume">
+          <Key>
+            <PropertyRef Name="VolumeId" />
+          </Key>
+          <Property Name="VolumeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeasurementTypeId" Type="int" />
+          <Property Name="Units" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MeasurementSystemId" Type="int" Nullable="false" />
+          <Property Name="MeasurementStateId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Batteries_BatteryTypes">
+          <End Role="BatteryTypes" Type="Self.BatteryTypes" Multiplicity="0..1" />
+          <End Role="Batteries" Type="Self.Batteries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatteryTypes">
+              <PropertyRef Name="BatteryTypeId" />
+            </Principal>
+            <Dependent Role="Batteries">
+              <PropertyRef Name="BatteryTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Categories_PrepperTools">
+          <End Role="Tools" Type="Self.Tools" Multiplicity="1" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tools">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="Categories">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fuel2Items_FeulTypes">
+          <End Role="FuelTypes" Type="Self.FuelTypes" Multiplicity="0..1" />
+          <End Role="Fuel" Type="Self.Fuel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FuelTypes">
+              <PropertyRef Name="FuelTypeId" />
+            </Principal>
+            <Dependent Role="Fuel">
+              <PropertyRef Name="FuelTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individuals_Gender">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="0..1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_FoodTypes">
+          <End Role="FoodTypes" Type="Self.FoodTypes" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodTypes">
+              <PropertyRef Name="FoodTypeId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="FoodTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Genders">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_PowerSources">
+          <End Role="PowerSources" Type="Self.PowerSources" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PowerSources">
+              <PropertyRef Name="PowerSourceId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="PowerSourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_PrepperTools">
+          <End Role="Tools" Type="Self.Tools" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tools">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Season">
+          <End Role="Season" Type="Self.Season" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Volume">
+          <End Role="Volume" Type="Self.Volume" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Volume">
+              <PropertyRef Name="VolumeId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="VolumeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Locations_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Locations" Type="Self.Locations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Locations">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Locations_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+          <End Role="Locations" Type="Self.Locations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Locations">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasurementType_MeasurementState">
+          <End Role="MeasurementState" Type="Self.MeasurementState" Multiplicity="1" />
+          <End Role="MeasurementType" Type="Self.MeasurementType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementState">
+              <PropertyRef Name="MeasurementStateId" />
+            </Principal>
+            <Dependent Role="MeasurementType">
+              <PropertyRef Name="MeasurementStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasurementType_MeasurementSystem">
+          <End Role="MeasurementSystem" Type="Self.MeasurementSystem" Multiplicity="1" />
+          <End Role="MeasurementType" Type="Self.MeasurementType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementSystem">
+              <PropertyRef Name="MeasurementSystemId" />
+            </Principal>
+            <Dependent Role="MeasurementType">
+              <PropertyRef Name="MeasurementSystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberTools_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="MemberTools" Type="Self.MemberTools" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="MemberTools">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberTools_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+          <End Role="MemberTools" Type="Self.MemberTools" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ColorId" />
+            </Principal>
+            <Dependent Role="MemberTools">
+              <PropertyRef Name="ColorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberTools_Tools">
+          <End Role="Tools" Type="Self.Tools" Multiplicity="1" />
+          <End Role="MemberTools" Type="Self.MemberTools" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tools">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="MemberTools">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Power_Batteries">
+          <End Role="Batteries" Type="Self.Batteries" Multiplicity="0..1" />
+          <End Role="PowerSources" Type="Self.PowerSources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batteries">
+              <PropertyRef Name="BatteriesId" />
+            </Principal>
+            <Dependent Role="PowerSources">
+              <PropertyRef Name="BatteriesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Power_Fuel">
+          <End Role="Fuel" Type="Self.Fuel" Multiplicity="0..1" />
+          <End Role="PowerSources" Type="Self.PowerSources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fuel">
+              <PropertyRef Name="FuelId" />
+            </Principal>
+            <Dependent Role="PowerSources">
+              <PropertyRef Name="FuelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScrumActivities_ScrumCard">
+          <End Role="ScrumCard" Type="Self.ScrumCard" Multiplicity="0..1" />
+          <End Role="ScrumActivities" Type="Self.ScrumActivities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScrumCard">
+              <PropertyRef Name="CardId" />
+            </Principal>
+            <Dependent Role="ScrumActivities">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScrumCard_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="ScrumCard" Type="Self.ScrumCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="ScrumCard">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScrumCard_ScrumStatusList">
+          <End Role="ScrumStatusList" Type="Self.ScrumStatusList" Multiplicity="1" />
+          <End Role="ScrumCard" Type="Self.ScrumCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScrumStatusList">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="ScrumCard">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScrumCard_Tools">
+          <End Role="Tools" Type="Self.Tools" Multiplicity="1" />
+          <End Role="ScrumCard" Type="Self.ScrumCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tools">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="ScrumCard">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScrumChecklists_ScrumCard">
+          <End Role="ScrumCard" Type="Self.ScrumCard" Multiplicity="1" />
+          <End Role="ScrumChecklists" Type="Self.ScrumChecklists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScrumCard">
+              <PropertyRef Name="CardId" />
+            </Principal>
+            <Dependent Role="ScrumChecklists">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tools_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+          <End Role="Tools" Type="Self.Tools" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ColorId" />
+            </Principal>
+            <Dependent Role="Tools">
+              <PropertyRef Name="ColorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Volume_MeasurementState">
+          <End Role="MeasurementState" Type="Self.MeasurementState" Multiplicity="0..1" />
+          <End Role="Volume" Type="Self.Volume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementState">
+              <PropertyRef Name="MeasurementStateId" />
+            </Principal>
+            <Dependent Role="Volume">
+              <PropertyRef Name="MeasurementStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Volume_MeasurementSystem">
+          <End Role="MeasurementSystem" Type="Self.MeasurementSystem" Multiplicity="1" />
+          <End Role="Volume" Type="Self.Volume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementSystem">
+              <PropertyRef Name="MeasurementSystemId" />
+            </Principal>
+            <Dependent Role="Volume">
+              <PropertyRef Name="MeasurementSystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Volume_MeasurementType">
+          <End Role="MeasurementType" Type="Self.MeasurementType" Multiplicity="0..1" />
+          <End Role="Volume" Type="Self.Volume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementType">
+              <PropertyRef Name="MeasurementTypeId" />
+            </Principal>
+            <Dependent Role="Volume">
+              <PropertyRef Name="MeasurementTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EFModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Batteries" EntityType="Self.Batteries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BatteryTypes" EntityType="Self.BatteryTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FoodTypes" EntityType="Self.FoodTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fuel" EntityType="Self.Fuel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FuelTypes" EntityType="Self.FuelTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeasurementState" EntityType="Self.MeasurementState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeasurementSystem" EntityType="Self.MeasurementSystem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeasurementType" EntityType="Self.MeasurementType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberTools" EntityType="Self.MemberTools" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PowerSources" EntityType="Self.PowerSources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScrumActivities" EntityType="Self.ScrumActivities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScrumCard" EntityType="Self.ScrumCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScrumChecklists" EntityType="Self.ScrumChecklists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScrumStatusList" EntityType="Self.ScrumStatusList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Season" EntityType="Self.Season" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tools" EntityType="Self.Tools" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Volume" EntityType="Self.Volume" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Batteries_BatteryTypes" Association="Self.FK_Batteries_BatteryTypes">
+            <End Role="BatteryTypes" EntitySet="BatteryTypes" />
+            <End Role="Batteries" EntitySet="Batteries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Categories_PrepperTools" Association="Self.FK_Categories_PrepperTools">
+            <End Role="Tools" EntitySet="Tools" />
+            <End Role="Categories" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fuel2Items_FeulTypes" Association="Self.FK_Fuel2Items_FeulTypes">
+            <End Role="FuelTypes" EntitySet="FuelTypes" />
+            <End Role="Fuel" EntitySet="Fuel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individuals_Gender" Association="Self.FK_Individuals_Gender">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Accounts" Association="Self.FK_Items_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Categories" Association="Self.FK_Items_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_FoodTypes" Association="Self.FK_Items_FoodTypes">
+            <End Role="FoodTypes" EntitySet="FoodTypes" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Genders" Association="Self.FK_Items_Genders">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Locations" Association="Self.FK_Items_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Members" Association="Self.FK_Items_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_PowerSources" Association="Self.FK_Items_PowerSources">
+            <End Role="PowerSources" EntitySet="PowerSources" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_PrepperTools" Association="Self.FK_Items_PrepperTools">
+            <End Role="Tools" EntitySet="Tools" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Season" Association="Self.FK_Items_Season">
+            <End Role="Season" EntitySet="Season" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Volume" Association="Self.FK_Items_Volume">
+            <End Role="Volume" EntitySet="Volume" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Locations_Accounts" Association="Self.FK_Locations_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Locations" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Locations_Members" Association="Self.FK_Locations_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Locations" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasurementType_MeasurementState" Association="Self.FK_MeasurementType_MeasurementState">
+            <End Role="MeasurementState" EntitySet="MeasurementState" />
+            <End Role="MeasurementType" EntitySet="MeasurementType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasurementType_MeasurementSystem" Association="Self.FK_MeasurementType_MeasurementSystem">
+            <End Role="MeasurementSystem" EntitySet="MeasurementSystem" />
+            <End Role="MeasurementType" EntitySet="MeasurementType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_Accounts" Association="Self.FK_Members_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberTools_Accounts" Association="Self.FK_MemberTools_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="MemberTools" EntitySet="MemberTools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberTools_Colors" Association="Self.FK_MemberTools_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="MemberTools" EntitySet="MemberTools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberTools_Tools" Association="Self.FK_MemberTools_Tools">
+            <End Role="Tools" EntitySet="Tools" />
+            <End Role="MemberTools" EntitySet="MemberTools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Power_Batteries" Association="Self.FK_Power_Batteries">
+            <End Role="Batteries" EntitySet="Batteries" />
+            <End Role="PowerSources" EntitySet="PowerSources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Power_Fuel" Association="Self.FK_Power_Fuel">
+            <End Role="Fuel" EntitySet="Fuel" />
+            <End Role="PowerSources" EntitySet="PowerSources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScrumActivities_ScrumCard" Association="Self.FK_ScrumActivities_ScrumCard">
+            <End Role="ScrumCard" EntitySet="ScrumCard" />
+            <End Role="ScrumActivities" EntitySet="ScrumActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScrumCard_Accounts" Association="Self.FK_ScrumCard_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="ScrumCard" EntitySet="ScrumCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScrumCard_ScrumStatusList" Association="Self.FK_ScrumCard_ScrumStatusList">
+            <End Role="ScrumStatusList" EntitySet="ScrumStatusList" />
+            <End Role="ScrumCard" EntitySet="ScrumCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScrumCard_Tools" Association="Self.FK_ScrumCard_Tools">
+            <End Role="Tools" EntitySet="Tools" />
+            <End Role="ScrumCard" EntitySet="ScrumCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScrumChecklists_ScrumCard" Association="Self.FK_ScrumChecklists_ScrumCard">
+            <End Role="ScrumCard" EntitySet="ScrumCard" />
+            <End Role="ScrumChecklists" EntitySet="ScrumChecklists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tools_Colors" Association="Self.FK_Tools_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="Tools" EntitySet="Tools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Volume_MeasurementState" Association="Self.FK_Volume_MeasurementState">
+            <End Role="MeasurementState" EntitySet="MeasurementState" />
+            <End Role="Volume" EntitySet="Volume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Volume_MeasurementSystem" Association="Self.FK_Volume_MeasurementSystem">
+            <End Role="MeasurementSystem" EntitySet="MeasurementSystem" />
+            <End Role="Volume" EntitySet="Volume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Volume_MeasurementType" Association="Self.FK_Volume_MeasurementType">
+            <End Role="MeasurementType" EntitySet="MeasurementType" />
+            <End Role="Volume" EntitySet="Volume" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EFPrepperSuiteDb" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="EFModel.Account" />
+          <EntitySet Name="Batteries" EntityType="EFModel.Battery" />
+          <EntitySet Name="BatteryTypes" EntityType="EFModel.BatteryType" />
+          <EntitySet Name="Categories" EntityType="EFModel.Category" />
+          <EntitySet Name="Colors" EntityType="EFModel.Color" />
+          <EntitySet Name="FoodTypes" EntityType="EFModel.FoodType" />
+          <EntitySet Name="Fuels" EntityType="EFModel.Fuel" />
+          <EntitySet Name="FuelTypes" EntityType="EFModel.FuelType" />
+          <EntitySet Name="Genders" EntityType="EFModel.Gender" />
+          <EntitySet Name="Items" EntityType="EFModel.Item" />
+          <EntitySet Name="Locations" EntityType="EFModel.Location" />
+          <EntitySet Name="MeasurementStates" EntityType="EFModel.MeasurementState" />
+          <EntitySet Name="MeasurementSystems" EntityType="EFModel.MeasurementSystem" />
+          <EntitySet Name="MeasurementTypes" EntityType="EFModel.MeasurementType" />
+          <EntitySet Name="Members" EntityType="EFModel.Member" />
+          <EntitySet Name="MemberTools" EntityType="EFModel.MemberTool" />
+          <EntitySet Name="PowerSources" EntityType="EFModel.PowerSource" />
+          <EntitySet Name="ScrumChecklists" EntityType="EFModel.ScrumChecklist" />
+          <EntitySet Name="ScrumStatusLists" EntityType="EFModel.ScrumStatusList" />
+          <EntitySet Name="Seasons" EntityType="EFModel.Season" />
+          <EntitySet Name="Tools" EntityType="EFModel.Tool" />
+          <EntitySet Name="Volumes" EntityType="EFModel.Volume" />
+          <AssociationSet Name="FK_Items_Accounts" Association="EFModel.FK_Items_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Locations_Accounts" Association="EFModel.FK_Locations_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_Accounts" Association="EFModel.FK_Members_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberTools_Accounts" Association="EFModel.FK_MemberTools_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="MemberTool" EntitySet="MemberTools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batteries_BatteryTypes" Association="EFModel.FK_Batteries_BatteryTypes">
+            <End Role="BatteryType" EntitySet="BatteryTypes" />
+            <End Role="Battery" EntitySet="Batteries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Power_Batteries" Association="EFModel.FK_Power_Batteries">
+            <End Role="Battery" EntitySet="Batteries" />
+            <End Role="PowerSource" EntitySet="PowerSources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Categories_PrepperTools" Association="EFModel.FK_Categories_PrepperTools">
+            <End Role="Tool" EntitySet="Tools" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Categories" Association="EFModel.FK_Items_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberTools_Colors" Association="EFModel.FK_MemberTools_Colors">
+            <End Role="Color" EntitySet="Colors" />
+            <End Role="MemberTool" EntitySet="MemberTools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tools_Colors" Association="EFModel.FK_Tools_Colors">
+            <End Role="Color" EntitySet="Colors" />
+            <End Role="Tool" EntitySet="Tools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_FoodTypes" Association="EFModel.FK_Items_FoodTypes">
+            <End Role="FoodType" EntitySet="FoodTypes" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fuel2Items_FeulTypes" Association="EFModel.FK_Fuel2Items_FeulTypes">
+            <End Role="FuelType" EntitySet="FuelTypes" />
+            <End Role="Fuel" EntitySet="Fuels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Power_Fuel" Association="EFModel.FK_Power_Fuel">
+            <End Role="Fuel" EntitySet="Fuels" />
+            <End Role="PowerSource" EntitySet="PowerSources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individuals_Gender" Association="EFModel.FK_Individuals_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Genders" Association="EFModel.FK_Items_Genders">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Locations" Association="EFModel.FK_Items_Locations">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Members" Association="EFModel.FK_Items_Members">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_PowerSources" Association="EFModel.FK_Items_PowerSources">
+            <End Role="PowerSource" EntitySet="PowerSources" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_PrepperTools" Association="EFModel.FK_Items_PrepperTools">
+            <End Role="Tool" EntitySet="Tools" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Season" Association="EFModel.FK_Items_Season">
+            <End Role="Season" EntitySet="Seasons" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Volume" Association="EFModel.FK_Items_Volume">
+            <End Role="Volume" EntitySet="Volumes" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Locations_Members" Association="EFModel.FK_Locations_Members">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasurementType_MeasurementState" Association="EFModel.FK_MeasurementType_MeasurementState">
+            <End Role="MeasurementState" EntitySet="MeasurementStates" />
+            <End Role="MeasurementType" EntitySet="MeasurementTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Volume_MeasurementState" Association="EFModel.FK_Volume_MeasurementState">
+            <End Role="MeasurementState" EntitySet="MeasurementStates" />
+            <End Role="Volume" EntitySet="Volumes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasurementType_MeasurementSystem" Association="EFModel.FK_MeasurementType_MeasurementSystem">
+            <End Role="MeasurementSystem" EntitySet="MeasurementSystems" />
+            <End Role="MeasurementType" EntitySet="MeasurementTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Volume_MeasurementSystem" Association="EFModel.FK_Volume_MeasurementSystem">
+            <End Role="MeasurementSystem" EntitySet="MeasurementSystems" />
+            <End Role="Volume" EntitySet="Volumes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Volume_MeasurementType" Association="EFModel.FK_Volume_MeasurementType">
+            <End Role="MeasurementType" EntitySet="MeasurementTypes" />
+            <End Role="Volume" EntitySet="Volumes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberTools_Tools" Association="EFModel.FK_MemberTools_Tools">
+            <End Role="Tool" EntitySet="Tools" />
+            <End Role="MemberTool" EntitySet="MemberTools" />
+          </AssociationSet>
+          <EntitySet Name="ScrumCards" EntityType="EFModel.ScrumCard" />
+          <AssociationSet Name="FK_ScrumCard_Accounts" Association="EFModel.FK_ScrumCard_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="ScrumCard" EntitySet="ScrumCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScrumCard_ScrumStatusList" Association="EFModel.FK_ScrumCard_ScrumStatusList">
+            <End Role="ScrumStatusList" EntitySet="ScrumStatusLists" />
+            <End Role="ScrumCard" EntitySet="ScrumCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScrumCard_Tools" Association="EFModel.FK_ScrumCard_Tools">
+            <End Role="Tool" EntitySet="Tools" />
+            <End Role="ScrumCard" EntitySet="ScrumCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScrumChecklists_ScrumCard" Association="EFModel.FK_ScrumChecklists_ScrumCard">
+            <End Role="ScrumCard" EntitySet="ScrumCards" />
+            <End Role="ScrumChecklist" EntitySet="ScrumChecklists" />
+          </AssociationSet>
+          <EntitySet Name="ScrumActivities" EntityType="EFModel.ScrumActivity" />
+          <AssociationSet Name="FK_ScrumActivities_ScrumCard" Association="EFModel.FK_ScrumActivities_ScrumCard">
+            <End Role="ScrumCard" EntitySet="ScrumCards" />
+            <End Role="ScrumActivity" EntitySet="ScrumActivities" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountHolderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="EFModel.FK_Items_Accounts" FromRole="Account" ToRole="Item" />
+          <NavigationProperty Name="Locations" Relationship="EFModel.FK_Locations_Accounts" FromRole="Account" ToRole="Location" />
+          <NavigationProperty Name="Members" Relationship="EFModel.FK_Members_Accounts" FromRole="Account" ToRole="Member" />
+          <NavigationProperty Name="MemberTools" Relationship="EFModel.FK_MemberTools_Accounts" FromRole="Account" ToRole="MemberTool" />
+          <NavigationProperty Name="ScrumCards" Relationship="EFModel.FK_ScrumCard_Accounts" FromRole="Account" ToRole="ScrumCard" />
+        </EntityType>
+        <EntityType Name="Battery">
+          <Key>
+            <PropertyRef Name="BatteriesId" />
+          </Key>
+          <Property Name="BatteriesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatteryTypeId" Type="Int32" />
+          <Property Name="BatteryQuantity" Type="Int32" />
+          <Property Name="HasBatteries" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BatteryType" Relationship="EFModel.FK_Batteries_BatteryTypes" FromRole="Battery" ToRole="BatteryType" />
+          <NavigationProperty Name="PowerSources" Relationship="EFModel.FK_Power_Batteries" FromRole="Battery" ToRole="PowerSource" />
+        </EntityType>
+        <EntityType Name="BatteryType">
+          <Key>
+            <PropertyRef Name="BatteryTypeId" />
+          </Key>
+          <Property Name="BatteryTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="24" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Batteries" Relationship="EFModel.FK_Batteries_BatteryTypes" FromRole="BatteryType" ToRole="Battery" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ToolId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tool" Relationship="EFModel.FK_Categories_PrepperTools" FromRole="Category" ToRole="Tool" />
+          <NavigationProperty Name="Items" Relationship="EFModel.FK_Items_Categories" FromRole="Category" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ColorId" />
+          </Key>
+          <Property Name="ColorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ColorCode" Type="String" Nullable="false" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="ColorName" Type="String" Nullable="false" MaxLength="24" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MemberTools" Relationship="EFModel.FK_MemberTools_Colors" FromRole="Color" ToRole="MemberTool" />
+          <NavigationProperty Name="Tools" Relationship="EFModel.FK_Tools_Colors" FromRole="Color" ToRole="Tool" />
+        </EntityType>
+        <EntityType Name="FoodType">
+          <Key>
+            <PropertyRef Name="FoodTypeId" />
+          </Key>
+          <Property Name="FoodTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Items" Relationship="EFModel.FK_Items_FoodTypes" FromRole="FoodType" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Fuel">
+          <Key>
+            <PropertyRef Name="FuelId" />
+          </Key>
+          <Property Name="FuelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FuelTypeId" Type="Int32" />
+          <Property Name="HasFuel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FuelType" Relationship="EFModel.FK_Fuel2Items_FeulTypes" FromRole="Fuel" ToRole="FuelType" />
+          <NavigationProperty Name="PowerSources" Relationship="EFModel.FK_Power_Fuel" FromRole="Fuel" ToRole="PowerSource" />
+        </EntityType>
+        <EntityType Name="FuelType">
+          <Key>
+            <PropertyRef Name="FuelTypeId" />
+          </Key>
+          <Property Name="FuelTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="24" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Fuels" Relationship="EFModel.FK_Fuel2Items_FeulTypes" FromRole="FuelType" ToRole="Fuel" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Members" Relationship="EFModel.FK_Individuals_Gender" FromRole="Gender" ToRole="Member" />
+          <NavigationProperty Name="Items" Relationship="EFModel.FK_Items_Genders" FromRole="Gender" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="ToolId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" />
+          <Property Name="LocationId" Type="Int32" />
+          <Property Name="GenderId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="FoodTypeId" Type="Int32" />
+          <Property Name="PowerSourceId" Type="Int32" />
+          <Property Name="VolumeId" Type="Int32" />
+          <Property Name="SeasonId" Type="Int32" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastUpdatedTimestamp" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Account" Relationship="EFModel.FK_Items_Accounts" FromRole="Item" ToRole="Account" />
+          <NavigationProperty Name="Category" Relationship="EFModel.FK_Items_Categories" FromRole="Item" ToRole="Category" />
+          <NavigationProperty Name="FoodType" Relationship="EFModel.FK_Items_FoodTypes" FromRole="Item" ToRole="FoodType" />
+          <NavigationProperty Name="Gender" Relationship="EFModel.FK_Items_Genders" FromRole="Item" ToRole="Gender" />
+          <NavigationProperty Name="Location" Relationship="EFModel.FK_Items_Locations" FromRole="Item" ToRole="Location" />
+          <NavigationProperty Name="Member" Relationship="EFModel.FK_Items_Members" FromRole="Item" ToRole="Member" />
+          <NavigationProperty Name="PowerSource" Relationship="EFModel.FK_Items_PowerSources" FromRole="Item" ToRole="PowerSource" />
+          <NavigationProperty Name="Tool" Relationship="EFModel.FK_Items_PrepperTools" FromRole="Item" ToRole="Tool" />
+          <NavigationProperty Name="Season" Relationship="EFModel.FK_Items_Season" FromRole="Item" ToRole="Season" />
+          <NavigationProperty Name="Volume" Relationship="EFModel.FK_Items_Volume" FromRole="Item" ToRole="Volume" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" />
+          <Property Name="IsBugoutBag" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="EFModel.FK_Locations_Accounts" FromRole="Location" ToRole="Account" />
+          <NavigationProperty Name="Items" Relationship="EFModel.FK_Items_Locations" FromRole="Location" ToRole="Item" />
+          <NavigationProperty Name="Member" Relationship="EFModel.FK_Locations_Members" FromRole="Location" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="MeasurementState">
+          <Key>
+            <PropertyRef Name="MeasurementStateId" />
+          </Key>
+          <Property Name="MeasurementStateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MeasurementTypes" Relationship="EFModel.FK_MeasurementType_MeasurementState" FromRole="MeasurementState" ToRole="MeasurementType" />
+          <NavigationProperty Name="Volumes" Relationship="EFModel.FK_Volume_MeasurementState" FromRole="MeasurementState" ToRole="Volume" />
+        </EntityType>
+        <EntityType Name="MeasurementSystem">
+          <Key>
+            <PropertyRef Name="MeasurementSystemId" />
+          </Key>
+          <Property Name="MeasurementSystemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MeasurementTypes" Relationship="EFModel.FK_MeasurementType_MeasurementSystem" FromRole="MeasurementSystem" ToRole="MeasurementType" />
+          <NavigationProperty Name="Volumes" Relationship="EFModel.FK_Volume_MeasurementSystem" FromRole="MeasurementSystem" ToRole="Volume" />
+        </EntityType>
+        <EntityType Name="MeasurementType">
+          <Key>
+            <PropertyRef Name="MeasurementTypeId" />
+          </Key>
+          <Property Name="MeasurementTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Abbr" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="BaseMetricValue" Type="Decimal" Nullable="false" Precision="8" Scale="4" />
+          <Property Name="BaseMetricType" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="BaseMetricAbbr" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="MeasurementSystemId" Type="Int32" Nullable="false" />
+          <Property Name="MeasurementStateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MeasurementState" Relationship="EFModel.FK_MeasurementType_MeasurementState" FromRole="MeasurementType" ToRole="MeasurementState" />
+          <NavigationProperty Name="MeasurementSystem" Relationship="EFModel.FK_MeasurementType_MeasurementSystem" FromRole="MeasurementType" ToRole="MeasurementSystem" />
+          <NavigationProperty Name="Volumes" Relationship="EFModel.FK_Volume_MeasurementType" FromRole="MeasurementType" ToRole="Volume" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="IsAccountOwner" Type="Boolean" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastInitial" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="BirthYear" Type="Int32" />
+          <Property Name="GenderId" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="EFModel.FK_Members_Accounts" FromRole="Member" ToRole="Account" />
+          <NavigationProperty Name="Gender" Relationship="EFModel.FK_Individuals_Gender" FromRole="Member" ToRole="Gender" />
+          <NavigationProperty Name="Items" Relationship="EFModel.FK_Items_Members" FromRole="Member" ToRole="Item" />
+          <NavigationProperty Name="Locations" Relationship="EFModel.FK_Locations_Members" FromRole="Member" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="MemberTool">
+          <Key>
+            <PropertyRef Name="MemberToolId" />
+          </Key>
+          <Property Name="MemberToolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="ToolId" Type="Int32" Nullable="false" />
+          <Property Name="ColorId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="EFModel.FK_MemberTools_Accounts" FromRole="MemberTool" ToRole="Account" />
+          <NavigationProperty Name="Color" Relationship="EFModel.FK_MemberTools_Colors" FromRole="MemberTool" ToRole="Color" />
+          <NavigationProperty Name="Tool" Relationship="EFModel.FK_MemberTools_Tools" FromRole="MemberTool" ToRole="Tool" />
+        </EntityType>
+        <EntityType Name="PowerSource">
+          <Key>
+            <PropertyRef Name="PowerSourceId" />
+          </Key>
+          <Property Name="PowerSourceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatteriesId" Type="Int32" />
+          <Property Name="FuelId" Type="Int32" />
+          <Property Name="RequiresAC" Type="Boolean" Nullable="false" />
+          <Property Name="RequiresBatteries" Type="Boolean" Nullable="false" />
+          <Property Name="RequiresFuel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Battery" Relationship="EFModel.FK_Power_Batteries" FromRole="PowerSource" ToRole="Battery" />
+          <NavigationProperty Name="Fuel" Relationship="EFModel.FK_Power_Fuel" FromRole="PowerSource" ToRole="Fuel" />
+          <NavigationProperty Name="Items" Relationship="EFModel.FK_Items_PowerSources" FromRole="PowerSource" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="ScrumChecklist">
+          <Key>
+            <PropertyRef Name="EntryId" />
+          </Key>
+          <Property Name="EntryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsComplete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedTimestamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ScrumCard" Relationship="EFModel.FK_ScrumChecklists_ScrumCard" FromRole="ScrumChecklist" ToRole="ScrumCard" />
+        </EntityType>
+        <EntityType Name="ScrumStatusList">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ScrumCards" Relationship="EFModel.FK_ScrumCard_ScrumStatusList" FromRole="ScrumStatusList" ToRole="ScrumCard" />
+        </EntityType>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="SeasonId" />
+          </Key>
+          <Property Name="SeasonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Items" Relationship="EFModel.FK_Items_Season" FromRole="Season" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Tool">
+          <Key>
+            <PropertyRef Name="ToolId" />
+          </Key>
+          <Property Name="ToolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ColorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categories" Relationship="EFModel.FK_Categories_PrepperTools" FromRole="Tool" ToRole="Category" />
+          <NavigationProperty Name="Color" Relationship="EFModel.FK_Tools_Colors" FromRole="Tool" ToRole="Color" />
+          <NavigationProperty Name="Items" Relationship="EFModel.FK_Items_PrepperTools" FromRole="Tool" ToRole="Item" />
+          <NavigationProperty Name="MemberTools" Relationship="EFModel.FK_MemberTools_Tools" FromRole="Tool" ToRole="MemberTool" />
+          <NavigationProperty Name="ScrumCards" Relationship="EFModel.FK_ScrumCard_Tools" FromRole="Tool" ToRole="ScrumCard" />
+        </EntityType>
+        <EntityType Name="Volume">
+          <Key>
+            <PropertyRef Name="VolumeId" />
+          </Key>
+          <Property Name="VolumeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeasurementTypeId" Type="Int32" />
+          <Property Name="Units" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MeasurementSystemId" Type="Int32" Nullable="false" />
+          <Property Name="MeasurementStateId" Type="Int32" />
+          <NavigationProperty Name="Items" Relationship="EFModel.FK_Items_Volume" FromRole="Volume" ToRole="Item" />
+          <NavigationProperty Name="MeasurementState" Relationship="EFModel.FK_Volume_MeasurementState" FromRole="Volume" ToRole="MeasurementState" />
+          <NavigationProperty Name="MeasurementSystem" Relationship="EFModel.FK_Volume_MeasurementSystem" FromRole="Volume" ToRole="MeasurementSystem" />
+          <NavigationProperty Name="MeasurementType" Relationship="EFModel.FK_Volume_MeasurementType" FromRole="Volume" ToRole="MeasurementType" />
+        </EntityType>
+        <Association Name="FK_Items_Accounts">
+          <End Type="EFModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="EFModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Locations_Accounts">
+          <End Type="EFModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="EFModel.Location" Role="Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_Accounts">
+          <End Type="EFModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="EFModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberTools_Accounts">
+          <End Type="EFModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="EFModel.MemberTool" Role="MemberTool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="MemberTool">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batteries_BatteryTypes">
+          <End Type="EFModel.BatteryType" Role="BatteryType" Multiplicity="0..1" />
+          <End Type="EFModel.Battery" Role="Battery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatteryType">
+              <PropertyRef Name="BatteryTypeId" />
+            </Principal>
+            <Dependent Role="Battery">
+              <PropertyRef Name="BatteryTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Power_Batteries">
+          <End Type="EFModel.Battery" Role="Battery" Multiplicity="0..1" />
+          <End Type="EFModel.PowerSource" Role="PowerSource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Battery">
+              <PropertyRef Name="BatteriesId" />
+            </Principal>
+            <Dependent Role="PowerSource">
+              <PropertyRef Name="BatteriesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Categories_PrepperTools">
+          <End Type="EFModel.Tool" Role="Tool" Multiplicity="1" />
+          <End Type="EFModel.Category" Role="Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Categories">
+          <End Type="EFModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="EFModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberTools_Colors">
+          <End Type="EFModel.Color" Role="Color" Multiplicity="1" />
+          <End Type="EFModel.MemberTool" Role="MemberTool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ColorId" />
+            </Principal>
+            <Dependent Role="MemberTool">
+              <PropertyRef Name="ColorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tools_Colors">
+          <End Type="EFModel.Color" Role="Color" Multiplicity="1" />
+          <End Type="EFModel.Tool" Role="Tool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ColorId" />
+            </Principal>
+            <Dependent Role="Tool">
+              <PropertyRef Name="ColorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_FoodTypes">
+          <End Type="EFModel.FoodType" Role="FoodType" Multiplicity="0..1" />
+          <End Type="EFModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodType">
+              <PropertyRef Name="FoodTypeId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="FoodTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fuel2Items_FeulTypes">
+          <End Type="EFModel.FuelType" Role="FuelType" Multiplicity="0..1" />
+          <End Type="EFModel.Fuel" Role="Fuel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FuelType">
+              <PropertyRef Name="FuelTypeId" />
+            </Principal>
+            <Dependent Role="Fuel">
+              <PropertyRef Name="FuelTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Power_Fuel">
+          <End Type="EFModel.Fuel" Role="Fuel" Multiplicity="0..1" />
+          <End Type="EFModel.PowerSource" Role="PowerSource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fuel">
+              <PropertyRef Name="FuelId" />
+            </Principal>
+            <Dependent Role="PowerSource">
+              <PropertyRef Name="FuelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individuals_Gender">
+          <End Type="EFModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="EFModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Genders">
+          <End Type="EFModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="EFModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Locations">
+          <End Type="EFModel.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="EFModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Members">
+          <End Type="EFModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="EFModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_PowerSources">
+          <End Type="EFModel.PowerSource" Role="PowerSource" Multiplicity="0..1" />
+          <End Type="EFModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PowerSource">
+              <PropertyRef Name="PowerSourceId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="PowerSourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_PrepperTools">
+          <End Type="EFModel.Tool" Role="Tool" Multiplicity="1" />
+          <End Type="EFModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Season">
+          <End Type="EFModel.Season" Role="Season" Multiplicity="0..1" />
+          <End Type="EFModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Volume">
+          <End Type="EFModel.Volume" Role="Volume" Multiplicity="0..1" />
+          <End Type="EFModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Volume">
+              <PropertyRef Name="VolumeId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="VolumeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Locations_Members">
+          <End Type="EFModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="EFModel.Location" Role="Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasurementType_MeasurementState">
+          <End Type="EFModel.MeasurementState" Role="MeasurementState" Multiplicity="1" />
+          <End Type="EFModel.MeasurementType" Role="MeasurementType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementState">
+              <PropertyRef Name="MeasurementStateId" />
+            </Principal>
+            <Dependent Role="MeasurementType">
+              <PropertyRef Name="MeasurementStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Volume_MeasurementState">
+          <End Type="EFModel.MeasurementState" Role="MeasurementState" Multiplicity="0..1" />
+          <End Type="EFModel.Volume" Role="Volume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementState">
+              <PropertyRef Name="MeasurementStateId" />
+            </Principal>
+            <Dependent Role="Volume">
+              <PropertyRef Name="MeasurementStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasurementType_MeasurementSystem">
+          <End Type="EFModel.MeasurementSystem" Role="MeasurementSystem" Multiplicity="1" />
+          <End Type="EFModel.MeasurementType" Role="MeasurementType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementSystem">
+              <PropertyRef Name="MeasurementSystemId" />
+            </Principal>
+            <Dependent Role="MeasurementType">
+              <PropertyRef Name="MeasurementSystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Volume_MeasurementSystem">
+          <End Type="EFModel.MeasurementSystem" Role="MeasurementSystem" Multiplicity="1" />
+          <End Type="EFModel.Volume" Role="Volume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementSystem">
+              <PropertyRef Name="MeasurementSystemId" />
+            </Principal>
+            <Dependent Role="Volume">
+              <PropertyRef Name="MeasurementSystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Volume_MeasurementType">
+          <End Type="EFModel.MeasurementType" Role="MeasurementType" Multiplicity="0..1" />
+          <End Type="EFModel.Volume" Role="Volume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementType">
+              <PropertyRef Name="MeasurementTypeId" />
+            </Principal>
+            <Dependent Role="Volume">
+              <PropertyRef Name="MeasurementTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberTools_Tools">
+          <End Type="EFModel.Tool" Role="Tool" Multiplicity="1" />
+          <End Type="EFModel.MemberTool" Role="MemberTool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="MemberTool">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ScrumCard">
+          <Key>
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="CardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="ToolId" Type="Int32" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="SortId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="CompletionDate" Type="DateTime" Precision="0" />
+          <Property Name="IsComplete" Type="Boolean" Nullable="false" />
+          <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedTimestamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="EFModel.FK_ScrumCard_Accounts" FromRole="ScrumCard" ToRole="Account" />
+          <NavigationProperty Name="ScrumStatusList" Relationship="EFModel.FK_ScrumCard_ScrumStatusList" FromRole="ScrumCard" ToRole="ScrumStatusList" />
+          <NavigationProperty Name="Tool" Relationship="EFModel.FK_ScrumCard_Tools" FromRole="ScrumCard" ToRole="Tool" />
+          <NavigationProperty Name="ScrumChecklists" Relationship="EFModel.FK_ScrumChecklists_ScrumCard" FromRole="ScrumCard" ToRole="ScrumChecklist" />
+          <NavigationProperty Name="ScrumActivities" Relationship="EFModel.FK_ScrumActivities_ScrumCard" FromRole="ScrumCard" ToRole="ScrumActivity" />
+        </EntityType>
+        <Association Name="FK_ScrumCard_Accounts">
+          <End Type="EFModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="EFModel.ScrumCard" Role="ScrumCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="ScrumCard">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScrumCard_ScrumStatusList">
+          <End Type="EFModel.ScrumStatusList" Role="ScrumStatusList" Multiplicity="1" />
+          <End Type="EFModel.ScrumCard" Role="ScrumCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScrumStatusList">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="ScrumCard">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScrumCard_Tools">
+          <End Type="EFModel.Tool" Role="Tool" Multiplicity="1" />
+          <End Type="EFModel.ScrumCard" Role="ScrumCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="ScrumCard">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScrumChecklists_ScrumCard">
+          <End Type="EFModel.ScrumCard" Role="ScrumCard" Multiplicity="1" />
+          <End Type="EFModel.ScrumChecklist" Role="ScrumChecklist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScrumCard">
+              <PropertyRef Name="CardId" />
+            </Principal>
+            <Dependent Role="ScrumChecklist">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ScrumActivity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="Int32" />
+          <Property Name="Text" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedTimestamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ScrumCard" Relationship="EFModel.FK_ScrumActivities_ScrumCard" FromRole="ScrumActivity" ToRole="ScrumCard" />
+        </EntityType>
+        <Association Name="FK_ScrumActivities_ScrumCard">
+          <End Type="EFModel.ScrumCard" Role="ScrumCard" Multiplicity="0..1" />
+          <End Type="EFModel.ScrumActivity" Role="ScrumActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScrumCard">
+              <PropertyRef Name="CardId" />
+            </Principal>
+            <Dependent Role="ScrumActivity">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFModelStoreContainer" CdmEntityContainer="EFPrepperSuiteDb">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="EFModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="AccountHolderId" ColumnName="AccountHolderId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batteries">
+            <EntityTypeMapping TypeName="EFModel.Battery">
+              <MappingFragment StoreEntitySet="Batteries">
+                <ScalarProperty Name="HasBatteries" ColumnName="HasBatteries" />
+                <ScalarProperty Name="BatteryQuantity" ColumnName="BatteryQuantity" />
+                <ScalarProperty Name="BatteryTypeId" ColumnName="BatteryTypeId" />
+                <ScalarProperty Name="BatteriesId" ColumnName="BatteriesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BatteryTypes">
+            <EntityTypeMapping TypeName="EFModel.BatteryType">
+              <MappingFragment StoreEntitySet="BatteryTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BatteryTypeId" ColumnName="BatteryTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="EFModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="EFModel.Color">
+              <MappingFragment StoreEntitySet="Colors">
+                <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+                <ScalarProperty Name="ColorCode" ColumnName="ColorCode" />
+                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoodTypes">
+            <EntityTypeMapping TypeName="EFModel.FoodType">
+              <MappingFragment StoreEntitySet="FoodTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FoodTypeId" ColumnName="FoodTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fuels">
+            <EntityTypeMapping TypeName="EFModel.Fuel">
+              <MappingFragment StoreEntitySet="Fuel">
+                <ScalarProperty Name="HasFuel" ColumnName="HasFuel" />
+                <ScalarProperty Name="FuelTypeId" ColumnName="FuelTypeId" />
+                <ScalarProperty Name="FuelId" ColumnName="FuelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FuelTypes">
+            <EntityTypeMapping TypeName="EFModel.FuelType">
+              <MappingFragment StoreEntitySet="FuelTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FuelTypeId" ColumnName="FuelTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="EFModel.Gender">
+              <MappingFragment StoreEntitySet="Genders">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="EFModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="LastUpdatedTimestamp" ColumnName="LastUpdatedTimestamp" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+                <ScalarProperty Name="VolumeId" ColumnName="VolumeId" />
+                <ScalarProperty Name="PowerSourceId" ColumnName="PowerSourceId" />
+                <ScalarProperty Name="FoodTypeId" ColumnName="FoodTypeId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="EFModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsBugoutBag" ColumnName="IsBugoutBag" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeasurementStates">
+            <EntityTypeMapping TypeName="EFModel.MeasurementState">
+              <MappingFragment StoreEntitySet="MeasurementState">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="MeasurementStateId" ColumnName="MeasurementStateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeasurementSystems">
+            <EntityTypeMapping TypeName="EFModel.MeasurementSystem">
+              <MappingFragment StoreEntitySet="MeasurementSystem">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="MeasurementSystemId" ColumnName="MeasurementSystemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeasurementTypes">
+            <EntityTypeMapping TypeName="EFModel.MeasurementType">
+              <MappingFragment StoreEntitySet="MeasurementType">
+                <ScalarProperty Name="MeasurementStateId" ColumnName="MeasurementStateId" />
+                <ScalarProperty Name="MeasurementSystemId" ColumnName="MeasurementSystemId" />
+                <ScalarProperty Name="BaseMetricAbbr" ColumnName="BaseMetricAbbr" />
+                <ScalarProperty Name="BaseMetricType" ColumnName="BaseMetricType" />
+                <ScalarProperty Name="BaseMetricValue" ColumnName="BaseMetricValue" />
+                <ScalarProperty Name="Abbr" ColumnName="Abbr" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="MeasurementTypeId" ColumnName="MeasurementTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="EFModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="BirthYear" ColumnName="BirthYear" />
+                <ScalarProperty Name="LastInitial" ColumnName="LastInitial" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IsAccountOwner" ColumnName="IsAccountOwner" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberTools">
+            <EntityTypeMapping TypeName="EFModel.MemberTool">
+              <MappingFragment StoreEntitySet="MemberTools">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+                <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="MemberToolId" ColumnName="MemberToolId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PowerSources">
+            <EntityTypeMapping TypeName="EFModel.PowerSource">
+              <MappingFragment StoreEntitySet="PowerSources">
+                <ScalarProperty Name="RequiresFuel" ColumnName="RequiresFuel" />
+                <ScalarProperty Name="RequiresBatteries" ColumnName="RequiresBatteries" />
+                <ScalarProperty Name="RequiresAC" ColumnName="RequiresAC" />
+                <ScalarProperty Name="FuelId" ColumnName="FuelId" />
+                <ScalarProperty Name="BatteriesId" ColumnName="BatteriesId" />
+                <ScalarProperty Name="PowerSourceId" ColumnName="PowerSourceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScrumChecklists">
+            <EntityTypeMapping TypeName="EFModel.ScrumChecklist">
+              <MappingFragment StoreEntitySet="ScrumChecklists">
+                <ScalarProperty Name="LastUpdatedTimestamp" ColumnName="LastUpdatedTimestamp" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScrumStatusLists">
+            <EntityTypeMapping TypeName="EFModel.ScrumStatusList">
+              <MappingFragment StoreEntitySet="ScrumStatusList">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seasons">
+            <EntityTypeMapping TypeName="EFModel.Season">
+              <MappingFragment StoreEntitySet="Season">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tools">
+            <EntityTypeMapping TypeName="EFModel.Tool">
+              <MappingFragment StoreEntitySet="Tools">
+                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Volumes">
+            <EntityTypeMapping TypeName="EFModel.Volume">
+              <MappingFragment StoreEntitySet="Volume">
+                <ScalarProperty Name="MeasurementStateId" ColumnName="MeasurementStateId" />
+                <ScalarProperty Name="MeasurementSystemId" ColumnName="MeasurementSystemId" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="MeasurementTypeId" ColumnName="MeasurementTypeId" />
+                <ScalarProperty Name="VolumeId" ColumnName="VolumeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScrumCards">
+            <EntityTypeMapping TypeName="EFModel.ScrumCard">
+              <MappingFragment StoreEntitySet="ScrumCard">
+                <ScalarProperty Name="LastUpdatedTimestamp" ColumnName="LastUpdatedTimestamp" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SortId" ColumnName="SortId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScrumActivities">
+            <EntityTypeMapping TypeName="EFModel.ScrumActivity">
+              <MappingFragment StoreEntitySet="ScrumActivities">
+                <ScalarProperty Name="LastUpdatedTimestamp" ColumnName="LastUpdatedTimestamp" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,47 @@
+﻿	
+ScrumCard
+	CardId
+	AccountId
+	ToolId
+	StatusId
+	Title
+	Description
+	CompletionDate
+	IsComplete
+	IsArchived
+	CreatedTimestamp
+	LastUpdatedTimestamp
+
+ScrumStatusList
+	StatusId
+	SortId
+	Name
+
+ScrumActivities
+	ActivityId
+	CardId
+	Text
+	CreatedTimestamp
+	LastUpdatedTimestamp
+
+ScrumChecklists
+	EntryId
+	CardId
+	SortOrder
+	Title
+	IsComplete
+	CreatedTimestamp
+	LastUpdatedTimestamp
+
+
+
+
+====================================
+Status List
+	To Do
+	Researching
+	In Progress
+	Complete
+	Urgent
+	Future Plans
+	Archived?

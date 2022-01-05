@@ -1,0 +1,75 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Models.Contact>
+
+
+<a name="contact"></a>
+<section id="contact-form" class="grid-x" style="background-image:url('@Model.BackgroundImgUrl');background-color: @Model.BackgroundTransparency;">
+    <input type="hidden" id="hfldRecaptchaKey" value="@Model.RecaptchaPublicKey" />
+    <div class="cell">
+        <div class="grid-container">
+            <br />
+            <br />
+            <div class="grid-x">
+                <div class="cell text-center">
+                    <h2>Contact Us</h2>
+                    <img alt="" class="seperator-stars" src="~/images/common/seperator-stars.png" />
+                    @{ if (!string.IsNullOrEmpty(Model.Description))
+                        {
+                            <p>
+                                @Html.Raw(Model.Description)
+                            </p>
+                        }
+                    }
+                </div>
+            </div>
+            <br />
+
+
+
+            @if (TempData["SubmittedSuccessfully"] != null && (bool)TempData["SubmittedSuccessfully"])
+            {
+                Html.RenderPartial("Partials/Forms/Successful");
+            }
+            else if (TempData["SubmissionFailed"] != null && (bool)TempData["SubmissionFailed"])
+            {
+                Html.RenderPartial("Partials/Forms/Failed");
+            }
+            else
+            {
+                Html.RenderAction("RenderForm", "Common");
+            }
+
+
+
+            <br />
+            <br />
+            <br />
+            <br class="show-for-large" />
+            <div class="grid-x grid-margin-x">
+                <div class="cell large-8 large-offset-4 text-center">
+                    <h3>CONTACT INFO</h3>
+                    <img alt="" class="seperator-stripes" src="~/images/common/seperator-stripes.jpg" />
+                    <p>
+                        <strong>Phone:</strong> <a href="@Model.LnkPhone.Url">@Model.LnkPhone.Name</a>
+                        <br />
+                        <strong>Email:</strong> <a href="mailto:@Model.Email">@Model.Email</a>
+                    </p>
+                </div>
+
+                <div class="cell large-8 text-center">
+                    <br class="hide-for-large" />
+                    <h3>SERVICE AREAS</h3>
+                    <img alt="" class="seperator-stripes" src="~/images/common/seperator-stripes.jpg" />
+                    <address>
+                        <strong>
+                            @Html.Raw(HttpUtility.HtmlDecode(Model.ServiceAreas))
+                        </strong>
+                    </address>
+                </div>
+            </div>
+
+
+            <br />
+            <br />
+        </div>
+    </div>
+</section>

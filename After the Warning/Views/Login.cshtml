@@ -1,0 +1,13 @@
+﻿@inherits UmbracoViewPage 
+@{ Layout = "TopLevel.cshtml"; }
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    Response.Redirect("/");
+}
+else
+{
+    Html.RenderAction("RenderForm", "Login", new { memberService = Services.MemberService });
+}

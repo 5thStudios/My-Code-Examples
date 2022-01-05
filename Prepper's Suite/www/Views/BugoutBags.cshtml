@@ -1,0 +1,49 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.BugoutBags>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "TopLevelDashboard.cshtml";
+
+    //Determine if another page needs to be displayed based on login status.
+    www.Controllers.LoginController.DetermineLoginStatus(Response, Umbraco, Model);
+
+    bl.Models.Inventory tempInv = new bl.Models.Inventory();
+}
+
+
+
+<div id="BugoutBags" class="grid-x grid-padding-x grid-padding-y  flex-child-auto">
+
+    <div class="cell small-15 flex-container flex-dir-column">
+        <div class="callout flex-child-shrink">
+            @{ Html.RenderPartial("Partials/Dashboard/BugoutBags/BagList");}
+        </div>
+        <br />
+        <div class="callout flex-child-auto">
+            @{ Html.RenderPartial("Partials/Dashboard/BugoutBags/CurrentInventory", tempInv);}
+        </div>
+    </div>
+
+
+    <div class="cell small-9 flex-container flex-dir-column" style="height:100%;">
+        <div class="callout flex-child-auto">
+
+            @*@{ Html.RenderPartial("Partials/Dashboard/Common/TabButtons");}*@
+
+            <div class="tab-items">
+                @*<div class="tab tab-description">
+                    @{ Html.RenderPartial("Partials/Dashboard/Common/Description");}
+                </div>*@
+                <div class="tab tab-add-item">
+                    @{ Html.RenderPartial("Partials/Dashboard/BugoutBags/AddItemsToBag");}
+                    
+                    @{ Html.RenderPartial("Partials/Dashboard/BugoutBags/AddItemToInventory");}
+                </div>
+                @*<div class="tab tab-charts">
+                    @{ Html.RenderPartial("Partials/Dashboard/Common/Charts");}
+                </div>*@
+            </div>
+
+
+        </div>
+    </div>
+</div>

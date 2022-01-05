@@ -1,0 +1,15 @@
+﻿@using EditableListMvc.Models
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<IEnumerable<Person>>
+@{ Layout = null; }
+@*@{ Layout = "TopLevel.cshtml"; }*@
+
+@{
+    //List<Person> iePerson = new List<Person>();
+}
+
+<h3>List Test</h3>
+@{
+    Html.RenderPartial("PersonList/Index", new List<Person>()); //, iePerson);
+}
+
+

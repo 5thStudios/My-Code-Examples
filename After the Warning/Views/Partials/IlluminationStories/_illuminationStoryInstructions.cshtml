@@ -1,0 +1,72 @@
+﻿@using Models;
+@inherits UmbracoViewPage
+
+
+@*@{     
+    //Redirect to home if illumination settings are not active.
+    if (!Controllers.IlluminationController.areIlluminationControlsActivated(Umbraco))
+    {
+        Response.Redirect(Umbraco.Content((int)(Models.Common.siteNode.Home)).Url());
+    }
+}*@
+
+<div id="pnlIlluminationStoryInstructions">
+    <div class="grid-x">
+        <div class="cell">
+            @*<h3>My Illumination Story</h3>
+            <div id="pnlAddIlluminationStory" class="">
+                <br />
+                <h4>Submit Story</h4>
+                <p>Haven’t submitted your Illumination story yet?  Don’t wait.  Click below to begin and share your story with the world today.</p>
+                <br />
+                <div class="grid-x">
+                    <div class="cell large-12 large-offset-6">
+                        <button id="btnCreateYourStory" class="button primary expanded">Submit Your Story</button>
+                    </div>
+                </div>
+            </div>*@
+
+
+
+
+
+
+
+
+            <h3>Share Your Story</h3>
+            <br />
+            <p><strong>Have you ever experienced an “<em>Illumination of Conscience</em>”</strong>, whether during a near-death experience or just out of the blue? We would love to share your story.</p>
+            <p>With the Warning quickly approaching, most of humanity will find themselves unprepared to see their sins contrasted against the brilliant light and love of God. Even we who have been blessed to know of the coming Illumination do not fully know what to expect.</p>
+            <h4 style="text-align: center;"><strong>And that is where <span style="text-decoration: underline;">you</span> come in.</strong></h4>
+            <p> </p>
+            <p>If you experienced an “<em>Illumination of Conscience</em>”, please consider sharing your story with our readers. Simply log into your account and go to “<a href="/{localLink:umb://document/20bc0c15a5cb479cae56f237fc4c4f3c}" title="My Illumination Story"><em>My Illumination Story</em></a>” to submit your experience.</p>
+
+
+            <div class="grid-x">
+                <div class="cell large-12 large-offset-6">
+                    <button id="btnCreateYourStory" class="button primary expanded">Submit Your Story</button>
+                </div>
+            </div>
+
+            <br />
+            @*<p style="text-align: center;"><a href="/{localLink:umb://document/20bc0c15a5cb479cae56f237fc4c4f3c}" title="Submit Your Story" class="button primary">Share Your Story</a></p>
+        <p> </p>*@
+            <h4><strong>Rules:</strong></h4>
+            <ol>
+                <li><strong>You will need an account</strong> in order to share your story. It’s free and takes only a moment to make. Your story will be attached to your account so you can review it and share the link with others.</li>
+                <li><strong>Do not provide any contact information</strong> nor your last name. If I have any questions I’ll email you using the address from your account.</li>
+                <li><strong>Our site does time out.</strong> To prevent any issues with sending us your story we suggest that you type your story on your computer first. Once finished, log in and simply copy &amp; paste it into the submission form.</li>
+                <li><strong>All stories will be reviewed</strong> before we post them.</li>
+                <li><strong>We reserve the right to choose not to share a story!!!</strong> Any story that contradicts the faith will not be published.</li>
+                <li><strong>We will attempt to clean up your grammar</strong> to make your story clear and understandable if possible. But if we cannot understand your story then we may not be able to share it.</li>
+                <li><span style="text-decoration: underline;"><strong>Say a prayer for me!!!</strong></span>  God knows that this is gonna be a difficult endeavor and the evil one is not gonna like us doing this at all, so PLEASE remember us in your prayers!!</li>
+            </ol>
+
+
+
+
+
+
+        </div>
+    </div>
+</div>

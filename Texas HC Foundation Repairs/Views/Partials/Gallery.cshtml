@@ -1,0 +1,59 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Models.Projects>
+
+
+
+<a name="gallery"></a>
+<section id="project-gallery" class="grid-x">
+    <div class="cell">
+        <br />
+        <br />
+        <div class="grid-x">
+            <div class="cell text-center">
+                <h2>Project Gallery</h2>
+                <img alt="" class="seperator-stars" src="~/images/common/seperator-stars.png" />
+                @{ if (!string.IsNullOrEmpty(Model.Description))
+                    {
+                        <p>
+                            @Html.Raw(Model.Description)
+                        </p>
+                    }
+                }
+            </div>
+        </div>
+        <br class="show-for-large" />
+        <div class="grid-x" id="gallery-filters">
+            <div class="cell large-8 large-offset-8">
+                <div class="grid-x medium-up-2 large-up-4 text-center">
+                    @foreach (Models.FilterLink filter in Model.LstCategories)
+                    {
+                        <div class="cell">
+                            <input type="radio" id="@filter.Id" name="filter" value="@filter.Value" data-filter="@filter.Filter" @(filter == Model.LstCategories.First() ? "checked" : "") />
+                            <label for="@filter.Id" class="button" data-filter="@filter.Filter">@filter.Name</label>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <br class="show-for-large" />
+        <br />
+        <div class="grid-x grid-padding-x projects">
+            @foreach (Models.Project project in Model.LstProjects)
+            {
+                <div class="cell medium-12 large-6 text-center project @project.ProjectClasses">
+                    <figure class="effect-layla">
+                        <img alt="@project.Title" src="@project.FeaturedImgUrl" />
+                        <figcaption class="flex-container">
+                            <div class="align-self-middle">
+                                <h3>@project.Title</h3>
+                                <p>@project.Description</p>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            }
+        </div>
+
+        <br />
+        <br />
+    </div>
+</section>

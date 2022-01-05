@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "TopLevelDashboard.cshtml";
+
+    //Determine if another page needs to be displayed based on login status.
+    www.Controllers.LoginController.DetermineLoginStatus(Response, Umbraco, Model);
+}
+
+
+@section Header {}
+@section Footer { <script src="~/scripts/Script22.js"></script> }
+
+
+
+
+@{ Html.RenderAction("RenderForm_22", "General"); }

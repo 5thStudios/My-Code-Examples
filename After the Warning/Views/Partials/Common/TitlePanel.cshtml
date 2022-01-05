@@ -1,0 +1,178 @@
+﻿@using Models;
+@inherits UmbracoViewPage
+
+
+@{
+    TitlePanelContent titlePanelContent = Controllers.GeneralController.ObtainTitlePanelContent(Model);
+}
+
+
+<div class="grid-container titleSectionPnl">
+    <div class="grid-x align-middle  @titlePanelContent.heightClass">
+        <div class="large-20 large-offset-2 cell">
+            @switch (titlePanelContent.docType)
+            {
+                case Common.docType.Home:
+                    <br />
+                    @titlePanelContent.topBanner
+                    <br />
+                    break;
+                case Common.docType.IlluminationStatistics:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.ParentName</h1>
+                    <h3>@titlePanelContent.Name</h3>
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.Search:
+                    <br class="hide-for-small-only" />
+                    <br class="hide-for-medium-only" />
+                    @Html.Partial("Partials/Search/_searchPnl")
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.Scripture:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>The Book of Genesis</h1>
+                    <h3>The Douay-Rheims Bible</h3>
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.Message:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.Name</h1>
+                    <h3>By @titlePanelContent.visionaryName</h3>
+                    if (!string.IsNullOrEmpty(@titlePanelContent.sbDateRange.ToString()))
+                    {
+                        <cite>@titlePanelContent.sbDateRange.ToString()</cite>
+                    }
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.WebmasterMessage:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.Name</h1>
+                    <h3>By @titlePanelContent.visionaryName</h3>
+                    if (!string.IsNullOrEmpty(@titlePanelContent.sbDateRange.ToString()))
+                    {
+                        <cite>@titlePanelContent.sbDateRange.ToString()</cite>
+                    }
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.BlockList:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.Name</h1>
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.Visionary:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.Name</h1>
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.VisionaryList:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.Name</h1>
+                    <br />
+                    <br />
+                    break;
+                @*case Common.docType.PrayerRequest:
+                        <br class="hide-for-small-only" />
+                        <br />
+                        <h1>@titlePanelContent.strH1</h1>
+                        <h3>By @Html.Raw(titlePanelContent.strH3)</h3>
+                        <br />
+                        <br />
+                        break;
+                    case Common.docType.PrayerList:
+                        <br class="hide-for-small-only" />
+                        <br />
+                        <h1>@titlePanelContent.Name</h1>
+                        <br />
+                        <br />
+                        break;*@
+                case Common.docType.IlluminationStoryList:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.Name</h1>
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.IlluminationStory:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.ParentName</h1>
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.Donations:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>Support Us</h1>
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.ContactUs:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.Name</h1>
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.CreateAccount:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.Name</h1>
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.ManageAccount:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.ParentName</h1>
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.Login:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.Name</h1>
+                    <br />
+                    <br />
+                    break;
+                case Common.docType.Standard:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.title</h1>
+                    if (!String.IsNullOrEmpty(titlePanelContent.subtitle))
+                    {
+                        <h3>@titlePanelContent.subtitle</h3>
+                    }
+                    if (!String.IsNullOrEmpty(titlePanelContent.sbCite.ToString()))
+                    {
+                        <cite>@Html.Raw(titlePanelContent.sbCite.ToString())</cite>
+                    }
+                    <br />
+                    <br />
+                    break;
+                default:
+                    <br class="hide-for-small-only" />
+                    <br />
+                    <h1>@titlePanelContent.title</h1>
+                    <h3>@titlePanelContent.subtitle</h3>
+                    <br />
+                    <br />
+                    break;
+            }
+        </div>
+    </div>
+</div>

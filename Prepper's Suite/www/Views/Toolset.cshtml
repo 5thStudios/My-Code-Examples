@@ -1,0 +1,39 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<IPublishedContent>
+@using bl.Models;
+@{
+    Layout = "TopLevelDashboard.cshtml";
+
+    //Determine if another page needs to be displayed based on login status.
+    www.Controllers.LoginController.DetermineLoginStatus(Response, Umbraco, Model);
+}
+
+
+
+<div class="grid-x grid-padding-x grid-padding-y  flex-child-auto">
+
+    <div class="cell small-15 flex-container flex-dir-column">
+        <div class="callout flex-child-auto">
+            @{ Html.RenderAction(Common.wwwAction.RenderForm_CurrentInventory, Common.wwwController.Tools, new { ipModel = Model }); }
+        </div>
+    </div>
+
+    <div class="cell small-9 flex-container flex-dir-column" style="height:100%;">
+        <div class="callout flex-child-auto">
+
+            @{ Html.RenderAction(Common.wwwAction.RenderForm_TabButtons, Common.wwwController.Tools, new { ipModel = Model }); }
+
+            <div class="tab-items">
+                <div class="tab tab-description">
+                    @{ Html.RenderPartial("Partials/Dashboard/Common/Description");}
+                </div>
+                <div class="tab tab-add-item">
+                    @{ Html.RenderAction(Common.wwwAction.RenderForm_AddItem, Common.wwwController.Tools, new { ipModel = Model }); }
+                </div>
+                <div class="tab tab-charts">
+                    @{ Html.RenderPartial("Partials/Dashboard/Common/Charts");}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

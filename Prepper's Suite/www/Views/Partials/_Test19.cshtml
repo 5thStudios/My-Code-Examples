@@ -1,0 +1,169 @@
+﻿@using ScrumTests.Controllers;
+@using ScrumTests.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<AllCards>
+
+
+
+@using (Html.BeginUmbracoForm<GeneralController>("FormUpdate_19", FormMethod.Post, new { id = "FormUpdate" }))
+{
+    @Html.AntiForgeryToken()
+    @HiddenFields()
+    @PnlAddCard()
+    @PnlUpdateCard()
+    for (int i = 0; i < Model.LstCardGroups.Count; i++)
+    {
+        @CardColumn(i)
+    }
+    @Html.ValidationSummary(false, "")
+}
+
+
+@helper PnlAddCard()
+{
+    <div id="PnlAddCard">
+        @Html.HiddenFor(m => m.AddCard, new { @class = "hfldAddCard" })
+        @Html.HiddenFor(m => m.VirtualCard.ColumnId, new { @class = "hfldAddColumnId" })
+        @Html.HiddenFor(m => m.VirtualCard.SortId, new { @class = "hfldAddSortId" })
+        <div class="container">
+            <h2>New Card</h2>
+
+            <div id="tabs">
+                <ul>
+                    <li><a href="#tabCustom">Custom</a></li>
+                    <li><a href="#tabPredefined">Predefined</a></li>
+                </ul>
+                <div id="tabCustom">
+                    <table border="0">
+                        <tr>
+                            <td>Name</td>
+                            <td>@Html.TextBoxFor(m => m.VirtualCard.CardName, new { @class = "hfldAddCardName" })</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><br /></td>
+                        </tr>
+                        <tr>
+                            <td><a class="button submit" style="font-weight:700;">Submit</a></td>
+                            <td><a class="button cancel" style="font-weight:700;">Cancel</a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="tabPredefined">
+                    <table border="0">
+                        <tr>
+                            <td>Select</td>
+                            <td>
+                                <select>
+                                    @foreach (Card _card in Model.LstPredefinedCards)
+                                    {
+                                    <option value="@_card.CardName">@_card.CardName</option>
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><br /></td>
+                        </tr>
+                        <tr>
+                            <td><a class="button submit" style="font-weight:700;">Submit</a></td>
+                            <td><a class="button cancel" style="font-weight:700;">Cancel</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+}
+@helper PnlUpdateCard()
+{
+    <div id="PnlUpdateCard">
+        <input type="hidden" id="HfldTemp_CardId" />
+        <input type="hidden" id="HfldTemp_UniqueCardName" />
+        <div class="container">
+            <h2>Update Card</h2>
+            <table border="0">
+                <tr>
+                    <td>Name</td>
+                    <td colspan="2">
+                        <input type="text" id="txbUpdateCardName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><a class="button submit" style="font-weight:700;">Update</a></td>
+                    <td><a class="button cancel" style="font-weight:700;">Cancel</a></td>
+                    <td><a class="button delete" style="font-weight:700;">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="PnlConfirmDeletion">
+        <div class="container">
+            <h2>Are you sure?</h2>
+            <h4>This option is permenant and cannot be undone.</h4>
+            <table border="0">
+                <tr>
+                    <td><a class="button cancel" style="font-weight:700;">Cancel</a></td>
+                    <td><a class="button delete" style="font-weight:700;">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+}
+@helper HiddenFields()
+{
+    <div class="hide hiddenFields">
+        @*@Html.HiddenFor(m => m.DeleteCard, new { @class = "hfldDeleteCard" })*@
+        @Html.HiddenFor(m => m.DeleteCardId, new { @class = "hfldDeleteCardId" })
+
+        @for (int i = 0; i < Model.LstCardGroups.Count; i++)
+        {
+            <div class="column">
+                @Html.HiddenFor(m => m.LstCardGroups[i].ColumnId, new { @class = "hfldColumnId" })
+                @Html.HiddenFor(m => m.LstCardGroups[i].ColumnName, new { @class = "hfldColumnName" })
+                @Html.HiddenFor(m => m.LstCardGroups[i].ColumnColor, new { @class = "hfldColumnColor" })
+
+                @{
+                    for (int j = 0; j < Model.LstCardGroups[i].LstCards.Count; j++)
+                    {
+                        string uniqueCardName = "card-" + @Model.LstCardGroups[i].LstCards[j].CardId;
+                        <div class="card">
+                            @Html.HiddenFor(m => m.LstCardGroups[i].LstCards[j].CardName, new { @class = "hfldCardName " + @uniqueCardName })
+                            @Html.HiddenFor(m => m.LstCardGroups[i].LstCards[j].CardId, new { @class = "hfldCardId " + @uniqueCardName })
+                            @Html.HiddenFor(m => m.LstCardGroups[i].LstCards[j].ColumnId, new { @class = "hfldCardColumnId " + @uniqueCardName })
+                            @Html.HiddenFor(m => m.LstCardGroups[i].LstCards[j].SortId, new { @class = "hfldSortId " + @uniqueCardName })
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+}
+@helper CardColumn(int i)
+{
+    <div class="container" style="background-color:@Model.LstCardGroups[i].ColumnColor;">
+
+        <h2>@Model.LstCardGroups[i].ColumnName</h2>
+        <ul class="sortable connectedSortable" data-column-id="@Model.LstCardGroups[i].ColumnId">
+            @{
+                for (int j = 0; j < Model.LstCardGroups[i].LstCards.Count; j++)
+                {
+                    @Card(i, j)
+                }
+            }
+        </ul>
+        <div class="link-btn">
+            <a class="button" data-column-id="@Model.LstCardGroups[i].ColumnId" data-next-sort-index="@Model.LstCardGroups[i].LstCards.Count()">Add</a>
+        </div>
+    </div>
+}
+@helper Card(int i, int j)
+{
+    string uniqueCardName = "card-" + @Model.LstCardGroups[i].LstCards[j].CardId;
+    <li id="@uniqueCardName" class="card" data-card-id="@Model.LstCardGroups[i].LstCards[j].CardId" data-column-id="@Model.LstCardGroups[i].LstCards[j].ColumnId" data-sort-id="@Model.LstCardGroups[i].LstCards[j].SortId">
+        @Model.LstCardGroups[i].LstCards[j].CardName
+    </li>
+}

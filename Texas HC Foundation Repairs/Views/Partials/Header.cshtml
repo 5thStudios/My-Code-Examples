@@ -1,0 +1,55 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Models.Header>
+
+
+
+<header class="grid-y" style="background-image: url('@Model.BackgroundImgUrl');">
+    <div class="cell large-auto hide-for-small-only">
+        @{Html.RenderPartial("Partials/Common/Navigation", Model.LstNavLinks);}
+    </div>
+    <div class="cell auto large-shrink">
+        <img alt="" src="~/images/common/logo-full.png" class="show-for-large" />
+        <div class="grid-x grid-container hide-for-large">
+            <div class="cell text-center">
+                <br />
+                <br />
+                <img alt="" src="~/images/common/logo-condensed.png" />
+                <br />
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+    <div class="cell shrink medium-auto large-flex-container">
+        <div class="grid-x grid-container align-middle medium-flex-child-auto show-for-medium">
+            <div class="cell text-right supporter-of ">
+                @foreach (Models.Link imgLink in Model.LstSupportImgs)
+                {
+                    <img alt="@imgLink.Name" src="@imgLink.Url" />
+                }
+            </div>
+        </div>
+        <br class="show-for-medium-only" />
+    </div>
+</header>
+
+
+
+<div class="grid-x hide-for-medium">
+    <div class="cell">
+        <br />
+        <div class="grid-x grid-container align-middle hide-for-large small-up-4 supporter-of text-center">
+            <div class="cell">
+                <img alt="" src="~/images/common/flag.jpg" />
+            </div>
+            <div class="cell">
+                <img alt="" src="~/images/common/vietnam-medal.png" />
+            </div>
+            <div class="cell">
+                <img alt="" src="~/images/common/wwp.jpg" />
+            </div>
+            <div class="cell">
+                <img alt="" src="~/images/common/pow.jpg" />
+            </div>
+        </div>
+    </div>
+</div>

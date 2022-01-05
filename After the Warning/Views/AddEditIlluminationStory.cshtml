@@ -1,0 +1,71 @@
+﻿@using ContentModels = Umbraco.Web.PublishedModels;
+@inherits UmbracoViewPage<ContentModels.AddEditIlluminationStory>
+@{ Layout = "ManageAccount.cshtml"; }
+
+
+
+@{
+    //Obtain page content
+    Models.AddEditIlluminationStoryContent PgContent = Controllers.IlluminationController.DoesStoryExist(Umbraco, User, Services.MemberService);
+}
+
+
+<div id="pnlIlluminationStory">
+    @if (TempData["showAddEditPnl"] != null && (bool)TempData["showAddEditPnl"])
+    {
+        <input type="hidden" value="true" id="hfldShowAddEditPnl" />
+    }
+    <div class="grid-x">
+        <div class="cell">
+            @if (!User.Identity.IsAuthenticated)
+            {
+                //Redirect to login page.
+                Response.Redirect(Umbraco.Content((int)(Models.Common.siteNode.Login)).Url());
+            }
+            else
+            {
+                if (PgContent.DoesStoryExist)
+                {
+                    <div id="pnlIlluminationStory">
+                        @if (PgContent.IsStoryPublished)
+                        {
+                            Html.RenderAction("RenderStory", "Illumination", new { member = PgContent.Member, Umbraco = Umbraco });
+                            Html.RenderAction("RenderForm", "Illumination", new { member = PgContent.Member, Umbraco = Umbraco, editMode = true });
+                        }
+                        else
+                        {
+                            if (TempData["IlluminationStoryAddedSuccessfully"] != null && (bool)TempData["IlluminationStoryAddedSuccessfully"])
+                            {
+                                <br />
+                                <hr />
+                                <h3 class="text-center">Your story has been successfully submitted!<br />We will review and publish your story as soon as possible.</h3>
+                                <hr />
+                                <br />
+                            }
+
+                            else
+                            {
+                                <br />
+                                <hr />
+                                <h3 class="text-center">Your Story is<br />Pending Publication</h3>
+                                <hr />
+                            }
+                        }
+                    </div>
+
+                }
+                else
+                {
+                    Html.RenderAction("RenderInstructions", "Illumination");
+                    Html.RenderAction("RenderForm", "Illumination", new { member = PgContent.Member, Umbraco = Umbraco });
+                }
+            }
+
+        </div>
+    </div>
+</div>
+
+
+@section Footer {
+    <script type="text/javascript" src="~/Scripts/custom/manageIlluminationPanels.js"></script>
+}

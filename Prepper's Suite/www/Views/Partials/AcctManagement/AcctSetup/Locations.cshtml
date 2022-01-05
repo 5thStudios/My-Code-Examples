@@ -1,0 +1,139 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<bl.Models.AcctSetupModel>
+
+
+<div id="Step-Locations" class="step-panel" data-step="3">
+    <h2>Locations & Bugout Bags</h2>
+
+    <div>
+        <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse, cricket bat max brucks terribilem incessu zomby. The voodoo sacerdos flesh eater, suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi.</p>
+    </div>
+    <hr />
+    <br />
+
+
+
+    <div class="grid-x grid-padding-x grid-padding-y">
+        <div class="cell small-3">
+            <div class="member-btn active">
+                <div class="grid-x">
+                    <div class="cell text-center">
+                        <input type="radio" id="rbNewLocation" name="location" value="-1" />
+                        <label for="rbNewLocation">New Location</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @foreach (var member in Model.LstLocations)
+        {
+            //Create button name
+            string btnName = ("rb" + member.Name).Replace(" ", "");
+
+            <div class="cell small-3">
+                <div class="member-btn">
+                    <div class="grid-x">
+                        <div class="cell text-center">
+                            <br />
+                            <input type="radio" id="@btnName" name="location" value="@member.LocationId" />
+                            <label for="@btnName">@member.Name</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <br />
+
+
+
+
+    <br />
+    <br />
+    <fieldset class="fsLocation" data-locationid="-1">
+        <legend>New Location</legend>
+
+        <div class="grid-x grid-padding-x grid-padding-y">
+            <div class="cell large-4">
+                <h5>Location Name</h5>
+            </div>
+            <div class="cell large-8">
+                @Html.TextBoxFor(m => Model.NewLocation.Name)
+            </div>
+        </div>
+
+        <div class="grid-x grid-padding-x grid-padding-y">
+            <div class="cell large-4 large-offset-16">
+                <button type="submit" class="button expanded" name="btnCancel" value="">Cancel</button>
+            </div>
+            <div class="cell large-4">
+                <button type="submit" class="button expanded active" name="btnSubmit" value="-1">Add Location</button>
+            </div>
+        </div>
+    </fieldset>
+
+
+    @for (int i = 0; i < Model.LstLocations.Count(); i++)
+    {
+        <fieldset class="fsLocation" data-locationid="@Model.LstLocations[i].LocationId">
+            <legend>Update Location</legend>
+            @Html.HiddenFor(x => Model.LstLocations[i].LocationId)
+
+            <div class="grid-x grid-padding-x grid-padding-y">
+                <div class="cell large-4">
+                    <h5>Location Name</h5>
+                </div>
+                <div class="cell large-8">
+                    @Html.TextBoxFor(x => Model.LstLocations[i].Name)
+                </div>
+            </div>
+
+            <div class="grid-x grid-padding-x grid-padding-y">
+                <div class="cell large-4 large-offset-12">
+                    <button type="submit" class="button expanded" name="btnCancel" value="">Cancel</button>
+                </div>
+                <div class="cell large-4">
+                    <button type="submit" class="button expanded" name="btnDelete" value="@Model.LstLocations[i].LocationId">Delete</button>
+                </div>
+                <div class="cell large-4">
+                    <button type="submit" class="button expanded active" name="btnSubmit" value="@Model.LstLocations[i].LocationId">Update</button>
+                </div>
+            </div>
+        </fieldset>
+    }
+
+
+
+    <br />
+    <br />
+
+    @Html.ValidationSummary(false, "")
+
+
+
+
+
+</div>
+
+
+
+
+<style>
+    .fsLocation { display: none; }
+</style>
+
+<script type="text/javascript">
+    //
+    //========================================================
+    jQuery(function ($) {
+        var fieldsets = $('.fsLocation');
+        var lstLocationRb = $('input[type=radio][name=location]')
+
+
+        $(lstLocationRb).change(function () {
+            console.log(this.value);
+            fieldsets.hide();
+            $('.fsLocation[data-locationid="' + this.value + '"]').show();
+        });
+    });
+</script>

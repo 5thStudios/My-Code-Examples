@@ -1,0 +1,14 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<List<Models.Link>>
+
+
+<div class="grid-x grid-container">
+    <div class="cell text-center large-text-right">
+        <br />
+        <nav>
+            @foreach (Models.Link link in Model)
+            {
+                <a href="@link.Url">@link.Name</a>
+            }
+        </nav>
+    </div>
+</div>

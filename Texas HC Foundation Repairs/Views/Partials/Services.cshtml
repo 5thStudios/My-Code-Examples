@@ -1,0 +1,42 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Models.Services>
+
+
+<a name="services"></a>
+<section id="services-panel" class="grid-x" style="background-image:url('@Model.BackgroundImgUrl');background-color:@Model.BackgroundTransparency;">
+    <div class="cell">
+        <div class="grid-container">
+            <br />
+            <br />
+            <div class="grid-x">
+                <div class="cell text-center">
+                    <h2>Our Services</h2>
+                    <img alt="" class="seperator-stars" src="~/images/common/seperator-stars.png" />
+                    @{ if (!string.IsNullOrEmpty(Model.Description))
+                        {
+                            <p>
+                                @Html.Raw(Model.Description)
+                            </p>
+                        }
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="grid-x grid-margin-x grid-margin-y">
+                @foreach (Models.Service service in Model.LstServices)
+                {
+                    <div class="cell medium-12 large-8 @(service ==  Model.LstServices.Last() ? "medium-offset-6 large-offset-0":"")">
+                        <div class="grid-x">
+                            <div class="cell text-center">
+                                <h3>@Html.Raw(service.Title)</h3>
+                                <img alt="@service.Title" src="@service.FeaturedImgUrl" class="service-image" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <br />
+            <br />
+            <br />
+        </div>
+    </div>
+</section>

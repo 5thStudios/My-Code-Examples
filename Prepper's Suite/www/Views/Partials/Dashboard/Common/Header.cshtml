@@ -1,0 +1,26 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<IPublishedContent>
+
+@{
+    //Instantiate variables
+    string title = "";
+
+    //Obtain page title
+    if (Model.HasValue(bl.Models.Common.NodeProperty.Title))
+    {
+        title = Model.Value<string>(bl.Models.Common.NodeProperty.Title);
+    }
+    else
+    {
+        title = Model.Name;
+    }
+}
+
+
+<header class="grid-x grid-padding-x grid-padding-y flex-child-shrink">
+    <div class="cell" style="border-bottom:1px solid #000000;">
+        <img alt="" src="~/images/temp/img-box.png" style="width:60px;height:auto;" />&nbsp;&nbsp;&nbsp;
+        <h1 style="display:inline-block; line-height: 1rem; vertical-align: bottom;">
+            @title
+        </h1>
+    </div>
+</header>

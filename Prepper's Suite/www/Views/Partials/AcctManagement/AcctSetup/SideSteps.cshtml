@@ -1,0 +1,153 @@
+﻿@using bl.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<bl.Models.AcctSetupModel>
+
+@{
+    //
+    List<string> lstStatus = new List<string>(6);
+    lstStatus.Add("");
+    lstStatus.Add("");
+    lstStatus.Add("");
+    lstStatus.Add("");
+    lstStatus.Add("");
+    lstStatus.Add("");
+    
+    //
+    for (var index = 0; index < 6; index++)
+    {
+        if (index < Model.StepIndex)
+        {
+            lstStatus[index] = "complete";
+        }
+        else if (index == Model.StepIndex)
+        {
+            lstStatus[index] = "active";
+        }
+    }
+
+}
+
+
+<div class="grid-x grid-margin-y side-steps">
+
+
+    <div class="cell">
+        <a id="btn-intro" data-step="0" class="@lstStatus[0]">
+            <div class="align-middle" style="display:flex;">
+                <img class="inactive" alt="" src="~/images/temp/side-btn-inactive.png" />
+                <img class="active" alt="" src="~/images/temp/side-btn-active.png" />
+                <img class="complete" alt="" src="~/images/temp/side-btn-complete.png" />
+                <div class="step-no">
+                    <div>STEP</div>
+                    <div>01</div>
+                </div>
+                <div class="content">
+                    <h3>Introduction</h3>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="cell">
+        <a id="btn-user-info" data-step="1" class="@lstStatus[1]">
+            <div class="align-middle" style="display:flex;">
+                <img class="inactive" alt="" src="~/images/temp/side-btn-inactive.png" />
+                <img class="active" alt="" src="~/images/temp/side-btn-active.png" />
+                <img class="complete" alt="" src="~/images/temp/side-btn-complete.png" />
+                <div class="step-no">
+                    <div>STEP</div>
+                    <div>02</div>
+                </div>
+                <div class="content">
+                    <h3>User Information</h3>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="cell">
+        <a id="btn-members" data-step="2" class="@lstStatus[2]">
+            <div class="align-middle" style="display:flex;">
+                <img class="inactive" alt="" src="~/images/temp/side-btn-inactive.png" />
+                <img class="active" alt="" src="~/images/temp/side-btn-active.png" />
+                <img class="complete" alt="" src="~/images/temp/side-btn-complete.png" />
+                <div class="step-no">
+                    <div>STEP</div>
+                    <div>03</div>
+                </div>
+                <div class="content">
+                    <h3>Members</h3>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="cell">
+        <a id="btn-locations" data-step="3" class="@lstStatus[3]">
+            <div class="align-middle" style="display:flex;">
+                <img class="inactive" alt="" src="~/images/temp/side-btn-inactive.png" />
+                <img class="active" alt="" src="~/images/temp/side-btn-active.png" />
+                <img class="complete" alt="" src="~/images/temp/side-btn-complete.png" />
+                <div class="step-no">
+                    <div>STEP</div>
+                    <div>04</div>
+                </div>
+                <div class="content">
+                    <h3>Locations & Bugout Bags</h3>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="cell">
+        <a id="btn-toolsets" data-step="4" class="@lstStatus[4]">
+            <div class="align-middle" style="display:flex;">
+                <img class="inactive" alt="" src="~/images/temp/side-btn-inactive.png" />
+                <img class="active" alt="" src="~/images/temp/side-btn-active.png" />
+                <img class="complete" alt="" src="~/images/temp/side-btn-complete.png" />
+                <div class="step-no">
+                    <div>STEP</div>
+                    <div>05</div>
+                </div>
+                <div class="content">
+                    <h3>Tool Sets</h3>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="cell">
+        <a id="btn-dedication" data-step="5" class="@lstStatus[5]">
+            <div class="align-middle" style="display:flex;">
+                <img class="inactive" alt="" src="~/images/temp/side-btn-inactive.png" />
+                <img class="active" alt="" src="~/images/temp/side-btn-active.png" />
+                <img class="complete" alt="" src="~/images/temp/side-btn-complete.png" />
+                <div class="step-no">
+                    <div>STEP</div>
+                    <div>06</div>
+                </div>
+                <div class="content">
+                    <h3>Dedication</h3>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>

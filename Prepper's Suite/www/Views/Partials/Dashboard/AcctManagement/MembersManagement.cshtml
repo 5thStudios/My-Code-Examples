@@ -1,0 +1,181 @@
+﻿@using bl.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<bl.Models.AcctSetupModel>
+
+
+@using (Html.BeginUmbracoForm<www.Controllers.AcctMngmntController>(Common.wwwAction.FormSubmit_MembersManagement))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.MemberId)
+    @Html.HiddenFor(m => m.AccountId)
+
+
+
+    <div class="grid-x grid-padding-x grid-padding-y">
+        <div class="cell small-3">
+            <div class="member-btn active">
+                <div class="grid-x">
+                    <div class="cell text-center">
+                        <input type="radio" id="rbNewMember" name="member" value="-1" />
+                        <label for="rbNewMember">New Member</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @foreach (var member in Model.LstMembers)
+        {
+            //Obtain member name
+            string memberName = member.FirstName + " " + member.LastInitial + ".";
+            string btnName = ("rb" + member.MemberId).Replace(" ", "");
+
+            <div class="cell small-3">
+                <div class="member-btn">
+                    <div class="grid-x">
+                        <div class="cell text-center">
+                            <br />
+                            <input type="radio" id="@btnName" name="member" value="@member.MemberId" />
+                            <label for="@btnName">@memberName</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <br />
+
+
+    <div class="fsMember" data-memberid="-1">
+        <div class="grid-x grid-padding-x grid-padding-y pnl-add-new-member ">
+            <div class="cell">
+                <h4>Add Member</h4>
+            </div>
+
+            <div class="cell large-4">
+                <h5>First Name</h5>
+            </div>
+            <div class="cell large-8">
+                @Html.TextBoxFor(m => Model.NewUserInfo.FirstName)
+            </div>
+
+            <div class="cell large-4">
+                <h5>Last Initial</h5>
+            </div>
+            <div class="cell large-8">
+                @Html.TextBoxFor(m => Model.NewUserInfo.LastInitial)
+            </div>
+
+            <div class="cell large-4">
+                <h5>Gender</h5>
+            </div>
+            <div class="cell large-8">
+                @Html.DropDownListFor(m => m.NewUserInfo.BirthYear, new SelectList(Model.LstBirthYears, "Value", "Text"), "Select Year")
+            </div>
+
+            <div class="cell large-4">
+                <h5>Birth Year</h5>
+            </div>
+            <div class="cell large-8">
+                @Html.DropDownListFor(m => m.NewUserInfo.BirthYear, new SelectList(Model.LstBirthYears, "Value", "Text"), "Select Year")
+            </div>
+
+            <div class="cell large-4 large-offset-16">
+                <button type="submit" class="button expanded" name="btnCancelNewMember" value="">Cancel</button>
+            </div>
+            <div class="cell large-4">
+                <button type="submit" class="button expanded active" name="btnSubmit" value="-1">Add Member</button>
+            </div>
+        </div>
+    </div>
+
+
+    for (int i = 0; i < Model.LstMembers.Count(); i++)
+    {
+        //Obtain member name
+        string memberName = Model.LstMembers[i].FirstName + " " + Model.LstMembers[i].LastInitial + ".";
+
+
+        <div class="fsMember" data-memberid="@Model.LstMembers[i].MemberId">
+            @Html.HiddenFor(x => Model.LstMembers[i].MemberId)
+            <div class="grid-x grid-padding-x grid-padding-y pnl-add-new-member ">
+                <div class="cell">
+                    <h4>Update Member: <strong>@memberName</strong></h4>
+                </div>
+
+                <div class="cell large-4">
+                    <h5>First Name</h5>
+                </div>
+                <div class="cell large-8">
+                    @Html.TextBoxFor(x => Model.LstMembers[i].FirstName)
+                </div>
+
+                <div class="cell large-4">
+                    <h5>Last Initial</h5>
+                </div>
+                <div class="cell large-8">
+                    @Html.TextBoxFor(x => Model.LstMembers[i].LastInitial)
+                </div>
+
+                <div class="cell large-4">
+                    <h5>Gender</h5>
+                </div>
+                <div class="cell large-8">
+                    @Html.DropDownListFor(x => Model.LstMembers[i].Gender, new SelectList(Model.LstGenders, "Value", "Text", Model.LstMembers[i].Gender), "Gender")
+                </div>
+
+                <div class="cell large-4">
+                    <h5>Birth Year</h5>
+                </div>
+                <div class="cell large-8">
+                    @Html.DropDownListFor(x => Model.LstMembers[i].BirthYear, new SelectList(Model.LstBirthYears, "Value", "Text", Model.LstMembers[i].BirthYear), "Birth Year")
+                </div>
+
+
+                <div class="cell large-4 large-offset-12">
+                    @if (!Model.LstMembers[i].IsAccountOwner)
+                    {
+                        <button type="submit" class="button expanded" name="btnDelete" value="@Model.LstMembers[i].MemberId">Delete</button>
+                    }
+                </div>
+                <div class="cell large-4 ">
+                    <button type="submit" class="button expanded" name="btnCancel" value="">Cancel</button>
+                </div>
+                <div class="cell large-4">
+                    <button type="submit" class="button expanded active" name="btnSubmit" value="@Model.LstMembers[i].MemberId">Update Member</button>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+    <br />
+    <br />
+    @Html.ValidationSummary(false, "")
+
+
+
+}
+
+
+
+<style>
+    .fsMember { display: none; }
+</style>
+
+<script type="text/javascript">
+    //
+    //========================================================
+    jQuery(function ($) {
+        var fieldsets = $('.fsMember');
+        var lstMemberRb = $('input[type=radio][name=member]')
+
+
+        $(lstMemberRb).change(function () {
+            console.log(this.value);
+            fieldsets.hide();
+            $('.fsMember[data-memberid="' + this.value + '"]').show();
+        });
+    });
+</script>

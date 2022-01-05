@@ -1,0 +1,95 @@
+﻿@using bl.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<bl.Models.AcctSetupModel>
+
+
+
+
+@using (Html.BeginUmbracoForm<www.Controllers.AcctMngmntController>(Common.wwwAction.FormSubmit_UserPreferences))
+{
+    @Html.AntiForgeryToken()
+
+    @*@Html.HiddenFor(m => m.MemberId)
+                    @Html.HiddenFor(m => m.AccountId)
+
+                    if (Model.StepIndex == 0) { Html.RenderPartial("Partials/AcctManagement/AcctSetup/Introduction", Model); }
+                    else if (Model.StepIndex == 1) { Html.RenderPartial("Partials/AcctManagement/AcctSetup/UserInfo", Model); }
+                    else if (Model.StepIndex == 2) { Html.RenderPartial("Partials/AcctManagement/AcctSetup/Members", Model); }
+                    else if (Model.StepIndex == 3) { Html.RenderPartial("Partials/AcctManagement/AcctSetup/Locations", Model); }
+                    else if (Model.StepIndex == 4) { Html.RenderPartial("Partials/AcctManagement/AcctSetup/ToolSets", Model); }
+                    else if (Model.StepIndex == 5) { Html.RenderPartial("Partials/AcctManagement/AcctSetup/Dedication", Model); }
+
+
+
+
+
+            <div class="grid-x grid-padding-x grid-padding-y pnl-add-new-member">
+
+                    <div class="cell large-3 text-right">
+                        <h5>First Name</h5>
+                    </div>
+                    <div class="cell large-5">
+                        @Html.TextBoxFor(m => Model.CurrentUserInfo.FirstName, new { required = "required" })
+                    </div>
+
+
+                    <div class="cell large-3 text-right">
+                        <h5>Last Initial</h5>
+                    </div>
+                    <div class="cell large-5">
+                        @Html.TextBoxFor(m => Model.CurrentUserInfo.LastInitial, new { required = "required" })
+                    </div>
+
+                </div>
+                <div class="grid-x grid-padding-x grid-padding-y pnl-add-new-member">
+
+                    <div class="cell large-3 text-right">
+                        <h5>Gender</h5>
+                    </div>
+                    <div class="cell large-5">
+                        @Html.DropDownListFor(m => m.CurrentUserInfo.Gender, new SelectList(Model.LstGenders, "Value", "Text", Model.CurrentUserInfo.Gender), "Select Gender")
+                    </div>
+
+
+                    <div class="cell large-3 text-right">
+                        <h5>Birth Year</h5>
+                    </div>
+                    <div class="cell large-5">
+                        @Html.DropDownListFor(m => m.CurrentUserInfo.BirthYear, new SelectList(Model.LstBirthYears, "Value", "Text", Model.CurrentUserInfo.BirthYear), "Select Year")
+                    </div>
+
+                </div>
+                <div class="grid-x grid-padding-x grid-padding-y pnl-add-new-member">
+                    <div class="cell">
+                        @Html.ValidationSummary(false, "Error")
+                    </div>
+                </div>
+
+
+
+
+        <div data-nav-btns>
+            <br />
+            <hr />
+            <div class="grid-x grid-padding-x grid-padding-y">
+                <div class="cell large-6 large-offset-12">
+                    @if (Model.StepIndex > 0)
+                    {
+                        <button type="submit" name="Previous" value="true" class="button expanded large">Previous</button>
+                    }
+                </div>
+                <div class="cell large-6">
+                    @if (Model.StepIndex == (Model.TotalSteps))
+                    {
+                        <button type="submit" name="btnComplete" value="true" class="button expanded large active">Complete</button>
+                    }
+                    else
+                    {
+                        <button type="submit" name="Next" value="true" class="button expanded large active">Next</button>
+                    }
+                </div>
+            </div>
+            <input type="hidden" name="StepIndex" value="@Model.StepIndex" />
+
+        </div>*@
+}
+
