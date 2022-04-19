@@ -1,0 +1,83 @@
+﻿@model Core.Models.Skills
+
+
+<article class="content skills gray-bg" id="chapterSkills">
+    <div class="inner">
+        <h2>Skills</h2>
+        <div class="title-divider"></div>
+
+        <div class="skills-con">
+            @*Application Patterns*@
+            <div class="container-sub skill-list">
+                @Html.Raw(Model.SkillDetails)
+
+                <div class="full-divider"></div>
+                <div class="row">
+                    <h3>Application Patterns</h3>
+                    @foreach (string pattern in Model.LstApplicationPatterns)
+                    {
+                        <div class="col-4 margin-top10">
+                            <ul>
+                                <li>@pattern</li>
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="full-divider"></div>
+
+            @*Language Skills*@
+            <h3>Language Skills</h3>
+            <div class="container-sub margin-top50">
+                <div class="row">
+                    @foreach (Core.Models.SkillItem skillItem in Model.LstLanguageSkills)
+                    {
+                        <div class="col-6 margin-bottom50">
+                            <div class="col-6"><span class="chart" data-percent="@skillItem.Percentage"><span class="percent"></span> </span></div>
+                            <div class="col-6 chart-text">
+                                <h4>@skillItem.Skill</h4>
+                                <p>@skillItem.ExperienceLevel</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="full-divider"></div>
+
+            @*Library Knowledge*@
+            <div class="container-sub">
+                <div class="row">
+                    <h3>Library Knowledge</h3>
+
+                    @foreach (Core.Models.SkillItem libraryItem in Model.LstLibraryKnowledge)
+                    {
+                        <div class="progressbar-main margin-top40">
+                            <div class="progress-bar-description">@libraryItem.Skill</div>
+                            <div id="progressBar2" class="progress" data-percent="@libraryItem.Percentage">
+                                <div class="progress-value"></div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="full-divider"></div>
+
+            @*Tools of the Trade*@
+            <div class="container-sub skill-list">
+                <div class="row">
+                    <h3>Tools of the Trade</h3>
+
+                    @foreach (string tool in Model.LstToolsOfTheTrade)
+                    {
+                        <div class="col-6 margin-top10">
+                            <ul>
+                                <li>@tool</li>
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</article>

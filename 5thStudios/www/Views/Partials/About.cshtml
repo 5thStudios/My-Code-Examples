@@ -1,0 +1,32 @@
+﻿@model Core.Models.About
+
+
+<style>
+    .about { background: url('/media/1137/hexagonbg_01.png?crop=0.17300657555151583,0,0,0.091092708543728376&amp;cropmode=percentage&amp;width=804&amp;height=1080&amp;rnd=132024730890000000')no-repeat right top #474645; }
+</style>
+
+
+
+<article class="content about white-bg" id="chapterAbout">
+    <div class="inner">
+        <h2>About</h2>
+        <div class="title-divider"></div>
+        <div class="about-con">
+            <div class="umb-grid">
+                <div class="grid-section">
+                    <div>
+                        <div class='container'>
+                            <div class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <div>
+                                        @Html.Raw(Model.Coverletter)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

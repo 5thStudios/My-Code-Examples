@@ -1,0 +1,31 @@
+﻿@model Core.Models.SidePnl
+
+
+
+<aside class="menu" id="chapterHome">
+    <div class="logo">
+        <!-- Logo image-->
+        <a href="/">
+            <img src="@Model.siteLogoImgUrl" width="140" height="140" alt="" />
+        </a>
+        <!-- Logo name-->
+        <span>5thStudios.com</span>
+    </div>
+
+    <!-- Mobile Navigation-->
+    <a href="#menu1" class="menu-link fas fa-bars"></a>
+
+    <!-- Left Navigation-->
+    <nav id="menu1" role="navigation">
+        @foreach (Core.Models.Link link in Model.LstNavigation)
+        {
+            <a class="navLink" href="@link.Url"><span id="@link.AltText">@link.Title</span></a>
+        }
+    </nav>
+
+
+    <div class="copyright">
+        © 5th Studios<br>
+        All Rights Reserved.
+    </div>
+</aside>

@@ -1,0 +1,34 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Core.Models.MasterClass>
+@{ Layout = "../TopLevel.cshtml"; }
+
+
+
+
+<div id="container" class="container">
+    <!-- Left Menu / Logo-->
+    @await Html.PartialAsync("~/Views/Partials/SideNav.cshtml")
+
+
+    <!-- Go to top link for mobile device -->
+    <a href="#menu" class="totop-link">Go to the top</a>
+
+
+    <div class="content-scroller">
+        <div class="content-wrapper">
+            <!-- Introduction -->
+            @await Html.PartialAsync("~/Views/Partials/Intro.cshtml")
+            <!-- About -->
+            @await Html.PartialAsync("~/Views/Partials/About.cshtml")
+            <!-- Portfolio -->
+            @await Html.PartialAsync("~/Views/Partials/Portfolio.cshtml")
+            <!-- Skills -->
+            @await Html.PartialAsync("~/Views/Partials/Skills.cshtml")
+            <!-- Contact -->
+            @await Html.PartialAsync("~/Views/Partials/Contact.cshtml")
+            <!-- Thankyou -->
+            @await Html.PartialAsync("~/Views/Partials/Thankyou.cshtml")
+
+        </div>
+    </div>
+</div>

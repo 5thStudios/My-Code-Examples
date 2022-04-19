@@ -1,0 +1,77 @@
+﻿@*@using Umbraco.Cms.Web.Common.PublishedModels;*@
+@*@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage*@
+@{ Layout = null; }
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    @*<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142295758-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-142295758-1');
+        </script>*@
+
+
+    <title>Jim Fifth | Full Stack Umbraco Expert</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+    @*@meta.AllTags*@
+
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic,100,400italic,500,500italic,700,900,900italic,700italic%7COswald:400,300,700' />
+    <link rel="stylesheet" type='text/css' href="https://use.fontawesome.com/releases/v5.7.2/css/solid.css" integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B" crossorigin="anonymous" />
+    <link rel="stylesheet" type='text/css' href="https://use.fontawesome.com/releases/v5.7.2/css/fontawesome.css" integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+" crossorigin="anonymous" />
+
+    <link type="text/css" rel="stylesheet" href="~/css/normalize.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/scroll.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/portfolio.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/carousel.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/responsive.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/styles.css" />
+
+
+    <script type="text/javascript" src="~/scripts/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="~/scripts/modernizr.custom.js"></script>
+</head>
+<body>
+
+    @RenderBody()
+
+    <script type="text/javascript" src="~/scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="~/scripts/head.min.js"></script>
+    <script type="text/javascript" src="~/scripts/imagesloaded.4.1.4.js"></script>
+    <script type="text/javascript" src="~/scripts/masonry.min.js"></script>
+    <script type="text/javascript" src="~/scripts/class_helper.js"></script>
+    <script type="text/javascript" src="~/scripts/grid_gallery.js"></script>
+    <script type="text/javascript" src="~/scripts/carousel.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.easypiechart.js"></script>
+    <script type="text/javascript" src="~/scripts/text.rotator.js"></script>
+    <script type="text/javascript" src="~/scripts/page-scrolling.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="~/scripts/sendemail.js"></script>
+    <script type="text/javascript" src="~/scripts/progressbar.js"></script>
+    <script type="text/javascript" src="~/scripts/custom-formulate-script.js"></script>
+    <script type="text/javascript" src="~/scripts/proposal-generator.js"></script>
+    <script type="text/javascript" src="~/scripts/settings.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+    <script type="text/javascript">
+        var t1 = gsap.timeline({ defaults: { duration: 1, delay: .5 } });
+
+        t1.from(".logo img", { opacity: 0, x: -40, duration: .75, rotationY: -90 })
+            .from("#menu1 a", { opacity: 0, duration: .6, y: -50, stagger: .25 }, "-=.85")
+            .from("#chapterIntroduction h1", { opacity: 0, x: -50 }, "-=.85")
+            .from("#chapterIntroduction .sub", { opacity: 0, y: 25 }, "-=1");
+
+
+    </script>
+</body>
+</html>

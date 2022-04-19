@@ -1,0 +1,19 @@
+﻿@model Core.Models.Introduction
+
+
+
+<article class="content introduction noscroll" id="chapterIntroduction">
+    <div class="inner">
+        <h1>
+            <span>Hello, I'm</span><br>
+            <span>@Model.FullName</span>
+        </h1>
+        <div class="sub">
+            <span class="title">@Model.CareerTitle</span>
+        </div>        
+    </div>
+    <div id="owl-demo" class="owl-carousel">
+        <div class="item"><img src="@Model.IntroImgUrl" alt="" /></div>
+    </div>
+</article>
+
