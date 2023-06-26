@@ -1,0 +1,153 @@
+﻿@inherits UmbracoViewPage<bl.Models.Header>
+
+
+
+@{
+    if (Model.IsHome)
+    {
+        <header>
+            <div class="grid-x hide-for-medium">
+                <div class="cell text-right">
+                    <button class="menu-control open" data-toggle="offCanvas">
+                        <img alt="hamburger-icon" src="/images/hamburger.1d2fa160.svg" width="40" height="29">
+                    </button>
+                </div>
+            </div>
+            <div class="grid-x grid-padding-x grid-padding-y">
+                <div class="cell small-24 medium-12 hide-for-laptop">
+                    <a href="/">
+                        <img src="@Model.SiteLogo.Url" alt="@Model.SiteLogo.Name" width="@Model.SiteLogo.Width" height="@Model.SiteLogo.Height" layout="responsive" />
+                    </a>
+                </div>
+                <div class="cell small-12 medium-12 laptop-24 large-24 text-right">
+                    <nav class="menu show-for-laptop">
+                        <div class="signup-login desktop">
+                            @foreach (var lnk in Model.LstMinorNav)
+                            {
+                                <a href="@lnk.Url" class="@lnk.Class">@lnk.Name</a>
+                            }
+                        </div>
+                    </nav>
+                    <div class="show-for-medium-only">
+                        <button class="menu-control open" data-toggle="offCanvas">
+                            <img alt="hamburger-icon" src="/images/hamburger.1d2fa160.svg" width="40" height="29">
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-container show-for-laptop">
+                <div class="grid-x grid-margin-x">
+                    <div class="cell    medium-12 medium-offset-1   laptop-8 laptop-offset-2   large-8 large-offset-4  text-left">
+
+                        <a href="/">
+                            <img src="@Model.SiteLogo.Url" alt="@Model.SiteLogo.Name" width="@Model.SiteLogo.Width" height="@Model.SiteLogo.Height" layout="responsive">
+                        </a>
+
+                    </div>
+                </div>
+                <br />
+            </div>
+
+            <div class="header-description">
+                <div class="grid-container">
+                    <div class="grid-x grid-margin-x">
+                        <div class="cell    laptop-8 laptop-offset-5    large-8 large-offset-5  text-center laptop-text-left large-text-left">
+                            @Html.Raw(Model.Intro)
+                        </div>
+                        <div class="cell laptop-11 large-11  show-for-laptop">
+                            <div class="img"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="header-cta">
+                <div class="grid-container">
+                    <div class="grid-x grid-margin-x">
+                        <div class="cell    laptop-4 laptop-offset-5    large-4 large-offset-5  down-arrow text-center">&nbsp;</div>
+                    </div>
+
+                    <div class="grid-x grid-margin-x contents">
+                        <div class="cell    small-18 small-offset-3    medium-6 medium-offset-6    laptop-4 laptop-offset-5    large-4 large-offset-5   text-center">
+                            <a href="@Model.LnkGetStarted.Url" class="btn huge medium-only-medium orange">Get Started</a>
+                        </div>
+                        <div class="cell small-24 medium-11 large-15 text-center medium-text-left">
+                            <p>or take our <a href="@Model.LnkFreePracticeTest.Url">Free Practice Test</a></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </header>
+    }
+    else
+    {
+        <div id="container" class="Subpage Resources ExamPrep NotLoggedIn">
+            <header>
+
+                    <div class="grid-x hide-for-medium">
+                        <div class="cell text-right">
+                            <button class="menu-control open" data-toggle="offCanvas">
+                                <img alt="hamburger-icon" src="/images/hamburger.1d2fa160.svg" width="40" height="29">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid-x grid-padding-x grid-padding-y">
+                        <div class="cell small-24 medium-12 laptop-7 large-4">
+                            <a href="/">
+                                <img src="@Model.SiteLogo.Url" alt="@Model.SiteLogo.Name">
+                            </a>
+                        </div>
+                        <div class="cell small-12 medium-12 laptop-17 large-20 text-right">
+                            
+                            <nav class="menu show-for-laptop">
+                                <ul class="">
+                                    @foreach (var lnkPrnt in Model.LstMainNav)
+                                    {
+                                        if (lnkPrnt.LstChildLinks != null)
+                                        {
+                                            <li class="has-children">
+                                                <a href="@lnkPrnt.Url">@lnkPrnt.Name</a>
+                                                <ul>
+                                                    @foreach (var lnkChld in lnkPrnt.LstChildLinks)
+                                                    {
+                                                        <li>
+                                                            <a href="@lnkChld.Url">@lnkChld.Name</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a href="@lnkPrnt.Url">@lnkPrnt.Name</a>
+                                            </li>
+                                        }
+                                    }
+
+                                </ul>
+
+                                <div class="signup-login desktop">
+                                    @*<h6 style="text-align:right;padding-right:16px;color: #357135;">jim.fifth@5thstudios.com</h6>*@
+                                    @foreach (var lnk in Model.LstMinorNav)
+                                    {
+                                        <a href="@lnk.Url" class="@lnk.Class">@lnk.Name</a>
+                                    }
+                                </div>
+                            </nav>
+                            <div class="show-for-medium-only">
+                                <button class="menu-control open" data-toggle="offCanvas">
+                                    <img alt="hamburger-icon" src="/images/hamburger.1d2fa160.svg" width="40" height="29">
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+            </header>
+        </div>
+    }
+}

@@ -1,0 +1,35 @@
+﻿@using ContentModels = Umbraco.Web.PublishedModels;
+@model ContentModels.Post
+
+
+@{
+    var dateTimeFormat = "yyyy-MM-ddThh:mm:sszzz";
+    var datePublished = Model.CreateDate.ToString(dateTimeFormat);
+    var dateModified = Model.UpdateDate.ToString(dateTimeFormat);
+    string imgUrl = "https://socialworktestprep.com/media/idqo4bds/social-work-test-prep-logo.png";
+    if (Model.ArticleImage != null)
+    {
+        imgUrl = Model.ArticleImage.Url(mode: UrlMode.Absolute);
+    }
+
+    //  https://developers.google.com/search/docs/appearance/structured-data/article
+    //  https://www.google.com/webmasters/markup-helper/u/0/?verticalId=4701&sourceId=108101248     4 TESTING!!
+}
+
+
+<!-- BLOGPOSTING FOR GOOGLE -->
+<script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "BlogPosting",
+      "headline": "@Model.Name",
+      "image": ["@imgUrl"],
+      "publisher": {
+        "@@type": "Organization",
+        "name": "Social Work Test Prep",
+        "url": "https://socialworktestprep.com"
+      },
+      "datePublished": "@datePublished",
+      "dateModified": "@dateModified"
+    }
+</script>

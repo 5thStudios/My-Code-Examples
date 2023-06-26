@@ -1,0 +1,39 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<bl.Models.ExamData>
+
+
+
+@if (TempData.ContainsKey(bl.Models.Common.TempData.RedirectToLogin) && (bool)TempData[bl.Models.Common.TempData.RedirectToLogin] == true)
+{
+    //Redirect to login page.
+    Response.Redirect(Umbraco.Content((int)bl.Models.Common.SiteNode.Login).Url(), false);
+}
+else
+{
+    <div class="grid-container exam">
+        <div class="grid-x grid-margin-x">
+            <div class="cell laptop-16 laptop-offset-4 large-16 large-offset-4">
+                <div id="Header">
+                    <div class="exam-header-inner instructions">
+                        <h1 class="Exam">@Model.Title</h1>
+                    </div>
+                </div>
+
+
+                <div class="main-content">
+                    <br />
+                    <div class="text-right">
+                        <a class="button" href="@Model.NextUrl">Start Exam</a>
+                    </div>
+                    @Html.Raw(Model.Instructions)
+                    <br />
+                    <div class="text-right">
+                        <a class="button" href="@Model.NextUrl">Start Exam</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <br />
+}

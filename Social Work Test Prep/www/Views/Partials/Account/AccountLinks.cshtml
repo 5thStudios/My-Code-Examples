@@ -1,0 +1,37 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<List<bl.Models.Link>>
+@using ContentModels = Umbraco.Web.PublishedModels;
+
+
+<article class="box box-bordered">
+    <h2>Account</h2>
+    <ul class="account-menu">
+        @foreach (var parentLnk in Model)
+        {
+            if (parentLnk.LstChildLinks == null)
+            {
+                //
+                <li><a href="@parentLnk.Url">@parentLnk.Name</a></li>
+            }
+            else
+            {
+                //
+                <li>
+                    <a href="@parentLnk.Url">@parentLnk.Name</a>
+                    <ul>
+                        @foreach (var childLnk in parentLnk.LstChildLinks)
+                        {
+                            <li><a href="@childLnk.Url">@childLnk.Name</a></li>
+                        }
+                    </ul>
+                </li>
+            }
+        }
+    </ul>
+    <br />
+    <br />
+
+    @using (Html.BeginUmbracoForm<bl.Controllers.blMemberController>(bl.Models.Common.Action.SubmitLogout))
+    {
+        <button>Log Out</button>
+    }
+</article>

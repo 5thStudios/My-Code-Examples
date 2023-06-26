@@ -1,0 +1,24 @@
+﻿.pending, .pending a:hover, .pending button:hover, .pending input:hover, .pending [type='checkbox'] + label[for], .pending [type='radio'] + label[for] { cursor: wait !important; }
+.manageCouponsController {}
+.manageCouponsController h1, 
+.manageCouponsController h2, 
+.manageCouponsController h3, 
+.manageCouponsController h4, 
+.manageCouponsController h5, 
+.manageCouponsController h6 {margin:0;}
+.manageCouponsController hr {border-bottom: 1px solid #d1d1d1;}
+.manageCouponsController table {background-color: transparent;}
+.manageCouponsController label { width:100%;margin:0;display: inline;}
+.manageCouponsController select { width:100%; margin: 0;}
+.manageCouponsController input { width:100%; margin: 0;}
+.manageCouponsController textarea { width:100%; margin: 0;}
+.manageCouponsController input[type=submit] {background-color: #1b264f;color: #fff;height: 32px;border-width: 0;border-radius: 3px;}
+.manageCouponsController input[type=button] {background-color: #1b264f;color: #fff;height: 32px;border-width: 0;border-radius: 3px;}
+.manageCouponsController input[type=checkbox] { width: 18px;height: 18px; }
+.manageCouponsController .ui-datepicker-trigger {    position: absolute;height: 28px;width: auto;margin-left: 6px;margin-top: 2px;}
+
+.manageCouponsController .errorMsg {color:red;font-style: italic; display:none;}
+.manageCouponsController .savedSuccessfully {color:green;font-style: italic; display:none;}
+
+.tblMngCoupons {min-width:60%}
+.tblMngCoupons > tbody {display:none;}

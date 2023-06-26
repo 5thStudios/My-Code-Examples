@@ -1,0 +1,28 @@
+﻿{
+    propertyEditors: [      
+        {
+			alias: "manageCouponsController",
+            name: "Manage Coupons",
+            editor: {
+                view: "~/App_Plugins/manageCoupons/manageCoupons.editor.html",
+                valueType: "JSON"
+            }
+        }
+    ],
+    javascript: [
+        '~/App_Plugins/manageCoupons/manageCoupons.controller.js'
+    ],
+    css: [
+        '~/App_Plugins/manageCoupons/manageCoupons.css'
+    ],
+
+    "dashboards":  [
+        {
+            "alias": "manageCouponsController",
+            "name":  "Manage Coupons",
+            "view":  "/App_Plugins/manageCoupons/manageCoupons.editor.html",
+            "sections":  [ "member" ],
+            "weight": -80
+        }
+    ]
+}

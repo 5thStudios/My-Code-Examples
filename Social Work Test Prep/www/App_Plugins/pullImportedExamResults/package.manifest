@@ -1,0 +1,30 @@
+﻿{
+    propertyEditors: [      
+        {
+			alias: "pullImportedExamResultsController",
+            name: "pullImportedExamResults",
+            editor: {
+                view: "~/App_Plugins/pullImportedExamResults/pullImportedExamResults.editor.html",
+                valueType: "JSON"
+            }
+        }
+    ],
+    javascript: [
+        'https://code.jquery.com/ui/1.13.2/jquery-ui.js',
+        '~/App_Plugins/pullImportedExamResults/pullImportedExamResults.controller.js?v=02'
+    ],
+    css: [
+        'https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css',
+        '~/App_Plugins/pullImportedExamResults/pullImportedExamResults.css'
+    ],
+
+    "dashboards":  [
+        {
+            "alias": "pullImportedExamResultsController",
+            "name":  "pullImportedExamResults",
+            "view":  "/App_Plugins/pullImportedExamResults/pullImportedExamResults.editor.html",
+            "sections":  [ "member" ],
+            "weight": 100
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Blog>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{ Layout = "TopLevel.cshtml"; }
+
+
+@section Header {
+    @*<link rel="stylesheet" type="text/css" href="~/Styles/simplePagination.min.css" />*@
+    <link rel="alternate" type="application/rss+xml" href="@Model.AncestorOrSelf("blog").DescendantsOfType("rSS").FirstOrDefault().Url(mode: UrlMode.Absolute)" />
+}
+@section Footer {
+    @*<script type="text/javascript" src="~/Scripts/jquery.session.js"></script>*@
+    @*<script type="text/javascript" src="~/Scripts/jquery.simplePagination.js"></script>*@
+    <script type="text/javascript" src="/Scripts/pagination.min.js"></script>
+}
+
+
+@{
+    //Get page # fro url
+    int pageNo = int.TryParse(Request.QueryString["page"], out pageNo) ? pageNo : 1;
+
+
+    // get tag, category, or author from query string
+    //var tag = HttpUtility.HtmlDecode(Request.QueryString["tag"]);
+    //var category = Request.QueryString["category"];
+    //var author = Request.QueryString["author"];
+    //var searchTerm = Request.QueryString["search"];
+    //var commenter = Request.QueryString["commenter"];
+}
+
+@{Html.RenderAction(bl.Models.Common.Action.RenderList, bl.Models.Common.Controller.Blog, new { cmModel = Model, pageNo = pageNo });}

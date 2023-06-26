@@ -1,0 +1,25 @@
+﻿@inherits UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedModels;
+
+
+
+<section class="grid-x features">
+    <div class="cell large-22 large-offset-1">
+        <div class="grid-x  small-up-1 medium-up-2 laptop-up-4 large-up-4    grid-margin-x grid-padding-x small-padding-collapse">
+            
+            <div class="cell">
+                @Html.Raw(Model.Feature01)
+            </div>
+            <div class="cell">
+                @Html.Raw(Model.Feature02)
+            </div>
+            <div class="cell">
+                @Html.Raw(Model.Feature03)
+            </div>
+            <div class="cell">
+                @{Html.RenderAction(bl.Models.Common.Action.RenderSignupPanel, bl.Models.Common.Controller.Common);}
+            </div>
+
+        </div>
+    </div>
+</section>

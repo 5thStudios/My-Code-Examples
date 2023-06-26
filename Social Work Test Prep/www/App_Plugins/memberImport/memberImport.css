@@ -1,0 +1,62 @@
+﻿.memberImportController { }
+.memberImportController hr {border-bottom: 1px solid #c5c5c5;}
+
+
+.memberImportController h4 { color: #666; }
+.memberImportController input[type=text] { font-weight: bold; color: #8d869c; border-width: 0; background-color: transparent; width: 100%; cursor: text; }
+.memberImportController a { color: #549dd8; text-decoration: underline; }
+.memberImportController a:hover { color: #2573B1; }
+.memberImportController .btnPullData { margin-right: 24px; height: 28px; color: #fff; background-color: #41365a; border: 1px solid #2e2247; }
+.memberImportController .btnPullData:hover { background-color: #8d869c; }
+.memberImportController .btnPullData:disabled { background-color: rgb(64 54 89 / 30%); }
+.memberImportController .btnPullData:disabled:hover { cursor: default !important; }
+.memberImportController .alertMsg { color: #B91800; }
+.memberImportController .msg { color: green; }
+
+
+
+
+/*  FROM OLD CODE IN U4     */
+.memberImportController { }
+.memberImportController h1 { color: #3c3c3c; }
+.memberImportController h2 { color: #3c3c3c; font-weight: 100;}
+.memberImportController h3 { color: #3c3c3c; font-weight: 100;}
+.memberImportController h4 { color: #3c3c3c; font-weight: 100;}
+.memberImportController h5 { color: #3c3c3c; font-weight: 100;}
+.memberImportController h6 { color: #3c3c3c; font-weight: 100;}
+.memberImportController p { }
+.memberImportController .checkbox { }
+.memberImportController .checkbox label { color: DarkOrange; font-size: Large; font-weight: bold; }
+.memberImportController .checkbox input { float: unset; margin-bottom: 9px; margin-left: 9px; width: 18px; height: 18px; }
+.memberImportController input[type=text] { font-weight: bold; color: #8d869c; border-width: 0; background-color: transparent; width: 100%; cursor: text; }
+.memberImportController a { color: #549dd8; text-decoration: underline; }
+.memberImportController a:hover { color: #2573B1; }
+.memberImportController button, 
+.memberImportController .btnImportExcel { padding: 9px 16px; color: #fff; background-color: #41365a; border: 1px solid #2e2247; font-size: 20px; }
+.memberImportController button:hover, 
+.memberImportController .btnImportExcel:hover { background-color: #8d869c; }
+
+.memberImportController .alertMsg { color: #549dd8; display: none; font-size: 16px; }
+.memberImportController .alertMsg-failed { color: #B91800; display: none; font-size: 16px; }
+.memberImportController .alertMsg-success { color: green; display: none; font-size: 16px; }
+.memberImportController .alertMsg-results { display: none; font-size: 16px; }
+
+.memberImportController table { min-width: 100%; font-size: 18px; }
+.memberImportController table thead, .memberImportController table thead th { font-size: 18px; text-align: left; background-color: #413659; color: #ffffff; padding: 5px; }
+.memberImportController table tfoot, .memberImportController table tfoot th { font-size: 18px; text-align: left; background-color: rgb(141 134 155 / 25%); padding: 5px; }
+.memberImportController table tbody, .memberImportController table tbody td { font-size: 18px; text-align: left; }
+.memberImportController table tbody tr:nth-child(even) { background-color:#f3f3f3; }
+
+.memberImportController table.tblMessageBoard {border-spacing: 0px; display:block;}
+.memberImportController table.tblMessageBoard tr {}
+.memberImportController table.tblMessageBoard tr:nth-child(even) {background-color:transparent;}
+.memberImportController table.tblMessageBoard td {padding: 0 20px 3px 0;}
+.memberImportController table.tblMessageBoard td:nth-child(even) {font-weight:700;}
+
+.memberImportController input[type=file] { height: auto; line-height: inherit; font-size: 20px; }
+.memberImportController input[type=button], 
+.memberImportController input[type=submit] { background-color: #41365a; font-size: 20px; padding: 9px 12px; color: #fff; }
+.memberImportController .data-pnl { display: none; }
+.memberImportController .btnImportExcel { margin-bottom: 24px; }
+
+

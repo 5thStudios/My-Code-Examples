@@ -1,0 +1,40 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedModels;
+
+
+
+<div class="grid-x">
+    <div class="cell">
+        <div class="slick-carousel" data-equalizer="slick-item" >
+
+            @{
+                foreach (MediaWithCrops media in Model.Testimonials)
+                {
+                    Testimonial testimonial = new ContentModels.Testimonial(media);
+                    <div class="slick-item">
+                        <div class="grid-x grid-margin-x grid-padding-y">
+                            <div class="cell    small-20 small-offset-2   laptop-11 laptop-offset-1  large-11 large-offset-1     text-right">
+                                <img src="@(Url.GetCropUrl(testimonial,bl.Models.Common.Crop.Portfolio_162x262))" alt="@media.Name" />
+                            </div>
+                            <div class="cell laptop-11 large-11" data-equalizer-watch="slick-item">
+                                <p>@testimonial.Review</p>
+                                <cite>
+                                    <span class="name" itemprop="name">
+                                        <span>@testimonial.MemberName</span>@if (!string.IsNullOrWhiteSpace(testimonial.Exam)){<span>, @testimonial.Exam</span>}
+                                    </span>
+                                    @if (!string.IsNullOrWhiteSpace(testimonial.Location))
+                                    {
+                                        <br />
+                                        <span class="address" itemprop="address">@testimonial.Location</span>
+                                    }
+                                </cite>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+

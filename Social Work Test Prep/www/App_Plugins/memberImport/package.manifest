@@ -1,0 +1,30 @@
+﻿{
+    propertyEditors: [      
+        {
+			alias: "memberImportController",
+            name: "Member Import",
+            editor: {
+                view: "~/App_Plugins/memberImport/memberImport.editor.html",
+                valueType: "JSON"
+            }
+        }
+    ],
+    javascript: [
+        "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js",
+        '~/App_Plugins/memberImport/memberImport.controller.js'
+    ],
+    css: [
+        '~/App_Plugins/memberImport/memberImport.css'
+    ],
+
+    "dashboards":  [
+        {
+            "alias": "memberImportController",
+            "name":  "Member Import",
+            "view":  "/App_Plugins/memberImport/memberImport.editor.html",
+            "sections":  [ "member" ],
+            "weight": -100
+        }
+    ]
+}

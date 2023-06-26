@@ -1,0 +1,53 @@
+﻿<div class="pullImportedExamResultsController" ng-controller="pullImportedExamResultsController">
+    <h3>Pull Exam Results into Member</h3>
+    <br />
+    <table border="0" cellpadding="3" class="tblPullImportedExamResults">
+        <tbody>
+            <tr>
+                <td>
+                    <h5>Pull Exam Results into Member</h5>
+                </td>
+                <td>
+                    <input type="email" id="txbMemberEmail" name="txbMemberEmail" value="" />
+                </td>
+                <td>
+                    <input type="submit" name="btnMemberSearch" id="btnMemberSearch" value="Search" form="submitData" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2">
+                    <div class="errorMsg msgMemberDoesNotExist">*Member does not exist</div>
+                    <div class="errorMsg msgPullingData">*Pulling Data...</div>
+                    <div class="errorMsg msgComplete">*Records Imported Successfully</div>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2">
+
+
+                    <table id="tblResults" border="0" valign="middle">
+                        <tbody id="examRecordList">
+                            <tr class="text-left examRecord">
+                                <td><label>Converted records:</label></td>
+                                <td><label>0</label></td>
+                            </tr>
+                            <tr class="text-left examRecord">
+                                <td><label>Errors:</label></td>
+                                <td><label>0</label></td>
+                            </tr>
+                            <tr class="text-left examRecord">
+                                <td><label>[TITLE]</label></td>
+                                <td><label>[DATA]</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

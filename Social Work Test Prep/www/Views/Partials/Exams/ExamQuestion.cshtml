@@ -1,0 +1,318 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<bl.Models.ExamQuestion>
+@using cm = Umbraco.Web.PublishedModels;
+@using System.Text
+
+
+@{
+    @*if (!Model.IsFreeExam)
+            {
+                //Instantiate variables
+                bool redirect = false;
+
+
+                //Is user logged in?
+                bl.Controllers.blMemberController memberController = new bl.Controllers.blMemberController();
+                if (!memberController.IsMemberLoggedIn()) //Determine if the user is logged in or not.
+                {
+                    TempData[bl.Models.Common.TempData.SessionTimedOut] = true;
+                    redirect = true;
+                }
+                else if (Request.Cookies["yourAuthCookie"] == null) //Determine if cookie has been deleted
+                {
+                    TempData[bl.Models.Common.TempData.SessionTimedOut] = true;
+                    redirect = true;
+                }
+
+
+                //Redirect to login page.
+                if (redirect)
+                {
+                    //Response.Redirect(Umbraco.Content((int)bl.Models.Common.SiteNode.Login).Url(), false);
+                }
+            }
+        }*@
+
+
+
+
+}
+
+<div class="grid-container exam">
+    <div class="grid-x grid-margin-x">
+        <div class="cell">
+            @using (Html.BeginUmbracoForm<bl.Controllers.blExamController>(bl.Models.Common.Action.SubmitExam))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="hide hidden hflds">
+                    @Html.HiddenFor(m => m.AdditionalNotes)
+                    @Html.HiddenFor(m => m.ExamModeId)
+                    @Html.HiddenFor(m => m.ExamMode)
+                    @Html.HiddenFor(m => m.ExamRecordId)
+                    @Html.HiddenFor(m => m.QuestionNo)
+                    @Html.HiddenFor(m => m.QuestionText)
+                    @Html.HiddenFor(m => m.Rationale)
+                    @Html.HiddenFor(m => m.Source)
+                    @Html.HiddenFor(m => m.SuggestedStudyDescription)
+                    @Html.HiddenFor(m => m.Title)
+                    @Html.HiddenFor(m => m.TotalNoQuestions)
+                    @Html.HiddenFor(m => m.ExamId)
+                    @Html.HiddenFor(m => m.ShowPrevious)
+                    @Html.HiddenFor(m => m.ShowNext)
+                    @Html.HiddenFor(m => m.ShowComplete)
+                    @Html.HiddenFor(m => m.StartTime)
+                    @Html.HiddenFor(x => Model.ExamAnswer.ExamAnswersId)
+                    @Html.HiddenFor(x => Model.ExamAnswer.ExamAnswerSetId)
+                    @Html.HiddenFor(x => Model.ExamAnswer.ContentAreaId)
+                    @Html.HiddenFor(x => Model.ExamAnswer.QuestionId)
+                    @Html.HiddenFor(x => Model.ExamAnswer.SelectedAnswer)
+                    @Html.HiddenFor(x => Model.ExamAnswer.IsCorrect)
+                    @Html.HiddenFor(x => Model.IsFreeExam)
+                    @Html.HiddenFor(x => Model.ExamAnswer.QuestionRenderOrder)
+                    @Html.HiddenFor(x => Model.ExamAnswer.AnswerRenderedOrder)
+                    @Html.HiddenFor(x => Model.ExamAnswer.CorrectAnswer)
+                    @Html.HiddenFor(x => Model.QuestionName)
+                    @Html.HiddenFor(x => Model.ContentAreaName)
+                    @for (var i = 0; i < Model.LstSuggestedStudyLinks.Count(); i++)
+                    {
+                        @Html.HiddenFor(x => Model.LstSuggestedStudyLinks[i].Name)
+                        @Html.HiddenFor(x => Model.LstSuggestedStudyLinks[i].Url)
+                        @Html.HiddenFor(x => Model.LstSuggestedStudyLinks[i].Target)
+                    }
+                </div>
+
+
+                <div id="Header">
+                    <div class="exam-header-inner instructions">
+                        <div class="grid-x">
+                            <div class="cell shrink">
+                                <h1 class="Exam">@Model.Title</h1>
+                                <h3 class="Exam">Question @Model.QuestionNo of @Model.TotalNoQuestions</h3>
+                            </div>
+                            <div class="cell auto">
+                                <h1 class="Exam text-right">@Model.ExamMode</h1>
+                                @if (!string.IsNullOrEmpty(Model.TimeRemaining))
+                                {
+                                    <h3 class="Exam text-right">@Model.TimeRemaining &nbsp;Remaining</h3>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="container container-exam">
+                    <div class="grid-x Container">
+                        <div class="cell laptop-18 large-18 exam-col">
+                            <div class="content">
+                                <div class="left">
+                                    <div class="exam-inner">
+                                        <div class="container">
+                                            <div class="contents">
+
+
+                                                @if (Model.ShowErrorMsg)
+                                                {
+                                                    <div class="grid-x grid-margin-x show-for-small-only">
+                                                        <div class="cell">
+                                                            <p class="error">
+                                                                * In order to continue you must select an answer or mark for review.
+                                                                <br />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                }
+
+
+
+                                                <p>@Model.QuestionText</p>
+                                                <div class="rationale">@Model.Rationale</div>
+                                                <div>
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                </div>
+                                                <div class="contents">
+                                                    <div class="contents">
+
+                                                        @for (int i = 0; i < Model.LstAnswerSets.Count(); i++)
+                                                        {
+                                                            @Html.HiddenFor(x => Model.LstAnswerSets[i].Answer)
+                                                            @Html.HiddenFor(x => Model.LstAnswerSets[i].IsCorrectAnswer)
+                                                            @Html.HiddenFor(x => Model.LstAnswerSets[i].Rationale)
+                                                            @Html.HiddenFor(x => Model.LstAnswerSets[i].RenderedOrder)
+
+                                                            //Determine if record is correct answer
+                                                            var isCorrect = "";
+                                                            if (Model.LstAnswerSets[i].IsCorrectAnswer) { isCorrect = "isCorrect"; }
+
+                                                            <div class="form-row @isCorrect">
+                                                                <div class="answer-contents">
+                                                                    @if (Model.LstAnswerSets[i].IsSelectedAnswer)
+                                                                    {
+                                                                        <input id="@Model.LstAnswerSets[i].RenderedOrder" name="SelectedAnswer" type="radio" value="@Model.LstAnswerSets[i].RenderedOrder" checked="checked">
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input id="@Model.LstAnswerSets[i].RenderedOrder" name="SelectedAnswer" type="radio" value="@Model.LstAnswerSets[i].RenderedOrder">
+                                                                    }
+
+                                                                    @if (Model.LstAnswerSets[i].IsCorrectAnswer)
+                                                                    {
+                                                                        <img class="rationale" src="/images/check.png" alt="error" width="16" height="16">
+                                                                    }
+
+                                                                    <label for="@Model.LstAnswerSets[i].RenderedOrder">@Model.LstAnswerSets[i].Answer</label>
+                                                                </div>
+                                                                <div class="rationale">@Model.LstAnswerSets[i].Rationale</div>
+                                                            </div>
+                                                            <br />
+
+                                                        }
+                                                    </div>
+
+
+
+                                                    <div class="grid-x grid-margin-x grid-padding-y ">
+                                                        <div class="cell small-12 medium-shrink">
+                                                            @if (Model.ShowPrevious)
+                                                            {
+                                                                <button class="button expanded medium-up-smaller-btn medium-up-smaller-btn" type="submit" name="PreviousBtnClicked" value="true">Back</button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button class="button expanded medium-up-smaller-btn" type="submit" disabled>Back</button>
+                                                            }
+                                                        </div>
+                                                        <div class="cell small-12 medium-shrink">
+                                                            @if (Model.ShowNext)
+                                                            {
+                                                                <button class="button expanded medium-up-smaller-btn" type="submit" name="NextBtnClicked" value="true">Next</button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button class="button expanded medium-up-smaller-btn" type="submit" disabled>Next</button>
+                                                            }
+                                                        </div>
+
+                                                        <div class="cell small-12 medium-shrink">
+                                                            <div class="review">
+                                                                @Html.CheckBoxFor(m => m.ExamAnswer.ReviewQuestion)
+                                                                @Html.LabelFor(f => f.ExamAnswer.ReviewQuestion, "Mark to Review")
+                                                            </div>
+                                                        </div>
+                                                        <div class="cell small-12 medium-shrink">
+                                                            <div class="show-rationale">
+                                                                <input type="checkbox" id="RationaleAction">
+                                                                <label for="RationaleAction">Show Rationale</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="cell small-18 small-offset-3 medium-shrink medium-offset-0">
+                                                            @if (Model.ShowComplete)
+                                                            {
+                                                                <button type="submit" name="CompleteBtnClicked" value="true" class="btn orange small button expanded medium-up-smaller-btn">Save and Exit</button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="btn orange small button expanded medium-up-smaller-btn" href="@Model.SaveStopBtnUrl">Save & Stop</a>
+                                                            }
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    @if (Model.ShowErrorMsg)
+                                                    {
+                                                        <div class="grid-x grid-margin-x">
+                                                            <div class="cell">
+                                                                <p class="error">
+                                                                    <br />
+                                                                    <br />* In order to continue you must select an answer or mark for review.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    }
+
+                                                    <br />
+                                                    <br />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cell laptop-6 large-6">
+
+                            <div class="SideBar">
+
+                                <div class="exam-review-inner">
+                                    <table>
+                                        <thead><tr><th>Marked Questions</th></tr> </thead>
+                                        <tfoot></tfoot>
+                                        <tbody>
+                                            @if (Model.LstMarkedQuestions.Any())
+                                            {
+                                                foreach (bl.Models.MarkedQuestion markedQuestion in Model.LstMarkedQuestions)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <div>
+                                                                <button type="submit" class="LnkBtn" name="GoToQuestion" value="@(markedQuestion.QuestionNo + 1)">
+                                                                    Question @(markedQuestion.QuestionNo + 1)
+                                                                    @if (!markedQuestion.IsAnswered)
+                                                                    {
+                                                                        <div class="notanswered"> (not answered)</div>
+                                                                    }
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <br />
+                                <div class="highlight rationale">
+                                    <div class="contents">
+                                        <h3>Suggested Study</h3>
+                                        <p>@Model.SuggestedStudyDescription</p>
+                                        @foreach (var link in Model.LstSuggestedStudyLinks)
+                                        {
+                                            <div>
+                                                <a href="@link.Url" target="@link.Target" title="@link.Name">@link.Name</a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="grid-x grid-margin-x">
+                                    <div class="cell">
+                                        <br />
+
+                                        <div class="text-right email-feedback">
+                                            @if (Model.ExamAnswer != null)
+                                            {
+                                                <a href="@Model.EmailSubjectText" title="Email with a question or a correction to this question." target="_blank">
+                                                    <img alt="send_feedback" width="16" height="16" src="/images/mail_box.png"> <span>Question ID @Model.ExamAnswer.QuestionId</span>
+                                                </a>
+                                            }
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br />
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+<br />

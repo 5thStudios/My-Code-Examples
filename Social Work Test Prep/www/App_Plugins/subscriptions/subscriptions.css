@@ -1,0 +1,29 @@
+﻿.pending, .pending a:hover, .pending button:hover, .pending input:hover, .pending [type='checkbox'] + label[for], .pending [type='radio'] + label[for] { cursor: wait !important; }
+.subscriptionsController {}
+.subscriptionsController h1, 
+.subscriptionsController h2, 
+.subscriptionsController h3, 
+.subscriptionsController h4, 
+.subscriptionsController h5, 
+.subscriptionsController h6 {margin:0;}
+.subscriptionsController hr {border-bottom: 1px solid #d1d1d1;}
+.subscriptionsController table {background-color: transparent; min-width:60%}
+.subscriptionsController table table {width:100%;}
+.subscriptionsController table table thead {background-color: #1b264f26;}
+.subscriptionsController label { width:100%;margin:0;display: inline;}
+.subscriptionsController select { width:100%; margin: 0;}
+.subscriptionsController input { width:100%; margin: 0;}
+.subscriptionsController textarea { width:100%; margin: 0;}
+.subscriptionsController input[type=submit] {background-color: #1b264f;color: #fff;height: 32px;border-width: 0;border-radius: 3px;}
+.subscriptionsController input[type=button] {background-color: #1b264f;color: #fff;height: 32px;border-width: 0;border-radius: 3px;}
+.subscriptionsController input[type=checkbox] { width: 18px;height: 18px; }
+.subscriptionsController .ui-datepicker-trigger {    position: absolute;height: 28px;width: auto;margin-left: 6px;margin-top: 2px;}
+
+.subscriptionsController .errorMsg {color:red;font-style: italic; display:none;}
+.subscriptionsController .savedSuccessfully {color:green;font-style: italic; display:none;}
+
+.subscriptionsController .tblSubscriptions {min-width:60%}
+.subscriptionsController .tblSubscriptions > tbody {display:none;}
+.subscriptionsController .tblSubscriptions > tfoot {display:none;}
+
+

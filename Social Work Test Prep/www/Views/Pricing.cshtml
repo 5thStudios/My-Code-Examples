@@ -1,0 +1,46 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Pricing>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{ Layout = "TopLevel.cshtml";
+}
+
+
+@{    
+    //Set signup link in temp data to indirectly pass to partialviews
+    TempData[bl.Models.Common.TempData.RedirectTo] = Umbraco.Content((int)bl.Models.Common.SiteNode.Login).Url();
+}
+
+
+<div class="grid-container Pricing">
+    <div class="titles">
+        <br />
+        @if (!string.IsNullOrWhiteSpace(Model.Title))
+        {<h1>@Model.Title</h1> }
+    else
+    { <h1>@Model.Name</h1>}
+
+        @if (!string.IsNullOrWhiteSpace(Model.Subtitle))
+        {<h2>@Model.Subtitle</h2>}
+
+        @if (!string.IsNullOrWhiteSpace(Model.Subtitle))
+        {<h3>@Model.Subtitle</h3>}
+    </div>
+
+
+    <div class="grid-x grid-margin-x grid-margin-y">
+        <div class="cell laptop-18 large-14">
+
+            <div class="main-content">
+                @{Html.RenderAction(bl.Models.Common.Action.RenderPurchaseForm, bl.Models.Common.Controller.Account, new { cmModel = Model });}
+                <div class="padded-content">
+                    @Html.Raw(Model.Content)
+                </div>
+            </div>
+
+        </div>
+        <div class="cell    laptop-6   large-9 large-offset-1">
+            @{Html.RenderAction(bl.Models.Common.Action.RenderSignupPanel, bl.Models.Common.Controller.Common);}
+        </div>
+    </div>
+</div>
+<br />
+<br />

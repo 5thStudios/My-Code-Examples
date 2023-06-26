@@ -1,0 +1,86 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.RSS>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@using System;
+@using System.Text.RegularExpressions;
+@{ Layout = null;
+    //  Tutorial
+    //  https://codeshare.co.uk/blog/simple-umbraco-rss-xml-feed-example/
+}
+
+
+
+@{
+    Response.AddHeader("Content-Type", "text/xml");
+
+    //Instantiate variables
+    const string DATE_FORMAT = "ddd, dd MMM yyyy hh:mm:ss zzz";
+    const string UPDATE_PERIOD = "weekly";
+    const string LANGUAGE = "en-US";
+    const string ARTICLE_DOC_TYPE_ALIAS = "post";
+    const string ARTICLE_DATE_PROPERTY_ALIAS = "postDate";
+    const int CONTENT_PREVIEW_LENGTH = 500;
+    const int UPDATE_FREQUENCY = 1;
+
+    //Obtain list of all blog posts no older than 3 years and in descending order
+    IEnumerable<IPublishedContent> feedItems = Model.BlogPage.Descendants()
+        .Where(x => x.ContentType.Alias == ARTICLE_DOC_TYPE_ALIAS && x.IsVisible() && ((DateTime)x.Value(ARTICLE_DATE_PROPERTY_ALIAS)) > DateTime.Today.AddYears(-3))
+        .OrderByDescending(x => (DateTime)x.Value(ARTICLE_DATE_PROPERTY_ALIAS));
+
+    //Obtain date of last blog entry
+    DateTime lastBuildDate = feedItems.Max(x => x.UpdateDate);
+
+    //Get the feed's url
+    string feedUrl = Model.Url(mode: UrlMode.Absolute);
+}
+
+
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
+
+    <channel>
+        <title>@Model.FeedTitle</title>
+        <atom:link href="@feedUrl" rel="self" type="application/rss+xml" />
+        <link>@Model.BlogPage.Url(mode: UrlMode.Absolute)</link>
+        <description>@Model.FeedDescription</description>
+        <lastBuildDate>@lastBuildDate.ToLocalTime().ToString(DATE_FORMAT)</lastBuildDate>
+        <language>@LANGUAGE</language>
+        <sy:updatePeriod>@UPDATE_PERIOD</sy:updatePeriod>
+        <sy:updateFrequency>@UPDATE_FREQUENCY</sy:updateFrequency>
+
+        @*<image>
+            <url>@(SiteSettings.Instance.SiteHome.BlogLogo.Url())</url>
+            <title>@FEED_TITLE | @FEED_DESCRIPTION</title>
+            <link>@Model.Content.UrlWithDomain()</link>
+            <width>139</width>
+            <height>81</height>
+        </image>*@
+
+
+        @foreach (IPublishedContent ipPost in feedItems)
+        {
+            //Obtain article description.
+            ContentModels.Post cmPost = new ContentModels.Post(ipPost);
+            string articleDescription = bl.Models.Common.StripHTML(Html.Raw(cmPost.Content).ToString(), CONTENT_PREVIEW_LENGTH);
+
+            //Create post item record.
+            @:<item>
+                <title>@cmPost.Name</title>
+                @:<link>@cmPost.Url(mode: UrlMode.Absolute)</link>
+                <pubDate>@(cmPost.PostDate.ToLocalTime().ToString(DATE_FORMAT))</pubDate>
+                <dc:creator><![CDATA[@Model.Creator]]></dc:creator>
+                foreach (var category in cmPost.Categories)
+                {
+                    <category><![CDATA[@category]]></category>
+                }                
+                <guid isPermaLink="false">@cmPost.Url(mode: UrlMode.Absolute)</guid>
+                <description><![CDATA[@articleDescription]]></description>
+                <content:encoded><![CDATA[@cmPost.Content]]></content:encoded>
+            @:</item>
+        }
+    </channel>
+</rss>

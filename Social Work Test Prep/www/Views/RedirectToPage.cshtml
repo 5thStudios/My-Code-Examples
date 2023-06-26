@@ -1,0 +1,9 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.RedirectToPage>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{ Layout = null; }
+
+
+@{
+    //Redirect to page.
+    Response.RedirectPermanent(Model.RedirectPage.Url(), false);
+}

@@ -1,0 +1,28 @@
+﻿{
+    propertyEditors: [      
+        {
+			alias: "paypalSearchController",
+            name: "Paypal Search",
+            editor: {
+                view: "~/App_Plugins/paypalSearch/paypalSearch.editor.html",
+                valueType: "JSON"
+            }
+        }
+    ],
+    javascript: [
+        '~/App_Plugins/paypalSearch/paypalSearch.controller.js'
+    ],
+    css: [
+        '~/App_Plugins/paypalSearch/paypalSearch.css'
+    ],
+
+    "dashboards":  [
+        {
+            "alias": "paypalSearchController",
+            "name":  "Paypal Search",
+            "view":  "/App_Plugins/paypalSearch/paypalSearch.editor.html",
+            "sections":  [ "member" ],
+            "weight": 200
+        }
+    ]
+}

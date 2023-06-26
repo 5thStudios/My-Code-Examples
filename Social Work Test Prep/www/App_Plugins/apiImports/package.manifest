@@ -1,0 +1,27 @@
+﻿{
+	//  
+    propertyEditors: [      
+        {
+			alias: "apiImportsController",
+            name: "API Import Controls",
+            editor: {
+                view: "~/App_Plugins/apiImports/apiImports.editor.html",
+                valueType: "JSON"
+            }
+        }
+    ],
+    javascript: [
+        '~/App_Plugins/apiImports/apiImports.controller.js'
+    ],
+
+    // models builder dashboard
+    "dashboards":  [
+        {
+            "alias": "apiImportsController",
+            "name":  "API Import Tools",
+            "view":  "/App_Plugins/apiImports/apiImports.editor.html",
+            "sections":  [ "content" ],
+            "weight": 900
+        }
+    ]
+}

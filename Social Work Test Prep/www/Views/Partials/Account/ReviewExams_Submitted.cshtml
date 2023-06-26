@@ -1,0 +1,25 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<List<bl.Models.ExamResult>>
+
+
+
+
+@if (TempData.ContainsKey(bl.Models.Common.TempData.TimeIsUp) && (bool)TempData[bl.Models.Common.TempData.TimeIsUp] == true)
+{
+    <div>
+        <h4 class="text-center alert">Your exam time has expired.<br />Results are below, ready for your review.</h4>
+        <br />
+    </div>
+}
+
+
+<fieldset class="exam-results">
+    <legend class="h3">Review Submitted Exams</legend>
+
+    @foreach (bl.Models.ExamResult examResult in Model)
+    {
+        @Html.Partial(bl.Models.Common.PartialPath.Exams_ExamOverview, examResult);
+    }
+</fieldset>
+<br />
+<br />
+<br />

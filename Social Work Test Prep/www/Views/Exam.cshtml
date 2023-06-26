@@ -1,0 +1,6 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Exam>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{ Layout = "TopLevel.cshtml"; }
+
+
+@{Html.RenderAction(bl.Models.Common.Action.RenderExam, bl.Models.Common.Controller.Exam);}

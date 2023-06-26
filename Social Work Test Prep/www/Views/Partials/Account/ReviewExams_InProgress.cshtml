@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<List<bl.Models.Link>>
+
+
+<fieldset class="exam-results">
+    <legend class="h3">Review Exams in Progress</legend>
+
+    <ul class="exam-menu">
+        @foreach (var link in Model)
+        {
+            <li>
+                @if (string.IsNullOrEmpty(link.Subname))
+                {
+                    <h5>@link.Name</h5>
+                }
+                else
+                {
+                    <h5>@link.Name <span class="dateTime" data-datetime="@link.Date" date-actualdate="@link.Subname"></span></h5>
+                }
+
+                <div class="exam-result">
+                    <h5 class="font-weight-normal">
+                        Time Remaining: @link.MiscNote
+                        <a href="@link.Url">Resume</a>
+                    </h5>
+                </div>
+            </li>
+        }
+    </ul>
+</fieldset>
+<br />
+<br />
+<br />

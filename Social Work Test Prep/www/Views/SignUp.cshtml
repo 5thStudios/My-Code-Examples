@@ -1,0 +1,55 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.SignUp>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{Layout = "TopLevel.cshtml";}
+
+
+
+<div class="grid-container Standard">
+    <div class="titles">
+        <br />
+        @if (!string.IsNullOrWhiteSpace(Model.Title))
+        {<h1>@Model.Title</h1> }
+    else
+    { <h1>@Model.Name</h1>}
+
+        @if (!string.IsNullOrWhiteSpace(Model.Subtitle))
+        {<h2>@Model.Subtitle</h2>}
+
+        <br />
+    </div>
+
+
+
+    <div class="grid-x grid-margin-x grid-margin-y">
+        <div class="cell laptop-14 large-14">
+
+            <div class="main-content">
+                @Html.Raw(Model.Content)
+
+                @{Html.RenderAction(bl.Models.Common.Action.RenderSignUp, bl.Models.Common.Controller.Member);}
+
+                <div class="grid-x grid-padding-y grid-margin-x">
+                    <div class="cell text-center">
+                        <a href="@Model.ForgotPassword.Url()">Forgot password?</a>
+                    </div>
+                </div>
+
+
+                <div class="grid-x grid-padding-y grid-margin-x">
+                    <div class="cell text-center">
+                        <strong>
+                            Already a member?
+                            <a href="@Model.Login.Url()">Log In</a>
+                        </strong>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="cell    laptop-9 laptop-offset-1   large-9 large-offset-1">
+            @{Html.RenderAction(bl.Models.Common.Action.RenderSignupPanel, bl.Models.Common.Controller.Common);}
+        </div>
+    </div>
+</div>
+<br />
+<br />

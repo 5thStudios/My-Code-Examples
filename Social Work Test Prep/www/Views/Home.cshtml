@@ -1,0 +1,30 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{ Layout = "TopLevel.cshtml"; }
+
+
+@section Header {
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css" />
+}
+@section Footer {
+    <script type="text/javascript" src="/Scripts/hammer.min.js"></script>
+    <script type="text/javascript" src="/Scripts/main.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+}
+
+
+
+<main class="home">
+    <br />
+    <br />
+    <br />
+    <br />
+    @{ Html.RenderPartial(bl.Models.Common.PartialPath.Home_Features, Model);}<br />
+    <br />
+    <br />
+    <br />
+    @{ Html.RenderPartial(bl.Models.Common.PartialPath.Home_Testimonials, Model);}
+    <br />
+    <br />
+    <br />
+</main>

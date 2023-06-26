@@ -1,0 +1,67 @@
+﻿@using ContentModels = Umbraco.Web.PublishedModels;
+@model ContentModels.Standard
+
+
+@{
+    //var dateTimeFormat = "yyyy-MM-ddThh:mm:sszzz";
+    //var datePublished = Model.CreateDate.ToString(dateTimeFormat);
+    //var dateModified = Model.UpdateDate.ToString(dateTimeFormat);
+
+
+    //  https://developers.google.com/search/docs/appearance/structured-data/product#single-product-page-example
+
+}
+
+@{ if (Model.ShowProductSnippet)
+    {
+        //Variables
+        bool showSnippet = true;
+        string imgUrl = "";
+
+        //validate data
+        if (Model.ProductName == string.Empty) { showSnippet = false; }
+        if (Model.ProductDescription == string.Empty) { showSnippet = false; }
+        if (Model.ProductPrice == string.Empty) { showSnippet = false; }
+        if (Model.ProductImage == null) { showSnippet = false; }
+        else { imgUrl = Model.ProductImage.Url(mode: UrlMode.Absolute); }
+
+
+        if (showSnippet)
+        {
+            <!-- PRODUCT POSTING FOR GOOGLE -->
+            <script type="application/ld+json">
+                {
+                  "@@context": "https://schema.org/",
+                  "@@type": "Product",
+                  "name": "@Model.ProductName",
+                  "image": ["@imgUrl"],
+                  "description": "@Model.ProductDescription",
+                  "offers": {
+                    "@@type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": @Model.ProductPrice
+                  }
+                }
+            </script>
+        }
+    }
+}
+
+
+
+
+@*
+    <!-- ORIGINAL PRODUCT POSTING FOR GOOGLE -->
+    <script type="application/ld+json">
+        {
+          "@@context": "http://schema.org/",
+          "@@type": "Product",
+          "name": "Practice Test for the California Law & Ethics Exam",
+          "description": "Practice test for the California Law & Ethics Exam for LCSW-bound social workers in California....",
+          "aggregateRating": {
+            "@@type": "AggregateRating",
+            "ratingValue": "3.76",
+            "ratingCount": "49"
+          }
+        }
+    </script>*@

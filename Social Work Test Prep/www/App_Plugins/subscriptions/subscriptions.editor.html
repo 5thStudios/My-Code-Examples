@@ -1,0 +1,122 @@
+﻿<div class="subscriptionsController" ng-controller="subscriptionsController">
+        <h3>Extend Subscriptions</h3>
+        <br />
+        <table border="0" cellpadding="3" class="tblSubscriptions">
+            <thead>
+                <tr>
+                    <td>
+                        <h5>Subscriber Email</h5>
+                    </td>
+                    <td colspan="3">
+                        <input type="email" id="txbMemberEmail" name="txbMemberEmail" value="" />
+                        <div class="errorMsg msgMemberDoesNotExist">*Member does not exist</div>
+                    </td>
+                    <td>
+                        <input type="submit" name="btnMemberSearch" id="btnMemberSearch" value="Search" form="submitData" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"><br /><br /></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <h5>Bonus Exam</h5>
+                    </td>
+                    <td colspan="2">
+                        <select name="ddlGiveExamSelect" id="ddlGiveExamSelect">
+                            <!--<option value="7669396" selected="selected">ASWB Exam #1</option>
+                            <option value="7669601">ASWB Exam #2</option>
+                            <option value="7669721">ASWB Exam #3</option>
+                            <option value="7670005">ASWB Exam #4</option>
+                            <option value="7670216">ASWB Exam #5</option>
+                            <option value="7670437">DSM Booster</option>
+                            <option value="7670434">Ethics Booster</option>
+                            <option value="7670554">California Law &amp; Ethics</option>-->
+                        </select>
+                    </td>
+                    <td colspan="2">
+                        <input type="submit" name="btnGiveBonusButton" id="btnGiveBonusButton" value="Give Exam to Member" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>Extend</h5>
+                    </td>
+                    <td class="text-right">
+                        <label>Days from Today:</label>
+                    </td>
+                    <td>
+                        <input type="number" id="txbDays" name="txbDays">
+                    </td>
+                    <td colspan="2" rowspan="2" valign="bottom" class="text-right">
+                        <div class="errorMsg msgEnterValue">*Enter number of days to extend.</div>
+                        <div class="errorMsg msgSelectRecord">*Select a record to update.</div>
+                        <div class="errorMsg msgErrorSaving">*An error occured. </div>
+                        <div class="savedSuccessfully">*Saved Successfully</div>
+                    </td>
+                </tr>
+                <!--<tr>
+                    <td></td>
+                    <td class="text-right">
+                        <label>Attempts:</label>
+                    </td>
+                    <td>
+                        <input type="number" name="txbAttempts" id="txbAttempts" disabled>
+                    </td>
+                </tr>-->
+                <tr>
+                    <td colspan="2"></td>
+                    <td>
+                        <input type="submit" name="btnExtendSelected" id="btnExtendSelected" value="Extend Selected Subscriptions" />
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td colspan="4">
+                        <hr />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4">
+                        <table border="0" valign="middle">
+                            <thead>
+                                <tr class="text-left">
+                                    <th></th>
+                                    <th>Item</th>
+                                    <th>Expiration Date</th>
+                                    <th>Status</th>
+                                    <!--<th>Attempts Used</th>-->
+                                </tr>
+                            </thead>
+                            <tbody id="examRecordList">
+                                <!--<tr class="text-left examRecord">
+                                    <td><input type="checkbox" class="cbExamRecord" value="-1" /></td>
+                                    <td><label>ASWB&nbsp;Exam&nbsp;#1</label></td>
+                                    <td><label>July 2, 2023</label></td>
+                                    <td><label>Active</label></td>
+                                    <td><label>1 of 3</label></td>
+                                </tr>-->
+                            </tbody>
+                        </table>
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" name="btnSelectAll" id="btnSelectAll" value="Select All" />
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+</div>

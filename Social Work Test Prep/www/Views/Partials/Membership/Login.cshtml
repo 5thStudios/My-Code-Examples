@@ -1,0 +1,31 @@
+﻿@inherits UmbracoViewPage<bl.Models.Login>
+
+
+
+@using (Html.BeginUmbracoForm<bl.Controllers.blMemberController>(bl.Models.Common.Action.SubmitLogin))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="grid-x grid-padding-y grid-margin-x">
+        <div class="cell medium-12">
+            @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Email Address", @required = "required" })
+            <h6>@Html.ValidationMessageFor(m => m.UserName)</h6>
+        </div>
+        <div class="cell medium-12">
+            @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @required = "required" })
+            <h6>@Html.ValidationMessageFor(m => m.Password)</h6>
+        </div>
+    </div>
+
+    <div class="grid-x grid-padding-y grid-margin-x">
+        <div class="cell">
+            @Html.ValidationSummary()
+        </div>
+    </div>
+
+    <div class="grid-x grid-padding-y grid-margin-x">
+        <div class="cell text-center">
+            <button value="" name="FormSubmit" class="orange">Log In</button>
+        </div>
+    </div>
+}

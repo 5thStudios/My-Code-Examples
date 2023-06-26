@@ -1,0 +1,231 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<bl.Models.ExamQuestion>
+@using cm = Umbraco.Web.PublishedModels;
+@using System.Text
+
+
+<div class="grid-container exam">
+    <div class="grid-x grid-margin-x">
+        <div class="cell">
+
+            @using (Html.BeginUmbracoForm<bl.Controllers.blExamController>(bl.Models.Common.Action.SubmitExamReview))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(m => m.ExamRecordId)
+                @Html.HiddenFor(m => m.QuestionNo)
+
+                <div id="Header">
+                    <div class="exam-header-inner instructions">
+                        <div class="grid-x">
+                            <div class="cell shrink">
+                                <h1 class="Exam">Question @Model.QuestionNo of @Model.TotalNoQuestions</h1>
+                            </div>
+                            <div class="cell auto">
+                                <h1 class="Exam text-right">@Model.Title</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="container container-exam">
+                    <div class="grid-x Container">
+                        <div class="cell large-18 exam-col">
+
+                            <div class="content">
+                                <div class="left">
+                                    <div class="exam-inner">
+                                        <div class="container">
+                                            <div class="contents">
+                                                <p>@Model.QuestionText</p>
+                                                <div class="rationale show-rationale">@Model.Rationale</div>
+                                                <div>
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                </div>
+
+
+                                                <div class="contents">
+                                                    <div class="contents">
+
+                                                        @for (int i = 0; i < Model.LstAnswerSets.Count(); i++)
+                                                        {
+                                                            <div class="form-row">
+                                                                <div class="answer-contents">
+                                                                    @if (Model.LstAnswerSets[i].IsCorrectAnswer)
+                                                                    {
+                                                                        <img class="rationale show-rationale" src="/images/check.png" alt="error" width="16" height="16">
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (Model.LstAnswerSets[i].IsSelectedAnswer)
+                                                                        {
+                                                                            <img class="rationale show-rationale" src="/images/error.png" alt="error" width="16" height="16">
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <input type="radio" disabled="disabled">
+                                                                        }
+                                                                    }
+                                                                    <label for="@Model.LstAnswerSets[i].RenderedOrder">@Model.LstAnswerSets[i].Answer</label>
+                                                                </div>
+                                                                <div class="rationale show-rationale">@Model.LstAnswerSets[i].Rationale</div>
+                                                            </div>
+                                                            <br />
+
+                                                        }
+                                                    </div>
+
+                                                    <br />
+                                                    <div class="form-submit show-for-medium">
+                                                        <div class="form-submit line">
+                                                            <div class="buttons">
+                                                                <div class="">
+                                                                    @if (Model.ShowPrevious)
+                                                                    {
+                                                                        <button type="submit" name="PreviousBtnClicked" value="true">Back</button>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <button type="submit" disabled>Back</button>
+                                                                    }
+                                                                </div>
+                                                                <div class="">
+                                                                    @if (Model.ShowNext)
+                                                                    {
+                                                                        <button type="submit" name="NextBtnClicked" value="true">Next</button>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <button type="submit" disabled>Next</button>
+                                                                    }
+                                                                </div>
+                                                                <div class="">
+                                                                    <button type="submit" name="CompleteBtnClicked" value="true">End Review</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="grid-x grid-margin-x grid-margin-y show-for-small-only">
+                                                        <div class="cell small-12">
+                                                            @if (Model.ShowPrevious)
+                                                            {
+                                                                <button class="button expanded" type="submit" name="PreviousBtnClicked" value="true">Back</button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button class="button expanded" type="submit" disabled>Back</button>
+                                                            }
+                                                        </div>
+                                                        <div class="cell small-12">
+                                                            @if (Model.ShowNext)
+                                                            {
+                                                                <button class="button expanded" type="submit" name="NextBtnClicked" value="true">Next</button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button class="button expanded" type="submit" disabled>Back</button>
+                                                            }
+                                                        </div>
+                                                        <div class="cell small-18 small-offset-3">
+                                                            <button class="btn orange expanded" type="submit" name="CompleteBtnClicked" value="true">End Review</button>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="cell large-6">
+
+                            <div class="SideBar">
+
+
+
+                                @if (Model.LstMarkedQuestions.Any())
+                                {
+                                    <div class="exam-review-inner">
+                                        <table>
+                                            <thead><tr><th>Marked Questions</th></tr> </thead>
+                                            <tfoot></tfoot>
+                                            <tbody>
+                                                @foreach (bl.Models.MarkedQuestion markedQuestion in Model.LstMarkedQuestions)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <div>
+                                                                <button type="submit" class="LnkBtn" name="GoToQuestion" value="@(markedQuestion.QuestionNo + 1)">
+                                                                    Question @(markedQuestion.QuestionNo + 1)
+                                                                    @if (!markedQuestion.IsAnswered)
+                                                                    {
+                                                                        <div class="notanswered"> (not answered)</div>
+                                                                    }
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+
+
+
+                                <div class="highlight show-rationale">
+                                    <div class="contents">
+                                        <h3>Suggested Study</h3>
+                                        <p>@Model.SuggestedStudyDescription</p>
+                                        @foreach (var link in Model.LstSuggestedStudyLinks)
+                                        {
+                                            <div>
+                                                <a href="@link.Url" target="@link.Target" title="@link.Name">@link.Name</a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="grid-x grid-margin-x">
+                                    <div class="cell">
+                                        <br />
+                                        <div class="text-right email-feedback">
+                                            @*<a href="@Model.EmailSubjectText" title="Email with a question or a correction to this question." target="_blank">
+                                                    <img alt="send_feedback" width="16" height="16" src="/images/mail_box.png"> <span>Question ID @Model.ExamAnswer.QuestionId</span>
+                                                </a>*@
+
+                                            @if (Model.ExamAnswer != null)
+                                            {
+                                                <a href="@Model.EmailSubjectText" title="Email with a question or a correction to this question." target="_blank">
+                                                    <img alt="send_feedback" width="16" height="16" src="/images/mail_box.png"> <span>Question ID @Model.ExamAnswer.QuestionId</span>
+                                                </a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+<br />
+
+
+

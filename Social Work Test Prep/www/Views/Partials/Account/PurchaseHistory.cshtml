@@ -1,0 +1,28 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<List<bl.Models.PurchaseRecord>>
+
+
+
+
+<table class="unstriped stack-for-small">
+    <thead>
+        <tr>
+            <th>Exam</th>
+            <th>Purchase Date</th>
+            <th colspan="2">Expiration Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (bl.Models.PurchaseRecord _record in Model)
+        {
+            <tr data-recordid="@_record.Id" class="text-center medium-text-left">
+                <td>@_record.Title</td>
+                <td>@_record.PurchaseDate.ToString("MMM d, yyyy")</td>
+                <td>@_record.ExpirationDate.ToString("MMM d, yyyy")</td>
+                <td class="text-center medium-text-right">
+                    <a href="@_record.ExtensionRequest" class="btn orange small text-center">Request Extension</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot></tfoot>
+</table>

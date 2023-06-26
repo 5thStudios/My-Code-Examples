@@ -1,0 +1,12 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Post>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{ Layout = "TopLevel.cshtml"; }
+@section Header {
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css" />
+    <link rel="alternate" type="application/rss+xml" href="@Model.AncestorOrSelf("blog").DescendantsOfType("rSS").FirstOrDefault().Url(mode: UrlMode.Absolute)" />
+
+    @Html.Partial(bl.Models.Common.PartialPath.Snippet_Blogpost, Model)
+}
+
+
+@{Html.RenderAction(bl.Models.Common.Action.RenderPost, bl.Models.Common.Controller.Blog, new { ipModel = Model });}

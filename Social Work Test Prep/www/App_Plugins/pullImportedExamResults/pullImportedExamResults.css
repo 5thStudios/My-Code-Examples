@@ -1,0 +1,31 @@
+﻿.pending, .pending a:hover, .pending button:hover, .pending input:hover, .pending [type='checkbox'] + label[for], .pending [type='radio'] + label[for] { cursor: wait !important; }
+.pullImportedExamResultsController {}
+.pullImportedExamResultsController h1, 
+.pullImportedExamResultsController h2, 
+.pullImportedExamResultsController h3, 
+.pullImportedExamResultsController h4, 
+.pullImportedExamResultsController h5, 
+.pullImportedExamResultsController h6 {margin:0;}
+.pullImportedExamResultsController hr {border-bottom: 1px solid #d1d1d1;}
+.pullImportedExamResultsController table {background-color: transparent; min-width:60%}
+.pullImportedExamResultsController table table {width:100%;}
+.pullImportedExamResultsController table table thead {background-color: #1b264f26;}
+.pullImportedExamResultsController label { width:100%;margin:0;display: inline;}
+.pullImportedExamResultsController select { width:100%; margin: 0;}
+.pullImportedExamResultsController input { width:100%; margin: 0;}
+.pullImportedExamResultsController textarea { width:100%; margin: 0;}
+.pullImportedExamResultsController input[type=submit] {background-color: #1b264f;color: #fff;height: 32px;border-width: 0;border-radius: 3px;}
+.pullImportedExamResultsController input[type=button] {background-color: #1b264f;color: #fff;height: 32px;border-width: 0;border-radius: 3px;}
+.pullImportedExamResultsController input[type=checkbox] { width: 18px;height: 18px; }
+.pullImportedExamResultsController .ui-datepicker-trigger {    position: absolute;height: 28px;width: auto;margin-left: 6px;margin-top: 2px;}
+
+.pullImportedExamResultsController .errorMsg {color:red;font-style: italic; display:none;}
+.pullImportedExamResultsController .msgPullingData {color:blue;font-style: italic; display:none;}
+.pullImportedExamResultsController .msgComplete {color:green;font-style: italic; display:none;}
+.pullImportedExamResultsController #tblResults {display:none;}
+
+.pullImportedExamResultsController .tblPullImportedExamResults {min-width:60%}
+.pullImportedExamResultsController .tblPullImportedExamResults > tbody {/*display:none;*/}
+.pullImportedExamResultsController .tblPullImportedExamResults > tfoot {/*display:none;*/}
+
+

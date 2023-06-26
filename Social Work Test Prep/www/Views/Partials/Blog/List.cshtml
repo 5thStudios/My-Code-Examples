@@ -1,0 +1,131 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<bl.Models.BlogPostList>
+@{ Layout = null; }
+
+
+
+
+
+<div class="grid-container BlogList">
+    <div class="titles">
+        <br />
+        <h1><a href="/blog/">Blog</a></h1>
+        <br />
+    </div>
+
+
+    <div class="grid-x grid-margin-x grid-margin-y">
+        <div class="cell laptop-14 large-14 main-content">
+
+            <div class="grid-x grid-padding-x grid-padding-y">
+                <div class="cell">
+                    <br />
+                    @if (Model.Pagination != null)
+                    {
+                        Html.RenderPartial("Partials/Common/Pagination", Model.Pagination);
+                        <br />
+                    }
+                    <br />
+                    @foreach (bl.Models.BlogPost blogPost in Model.LstBlogPosts)
+                    {
+                        //Add copy of categories in lowercase for filtering
+                        List<string> lstCategories = new List<string>();
+                        foreach (var _category in blogPost.Categories)
+                        {
+                            lstCategories.Add(_category);
+                            lstCategories.Add(_category.ToLower());
+                        }
+                        string _categories = Newtonsoft.Json.JsonConvert.SerializeObject(lstCategories);
+
+
+                        <section class="blogListItem viewItem" data-tags="@_categories">
+                            <div class="listViewItem columns">
+                                <div class="grid-x">
+                                    <div class="cell small-24 medium-4 laptop-2 large-2 columns show-for-medium">
+                                        <div class="articleDate">
+                                            <div class="month text-center">@blogPost.PostDate.ToString("MMM")</div>
+                                            <div class="day text-center">@blogPost.PostDate.ToString("dd")</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="cell small-24 medium-4 laptop-4 large-4 columns">
+                                        @if (!string.IsNullOrEmpty(blogPost.PostImageUrl))
+                                        {
+                                            <img alt="@blogPost.Title" src="@blogPost.PostImageUrl" />
+                                        }
+                                    </div>
+
+                                    <div class="cell laptop-17 laptop-offset-1 large-17 large-offset-1 columns articleDesc">
+                                        <h2 class="title">
+                                            <a href="@blogPost.Blog.Url" title="@blogPost.Blog.Name">
+                                                @Html.Raw(blogPost.Title)
+                                            </a>
+                                        </h2>
+                                        <div>
+                                            <span class="date">
+                                                @blogPost.PostDate.ToString("MMMM d, yyyy")
+                                            </span>
+                                            <span class="categories show-for-medium">
+                                                @{
+                                                    foreach (string category in blogPost.Categories)
+                                                    {
+                                                        <span>&nbsp;|&nbsp;</span>
+                                                        <a href="/blog/category/@System.Web.HttpUtility.UrlEncode(category.ToLower())/">@category</a>
+                                                    }
+                                                }
+                                            </span>
+                                        </div>
+                                        <br>
+                                        <div class="summary">@blogPost.Content</div>
+                                        <br>
+                                        <br>
+                                        <div class="readMore">
+                                            <a href="@blogPost.Blog.Url" title="@blogPost.Blog.Name" class="btn orange">Read More</a>
+                                        </div>
+
+
+                                        <span class="categories hide-for-medium">
+                                            <br />
+                                            @{
+                                                bool isFirst = true;
+                                                foreach (string category in blogPost.Categories)
+                                                {
+                                                    if (isFirst)
+                                                    {
+                                                        isFirst = false;
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>&nbsp;|&nbsp;</span>
+                                                    }
+                                                    <a data-category="@category" onclick="return false;">@category</a>
+                                                }
+                                            }
+                                        </span>
+
+                                    </div>
+                                </div>
+                                <br>
+                                <hr>
+                                <br>
+                            </div>
+                        </section>
+                    }
+                    <br />
+                    <br />
+                    @if (Model.Pagination != null)
+                    {
+                        Html.RenderPartial("Partials/Common/Pagination", Model.Pagination);
+                        <br />
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="cell laptop-9 laptop-offset-1 large-9 large-offset-1">
+
+            @Html.Partial(bl.Models.Common.PartialPath.Blog_Filter, Model)
+
+        </div>
+    </div>
+</div>
+<br />
+<br />

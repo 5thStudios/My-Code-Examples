@@ -1,0 +1,118 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<bl.Models.BlogPostList>
+@{ Layout = null; }
+
+
+
+<div class="BlogFilter hide">
+    @*<h4>Filter By <span id="lblFilterBy" class="camelCase"></span></h4>*@
+    <aside class="hidePrint blogFilters">
+
+        <section class="accordion">
+            <h3>Latest Posts</h3>
+            <ul>
+                @for (Int16 i = 0; i < 10; i++)
+                {
+                    <li data-id="@Model.LstAllBlogPosts[i].Id">
+                        <a href="@Model.LstAllBlogPosts[i].Blog.Url">
+                            <h6>@Model.LstAllBlogPosts[i].PostDate.ToString("MMMM d, yyyy")</h6>
+                            <div class="docTitle">@Html.Raw(Model.LstAllBlogPosts[i].Title)</div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </section>
+
+
+        <section class="accordion by-date">
+            <h3>Posts by Date</h3>
+
+            <ul>
+                @{
+                    int _year = 0;
+                    string _month = "";
+
+                    foreach (var blogPost in Model.LstAllBlogPosts)
+                    {
+                        if (_year != blogPost.PostDate.Year)
+                        {
+                            _year = blogPost.PostDate.Year;
+                            _month = "";
+                            <li class="blog_year">
+                                <div class="blog_year_name ui-accordion-header">@_year.ToString()</div>
+                            </li>
+                        }
+
+                        if (_month != blogPost.PostDate.ToString("MMMM"))
+                        {
+                            _month = blogPost.PostDate.ToString("MMMM");
+                            <li class="blog_month">
+                                <div class="blog_month_name">@_month</div>
+                            </li>
+                        }
+
+                        <li class="blog_post_item">
+                            <a href="@blogPost.Blog.Url" class="blog_post_title">
+                                @Html.Raw(blogPost.Title)
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>
+
+
+
+        </section>
+
+
+        <section class="accordion tags">
+            <h3>Posts by Tags</h3>
+            <ul>
+                @{ var index = 0;}
+                @foreach (var category in Model.LstCategories.OrderBy(x => x.Item1))
+                {
+                    <li>
+                        <a href="/blog/category/@System.Web.HttpUtility.UrlEncode(category.Item2.ToLower())/">@category.Item2</a>
+                    </li>
+                    index++;
+                }
+            </ul>
+        </section>
+
+
+        <section class=" viewall">
+            <a class="viewAllBlog" href="@Model.PgUrl">
+                <h3>View All</h3>
+            </a>
+        </section>
+
+
+        @*<br>
+            <br>
+            <br>
+            <div class="grid-x blogSearch" id="blogSearch">
+                <div class="cell medium-18 large-19 columns searchFld" id="searchFld">
+                    <input id="blogTxtSearch" type="text" placeholder="Search...">
+                </div>
+                <div class="cell medium-6 large-5 columns searchBtn" id="searchBtn">
+                    <img alt="" src="/Images/SearchIcon_Medium.png">
+                </div>
+            </div>*@
+
+    </aside>
+
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('.BlogFilter').removeClass('hide');
+        });
+    </script>
+</div>
+
+<br />
+<br />
+<br />
+
+@{Html.RenderAction(bl.Models.Common.Action.RenderSignupPanel, bl.Models.Common.Controller.Common);}
+
+
+

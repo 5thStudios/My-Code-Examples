@@ -1,0 +1,85 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ExamResult>
+@using bl.Models;
+
+
+@{
+    Double percentage = Math.Ceiling(((double)Model.CorrectAnswerCount / (double)Model.TotalAnswerCount) * 100);
+    //string json = Newtonsoft.Json.JsonConvert.SerializeObject(Model);
+}
+
+
+<ul class="exam-menu">
+    <li data-examinrecordid="@Model.ExamRecordId">
+        @if (Model.SubmittedDate == null)
+        {
+            < h5 > @Model.Title </ h5 >
+        }
+        else
+        {
+            <h5>@Model.Title<span class="dateTime" data-datetime="@Model.SubmittedDate"></span></h5>
+        }
+        <div class="exam-result">
+
+            @*<div>
+                <hr />
+                @json
+                <hr />
+            </div>*@
+
+            <table>
+                <caption class="heading">
+                    @percentage% - @Model.CorrectAnswerCount/@Model.TotalAnswerCount
+                </caption>
+                <tbody>
+                    <tr>
+                        <td>
+                            <table>
+                                <caption>Result&nbsp;by Content&nbsp;Area</caption>
+                                <tbody>
+                                    @foreach (ExamResult examResult in Model.LstContentAreaResults.OrderBy(x => x.Title))
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                <a class="result-link" href="@examResult.RedirectUrl">
+                                                    @examResult.Title
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="result-link" href="@examResult.RedirectUrl">
+                                                    @examResult.CorrectAnswerCount / @examResult.TotalAnswerCount
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table>
+                                <caption>Review&nbsp;Answers</caption>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="@Model.RedirectUrl">Review All</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="@Model.RedirectUrl&Review=Correct">Review Correct</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="@Model.RedirectUrl&Review=Incorrect">Review Incorrect</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </li>
+</ul>

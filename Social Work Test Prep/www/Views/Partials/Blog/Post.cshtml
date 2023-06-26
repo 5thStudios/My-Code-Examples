@@ -1,0 +1,66 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<bl.Models.BlogPost>
+@{ Layout = null; }
+
+
+
+
+<div class="grid-container BlogPost">
+    <div class="titles">
+        <br />
+        <h1><a href="@Model.Blog.Url">@Model.Blog.Name</a></h1>
+        <h3>@Html.Raw(Model.Title)</h3>
+        <br />
+    </div>
+
+
+    <div class="grid-x grid-margin-x grid-margin-y">
+        <div class="cell laptop-14 large-14 main-content">
+
+            <div class="grid-x grid-padding-x grid-padding-y">
+                <div class="cell">
+
+                    @Html.Raw(Model.Content)
+
+                    <br />
+                    <div class="grid-x">
+                        <div class="cell auto">
+                            <h6>@Model.PostDate.ToString("MMMM d, yyyy")</h6>
+                        </div>
+
+                        @if (Model.Categories.Any())
+                        {
+                            <div class="cell shrink">Categories&nbsp;:&nbsp;</div>
+                            foreach (string tag in Model.Categories)
+                            {
+                                <div class="cell shrink">&nbsp;&nbsp;<a title="@tag" href="/blog/category/@System.Web.HttpUtility.UrlEncode(tag)">@tag</a>&nbsp;&nbsp;</div>
+                            }
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="grid-x grid-padding-x uBlogsy_next_prev">
+                <div class="cell shrink">
+                    @if (Model.ShowPrevBtn)
+                    {
+                        <a href="@Model.Previous.Url" class="uBlogsy_prev" title="@Model.Previous.Name">Previous</a>
+                    }
+                </div>
+                <div class="cell auto"></div>
+                <div class="cell shrink">
+                    @if (Model.ShowNextBtn)
+                    {
+                        <a href="@Model.Next.Url" class="uBlogsy_next" title="@Model.Next.Name">Next</a>
+                    }
+                </div>
+            </div>
+
+        </div>
+        <div class="cell laptop-9 laptop-offset-1 large-9 large-offset-1">
+            @{Html.RenderAction(bl.Models.Common.Action.RenderSignupPanel, bl.Models.Common.Controller.Common);}
+        </div>
+    </div>
+</div>
+<br />
+<br />

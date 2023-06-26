@@ -1,0 +1,34 @@
+﻿@model bl.Models.ExamList
+
+
+@using (Html.BeginUmbracoForm<bl.Controllers.blExamController>(bl.Models.Common.Action.SubmitTakeExam))
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset class="exam-info" id="exam-info">
+        <legend class="h3">Take Exams</legend>
+
+        <div class="grid-x">
+            <div class="cell laptop-12 large-12">
+                <div class="form-row">
+                    <label>Pick an exam from your purchased list</label>
+                    @Html.DropDownListFor( m => m.SelectedExam, new SelectList(Model.ExamDict, "Value", "Key"), "Select Exam...", new { required = String.Empty })
+                </div>
+            </div>
+            <div class="cell laptop-12 large-12">
+                <div class="form-row">
+                    <label>Exam Mode</label>
+                    @Html.DropDownListFor(m => m.SelectedMode, new SelectList(Model.ModeDict, "Value", "Key"), "Select Mode...", new { required = String.Empty })
+                </div>
+            </div>
+        </div>
+        <div class="grid-x">
+            <div class="cell text-center">
+                @*<a href="/exam-instructions/">Take Exam</a>*@
+                <input type="submit" class="button tertiary" name="submit" value="Take Exam" id="submit">
+            </div>
+        </div>
+    </fieldset>
+
+
+}

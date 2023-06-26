@@ -1,0 +1,15 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<List<bl.Models.ExamResult>>
+
+
+<fieldset class="exam-results">
+    <legend class="h3">Review Submitted Free Practice Exams</legend>
+
+
+    @foreach (bl.Models.ExamResult examResult in Model)
+    {
+        @Html.Partial(bl.Models.Common.PartialPath.Exams_ExamOverview, examResult);
+    }
+</fieldset>
+<br />
+<br />
+<br />

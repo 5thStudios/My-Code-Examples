@@ -1,0 +1,275 @@
+﻿<style>
+    .apiImportsController { }
+    .apiImportsController p { }
+    .apiImportsController h4 { color: #666; }
+    .apiImportsController input[type=text] { font-weight: bold; color: #8d869c; border-width: 0; background-color: transparent; width: 100%; cursor: text; }
+    .apiImportsController a { color: #549dd8; text-decoration: underline; }
+    .apiImportsController a:hover { color: #2573B1; }
+    .apiImportsController .btnPullData { /*margin-right: 24px;*/ height: 28px; color: #fff; background-color: #41365a; border: 1px solid #2e2247; }
+    .apiImportsController .btnPullData:hover { background-color: #8d869c; }
+    .apiImportsController .btnPullData:disabled { background-color: rgb(64 54 89 / 30%); }
+    .apiImportsController .btnPullData:disabled:hover { cursor: default !important; }
+    .apiImportsController .alertMsg { color: #B91800; }
+    .apiImportsController .msg { color: green; }
+</style>
+
+
+
+<form id="submitData" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="hfldJson" name="hfldJson" />
+
+    <div class="apiImportsController" ng-controller="apiImportsController">
+        <h3>API Calls Post-Launch</h3>
+        <h6>*For Jim's use only.  These are connections between the old and new server. <br />DO NOT RUN THESE UNLESS IF YOU KNOW WHAT YOU ARE DOING!!!</h6>
+        <br />
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;align-content: flex-start;">
+
+            <div style="padding: 0 0 0 100px;border-left: 2px solid #b9b9b9;display: flex;flex-direction: column;align-items: flex-start;align-content: flex-start;flex-grow: 1;">
+                <!--<h4>Post-Launch Fixes</h4>
+    <br />-->
+
+
+                <input type="submit" class="btnPullData" value="Fix Matching Redirects" data-external-api="" data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/FindMatchingRedirects" />
+                <br />
+
+                <input type="submit" class="btnPullData" value="Fix 'Page-Not-Found' Blogpost Redirects" data-external-api="" data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/PageNotFoundRedirects" disabled="disabled" />
+                <br />
+
+                <input type="submit" class="btnPullData" value="Temp: Pull Descriptions" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/GetAllSEODescriptions" data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/PullDescriptions" disabled="disabled" />
+                <br />
+
+
+                <input type="submit" class="btnPullData" value="Move deleted acct purchases to live acct" data-external-api="" data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/MoveDeletedAcctPurchasesToLive" disabled="disabled" />
+                <br />
+                <input type="submit" class="btnPullData" value="Convert Imported Exam Results to New Method" data-external-api="" data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ConvertImportedExamResults" />
+                <br />
+                <input type="submit" class="btnPullData" value="Add Missing ExamAnswers" data-external-api="" data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/AddMissingExamAnswers" />
+                <br />
+                <input type="submit" class="btnPullData" value="Update Coupon Uses" data-external-api="" data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/UpdateCouponCounters" />
+                <br />
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <div style="padding:12px;display: flex;flex-direction: column;align-items: flex-start;align-content: flex-start;flex-grow: 1; display:none;">
+                <h4>Member & Purchase Records</h4>
+                <!--<h6 style="max-width:400px;margin:0;"><strong>*These can be run before taking down live site to minimize downtime.</strong></h6>-->
+                <br />
+
+                <input type="submit" class="btnPullData" value="1) Import Members into Db"
+                       data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainMembers"
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ImportMember" />
+                <br />
+                <input type="submit" class="btnPullData" value="2) Convert Db Members to Umbraco"
+                       data-external-api=""
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ConvertDbMemberToUmbraco" />
+                <br />
+
+                <input type="submit" class="btnPullData" value="3) Get Internal-Purchased Records"
+                       data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/GetInternalPurchaseRecords"
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/SaveInternalPurchaseRecords" />
+                <br />
+                <input type="submit" class="btnPullData" value="4) Get Latest Purchase Records"
+                       data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/GetPurchaseRecords"
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/SavePurchaseRecords" />
+                <br />
+
+                <input type="submit" class="btnPullData" value="5) Get Latest Updates by Date [no longer used]" disabled="disabled"
+                       data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainLatestUpdates_byDate?updateDate=2022-01-01"
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainLatestUpdates" />
+                <br />
+                <input type="submit" class="btnPullData" value="5B) Extend ALL exams 180 days" disabled="disabled"
+                       data-external-api=""
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ExtendAllExams" />
+                <br />
+
+                <h6 style="max-width:400px;margin:0;">3) run twice!</h6>
+                <h6 style="max-width:400px;margin:0;">4) run twice!</h6>
+                <br />
+            </div>
+
+            <div style="padding: 0 0 0 100px;border-left: 2px solid #b9b9b9;display: flex;flex-direction: column;align-items: flex-start;align-content: flex-start;flex-grow: 2; display:none !important">
+                <h4>Import Client Exams [Raw]</h4>
+
+                <!--
+            //path = "-1,1148,15521807,"    --All records for 2023
+            //path = "-1,1148,13824181,"    --All records for 2022
+            //path = "-1,1148,11920882,"    --All records for 2021
+            //path = "-1,1148,10280608,"    --All records for 2020
+        -->
+                <h5>6) Obtain All Member Exam Nodes</h5>
+                <div>
+                    <h6>2020</h6>
+                    <input type="submit" class="btnPullData" value="1" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,10280609," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="2" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,10372195," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="3" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,10496532," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="4" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,10595221," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="5" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,10669248," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="6" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,10826597," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="7" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,10976926," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="8" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,11123780," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="9" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,11288008," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="10" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,11456737," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="11" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,11632630," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="12" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,10280608,11780670," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                </div>
+                <div>
+                    <h6>2021</h6>
+                    <input type="submit" class="btnPullData" value="1" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,11920883," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="2" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,12090874," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="3" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,12268978," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="4" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,12456380," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="5" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,12620272," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="6" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,12775495," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="7" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,12933132," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="8" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,13091793," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="9" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,13262272," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="10" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,13421369," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="11" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,13577963," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="12" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,11920882,13720524," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                </div>
+                <div>
+                    <h6>2022</h6>
+                    <input type="submit" class="btnPullData" value="1" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,13824182," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="2" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,13973086," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="3" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,14130777," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="4" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,14298311," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="5" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,14451305," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="6" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,14597660," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="7" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,14747900," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="8" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,14886536," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <!--<input type="submit" class="btnPullData" value="8b" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,14886537," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />-->
+                    <input type="submit" class="btnPullData" value="9" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,15043328," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="10" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,15172188," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="11" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,15299720," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                    <input type="submit" class="btnPullData" value="12" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,13824181,15415051," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                </div>
+                <div>
+                    <h6>2023</h6>
+                    <input type="submit" class="btnPullData" value="2023" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllUmbracoNodes_byPartialPath?path=-1,1148,15521807," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllUmbracoNodes" />
+                </div>
+
+
+                <br />
+                <h5>7) Obtain All Member Exam Data</h5>
+                <div>
+
+                </div>
+
+
+
+                <div>
+                    <h6>2020</h6>
+                    <input type="submit" class="btnPullData" value="1" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,10280609," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="2" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,10372195," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="3" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,10496532," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="4" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,10595221," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="5" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,10669248," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="6" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,10826597," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="7" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,10976926," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="8" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,11123780," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="9" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,11288008," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="10" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,11456737," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="11" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,11632630," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="12" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,10280608,11780670," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+
+                </div>
+                <div>
+                    <h6>2021</h6>
+                    <input type="submit" class="btnPullData" value="1" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,11920883," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="2" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,12090874," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="3" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,12268978," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="4" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,12456380," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="5" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,12620272," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="6" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,12775495," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="7" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,12933132," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="8" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,13091793," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="9" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,13262272," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="10" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,13421369," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="11" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,13577963," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="12" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,11920882,13720524," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+
+                </div>
+                <div>
+                    <h6>2022</h6>
+                    <input type="submit" class="btnPullData" value="1" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,13824182," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="2" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,13973086," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="3" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,14130777," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="4" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,14298311," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="5" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,14451305," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="6" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,14597660," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="7" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,14747900," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="8" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,14886536," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <!--<input type="submit" class="btnPullData" value="8b" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,14886537," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />-->
+                    <input type="submit" class="btnPullData" value="9" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,15043328," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="10" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,15172188," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="11" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,15299720," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                    <input type="submit" class="btnPullData" value="12" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,13824181,15415051," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                </div>
+                <div>
+                    <h6>2023</h6>
+                    <input type="submit" class="btnPullData" value="2023" data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/ObtainAllCmsPropertyData_byPartialPath?path=-1,1148,15521807," data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ObtainAllCmsPropertyData" />
+                </div>
+                <br />
+
+            </div>
+
+            <div style="padding: 0 0 0 100px;border-left: 2px solid #b9b9b9;display: flex;flex-direction: column;align-items: flex-start;align-content: flex-start;flex-grow: 2; display:none">
+                <h4>Migrate Original Records into Db</h4>
+                <br />
+
+                <input type="submit" class="btnPullData" value="8) Get Latest Exam Bundles" disabled="disabled"
+                       data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/GetExamBundles"
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/SaveExamBundles" />
+                <br />
+                <input type="submit" class="btnPullData" value="9) Add Imported Purchase Records To Db" disabled="disabled"
+                       data-external-api=""
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/AddImportedPurchaseRecordsToSite" />
+                <br />
+                <input type="submit" class="btnPullData" value="10) Convert Imported Exam Results to New Method"
+                       data-external-api=""
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/ConvertImportedExamResults" />
+                <br />
+                <input type="submit" class="btnPullData" value="11) Update Coupon Uses"
+                       data-external-api="https://u4.api.socialworktestprep.com/Services/apiMigrateData.asmx/GetAllCoupons"
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/UpdateCouponCounters" />
+                <br />
+                <input type="submit" class="btnPullData" value="12) Add Missing ExamAnswers"
+                       data-external-api=""
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/AddMissingExamAnswers" />
+                <br />
+                <input type="submit" class="btnPullData" value="13) Remove Duplicate Members"
+                       data-external-api=""
+                       data-internal-api="/umbraco/backoffice/Api/ApiMigrateData/RemoveDuplicateMembers" />
+                <br />
+            </div>
+
+        </div>
+
+
+
+
+
+        <div>
+            <label class="msg msgPullExams"></label>
+        </div>
+        <br />
+        <br />
+
+
+
+
+    </div>
+</form>

@@ -1,0 +1,56 @@
+﻿<form id="submitData" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="hfldJson" name="hfldJson" />
+
+    <div class="memberImportController" ng-controller="memberImportController">
+
+        <div class="excelImporterController">
+            <h3>Import & Extend Members</h3>
+            <p>
+                Select the excel file to be imported and click <strong>"Import to Table"</strong> to view the data.<br>
+                Once the table is displayed, an option to <strong>"Import Members"</strong> will be displayed.<br>
+                Click this button to import the exams into the database.
+            </p>
+            <p>
+                <strong>Extend Only:</strong> The "Extend Only" option will ONLY extend the listed exams in the spreadsheet.
+                It will not create an account nor add new exams to the member.
+            </p>
+            <hr>
+            <br>
+            <br>
+
+
+
+
+            <div class="import-pnl">
+                <input type="file" id="excelfile" name="excelfile">
+                <input type="button" class="button" id="btnImportToTable" value="Import To Table">
+                <br>
+                <label class="alertMsg"></label>
+                <br>
+                <br>
+            </div>
+
+
+
+            <div class="data-pnl">
+                <input type="hidden" name="hfldJson" id="hfldJson">
+                <div class="import-controls">
+                    <input type="submit" id="btnImportExcel" class="btnImportExcel" name="btnImportExcel" value="Import Members" />
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                    <span class="checkbox">
+                        <label for="cbExtendOnly">Extend Only</label>
+                        <input id="cbExtendOnly" type="checkbox" name="cbExtendOnly">
+                    </span>
+                </div>
+                <br>
+                <br>
+
+                <label class="alertMsg-success">Submission Complete</label>
+                <label class="alertMsg-failed"><strong>The following errors have occured:</strong><br /></label>
+                <table id="exceltable" cellpadding="5"></table>
+
+            </div>
+        </div>
+    </div>
+</form>

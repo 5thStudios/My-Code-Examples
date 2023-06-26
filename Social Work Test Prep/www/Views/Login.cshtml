@@ -1,0 +1,82 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Login>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{Layout = "TopLevel.cshtml";}
+
+
+
+<div class="grid-container Standard">
+    <div class="titles">
+        <br />
+        @if (!string.IsNullOrWhiteSpace(Model.Title))
+        {<h1>@Model.Title</h1> }
+    else
+    { <h1>@Model.Name</h1>}
+
+        @if (!string.IsNullOrWhiteSpace(Model.Subtitle))
+        {<h2>@Model.Subtitle</h2>}
+
+        <br />
+    </div>
+
+
+
+    <div class="grid-x grid-margin-x grid-margin-y">
+        <div class="cell laptop-14 large-14">
+
+            <div class="main-content">
+
+                @if (TempData.ContainsKey(bl.Models.Common.TempData.PasswordResetSuccessfully) && (bool)TempData[bl.Models.Common.TempData.PasswordResetSuccessfully] == true)
+                {
+                    <div class="text-center">
+                        <h3 class="text-center">
+                            Your password has been updated successfully!<br />
+                            You may now log in.
+                        </h3>
+                        <hr style="width: 50%;margin: 1em auto;">
+                        <br />
+                        <br />
+                    </div>
+                }
+                else if (TempData.ContainsKey(bl.Models.Common.TempData.SessionTimedOut) && (bool)TempData[bl.Models.Common.TempData.SessionTimedOut] == true)
+                {
+                    <div class="text-center">
+                        <h3 class="text-center">
+                            Please log in again to continue
+                        </h3>
+                        <hr style="width: 50%;margin: 1em auto;">
+                        <br />
+                        <br />
+                    </div>
+                }
+                else
+                {
+                    @Html.Raw(Model.Content)
+                }
+
+                @{Html.RenderAction(bl.Models.Common.Action.RenderLogin, bl.Models.Common.Controller.Member);}
+
+                <div class="grid-x grid-padding-y grid-margin-x">
+                    <div class="cell text-center">
+                        <a href="@Model.ForgotPassword.Url()">Forgot password?</a>
+                    </div>
+                </div>
+
+
+                <div class="grid-x grid-padding-y grid-margin-x">
+                    <div class="cell text-center">
+                        <strong>
+                            Not a member?
+                            <a href="@Model.SignUp.Url()">Sign Up</a>
+                        </strong>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="cell    laptop-9 laptop-offset-1   large-9 large-offset-1">
+            @{Html.RenderAction(bl.Models.Common.Action.RenderSignupPanel, bl.Models.Common.Controller.Common);}
+        </div>
+    </div>
+</div>
+<br />
+<br />

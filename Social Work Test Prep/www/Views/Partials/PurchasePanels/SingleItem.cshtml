@@ -1,0 +1,151 @@
+﻿@model bl.Models.Region
+
+
+@{
+    //Create abbreviated region name
+    string regionClass = new String(Model.Title.Where(Char.IsLetter).ToArray());
+}
+
+
+
+<div class="cell purchase-panel single-item">
+    @using (Html.BeginUmbracoForm<bl.Controllers.blAccountController>(bl.Models.Common.Action.SubmitExamPurchase_Single))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="title  text-center" data-equalizer-watch="title-@regionClass">
+            <h3>Single</h3>
+            <p>Start with One Exam</p>
+        </div>
+        <div class="option-table single">
+
+
+            <div class="selections" data-equalizer-watch="selections-@regionClass">
+                <div>
+                    @for (var j = 0; j < Model.LstExams.Count(); j++)
+                    {
+                        if (j < 1)
+                        {
+                            @Html.RadioButtonFor(
+                                 m => Model.LstExams[j].Id,
+                                 true,
+                                 new
+                                 {
+                                     @Name = @regionClass + "-singleExam",
+                                     @Id = @regionClass + "-single-" + @Model.LstExams[j].Id,
+                                     data_price = Model.LstExams[j].Price,
+                                     @checked = "checked"
+                                 });
+                        }
+                        else
+                        {
+                            @Html.RadioButtonFor(
+                                 m => m.LstExams[j].Id,
+                                 false,
+                                 new
+                                 {
+                                     @Name = @regionClass + "-singleExam",
+                                     @Id = @regionClass + "-single-" + @Model.LstExams[j].Id,
+                                     data_price = Model.LstExams[j].Price
+                                 });
+                        }
+
+
+                        <label for="@regionClass-single-@Model.LstExams[j].Id">
+                            <span class="check"></span>
+                            @Model.LstExams[j].Title
+                        </label>
+
+
+                        <div class="hide hidden hflds @regionClass-single-@Model.LstExams[j].Id">
+                            @Html.HiddenFor(x => Model.LstExams[j].Title)
+                            @Html.HiddenFor(x => Model.LstExams[j].Price)
+                            @Html.HiddenFor(x => Model.LstExams[j].Duration)
+                            @Html.HiddenFor(x => Model.LstExams[j].Id)
+                            @if (j < 1)
+                            {
+                                @Html.HiddenFor(x => Model.LstExams[j].IsSelected, new { Value = true, @class = "hfldIsSelected" })
+                            }
+                            else
+                            {
+                                @Html.HiddenFor(x => Model.LstExams[j].IsSelected, new { Value = false, @class = "hfldIsSelected" })
+                            }
+                        </div>
+
+                    }
+                </div>
+            </div>
+
+
+            <div class="price" data-equalizer-watch="price-@regionClass">
+                <p>$<span class="amount"></span></p>
+                <p class="savings">
+                    <span class="coupon-applied">
+                        Coupon applied,<br>
+                        You save a total of $<span class="discount">0</span>.
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="hide hflds">
+            @Html.HiddenFor(x => Model.Title)
+            @Html.HiddenFor(x => Model.Id)
+            @Html.HiddenFor(x => Model.SubscriptionTime)
+            @Html.HiddenFor(x => Model.BundleDiscount, new { @class = "hfldBundleDiscount" })
+            @Html.HiddenFor(x => Model.CouponDiscount, new { @class = "hfldCouponDiscount" })
+            @Html.HiddenFor(x => Model.TotalDiscount, new { @class = "hfldTotalDiscount" })
+            @Html.HiddenFor(x => Model.TotalCost, new { @class = "hfldTotalCost" })
+            @Html.HiddenFor(x => Model.CouponCode, new { @class = "hfldCouponCode" })
+
+            @*<input class="amount-savings" type="hidden" value="0">*@
+            @*<input class="coupon-savings" type="hidden" value="0">*@
+            @*<input class="amount-total" type="hidden" value="0">*@
+            @*<input class="amount-subtotal" type="hidden" value="0">*@
+        </div>
+        if (User.Identity.IsAuthenticated)
+        {
+            <button type="submit" name="submit" class="buy-now" value="Single">Buy Now</button>
+        }
+        else
+        {
+            <a href="@TempData[bl.Models.Common.TempData.RedirectTo]" class="btn button buy-now">Buy Now</a>
+        }
+    }
+
+    @{
+        //if (User.Identity.IsAuthenticated)
+        //{
+        <div class="discount">
+            <a class="discountCodeDisplay">Coupon Code?</a>
+            <div class="discount form-row discountDiv">
+                <div class="code">
+
+                    <div class="grid-x">
+                        <div class="cell auto">
+                            <input name="@regionClass-single-DiscountCode" value="" id="@regionClass-single-DiscountCode" type="text">
+                        </div>
+                        <div class="cell shrink">
+                            <button class="apply-btn">Apply</button>
+                        </div>
+                    </div>
+
+                    <div class="grid-x">
+                        <div class="cell">
+                            <div class="info valid">
+                                <i class="icon-attention-circled"></i>Code is valid, <span class="discount-value"></span> discount.
+                            </div>
+                            <div class="info invalid">
+                                <i class="icon-minus-circled"></i>Code not found.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        //}
+    }
+
+</div>

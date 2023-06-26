@@ -1,0 +1,44 @@
+﻿<div class="paypalSearchController" ng-controller="paypalSearchController">
+    <h3>Paypal Search</h3>
+    <br />
+    <table border="0" cellpadding="9" class="tblPaypalSearch">
+        <thead>
+            <tr>
+                <td>
+                    <h5>Paypal Transaction Id</h5>
+                </td>
+                <td>
+                    <input type="text" id="txbRecordId" name="txbRecordId" value="" />
+                    <div class="errorMsg msgRecordDoesNotExist">*Record does not exist</div>
+                </td>
+                <td>
+                    <input type="submit" name="btnRecordSearch" id="btnRecordSearch" value="Search" />
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <br />
+                    <br />
+                    <table border="0" cellpadding="9" valign="middle">
+                        <thead>
+                            <tr class="text-left">
+                                <th>created</th>
+                                <th>payerEmail</th>
+                                <!--<th>memberId</th>-->
+                                <th>itemName</th>
+                                <!--<th>itemNumber</th>-->
+                                <th>price</th>
+                                <th>discount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="examRecordList">
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

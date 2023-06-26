@@ -1,0 +1,40 @@
+﻿@inherits UmbracoViewPage<bl.Models.Message>
+
+
+
+@using (Html.BeginUmbracoForm<bl.Controllers.blMemberController>(bl.Models.Common.Action.SubmitTutoringRequest))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.IsValid, new {@class = "hfldIsValid"})
+
+    <div class="grid-x grid-padding-y grid-margin-x">
+        <div class="cell medium-8">
+            @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email Address", @required = "required" })
+            <h6>@Html.ValidationMessageFor(m => m.Email)</h6>
+        </div>
+        <div class="cell medium-16">
+            @Html.TextBoxFor(m => m.Subject, new { @placeholder = "Subject", @required = "required" })
+            <h6>@Html.ValidationMessageFor(m => m.Subject)</h6>
+        </div>
+        <div class="cell medium-24">
+            @Html.TextAreaFor(m => m.MessageText, new { @placeholder = "Message", @required = "required", @rows = 10 })
+            <h6>@Html.ValidationMessageFor(m => m.MessageText)</h6>
+        </div>
+    </div>
+
+
+    <div class="grid-x grid-padding-y grid-margin-x">
+        <div class="cell medium-12 text-center medium-text-left" style="color:red;">
+            <div id="RecaptchaContainer"></div>
+        </div>
+        <div class="cell medium-12 text-center medium-text-right">
+            <button value="" name="FormSubmit" class="orange">Send</button>
+        </div>
+    </div>
+
+    <div class="grid-x grid-padding-y grid-margin-x">
+        <div class="cell">
+            @Html.ValidationSummary()
+        </div>
+    </div>
+}

@@ -1,0 +1,52 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<List<bl.Models.Region>>
+
+
+
+<div class="contents">
+    <div class="grid-x purchase-regions">
+        <div class="cell    medium-16 medium-offset-8    laptop-12 laptop-offset-12     large-12 large-offset-12">
+            <div class="grid-x">
+                @foreach (var _region in Model)
+                {
+                    //Create abbreviated region name
+                    string regionClass = new String(_region.Title.Where(Char.IsLetter).ToArray());
+
+                    <div class="cell region @( _region == Model.FirstOrDefault() ? "auto selected" : "shrink") @regionClass" data-region="@regionClass">
+                        @Html.Raw(_region.Title.Replace("& ", "&<br />"))
+                        <img alt="selected" src="~/Images/temp/selected.png" />
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+
+    <div class="hide hflds">
+        <input type="hidden" id="hfldValidCoupon" value="false" />
+        @*<input type="hidden" id="hfldCouponCode" value="" />*@
+        <input type="hidden" id="hfldDiscountByPercentage" value="false" />
+        <input type="hidden" id="hfldDiscountAmount" value="" />
+        <input type="hidden" id="hfldDiscountPercentage" value="" />
+    </div>
+
+
+    @for (var i = 0; i < Model.Count(); i++)
+    {
+        //Create abbreviated region name
+        string regionClass = new String(Model[i].Title.Where(Char.IsLetter).ToArray());
+
+        <fieldset class="table-purchases" data-region="@regionClass" data-equalizer="title-@regionClass">
+            <div data-equalizer="selections-@regionClass">
+                <div class="grid-x grid-margin-x medium-up-2 laptop-up-3 large-up-3" data-equalizer="price-@regionClass">
+
+                    @{ Html.RenderPartial("~/Views/Partials/PurchasePanels/SingleItem.cshtml", Model[i]);}
+
+                    @{ Html.RenderPartial("~/Views/Partials/PurchasePanels/CustomBundle.cshtml", Model[i]);}
+
+                    @{ Html.RenderPartial("~/Views/Partials/PurchasePanels/CompleteSet.cshtml", Model[i]);}
+                </div>
+            </div>
+        </fieldset>
+    }
+</div>

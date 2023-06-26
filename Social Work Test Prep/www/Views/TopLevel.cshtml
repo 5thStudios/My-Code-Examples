@@ -1,0 +1,107 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@{ Layout = null; }
+
+
+@{
+    //Obtain top-level data
+    bl.Models.TopLevelContent PgContent = bl.Controllers.blCommonController.ObtainTopLevelData(Model, Request.Url.OriginalString, Umbraco);
+
+    //Redirect if querystring is required.
+    if (PgContent.Redirect)
+    {
+        Response.Redirect(PgContent.RedirectTo, false);
+    }
+}
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    @{
+        if (!string.IsNullOrEmpty(PgContent.ErrorMsg))
+        {
+            <meta name="errors" content="@PgContent.ErrorMsg" />
+        }
+    }
+    @{
+        if (PgContent.ShowAnalytics)
+        {
+            <!-- ANALYTICS -->
+            @Html.Raw(PgContent.Analytics);
+
+            <!-- DRIFT -->
+            @Html.Raw(PgContent.DriftCode);
+
+            if (!string.IsNullOrEmpty(PgContent.SeoEcommerce))
+            {
+                <!-- SEO PURCHASE SCRIPTS -->
+                @Html.Raw(PgContent.SeoEcommerce);
+            }
+        }
+    }
+
+    <!-- META TAGS -->
+    @{
+        if (PgContent.Meta != null && PgContent.Meta.AllTags != null)
+        {
+            <!-- -->
+            @PgContent.Meta.AllTags
+            <!-- -->
+        }
+        else
+        {
+            <title>Social Work Test Prep</title>
+            <meta name="robots" content="noimageindex, noindex, nofollow, nosnippet, noarchive">
+        }
+    }
+
+    @Html.Partial(bl.Models.Common.PartialPath.Common_Meta, Model)
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto+Slab:wght@300;400;700&display=swap">
+    <link rel="stylesheet" type="text/css" href="/Styles/font-awesome.all.min.css" />
+
+    <!-- STYLES -->
+    <link rel="stylesheet" type="text/css" href="/Styles/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="/Styles/JqueryUI/jquery-ui.structure.min.css">
+    <link rel="stylesheet" type="text/css" href="/Styles/JqueryUI/jquery-ui.theme.min.css">
+    <link rel="stylesheet" type="text/css" href="/Styles/foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="/Styles/site.min.css?v=13">
+
+    @RenderSection(bl.Models.Common.Misc.Header, false)
+
+    @Html.Partial(bl.Models.Common.PartialPath.Snippet_SiteLogo)
+</head>
+<body>
+    <noscript>
+        <!-- Google Tag Manager (noscript) -->
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M54M347" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+
+    <script type="text/javascript" src="/Scripts/jquery.min.js"></script>
+    @Html.Partial(bl.Models.Common.PartialPath.UmbracoEditButton)
+
+
+    @{Html.RenderAction(bl.Models.Common.Action.RenderMobileNavigation, bl.Models.Common.Controller.Common, new { ipModel = Model });}
+
+
+    <div class="off-canvas-content" data-off-canvas-content>
+        @{Html.RenderAction(bl.Models.Common.Action.RenderHeader, bl.Models.Common.Controller.Common, new { ipModel = Model });}
+        @RenderBody()
+        @{Html.RenderAction(bl.Models.Common.Action.RenderFooter, bl.Models.Common.Controller.Common, new { ipModel = Model });}
+    </div>
+
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="/Scripts/foundation.min.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="/Scripts/is.min.js"></script>
+    @RenderSection(bl.Models.Common.Misc.Footer, false)
+    <script type="text/javascript" src="/Scripts/app.min.js?v=03"></script>
+</body>
+</html>

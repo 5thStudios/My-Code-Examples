@@ -1,0 +1,121 @@
+﻿@inherits UmbracoViewPage<bl.Models.Header>
+
+
+<div class="off-canvas position-right" id="offCanvas" data-off-canvas>
+
+    <ul class="vertical menu">
+        <li class="close-menu text-right">
+            <a aria-label="Close menu" data-close>
+                Close <span>&times;</span>
+            </a>
+        </li>
+    </ul>
+
+
+    @if (!Model.IsLoggedIn)
+    {
+        <div class="grid-x small-up-2 user-btns">
+            @foreach (var lnk in Model.LstMinorNav)
+            {
+                <div class="cell text-center">
+                    <a href="@lnk.Url">@lnk.Name</a>
+                </div>
+            }
+        </div>
+    }
+
+
+
+    <ul class="vertical menu drilldown" data-drilldown>
+        @foreach (var lnkPrnt in Model.LstMainNav)
+        {
+            <li>
+                <a href="@lnkPrnt.Url">@lnkPrnt.Name</a>
+            </li>
+            if (lnkPrnt.LstChildLinks != null)
+            {
+                foreach (var lnkChld in lnkPrnt.LstChildLinks)
+                {
+                    <li class="secondary">
+                        <a href="@lnkChld.Url">@lnkChld.Name</a>
+                    </li>
+                }
+            }
+        }
+        @if (Model.IsLoggedIn)
+        {
+            using (Html.BeginUmbracoForm<bl.Controllers.blMemberController>(bl.Models.Common.Action.SubmitLogout))
+            {
+                <li>
+                    <button>Log Out</button>
+                </li>
+            }
+        }
+    </ul>
+
+</div>
+
+
+
+
+
+@*
+
+
+    <div class="off-canvas position-right" id="offCanvas" data-off-canvas>
+
+        <ul class="vertical menu">
+            <li class="close-menu text-right">
+                <a aria-label="Close menu" data-close>
+                    Close <span>&times;</span>
+                </a>
+            </li>
+        </ul>
+
+
+        @if (!Model.IsLoggedIn)
+        {
+            <div class="grid-x small-up-2 user-btns">
+                @foreach (var lnk in Model.LstMinorNav)
+                {
+                    <div class="cell text-center">
+                        <a href="@lnk.Url">@lnk.Name</a>
+                    </div>
+                }
+            </div>
+        }
+
+
+
+    <ul class="vertical menu drilldown" data-drilldown>
+        @foreach (var lnkPrnt in Model.LstMainNav)
+        {
+            <li>
+                <a href="@lnkPrnt.Url">@lnkPrnt.Name</a>
+                @if (lnkPrnt.LstChildLinks != null)
+                {
+                    <ul>
+                        @foreach (var lnkChld in lnkPrnt.LstChildLinks)
+                        {
+                            <li>
+                                <a href="@lnkChld.Url">@lnkChld.Name</a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+        @if (Model.IsLoggedIn)
+        {
+            using (Html.BeginUmbracoForm<bl.Controllers.blMemberController>(bl.Models.Common.Action.SubmitLogout))
+            {
+                <li>
+                    <button>Log Out</button>
+                </li>
+            }
+        }
+    </ul>
+
+    </div>
+
+*@

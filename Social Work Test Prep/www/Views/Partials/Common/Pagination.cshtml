@@ -1,0 +1,99 @@
+﻿@inherits UmbracoViewPage<bl.Models.Pagination>
+
+
+
+@{
+    //
+    bl.Models.PaginationContent paginationContent = bl.Controllers.blBlogController.ObtainPaginationContent(Model, Request.Url.ToString());
+    int index = 1;
+}
+
+
+
+@{
+    /*
+    {
+      "baseUri": "https://localhost:44305/blog?page=3",
+      "queryString": [
+        "page",
+        "pageNo"
+      ],
+      "baseUrl": "https://localhost:44305/blog",
+      "Pagination": {
+        "pageNo": 3,
+        "previous": 2,
+        "next": 4,
+        "itemsPerPage": 10,
+        "totalPages": 90,
+        "totalItems": 895,
+        "itemsToSkip": 20
+      }
+    }
+    https://localhost:44305/blog/page/3/
+    */
+}
+<div class="grid-x">
+
+    <div class="cell medium-text-right text-center">
+        <div class="paginationLst">
+            @Html.HiddenFor(m => m.pageNo)
+            @Html.HiddenFor(m => m.totalPages)
+
+
+            <span class="pagination-first">
+                <a href="@(String.Format("{0}/page/1/", paginationContent.baseUrl))">First</a>
+                &nbsp;&nbsp;
+                <span class="hide-for-small show-for-medium">&nbsp;&nbsp;&nbsp;</span>
+            </span>
+
+            <span class="pagination-previous">
+                <a href="@(String.Format("{0}/page/{1}/", paginationContent.baseUrl, paginationContent.Pagination.previous))">Previous</a>
+                &nbsp;&nbsp;
+                <span class="hide-for-small show-for-medium">&nbsp;&nbsp;&nbsp;</span>
+            </span>
+
+            <span class="pagination-previous-set"><a onclick="return false;">&hellip;</a>&nbsp;&nbsp;<span class="hide-for-small show-for-medium">&nbsp;&nbsp;&nbsp;</span></span>
+
+            @while (index <= Model.totalPages)
+            {
+                if (index == Model.pageNo)
+                {
+                    <span class="current page-no" data-pageno="@index">
+                        @index &nbsp;&nbsp;
+                        <span class="hide-for-small show-for-medium">&nbsp;&nbsp;&nbsp;</span>
+                    </span>
+                }
+                else
+                {
+                    <span class="page-no" data-pageno="@index">
+                        <a href="@(String.Format("{0}/page/{1}/", paginationContent.baseUrl, index))">@index</a>
+                        &nbsp;&nbsp;
+                        <span class="hide-for-small show-for-medium">&nbsp;&nbsp;&nbsp;</span>
+                    </span>
+                }
+
+                //Increment index
+                index++;
+            }
+
+            <span class="pagination-next-set">
+                <a onclick="return false;">&hellip;</a>
+                &nbsp;&nbsp;
+                <span class="hide-for-small show-for-medium">&nbsp;&nbsp;&nbsp;</span>
+            </span>
+
+            <span class="pagination-next">
+                <a href="@(String.Format("{0}/page/{1}/", paginationContent.baseUrl, paginationContent.Pagination.next))">Next</a>
+                &nbsp;&nbsp;
+                <span class="hide-for-small show-for-medium">&nbsp;&nbsp;&nbsp;</span>
+            </span>
+
+            <span class="pagination-last">
+                <a href="@(String.Format("{0}/page/{1}/", paginationContent.baseUrl, paginationContent.Pagination.totalPages))">Last</a>
+            </span>
+
+            <br />
+            <br />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@inherits UmbracoViewPage<bl.Models.Footer>
+
+
+<footer>
+    <div class="grid-container">
+        <div class="grid-x">
+            <div class="cell    small-24    medium-11   laptop-5   large-5     text-center">
+                <div id="footer-logo">
+                    <a href="/">
+                        <img src="@Model.Logo.Url" alt="@Model.Logo.Name" style="width:100%;height:auto;">
+                    </a>
+                </div>
+                <p class="copyright">
+                    Copyright © <span>2009 - @DateTime.Now.Year</span> - All Rights Reserved
+                </p>
+                <ul class="social">
+                    @foreach (bl.Models.Link lnk in Model.LstSocialLinks)
+                    {
+                        <li>
+                            <a href="@lnk.Url" title="@lnk.Name">
+                                <img alt="@lnk.Name" src="@lnk.ImgUrl" />
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="cell    small-24    medium-12 medium-offset-1   laptop-12 laptop-offset-7   large-12 large-offset-7     text-center medium-text-right">
+                <div class="description">
+                    @Html.Raw(Model.Description)
+                </div>
+                <div class="terms">
+                    @foreach (bl.Models.Link lnk in Model.LstFooterNav)
+                    {
+                        <a href="@lnk.Url" title="@lnk.Name">@lnk.Name</a>
+                    }
+                </div>
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+</footer>

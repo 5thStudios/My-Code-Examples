@@ -1,0 +1,41 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Standard>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{ Layout = "TopLevel.cshtml"; }
+@section Header {
+    @Html.Partial(bl.Models.Common.PartialPath.Snippet_Product, Model)
+}
+
+
+<div class="grid-container Standard">
+    <div class="titles">
+        <br />
+        @if (!string.IsNullOrWhiteSpace(Model.Title))
+        {<h1>@Model.Title</h1> }
+    else
+    { <h1>@Model.Name</h1>}
+
+        @if (!string.IsNullOrWhiteSpace(Model.Subtitle))
+        {<h2>@Model.Subtitle</h2>}
+
+    @*@if (!string.IsNullOrWhiteSpace(Model.Subtitle))
+        {<h3>@Model.Subtitle</h3>}*@
+        <br />
+    </div>
+
+
+
+    <div class="grid-x grid-margin-x grid-margin-y">
+        <div class="cell laptop-14 large-14">
+
+            <div class="main-content">
+                @Html.Raw(Model.Content)
+            </div>
+
+        </div>
+        <div class="cell    laptop-9 laptop-offset-1   large-9 large-offset-1">
+            @{Html.RenderAction(bl.Models.Common.Action.RenderSignupPanel, bl.Models.Common.Controller.Common);}
+        </div>
+    </div>
+</div>
+<br />
+<br />

@@ -1,0 +1,116 @@
+﻿
+<div class="manageCouponsController" ng-controller="manageCouponsController">
+
+    <h3>Manage Coupons</h3>
+    <br />
+
+    <table border="0" cellpadding="3" class="tblMngCoupons">
+        <thead>
+            <tr>
+                <td>
+                    <h5>Coupon Name</h5>
+                </td>
+                <td colspan="2">
+                    <input type="text" name="txbCouponCode" id="txbCouponCode" value="" required />
+                </td>
+                <td>
+                    <input type="submit" name="btnCouponLookup" id="btnCouponLookup" value="Lookup / Create" />
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4">
+                    <br />
+                    <br />
+                    <h4>
+                        <strong>Coupon Settings</strong>
+                    </h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>Discount</h5>
+                </td>
+                <td>
+                    <input type="number" value="0" min="0" step=".01" id="txbDiscount" name="txbDiscount" />
+                </td>
+                <td>
+                    <select name="ddlDiscountType" id="ddlDiscountType">
+                        <option value="Amount" selected="selected">$</option>
+                        <option value="Percent">%</option>
+                    </select>
+                </td>
+                <td>
+                    <div class="errorMsg msgPercentInvalid">*Percentage values needs to be more than 0<br />and less than or equal to 100.</div>
+                    <div class="errorMsg msgDiscountRequired">*Need a value for discount.</div>
+                    <div class="errorMsg msgDiscountPositiveNo">*Discount must be a positive number.</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <h5>Expires</h5>
+                </td>
+                <td>
+                    <input type="date" id="txbDatePicker" name="txbDatePicker" />
+                </td>
+                <td></td>
+                <td>
+                    <div class="errorMsg msgInvalidDate">*Invalid Date</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <h5>Max Allowed / Times Used</h5>
+                </td>
+                <td>
+                    <input type="number" name="txbMaxAllowed" id="txbMaxAllowed">
+                </td>
+                <td>
+                    <label id="lblTimesUsed"></label>
+                </td>
+                <td>
+                    <div class="errorMsg msgInvalidTimesUsed">*Times Used must be a positive number.</div>
+                </td>
+            </tr>
+
+            <tr valign="top">
+                <td>
+                    <h5>Notes</h5>
+                </td>
+                <td colspan="2">
+                    <textarea name="txbNotes" id="txbNotes" rows="2"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <h5>Created</h5>
+                </td>
+                <td>
+                    <label id="lblCreatedDate"></label>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
+
+            <tr valign="bottom">
+                <td>
+                    <br />
+                    <br />
+                    <input type="button" name="btnSaveCode" id="btnSaveCode" value="Save Changes" />
+                </td>
+                <td colspan="3">
+                    <div class="savedSuccessfully">*Saved Successfully</div>
+                    <div class="errorMsg msgErrorSaving">*An error occured. </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--<img alt="" src="/Images/temp/mngCodes.jpg" style="" />-->
