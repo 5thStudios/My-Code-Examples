@@ -1,0 +1,66 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<HeroBanner>>
+
+@{
+    //
+    string headline = string.Empty;
+    switch (Model.Content.HeadlineLevel)
+    {
+        case "H2":
+            headline = "<h2>{0}<h2>";
+            break;
+
+        case "H3":
+            headline = "<h3>{0}<h3>";
+            break;
+
+        case "H4":
+            headline = "<h4>{0}<h4>";
+            break;
+
+        case "H5":
+            headline = "<h5>{0}<h5>";
+            break;
+
+        case "H6":
+            headline = "<h6>{0}<h6>";
+            break;
+
+        default:
+            headline = "<h1>{0}<h1>";
+            break;
+    }
+    headline = string.Format(headline, Model.Content.Headline);
+}
+
+
+
+
+<section class="hero-banner @Model.Content.EncompassingClass" data-blockgrid="blockgrid/Components/heroBanner">
+    <div class="grid-x">
+
+        @if (!Model.Content.ImageIsLocatedOnThe)
+        {
+            <div class="cell laptop-12 bg-img-pnl" style="background-image:url('@Model.Content.SideImage?.Url()');"></div>
+        }
+        <div class="cell laptop-12">
+
+            <div class="grid-x" style="min-height: 640px;">
+                <div class="cell large-20 large-offset-2 align-center-middle">
+                    
+                    <div class="body-content">
+                        @Html.Raw(headline)
+                        @Html.Raw(Model.Content.Content)
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        @if (Model.Content.ImageIsLocatedOnThe)
+        {
+            <div class="cell laptop-12 bg-img-pnl" style="background-image:url('@Model.Content.SideImage?.Url()');"></div>
+        }
+
+    </div>
+</section>

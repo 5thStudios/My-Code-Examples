@@ -1,0 +1,8 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<CustomHtml>>
+
+
+
+<section data-blockgrid="blockgrid/Components/customHTML"  @Html.Raw(Model.Content.Attributes)>
+    @Html.Raw(Model.Content.BodyHtml)
+</section>

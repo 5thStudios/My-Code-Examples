@@ -1,0 +1,29 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<SignupPanel>>
+@using ContentModels = www.Models.PublishedModels;
+
+
+<section class="sign-up-pnl">
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x grid-padding-y grid-margin-x">
+            <div class="cell text-center">
+
+                <br />
+                <h4>@Model.Content.Title</h4>
+                <h5>@Html.ReplaceLineBreaks(Model.Content.Content ?? "")</h5>
+
+                <div class="hbspt">
+                    <script type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+                    <script>
+                        hbspt.forms.create({
+                            portalId: "4625269",
+                            formId: "462b7ac2-5707-4b00-b549-73a47ac441d7",
+                            css: ""
+                        });
+                    </script>
+                </div>
+                <br />
+
+            </div>
+        </div>
+    </div>
+</section>

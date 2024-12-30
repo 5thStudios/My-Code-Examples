@@ -1,0 +1,20 @@
+﻿<link href="/css/Umbraco RTE.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus" ng-controller="formController as vm">
+    <fieldset class="blockContent">
+        <legend>Form Panel</legend>
+
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Form</td>
+                    <td ng-if="vm.selectedForm.name">{{vm.selectedForm.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </fieldset>
+</div>
+<br />

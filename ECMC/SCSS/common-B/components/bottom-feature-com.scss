@@ -1,0 +1,27 @@
+﻿@import'../_variables-com';
+
+.bottom-feature {
+    overflow: hidden;
+    position: relative;
+
+    @media only screen and (max-width: $bp_sm) {
+        div.align-middle { -webkit-align-items: flex-end; -ms-flex-align: end; align-items: flex-end !important; }
+    }
+
+    .callout {
+        width: 400px;
+        h4 { font-family: $def_font_condensed; font-size: $h4_size; font-weight: $weight_Book; line-height: $def_line_height_B; margin-bottom: 20px }
+
+        @media only screen and (max-width: $bp_sm) { width: 300px; padding: 5%;
+            h4 { font-size: $h4_size - 5px }
+        }
+
+        @media only screen and (min-width:$bp_tablet_min) and (max-width: $bp_tablet) { width: 300px; padding: 5%;
+            h4 { font-size: $h4_size - 5px }
+        }
+
+        @media only screen and (min-width: $bp_lap_min) and (max-width: $bp_lap) { width: 300px;
+            h4 { font-size: $h4_size - 5px }
+        }
+    }
+}

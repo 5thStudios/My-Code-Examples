@@ -1,0 +1,9 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Standard>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{Layout = "TopLevel.cshtml";}
+
+
+
+@await Html.GetBlockGridHtmlAsync(Model.HeroArea)
+@await Html.GetBlockGridHtmlAsync(Model.MainContent)

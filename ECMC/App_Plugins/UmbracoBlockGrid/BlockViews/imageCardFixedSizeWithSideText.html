@@ -1,0 +1,52 @@
+﻿<style>
+    
+    .bvTable ul { margin: 0; padding-left: 16px; }
+    /*.nested-tbls table:nth-child(n+2) { border-top: 2px solid #ffcc9e; padding-top: 9px; margin-top: 9px; }*/
+</style>
+
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend><strong>Image Card [Fixed Size] with Side Text</strong></legend>
+
+        {{mediaItem = (block.data.cardImage[0].mediaKey | mediaItemResolver); ""}}
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Card Image</td>
+                    <td>
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width: 140px; height:auto;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Headline</td>
+                    <td>{{block.data.headline}}</td>
+                </tr>
+                <tr>
+                    <td>Content</td>
+                    <td>{{block.data.content.markup}}</td>
+                </tr>
+
+                <tr>
+                    <td>Links</td>
+                    <td class="nested-tbls">
+                        <table ng-repeat="link in block.data.links">
+                            <tr>
+                                <td>Link to</td>
+                                <td>
+                                    <span>{{link.name}}</span>
+                                    <span ng-if="link.url">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{link.url}}</em></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </fieldset>
+</div>
+<br />

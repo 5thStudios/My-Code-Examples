@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+@font-face { font-family: 'UnitedSansCdBd'; src: url('/fonts/UnitedSansSmCdBd.ttf') format('truetype'); font-weight: bold; font-style: normal }
+@font-face { font-family: 'fontello'; src: url('/fonts/fontello.eot?56925601'); src: url('/fonts/fontello.eot?56925601#iefix') format('embedded-opentype'),url('/fonts/fontello.woff?56925601') format('woff'),url('/fonts/fontello.ttf?56925601') format('truetype'),url('/fonts/fontello.svg?56925601#fontello') format('svg'); font-weight: normal; font-style: normal }
+
+
+
+/*  Color Palette
+----------------------------------------------------------*/
+COLORS { color: #161616; color: #222222; color: #323232; color: #333333; color: #444444; color: #676767; color: #707070; color: #777777; color: #888888; color: #8a8a8a; color: #b4b2b2; color: #ebebeb; color: #e5e5e5; color: #f7f7f7; color: #e72623; color: #d42828; color: #cd0202; color: #8b0000; color: #556B2F; color: #f0ad4e; color: #E5C527; color: #ebea3b; color: #3B5998; color: #4099FF; }
+
+
+/*  Font Families
+----------------------------------------------------------*/
+FONTS { font-family: 'Open Sans',sans-serif; font-family: 'UnitedSansCdBd'; }
+
+
+
+/* GENERAL
+----------------------------------------------------------*/
+html, body { font-family: 'Open Sans',sans-serif; font-size: 16px; line-height: 20px; font-weight: 400; height: 100%; margin: 0; overflow-x: hidden; }
+
+abbr, address, article, aside, audio, b, blockquote, canvas, caption, cite, code, dd, del, details, dfn, div, dl, dt, em, fieldset, figcaption, figure, footer, form,
+h1, h2, h3, h4, h5, h6, header, hgroup, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, p, pre, q, samp, section, small, span, strong, sub, summary, sup,
+table, tbody, td, tfoot, th, thead, time, tr, ul, var, video { padding: 0; border: 0; outline: 0; background: transparent /*vertical-align: baseline;*/ /*margin: 0;*/ }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block }
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.H1, .H2, .H3, .H4, .H5, .H6 { margin-top: 20px; margin-bottom: 10px; }
+h1, .h1, .H1 { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 24px; font-weight: 400; /*line-height:px; */ color: #ffffff; }
+h2, .h2, .H2 { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 35px; font-weight: 400; /*line-height:px; */ color: #161616; }
+h3, .h3, .H3 { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 27px; font-weight: 400; /*line-height:px; */ color: #cd0202;  }
+
+h4, .h4, .H4 { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 24px; font-weight: 400; line-height: 28px;  color: #b4b2b2; }
+h5, .h5, .H5 { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 18px; font-weight: 400; /*line-height:px; */ color: #333333; }
+h6, .h6, .H6 { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 14px; font-weight: 400; /*line-height:px; */ color: #cd0202; }
+
+span.h1, span.h2, span.h3, span.h4, span.h5, span.h6,
+span.H1, span.H2, span.H3, span.H4, span.H5, span.H6 { display: inline-flex }
+
+p, div, li, pre, table, blockquote { font-family: 'Open Sans',sans-serif; font-size: 17px; font-weight: 400; color: #161616; line-height: 1.5625; }
+
+a { color: #cd0202; -webkit-transition: all 0.25s ease-in-out; -moz-transition: all 0.25s ease-in-out; -ms-transition: all 0.25s ease-in-out; -o-transition: all 0.25s ease-in-out; transition: all 0.25s ease-in-out;
+    &:hover { color: #8b0000; text-decoration: none }
+    &:focus { color: #8b0000; text-decoration: none }
+    &:visited { color: #cd0202; text-decoration: none }
+}
+
+ul, ol { padding-inline-start: 40px;
+    ul, ol { margin-top: 0; margin-bottom: 0; }
+}
+
+select { }
+sup { }
+hr { width: 100%; max-width:100%; border-bottom: 1px solid #eaeaea; }
+
+input { border: 1px solid #eaeaea;
+    &:hover { border: 1px solid #b4b2b2; }
+    &:focus { border: 1px solid #cd0202; box-shadow: none; outline: none; }
+    &:active { border: 1px solid #cd0202; box-shadow: none; outline: none; }
+}
+
+img { max-width: 100%; height: auto;
+    //&.png { display: inline; }
+}
+/*html.svg img {
+    &.svg { display: inline; }
+    &.png { display: none; }
+}
+img.svg { display: none; }*/
+
+
+
+
+
+
+
+
+/* Small screens | max-width 640px, mobile-only styles */
+@media only screen and (max-width: 40em) {
+}
+
+/* Medium screens | min-width 641px */
+@media only screen and (min-width: 40.063em) {
+}
+
+/* Medium screens | min-width 641px and max-width 1024px  */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+}
+
+/* Laptop screens | min-width 1025px*/
+@media only screen and (min-width: 64.063em) {
+}
+
+/* Laptop screens | min-width 1025px and max-width 1440px  */
+@media only screen and (min-width: 64.063em) and (max-width: 90em) {
+}
+
+/* Large screens | min-width 1441px */
+@media only screen and (min-width: 90.063em) {
+}
+
+/* Large screens | min-width 1441px and max-width 1920px */
+@media only screen and (min-width: 90.063em) and (max-width: 120em) {
+}
+
+/* XLarge screens | min-width 1921px */
+@media only screen and (min-width: 120.063em) {
+}

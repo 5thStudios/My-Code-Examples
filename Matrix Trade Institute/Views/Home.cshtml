@@ -1,0 +1,14 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "TopLevel.cshtml";
+}
+
+
+<div class="home">
+    <partial name="/Views/Partials/Heroes/Hero-Home.cshtml" model="Model" />
+    @await Html.GetBlockGridHtmlAsync(Model.MainContent)
+</div>
+
+

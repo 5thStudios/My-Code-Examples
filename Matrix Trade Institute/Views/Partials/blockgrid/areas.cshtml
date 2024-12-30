@@ -1,0 +1,76 @@
+﻿@using Umbraco.Extensions
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@using www.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@{
+    if (Model?.Areas.Any() != true) { return; }
+
+
+    //Variables
+    ColumnSettings? settings = Model?.Settings as ColumnSettings;
+    List<string> lstRowSpacing = new List<string>();
+    string optRowClasses = string.Empty;
+    string optVertAlignClass = string.Empty;
+    bool IsFullWidth = false;
+    string LayoutName = string.Empty;
+    //string bgColorClass = string.Empty;
+
+
+    //Pull settings from Model
+    if (settings != null)
+    {
+        //Extract extended settings
+        LayoutName = settings.LayoutName;
+        IsFullWidth = settings.IsFullWidth;
+
+
+        //Create row classes
+        if (settings.RowSpacing != null)
+        {
+            foreach (string value in settings.RowSpacing)
+            {
+                lstRowSpacing.Add(www.Models.Common.ConvertRowSpacing(value));
+            }
+            optRowClasses = String.Join(" ", lstRowSpacing.ToArray());
+        }
+
+        //Vertical alignment class
+        if (!string.IsNullOrEmpty(settings.VerticallyAlignContent))
+        {
+            optVertAlignClass = www.Models.Common.ConvertToClass(settings.VerticallyAlignContent);
+        }
+
+        //Create background color class if applicable.
+        // if (!string.IsNullOrEmpty(settings.BackgroundColor))
+        // {
+        //     bgColorClass = www.Models.Common.ConvertBgColorClass(settings.BackgroundColor ?? "");
+        // }
+    }
+}
+
+
+
+<section  data-blockgrid="@LayoutName" data-equalizer="card"   class="@Html.Raw(settings?.OuterMostClass)"   @Html.Raw(settings?.OuterMostAttributes) >
+    @Html.Raw(settings.CustomScripts)
+
+    @if (IsFullWidth)
+    {
+        <div  class="grid-x   @optRowClasses   @optVertAlignClass    @Html.Raw(settings?.ContainerClasses) " @Html.Raw(settings?.ContainerAttributes)>
+            @foreach (var area in Model.Areas)
+            {
+                @await Html.GetBlockGridItemAreaHtmlAsync(area)
+            }
+        </div>
+    }
+    else
+    {
+        <div  class="grid-container  @Html.Raw(settings?.ContainerClasses) " @Html.Raw(settings?.ContainerAttributes)>
+            <div class="grid-x   @optRowClasses   @optVertAlignClass">
+                @foreach (var area in Model.Areas)
+                {
+                    @await Html.GetBlockGridItemAreaHtmlAsync(area)
+                }
+            </div>
+        </div>
+    }
+</section>

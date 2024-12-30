@@ -1,0 +1,60 @@
+﻿<style>
+    
+</style>
+
+<fieldset>
+    <legend>Icon List with Text Right</legend>
+    <div ng-click="block.edit()" ng-focus="block.focus">
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Title</td>
+                    <td>{{block.data.title}}</td>
+                </tr>
+                <tr>
+                    <td>Columns</td>
+                    <td>{{block.data.columns}}</td>
+                </tr>
+                <tr>
+                    <td>Background Color</td>
+                    <td>
+                        {{block.data.backgroundColor}}
+                        {{color = (block.data.backgroundColor); ""}}
+                        <div style="display:inline-block;width:50px; border: 1px solid #6f7285; background-color:{{color}}">&nbsp;</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Items</td>
+                    <td class="nested-tbls">
+                        <table ng-repeat="ds in block.data.iconListItems.contentData">
+                            <tbody>
+                                <tr>
+                                    <td>Header</td>
+                                    <td>{{ds.header}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Text</td>
+                                    <td>{{ds.text}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Side Image</td>
+                                    <td>
+                                        {{mediaItem = (ds.sideImage[0].mediaKey | mediaItemResolver); ""}}
+                                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width:50px;" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+
+    </div>
+</fieldset>
+<br />

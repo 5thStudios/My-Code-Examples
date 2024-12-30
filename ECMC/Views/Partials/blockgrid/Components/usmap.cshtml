@@ -1,0 +1,141 @@
+@using System;
+@using System.Collections.Generic;
+@using System.Text.Json;
+@using Umbraco.Extensions;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<USmap>> 
+@{
+
+    var cmModel = Model.Content;
+    string? title = cmModel.MapTitle;
+    var item = (ContentModels.USmap)Model.Content;
+
+    //Create random string to attach to canvas name.  [allows multiple canvases on single page.]
+    string chartName = "chartPnl-";
+    Random rand = new Random();
+    int stringlen = rand.Next(6, 10);
+    for (int i = 0; i < stringlen; i++)
+    {
+        // Generating random character by converting a random number into character and append the letter to string.
+        chartName = chartName + Convert.ToChar(rand.Next(0, 26) + 65);
+    }
+
+
+
+
+}
+
+
+<div data-blockgrid="Components/usmap" class="section">
+    <div class="content">
+        <!-- https://simplemaps.com/custom/us/jUzM18JB -->
+        <div id="map" ></div>
+        <!-- Show on screen starting at large, hide from ADA -->
+        <div class="" style="background-color:#f6f6f6; padding:20px "><p><em id="adaMap"></em></p></div> @* show-for-sr hide-for-large*@
+
+    </div>
+</div>
+
+
+
+
+<script>
+    var state_target = "_self";
+    var location_target = "_blank";
+
+    //https: //simplemaps.com/docs/javascript-hooks#usmap
+
+    simplemaps_usmap.hooks.preclick_state = function (id) {
+        if (!simplemaps_usmap.states[id].sm.url_manual) {
+            simplemaps_usmap.states[id].sm.url_manual = simplemaps_usmap.states[id].sm.url;
+            simplemaps_usmap.states[id].sm.url = '';
+        }
+        window.open(simplemaps_usmap.states[id].sm.url_manual, state_target);
+    }
+
+    simplemaps_usmap.hooks.preclick_location = function (id) {
+        if (!simplemaps_usmap.locations[id].sm.url_manual) {
+            simplemaps_usmap.locations[id].sm.url_manual = simplemaps_usmap.locations[id].sm.url;
+            simplemaps_usmap.locations[id].sm.url = '';
+        }
+        window.open(simplemaps_usmap.locations[id].sm.url_manual, location_target);
+    }
+
+    var stateArray = [];
+    var cityArray = [];
+    var tableArray = [];
+
+
+    @foreach (var data in item.MapLocations)
+    {
+        var location = (ContentModels.USmapWithLocations)data.Content;
+
+        if (@location.LocationName != null && @location.LocationName.Count() != 0)
+        {
+
+            @:cityArray.push(["@location.LocationName", @location.LocationLatitude, @location.LocationLongitude, "@location.LocationGoogleUrl", "@location.LocationDescription"]);
+
+            @:tableArray.push(["@location.StateAbbr", "@location.LocationDate", "@location.LocationName", @location.LocationLatitude, @location.LocationLongitude, "@location.LocationGoogleUrl", "@location.LocationDescription"]);
+
+        }
+
+    }
+    @foreach (var data in item.StateLocations)
+    {
+
+        var state = (ContentModels.USstateDescriptions)data.Content;
+
+        if (@state.USstateAbbr != null && @state.USstateAbbr.Count() != 0){
+
+            @:stateArray.push(["@state.USstateAbbr", "@state.USstateDescription"]);
+        }
+    }
+
+
+        ///ADA Section
+    var adaState = "";
+    var adaLocation = "";
+
+
+    jQuery(document).ready(function () {
+        jQuery.each(cityArray, function (index, value) {
+            // create location marker
+            simplemaps_usmap_mapdata.locations[index] = { name: value[0], lat: value[1], lng: value[2], url: value[3], description: value[4], opacity: "1", color: "#13818B", size: "24", type: "marker" }; //, type: "circle" image_url: "/images/icons/mapLocation.jpg"
+           //Make state zoomable
+
+            //ada for marker
+            adaLocation += value[0] + "&ndash;" + value[4] + "; ";
+  
+        });
+        jQuery.each(stateArray, function (index, value) {
+            var state = value[0];
+            //assign state tool tip
+            simplemaps_usmap_mapdata.state_specific[state].description = value[1];
+            //if state tip exists make active
+            //simplemaps_usmap_mapdata.state_specific[state].inactive = "no";
+            //for ada and mobile
+            adaState += value[0] + " " + value[1] + ", ";
+        })
+
+     
+
+        simplemaps_usmap.load();
+        $('#adaMap').html("<strong>Locations:</strong> " + adaLocation);
+    });
+
+        // var path = window.location.pathname;
+        // simplemaps_usmap_mapdata.main_settings.back_image = 'none'; //remove back navigation icon
+
+        // if (path == "/locations/california") {
+        //     simplemaps_usmap.hooks.complete = function () {
+        //         simplemaps_usmap.state_zoom("CA");
+        //         createCityTable("CA");
+        //     }
+        // }
+
+
+</script>
+
+
+

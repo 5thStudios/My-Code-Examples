@@ -1,0 +1,14 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridArea>
+
+@* <div data-blockgrid="area" class="umb-block-grid__area   cell medium-@Model.ColumnSpan"
+     data-area-col-span="@Model.ColumnSpan"
+     data-area-row-span="@Model.RowSpan"
+     data-area-alias="@Model.Alias"
+     style="--umb-block-grid--grid-columns: @Model.ColumnSpan;--umb-block-grid--area-column-span: @Model.ColumnSpan; --umb-block-grid--area-row-span: @Model.RowSpan;">
+    @await Html.GetBlockGridItemsHtmlAsync(Model)
+</div> *@
+
+<div data-blockgrid="area" class="cell medium-@Model.ColumnSpan">
+@await Html.GetBlockGridItemsHtmlAsync(Model)
+</div>

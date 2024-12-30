@@ -1,0 +1,96 @@
+﻿@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@model ComposedPageViewModel<ContentModels.ScrollingBlogPost, ScrollingBlogPostViewModel>
+@{
+    Layout = Common.Layout.TopLevelPER;
+}
+@section Footer {
+    <script type="text/javascript" src="/js/custom/scroll-pnls.js"></script>
+    <script type="text/javascript" src="/js/jquery/jssocials.js"></script>
+}
+
+
+<div class="ScrollingBlogPost">
+    <div class="grid-container">
+        <div class="grid-x blog-header">
+            <div class="cell">
+                <h1>@Model.Page?.Name</h1>
+                @if (Model.Page?.PublishedDate != DateTime.MinValue)
+                {
+                    <p class="publication-date">Published on: @Model.Page?.PublishedDate.ToString("MM/dd/yyyy") in @string.Join(", ", Model.Page?.Categories)</p>
+                }
+            </div>
+        </div>
+        <div class="grid-x grid-margin-x">
+            <div class="cell laptop-16 blog-content">
+               
+                <div class="post-image scroll-pnls">
+                    @foreach (IPublishedContent ipRecipe in Model.Page?.RecipeList)
+                    {
+                        string imgUrl = ipRecipe.Value<IPublishedContent>("photo").GetCropUrl("800x484");
+
+                        <div class="scroll-pnl 1">
+                            <a href="@ipRecipe.Url()">
+                                <img alt="" src="@imgUrl" style="width:100%;height:auto;" />
+                            </a>
+
+                            <div class="grid-x">
+                                <div class="content cell laptop-18">
+                                    <h4>
+                                        <a href="@ipRecipe.Url()">
+                                            @ipRecipe.Name
+                                        </a>
+                                    </h4>
+                                    @Html.Raw(ipRecipe.Value<string>("Description"))
+                                </div>
+                                <div class="navigation  cell laptop-6">
+                                    <div class="text-right">
+                                        <a class="btn btn-prev">
+                                            <img alt="Previous" src="/images/icons/btn_prev.png" />
+                                        </a>
+                                        <a class="btn btn-next">
+                                            <img alt="Next" src="/images/icons/btn_next.png" />
+                                        </a>
+                                    </div>
+                                    <br />
+                                    <div class="text-left">
+                                        <br />
+                                        <a href="@ipRecipe.Url()" class="button">Get Recipe</a>
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+                @await Html.GetBlockGridHtmlAsync(Model.Page?.MainContent)
+            </div>
+            <div class="cell laptop-8 blog-navigation">
+                <div class="share-fields no-print text-center">
+                    <h3>Share</h3>
+                    <div id="share"></div>
+                    <br />
+                    <br />
+                </div>
+
+                <div id="postSidebar">
+                    <h3 class="text-center">Recent Posts</h3>
+                    <partial name="@Common.Partial.BlogRecentPosts" model="Model.ViewModel?.LstRecentPosts" />
+                    @{
+                        // Html.RenderPartial("~/Themes/PerdueFoodService/Views/Partials/Blog_RecentPosts.cshtml", Model, new ViewDataDictionary { { "NumPosts", 5 } });
+                    }
+                    <br />
+                    <h3 class="text-center">Categories</h3>
+                    <partial name="@Common.Partial.BlogAllCategories" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

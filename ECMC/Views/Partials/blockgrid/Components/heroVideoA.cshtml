@@ -1,0 +1,63 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<HeroVideoA>>
+
+@{
+    //Instantiate variables
+    var cmModel = Model.Content;
+    string cssHeight = "";
+    string cssMaxHeight = "";
+    string noBtmMrgn = string.Empty;
+
+    //Obtain max-height if it exists
+    if (!string.IsNullOrEmpty(cmModel.HeroHeight))
+    {
+        cssHeight = "height:" + cmModel.HeroHeight + ";";
+        cssMaxHeight = "max-height:" + cmModel.HeroHeight + ";";
+    }
+
+    //Determine if bottom padding should appear
+    if (cmModel.RemoveBottomPadding)
+    {
+        noBtmMrgn = "no-bottom-margin";
+    }
+}
+
+
+
+
+<div data-blockgrid="Components/heroVideo" class="hero mbl-height-initial tbl-height-initial  @noBtmMrgn" style="@cssHeight @cssMaxHeight">
+    <video width="100%" autoplay loop muted>
+        <source src="@cmModel.BackgroundVideoUrl" type="video/mp4">
+    </video>
+    <div class="grid-container">
+        <div class="grid-x align-middle mbl-height-initial tbl-height-initial" style="@cssHeight @cssMaxHeight">
+            <div class="cell    small-12 small-offset-2    medium-10 medium-offset-2   laptop-8 laptop-offset-2   large-8 large-offset-2">
+
+                <div class="content">
+
+                    @if (!string.IsNullOrWhiteSpace(cmModel.IntroHeadline))
+                    {
+                        <h2>@Html.Raw(cmModel.IntroHeadline)</h2>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(cmModel.Headline))
+                    {
+                        <h1>@Html.Raw(cmModel.Headline)</h1>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(cmModel.SubHeadline))
+                    {
+                        <h2>@Html.Raw(cmModel.SubHeadline)</h2>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(cmModel.CallToAction?.Name))
+                    {
+                        <p><a class="link-button" target="@cmModel.CallToAction.Target" href="@cmModel.CallToAction.Url">@cmModel.CallToAction.Name</a></p>
+                    }
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

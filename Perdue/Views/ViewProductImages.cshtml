@@ -1,0 +1,77 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.ViewModels;
+@model ComposedPageViewModel<ContentModels.ViewProductImages, ViewProductImagesViewModel>
+@{
+    Layout = "TopLevelMinimum.cshtml";
+}
+
+
+
+
+<div id="perdue-tools">
+    <div class="grid-x grid-padding-x grid-padding-y">
+        <div class="cell">
+            <h2>Displaying Images for All Imported Products</h2>
+
+
+            @if (!Model.ViewModel!.LstImageDetails.Any())
+            {
+                <h4>No records available.</h4>
+                <br />
+                @Html.ValidationSummary()
+            }
+            else
+            {
+                <div>Total Products: <strong>@Model.ViewModel.ProductCount</strong></div>
+                <p>Total Images: <strong>@Model.ViewModel.LstImageDetails.Count()</strong></p>
+                <br />
+
+                @Html.ValidationSummary()
+
+
+                <table class="hover" valign="top">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th width="400">Product Name</th>
+                            <th>Code</th>
+                            <th>Image</th>
+                            @* <th>Size [WxH]</th>
+                        <th>Filename</th> *@
+                            <th>Is Primary?</th>
+                            <th>Last Changed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        @{
+                            int index = 0;
+
+                            foreach (var img in Model.ViewModel!.LstImageDetails)
+                            {
+                                index++;
+                                <tr>
+                                    <td>@index</td>
+                                    <td>@img.ProductName</td>
+                                    <td>@img.ProductCode</td>
+                                    <td><img alt="@img.ProductName" src="@img.ImgUrl" class="x300" /></td>
+                                    <td>@img.IsPrimary.ToString()</td>
+                                    <td>@img.LastChanged</td>
+
+                                </tr>
+                            }
+                        }
+                        @*   <td>@img.ImgSize</td>
+                             <td>@img.FileName</td> *@
+
+                    </tbody>
+                </table>
+
+            }
+        </div>
+    </div>
+    <br />
+
+</div>

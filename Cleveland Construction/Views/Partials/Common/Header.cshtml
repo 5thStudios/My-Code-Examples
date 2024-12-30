@@ -1,0 +1,145 @@
+﻿@using www.Models;
+@using www.ViewModels;
+@model HeaderViewModel;
+
+
+@if (Model.IsListOfHomePgs)
+{
+    <header class="listOfHomePgs">
+
+        <div class="grid-container   show-for-medium">
+            <div class="grid-x   grid-margin-x    align-middle">
+                <div class="cell auto show-for-medium"></div>
+                <nav class="cell  z-index-200  small-24 medium-shrink   text-center">
+                    <ul class="minor-nav">
+                        @foreach (var link in Model.LstMinorNav)
+                        {
+                            <li>
+                                <a href="@link.Url" target="@link.Target" title="@link.Title">@link.Title</a>
+                            </li>
+                        }
+
+                        <li class="childLinks">
+                            <a href="#">Login</a>
+                            <ul>
+                                @foreach (var link in Model.LstLoginLinks)
+                                {
+                                    <li>
+                                        <a href="@link.Url" target="@link.Target" title="@link.Title">@link.Title</a>
+                                    </li>
+                                }
+                            </ul>
+
+                        </li>
+                    </ul>
+                </nav>
+
+                <nav class="cell small-24 medium-shrink   text-center">
+                    <ul class="social-icons">
+                        @foreach (var link in Model.LstSocialLinks)
+                        {
+                            <li>
+                                <a href="@link.Url" target="@link.Target" title="@link.Title" class="@link.Class"></a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+
+                <div class="cell large-2">&nbsp;</div>
+            </div>
+        </div>
+
+
+
+        <div class="grid-x      sub-header     grid-padding-y grid-padding-x      align-middle">
+            <div class="cell  small-18       laptop-4 laptop-offset-1   ">
+                <img class="logo" alt="@Model.SiteLogo?.Title" src="@Model.SiteLogo?.ImgUrl">
+            </div>
+            <div class="cell    small-6    medium-3 medium-offset-3     hide-for-laptop">
+                <button class="menu-control open" data-toggle="offCanvas">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+            <div class="cell   show-for-laptop   laptop-1 laptop-offset-1   left-border">&nbsp;</div>
+            <div class="cell   small-20 small-offset-4   medium-21 medium-offset-3    laptop-17 laptop-offset-0    ptext">
+                @Html.Raw(Model.SiteTagline)
+            </div>
+        </div>
+
+    </header>
+}
+else
+{
+    <header>
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x  align-center-middle">
+                <div class="cell shrink large-offset-2   show-for-medium">
+                    <div class="tagline">@Html.Raw(Model.SiteTagline)</div>
+                </div>
+                <div class="cell auto   show-for-medium"></div>
+                <nav class="cell shrink z-index-200">
+                    <ul class="minor-nav">
+                        @foreach (var link in Model.LstMinorNav)
+                        {
+                            <li>
+                                <a href="@link.Url" target="@link.Target" title="@link.Title">@link.Title</a>
+                            </li>
+                        }
+
+                        <li class="childLinks">
+                            <a href="#">Login</a>
+
+                            <ul>
+                                @foreach (var link in Model.LstLoginLinks)
+                                {
+                                    <li>
+                                        <a href="@link.Url" target="@link.Target" title="@link.Title">@link.Title</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="cell shrink   show-for-laptop">
+                    <ul class="social-icons">
+                        <li>
+                            Stay Connected:
+                        </li>
+                        @foreach (var link in Model.LstSocialLinks)
+                        {
+                            <li>
+                                <a href="@link.Url" target="@link.Target" title="@link.Title" class="@link.Class"></a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+                <div class="cell laptop-2   show-for-large"></div>
+            </div>
+        </div>
+        <hr class="no-bottom-margin" />
+        <div class="grid-container">
+            <div class="grid-x grid-padding-y align-center-middle">
+                <div class="cell large-2   show-for-large"></div>
+                <div class="cell small-12 laptop-shrink">
+                    <a href="@Model.SiteLogo?.Url">
+                        <img class="logo" alt="@Model.SiteLogo?.Title" src="@Model.SiteLogo?.ImgUrl">
+                    </a>
+                </div>
+                <nav class="cell auto text-right  show-for-laptop">
+                    <partial name="/Views/Partials/Common/MainNav.cshtml" model="Model.LstMainNav" />
+                </nav>
+                <div class="cell text-right small-12 hide-for-laptop">
+                    <button class="menu-control open" data-toggle="offCanvas">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+                <div class="cell large-2 show-for-large"></div>
+            </div>
+        </div>
+    </header>
+}
+
+
+<nav class="hide-for-laptop">
+    <partial name="/Views/Partials/Common/MblNav.cshtml" model="Model.LstMainNav" />
+</nav>

@@ -1,0 +1,183 @@
+﻿@using Dragonfly
+@using Dragonfly.NetHelpers
+@using Dragonfly.UmbracoModels
+@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@model ComposedPageViewModel<ContentModels.ProductsSection, ProductsSectionViewModel>
+
+
+
+<div id="product-filters" style="display: block;">
+
+    <div style="margin-bottom: 10px;">
+        <div id="clear-filters" style="cursor: pointer">
+            <a href="@Model.Page?.Url()" class="btn btn-blue">Show All Products</a>
+        </div>
+        <br>
+    </div>
+
+
+
+
+    <div class="checks-group" data-filter-group="Proteins">
+        <h5 class="filter-section-title">
+            Proteins&nbsp;<span class="fas fa-caret-right">
+                <img src="/images/icons/caret-right-solid.svg" class="svg-btn caret-right" />
+                <img src="/images/icons/caret-down-solid.svg" class="svg-btn caret-down" />
+            </span>
+        </h5>
+        <div class="filter-items-group" style="display: none; opacity: 0;">
+            @foreach (var tag in Model.ViewModel!.LstTags_Proteins)
+            {
+                <div class="parentContainer">
+                    <input type="checkbox" data-filter="@tag.Key" value="@tag.Key" class="col-1 align-top filter-item @tag.Key" id="@tag.Key" />
+                    <label for="@tag.Key" class="col-11 text-left pl-1">@tag.Value</label>
+                </div>
+            }
+
+        </div>
+        <hr width="100%">
+    </div>
+
+    <div class="checks-group" data-filter-group="Brand">
+        <h5 class="filter-section-title">
+            Brands&nbsp;<span class="fas fa-caret-right">
+                <img src="/images/icons/caret-right-solid.svg" class="svg-btn caret-right" />
+                <img src="/images/icons/caret-down-solid.svg" class="svg-btn caret-down" />
+            </span>
+        </h5>
+        <div class="col-12 filter-items-group" style="display: none; opacity: 0;">
+            @foreach (var tag in Model.ViewModel!.LstTags_Brands)
+            {
+                var uppercaseAttribute = tag.Value.ToUpper();
+                if (Model.ViewModel!.WebsiteBrands.Contains(uppercaseAttribute))
+                {
+                    var brandSuperScript = uppercaseAttribute.Replace("®", "<sup>®</sup>");
+                    <div class="parentContainer">
+                        <input type="checkbox" data-filter="@tag.Key" value="@tag.Key" class="col-1 align-top filter-item @tag.Key" id="@tag.Key" />
+                        <label for="@tag.Key" class="col-11 text-left pl-1">@Html.Raw(brandSuperScript)</label>
+                    </div>
+                }
+            }
+        </div>
+        <hr width="100%">
+    </div>
+
+    <div class="checks-group" data-filter-group="ProductType">
+        <h5 class="filter-section-title">
+            Product Type&nbsp;<span class="fas fa-caret-right">
+                <img src="/images/icons/caret-right-solid.svg" class="svg-btn caret-right" />
+                <img src="/images/icons/caret-down-solid.svg" class="svg-btn caret-down" />
+            </span>
+        </h5>
+        <div class="filter-items-group" style="display: none; opacity: 0;">
+
+            @* [ProductType filter] *@
+            @foreach (var type in Model.ViewModel.FoodProductTypes?.Types.Where(n => !n.Name.StartsWith("~")))
+            {
+                LoopRenderingProductTypesFilter(type);
+            }
+        </div>
+        <hr width="100%">
+    </div>
+
+    <div class="checks-group" data-filter-group="Attributes">
+        <h5 class="filter-section-title">
+            Attributes&nbsp;<span class="fas fa-caret-right">
+                <img src="/images/icons/caret-right-solid.svg" class="svg-btn caret-right" />
+                <img src="/images/icons/caret-down-solid.svg" class="svg-btn caret-down" />
+            </span>
+        </h5>
+        <div class="col-12 filter-items-group" style="display: none; opacity: 0;">
+
+            @foreach (var item in Model.ViewModel!.LstTags_Attributes.OrderBy(x => x.Attribute).ToList())
+            {
+                //
+                string className = "";
+                if (item.Attribute == "CVP")
+                {
+                    className = GetSearchAttributeClassName(item.Category, "Fresh CVP");
+                }
+                else
+                {
+                    className = GetSearchAttributeClassName(item.Category, item.Attribute);
+                }
+
+
+                <div class="parentContainer">
+                    <input type="checkbox" data-filter="@className" value="@className" class="col-1 align-top filter-item @className" id="@className" />
+                    <label for="@className" class="col-11 text-left pl-1">@item.Attribute</label>
+                </div>
+            }
+
+        </div>
+        <hr width="100%">
+    </div>
+
+</div>
+
+
+
+@functions {
+    private void LoopRenderingProductTypesFilter(FoodProductType Type)
+    {
+        //
+        var category = "ProductType";
+        var attribute = Type.Code;
+        var className = GetSearchAttributeClassName(category, attribute, true);
+        var filteritemClass = "filteritem-type"; // IsASubType ? "filteritem-subtype" : "filteritem-type";
+
+        <div class="@filteritemClass">
+            <div class="parentContainer">
+                <input type="checkbox" data-filter="@className" value="@className" class="col-1 align-top filter-item @className" id="@className" />
+                <label for="@className" class="col-11 text-left pl-1">@Type.Name</label>
+            </div>
+        </div>
+
+
+        if (Type.SubTypes != null & Type.SubTypes.Any())
+        {
+            foreach (var Subtype in Type.SubTypes)
+            {
+                var subcategory = "ProductType";
+                var subattribute = Subtype.Code;
+                var subclassName = GetSearchAttributeClassName(subcategory, subattribute, true);
+                var subfilteritemClass = "filteritem-subtype";
+
+                <div class="@subfilteritemClass">
+                    <div class="parentContainer">
+                        <input type="checkbox" data-filter="@subclassName" value="@subclassName" class="col-1 align-top filter-item @subclassName" id="@subclassName" />
+                        <label for="@subclassName" class="col-11 text-left pl-1">@Subtype.Name</label>
+                    </div>
+                </div>
+            }
+        }
+    }
+    private bool IsASubType(IPublishedContent ipChild)
+    {
+        string documentTypeAlias = ipChild.Parent!.ContentType.Alias;
+        return documentTypeAlias == "ProductType";
+    }
+    private string GetSearchAttributeClassName(string ItemCategory, string ItemAttribute, bool AlreadyCoded = false)
+    {
+        string text = "";
+        string arg = ItemCategory.MakeCamelCase().MakeCodeSafe("");
+        string text2 = (AlreadyCoded ? ItemAttribute : ItemAttribute.MakeCamelCase().Replace("-", "").MakeCodeSafe(""));
+        if (text2 == null)
+        {
+            text2 = "";
+        }
+
+        text2 = text2.Replace("®", "").Replace("/", "-");
+        if (text2 != "")
+        {
+            return $"{arg}-{text2}";
+        }
+
+        return $"{arg}";
+    }
+
+}

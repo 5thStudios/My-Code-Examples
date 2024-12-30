@@ -1,0 +1,34 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ColumnTwoLgleftB, ColumnSettingsB>>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+
+@{
+    string bgColor = "";
+    if (!string.IsNullOrEmpty(Model.Settings.BackgroundColor))
+    {
+        bgColor = "background-color: " + Model.Settings.BackgroundColor + " !important;";
+    }
+
+    string rowPadding = "";
+    if (!string.IsNullOrEmpty(Model.Settings.RowPadding))
+    {
+        rowPadding = Common.ConvertRowPadding(Model.Settings.RowPadding ?? "");
+    }
+    string rowMargin = "";
+    if (!string.IsNullOrEmpty(Model.Settings.RowMargin))
+    {
+        rowMargin = Common.ConvertRowMargin(Model.Settings.RowMargin ?? "");
+    }
+}
+
+
+
+<section data-blockgrid="Components/columnTwo" class="@Model.Settings.SectionClasses @rowPadding @rowMargin" style="@bgColor ">
+    <div class="grid-container @Model.Settings.GridContainerClasses">
+        <div class="grid-x   @Model.Settings.GridXclasses">
+            <div class="cell small-offset-2 small-20  @Model.Settings.CellClasses   nested-rectifier">
+                @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+            </div>
+        </div>
+    </div>
+</section>

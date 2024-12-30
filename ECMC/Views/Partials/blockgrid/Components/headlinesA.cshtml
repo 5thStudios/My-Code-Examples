@@ -1,0 +1,28 @@
+﻿@using Umbraco.Extensions;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<HeadlinesA>>
+@{
+    //Instantiate variables
+    var cmModel = Model.Content;
+}
+
+@if (!string.IsNullOrWhiteSpace(cmModel.HeadlineH1))
+{
+    <h1 data-blockgrid="Components/headlines">@Html.Raw(cmModel.HeadlineH1)</h1>
+}
+
+@if (!string.IsNullOrWhiteSpace(cmModel.HeadlineH2))
+{
+    <h2 data-blockgrid="Components/headlines">@Html.Raw(cmModel.HeadlineH2)</h2>
+}
+
+@if (!string.IsNullOrWhiteSpace(cmModel.HeadlineH3))
+{
+    <h3 data-blockgrid="Components/headlines">@Html.Raw(cmModel.HeadlineH3)</h3>
+}
+
+@if (!string.IsNullOrWhiteSpace(cmModel.HeadlineH4))
+{
+    <h4 data-blockgrid="Components/headlines">@Html.Raw(cmModel.HeadlineH4)</h4>
+}

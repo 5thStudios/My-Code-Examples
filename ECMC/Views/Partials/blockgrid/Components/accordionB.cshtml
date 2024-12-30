@@ -1,0 +1,19 @@
+@using Umbraco.Extensions;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<AccordionB>>
+
+
+@if (!string.IsNullOrEmpty(Model.Content.AccordionTitle))
+{
+    <h3>@Model.Content.AccordionTitle</h3>
+}
+
+
+<div class="accordion @Model.Content.Class">
+    @foreach (var bgItem in Model.Content.AccordionItem)
+    {
+        <partial name="@Common.Partial.AccordionItemB" model="bgItem" />
+    }
+</div>
+

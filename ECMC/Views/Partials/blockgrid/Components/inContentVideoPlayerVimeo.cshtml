@@ -1,0 +1,37 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<InContentVideoPlayerVimeo>>
+@{
+    //Instantiate variables
+    var cmModel = Model.Content;
+
+    var src = cmModel.VideovemioOrYouTubeUrltoVideo;
+    bool muted = cmModel.VideoMute;
+    bool loop = cmModel.VideoLoop;
+    bool controls = cmModel.HideControls;
+    bool autoplay = cmModel.VideoAutoPlay;
+    var cc = cmModel.VideoClosedCaptioningAternative;
+    string format = "";
+    if (cmModel.Widescreen)
+    {
+        format = "widescreen";
+    }
+
+
+    //Create source url
+    //  REFERENCE: https://developer.vimeo.com/player/sdk/embed#embed-options-as-objects
+    List<string> controlsList = new List<string>();
+    if (autoplay) { controlsList.Add("&autoplay=true"); }
+    if (muted || autoplay) { controlsList.Add("&muted=true"); }
+    if (loop) { controlsList.Add("&loop=true"); }
+    if (controls) { controlsList.Add("&controls=false"); }
+    var cntrlList = String.Join("", controlsList.Distinct());
+    var SrcConcat = "https://player.vimeo.com/video/" + src + "?" + cntrlList;
+}
+
+
+
+<div data-blockgrid="Components/inContentVideoPlayerVimeo" class="videoPlayer responsive-embed @format">
+    <iframe src="@SrcConcat" frameborder="0" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen></iframe>
+    <div class="sr-only">@cc</div>
+</div>

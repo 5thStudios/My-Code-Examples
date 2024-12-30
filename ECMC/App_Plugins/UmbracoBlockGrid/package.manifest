@@ -1,0 +1,9 @@
+﻿{
+  "name": "Umbraco Block Grids",
+  "version": "1.0.0",
+  "allowPackageTelemetry": true,
+  "javascript": [
+    "~/App_Plugins/UmbracoBlockGrid/newsTop5.controller.js",
+    "~/App_Plugins/UmbracoBlockGrid/relatedNews.controller.js"
+  ]
+}

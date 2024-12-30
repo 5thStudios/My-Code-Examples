@@ -1,0 +1,25 @@
+﻿@import'../common-B/_variables-com';
+
+/* Filters
+----------------------------------------------------------*/
+.filter-pnl {
+
+    input[type=radio] {
+        &:checked {
+            + label.rbListView { color: $color_glob_black; }
+            + label.rbGridView { color: $color_glob_black; }
+        }
+    }   
+
+}
+
+.umbraco-forms-form {
+    form {
+        input[type=submit].button, input[type=button].button, a.button { background-color: $color_glob_black;
+            &:hover, &:focus, &:after { background-color: $color_QTQ_Green; }
+        }
+        a.button.inverse { background-color: $color_QTQ_Green; text-decoration: none;
+            &:hover, &:focus, &:after { background-color: $color_glob_black; }
+        }
+    }
+}

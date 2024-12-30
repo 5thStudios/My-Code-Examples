@@ -1,0 +1,25 @@
+﻿@import'../common-B/_variables-com';
+
+
+/* Image Card [Fixed Size] with Side Text Custom-Styles
+----------------------------------------------------------*/
+
+.card, .cell.card {
+
+    &.image-card {
+        &.with-side-content {
+            &.grey-200 { background-color: $color_glob_gray_200 }
+            &.grey-200-border { border: 1px solid $color_glob_gray_200 }
+            &.padding-10 { padding: 10px; margin: 5px; }
+            &.align-text-middle {
+                div { -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; }
+            }
+        }
+    }
+
+    &.fixed-size {
+        a.fixed-size-link { color: $color_glob_green_ADA;
+            &:hover, &:focus { color: $color_glob_teal; }
+        }
+    }
+}

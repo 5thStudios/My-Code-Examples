@@ -1,0 +1,114 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.StandardSol>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "MasterSol.cshtml";
+}
+
+@await Html.GetBlockGridHtmlAsync(Model.HeroBlockGrid)
+
+
+
+<section>
+
+    <div class="grid-container">
+        <div class="grid-x grid-padding-y">
+            <div class="cell small-offset-2 small-20  ">
+                <div class="breadcrumb-container">
+                    <ul>
+                        @{
+                            var lst = GetBreadcrumbList(Model);
+                            for (int i = lst.Count(); i > 0; i--)
+                            {
+                                <li><a href="@lst[i - 1].Url">@lst[i - 1].Title</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="grid-x grid-padding-y">
+            <div class="cell small-offset-2 small-20  ">
+
+                <div class="grid-x grid-margin-x">
+                    @if (Model.HideSidebar)
+                    {
+                        //Expand column across page.
+                        <div class="cell">
+                            @await Html.GetBlockGridHtmlAsync(Model.ContentBlockGrid)
+
+                            @await Html.GetBlockGridHtmlAsync(Model.ContentBottomBlockGrid)
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="cell laptop-17">
+                            @await Html.GetBlockGridHtmlAsync(Model.ContentBlockGrid)
+
+                            @await Html.GetBlockGridHtmlAsync(Model.ContentBottomBlockGrid)
+                        </div>
+                        <div class="cell laptop-7">
+                            @{
+                                RenderSidebar();
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+@functions {
+    private void RenderSidebar()
+    {
+        //Obtain page with sidebar data (get parent if child does not have value)
+        IPublishedContent pgWithSidebar = GetPgWithSidebar(Model);
+
+
+        <div class="sidebar">
+            @Html.GetBlockListHtml(pgWithSidebar.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>(ECMC_Umbraco.Models.Common.Property.SidebarList)!)
+        </div>
+        <br />
+        <br />
+    }
+
+    private IPublishedContent GetPgWithSidebar(IPublishedContent ip)
+    {
+        //Get page from self or ancestors which has a value.
+        if (ip.HasValue(ECMC_Umbraco.Models.Common.Property.SidebarList))
+        {
+            return ip;
+        }
+        else
+        {
+            return GetPgWithSidebar(ip.Parent!);
+        }
+    }
+
+    private List<UmbracoProject.Models.Link> GetBreadcrumbList(IPublishedContent ip)
+    {
+        //Instanatiate variable
+        List<UmbracoProject.Models.Link> lst = new List<UmbracoProject.Models.Link>();
+
+        //Add page to list of links
+        lst.Add(new UmbracoProject.Models.Link()
+            {
+                Url = ip.Url(),
+                Title = (ip == ip.Root()) ? "Home" : ip.Name
+            });
+
+        //If not root, add parent page to list.
+        if (ip != ip.Root())
+        {
+            lst.AddRange(GetBreadcrumbList(ip.Parent!));
+        }
+
+        return lst;
+    }
+}

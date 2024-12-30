@@ -1,0 +1,27 @@
+﻿<style>
+    legend { color: #ff1600; }
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Navigation Group</legend>
+        <!--{{block.data}}-->
+        {{linkName = (block.data.link[0].name); ""}}
+        {{linkUrl = (block.data.link[0].url); ""}}
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Link</td>
+                    <td>
+                        <span>{{linkName}}</span>
+                        <span ng-if="linkUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{linkUrl}}</em></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+    </fieldset>
+</div>
+<br />

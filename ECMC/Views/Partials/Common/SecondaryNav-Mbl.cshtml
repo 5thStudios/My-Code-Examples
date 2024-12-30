@@ -1,0 +1,42 @@
+﻿@using UmbracoProject.Models;
+@model IPublishedContent;
+
+@{
+    //Create list of child links if they exist
+    List<Link> LstLinks = new List<Link>();
+    foreach (var ipChild in Model.Children)
+    {
+        LstLinks.Add(new Link()
+                {
+                    Title = ipChild.Name,
+                    Url = ipChild.Url()
+                });
+    }
+}
+
+
+@if (LstLinks.Any())
+{
+    <div class="grid-container   hide-for-medium">
+        <div class="grid-x   grid-padding-y grid-margin-y">
+            <div class="cell small-20 small-offset-2">
+                <nav class="mobile-secondary-nav">
+                    <br />
+                    <ul>
+                        @foreach (var link in LstLinks)
+                        {
+                            <li>
+                                <a href="@link.Url">@link.Title</a>
+                            </li>
+                        }
+                    </ul>
+                    <br />
+                </nav>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+

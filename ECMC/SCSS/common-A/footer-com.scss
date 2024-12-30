@@ -1,0 +1,40 @@
+﻿@import'_variables-com';
+ 
+footer { width: 100%; background-color: $header_color_solid_bkg; color: $color_glob_white; margin-top: 75px;
+
+    .logo {
+        height: $header_logo_height;
+        width: $header_logo_width;
+        max-width: $header_logo_width;
+        @media only screen and (max-width: $bp_sm) { margin-bottom: 25px }
+    }
+
+    p.copyright { margin: 15px 0 30px 0; }
+
+    a, a:hover, a:visited, a:visited:hover { color: $color_glob_white;  text-decoration: none;
+
+        &.email { text-decoration: underline; }
+    }
+
+    .seperator { margin: 0 18px; }
+
+    h2 { font-size: 20px; line-height: 1.25em; color: $color_glob_white; margin-bottom: 21px; }
+
+    .social {
+        a { font-size: 40px; margin-right: 0.25em;
+
+            img { width: 40px; height: auto; margin-bottom: .25em; }
+        }
+    }
+
+    form {
+        input[type=text], input[type=email] { font-size: $def_font_size_B; border-radius: 0; margin-bottom: 3px;
+
+            &::placeholder { color: #95989a; font-size: $def_font_size_A; font-style: italic; font-weight: $weight_Book; }
+
+            &:focus { box-shadow: none; }
+        }
+
+        button, input[type=submit] { font-size: 14px; font-weight: $weight_Normal; border-radius: 0; width: auto; background-color: transparent; text-transform: none; color: $color_glob_white; cursor: pointer; padding: .5em 1em; border: solid 2px $color_glob_white; margin: 12px 0; }
+    }
+}

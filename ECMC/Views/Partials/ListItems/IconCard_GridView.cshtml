@@ -1,0 +1,171 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ECMC_Umbraco.Models;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@model IconCard;
+
+
+@{
+    //Obtain image
+    string imgUrl = Model.Icon?.Url();
+
+    //Determine if hover panel should be added
+    bool ShowHoverContent = false;
+    if (!string.IsNullOrWhiteSpace(Model.HoverTitle))
+    {
+        ShowHoverContent = true;
+    }
+    if (Model.HoverTip != null && !string.IsNullOrWhiteSpace(Model.HoverTip.ToString()))
+    {
+        ShowHoverContent = true;
+    }
+
+
+    //Obtain background image
+    string bgImg = "";
+    if (Model.BackgroundImage != null)
+    {
+        //bgImg = "background-image: url('" + Model.BackgroundImage.Url() + "');";
+        bgImg = "background-image: url('" + Model.BackgroundImage?.GetCropUrl(Common.Crop.Icon_Card_575x375) + "');";
+    }
+
+    //Determine if card content panel should be displayed
+    bool showContent = false;
+    if (!string.IsNullOrEmpty(Model.Title) || (Model.Summary != null && !string.IsNullOrWhiteSpace(Model.Summary.ToString())))
+    {
+        showContent = true;
+    }
+
+
+    string id = "iconCard-" + Model.Key.ToString();
+}
+
+
+<style type="text/css">
+    /*Build custom css*/
+    #@Html.Raw(id) {@Html.Raw(bgImg)}
+    #@Html.Raw(id) .pnl-divider {background-image:none;}
+
+    @@media only screen and (max-width: 64em) {
+        #@Html.Raw(id) {@Html.Raw(bgImg)}
+        #@Html.Raw(id) .pnl-divider {@Html.Raw(bgImg)}
+    }
+
+</style>
+
+
+
+
+@{
+    <figure class="card icon-card medium-8 laptop-6  img-slide-down" id="@id">
+
+        
+            
+
+            @if (Model.Link == null)
+            {
+                RenderCard(imgUrl ?? "", showContent,  ShowHoverContent);
+            }
+            else
+            {
+                <a href="@Model.Link?.Url" target="@Model.Link?.Target">
+                    @{
+                        RenderCard(imgUrl ?? "", showContent,  ShowHoverContent, true);
+                    }
+                </a>
+            }
+
+
+
+    </figure>
+}
+
+
+
+@functions {
+    private void RenderCard(string _imgUrl, bool _showContent, bool _showHoverContent = false, bool _showBtn = false)
+    {
+
+            <div class="grid-x align-middle iconCard-height"> 
+                   <div class="cell text-center card-content">
+
+                        <img src="@_imgUrl" alt="@Model.Title">
+
+                        @if (_showContent)
+                        {
+               
+                                @if (!string.IsNullOrEmpty(Model.Title))
+                                {
+                                    <h2>@Model.Title</h2>
+                                }
+                                @if (Model.Summary != null)
+                                {
+                                    <div>
+                                        @Html.Raw(Model.Summary)
+                                    </div>
+                                }
+                
+                        }
+
+                        @if (_showHoverContent)
+                                {
+                                    <figcaption class="text-left show-for-laptop">
+                                        <div class="grid-y grid-padding-y">
+                                            <div class="cell auto vertical-align-middle">
+                                                @if (!string.IsNullOrEmpty(Model.HoverTitle))
+                                                {
+                                                    <h2>@Model.HoverTitle</h2>
+                                                }
+
+                                                @if (Model.HoverTip != null && !string.IsNullOrWhiteSpace(Model.HoverTip.ToString()))
+                                                {
+                                                    <div>
+                                                        @Html.Raw(Model.HoverTip)
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="cell shrink">
+                                                @if (_showBtn)
+                                                {
+                                                    <div class="read-more btn">
+                                                        @Model.Link?.Name
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </figcaption>
+                                }
+
+                    </div>
+            </div>
+    
+
+
+        @if (_showHoverContent)
+        {
+            <figcaption class="text-left hide-for-laptop mbl">
+                <div class="grid-x">
+                    <div class="cell">
+                        @if (!string.IsNullOrEmpty(Model.HoverTitle))
+                        {
+                            <h2>@Model.HoverTitle</h2>
+                        }
+                        @if (Model.HoverTip != null && !string.IsNullOrWhiteSpace(Model.HoverTip.ToString()))
+                        {
+                            <div>
+                                @Html.Raw(Model.HoverTip)
+                            </div>
+                        }
+                        @if (_showBtn)
+                        {
+                            <div class="read-more btn">
+                                @Model.Link?.Name
+                            </div>
+                        }
+                    </div>
+                </div>
+            </figcaption>
+        }
+
+    }
+}

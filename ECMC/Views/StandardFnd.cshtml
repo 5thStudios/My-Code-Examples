@@ -1,0 +1,14 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.StandardFnd>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterFnd.cshtml";
+}
+
+
+@await Html.GetBlockGridHtmlAsync(Model.HeroBlockGrid)
+<partial name="@Common.Partial.SecondaryNav" model="Model" />
+@await Html.GetBlockGridHtmlAsync(Model.ContentBlockGrid)
+<partial name="@Common.Partial.SecondaryNavMbl" model="Model" />
+@await Html.GetBlockGridHtmlAsync(Model.ContentBottomBlockGrid)

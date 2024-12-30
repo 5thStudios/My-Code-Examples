@@ -1,0 +1,60 @@
+﻿<style>
+    
+    .bvTable ul { margin: 0; padding-left: 16px; }
+    .nested-tbls table:nth-child(n+2) { border-top: 2px solid #ffcc9e; padding-top: 9px; margin-top: 9px; }
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Donut Chart</legend>
+        <!--{{block.data.datasets.contentData}}-->
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Title</td>
+                    <td>{{block.data.title}}</td>
+                </tr>
+                <tr>
+                    <td>Value Type</td>
+                    <td>{{block.data.valueType}}</td>
+                </tr>
+                <tr>
+                    <td>Index Labels</td>
+                    <td>
+                        <ul>
+                            <li ng-repeat="lbl in block.data.indexLabels">
+                                {{lbl.value}}
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Datasets</td>
+                    <td class="nested-tbls">
+                        <table ng-repeat="ds in block.data.datasets.contentData">
+                            <tr>
+                                <td>Dataset Label</td>
+                                <td>{{ds.datasetLabel}}</td>
+                            </tr>
+                            <tr>
+                                <td>Values</td>
+                                <td>
+                                    <ul>
+                                        <li ng-repeat="dsv in ds.dataPoints.contentData">
+                                            {{dsv.data}}&nbsp;
+                                            {{dpcolor = "#" + (dsv.color.value); ""}}
+                                            <div style="display:inline-block;width:50px; background-color:{{dpcolor}}">&nbsp;</div>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

@@ -1,0 +1,75 @@
+﻿@using Umbraco.Cms.Core.WebAssets;
+@using Umbraco.Cms.Core.Web;
+@using Smidge;
+@using Microsoft.Extensions.Options;
+@using Umbraco.Cms.Core.Configuration.Models;
+@using www.Models;
+@inject IUmbracoContextAccessor context;
+@inject IOptions<HostingSettings> hostingSettings
+@{
+    Layout = null;
+
+    //create body class
+    IPublishedContent ipModel = context.GetRequiredUmbracoContext().PublishedRequest!.PublishedContent!;
+    string doctype = ipModel.ContentType.Alias.ToLower();
+
+
+    //Bundle JS files
+    SmidgeHelper.CreateJsBundle("inline-js-bundle-che").RequiresJs(
+                    "~/js/jquery/jquery-3.7.1.js",
+                    "~/js/slick/slick.js",
+                    "~/js/paginathing/paginathing.min.js",
+                    "~/js/zurb/what-input.js",
+                    "~/js/zurb/foundation.js",
+                    "~/js/vendor/zoom.js",
+                    "~/js/custom/accordion.js",
+                    "~/js/light/lightslider.min.js",
+                    "~/js/perdue-library/jquery.perduelibrary.js",
+                    "~/js/vendor/imageCoverIE.js",
+                    "~/js/jquery/jquery.cookies.2.2.0.min.js",
+                    "~/js/custom/cookie-msgs.js",
+                    "~/js/custom/sign-up-here.js");
+
+
+
+    //Bundle CSS files
+    SmidgeHelper.CreateCssBundle("inline-css-bundle-che").RequiresCss(
+        "~/css/vendor/hubspot.css",
+        "~/css/vendor/lightslider.css",
+        "~/css/vendor/perduelibrary.css",
+        "~/css/zurb/foundation.css");
+
+
+
+    //Determine if site is running in debug mode
+    bool debugMode = hostingSettings.Value.Debug;
+}
+
+
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6160113741.js" crossorigin="anonymous"></script>
+
+
+    @await SmidgeHelper.JsHereAsync("inline-js-bundle-che", @debugMode)
+    <script type="text/javascript" src="/js/app.js?v=02"></script>
+    @await SmidgeHelper.CssHereAsync("inline-css-bundle-che", @debugMode)
+    <link rel="stylesheet" href="/css/site-che.css?v=04" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
+
+    @RenderSection("Header", false)
+</head>
+<body class="@doctype" data-site="@Common.Site.Cheney">
+    <div class="off-canvas-content" data-off-canvas-content>
+        @RenderBody()
+        @RenderSection("Footer", false)
+    </div>
+</body>
+</html>

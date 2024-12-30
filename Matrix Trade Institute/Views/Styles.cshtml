@@ -1,0 +1,35 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Styles>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = null; //"TopLevel.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Foundation | Welcome</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="/css/foundation.css">
+    <link href="/css/site.css" rel="stylesheet" />
+    <link href="/css/element451.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/b880db5e82.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <br />
+    @await Html.PartialAsync("~/Views/Partials/Test/ZurbTestPg.cshtml")
+    <br />
+    <br />
+    <br />
+    @await Html.PartialAsync("~/Views/Partials/Test/GridOutline.cshtml")
+    <br />
+    <br />
+    <br />
+    <script src="/scripts/foundation.js"></script>
+</body>

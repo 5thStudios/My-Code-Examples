@@ -1,0 +1,66 @@
+﻿<style>
+    
+</style>
+
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend><strong>Image Card with Side Text</strong></legend>
+
+        {{mediaItem = (block.data.image[0].mediaKey | mediaItemResolver); ""}}
+        {{linkName = (block.data.link[0].name); ""}}
+        {{linkUrl = (block.data.link[0].url); ""}}
+
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Card Image</td>
+                    <td>
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width: 140px; height:auto;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Headline</td>
+                    <td>{{block.data.headline}}</td>
+                </tr>
+                <tr>
+                    <td>Link to</td>
+                    <td>
+                        <span>{{linkName}}</span>
+                        <span ng-if="linkUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{linkUrl}}</em></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>LinkedIn Url</td>
+                    <td>{{block.data.linkedIn}}</td>
+                </tr>
+                <tr>
+                    <td>Facebook Url</td>
+                    <td>{{block.data.facebook}}</td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2" style="text-align:center;">- - Animation Features - -</td>
+                </tr>
+                <tr>
+                    <td>In-View Animation</td>
+                    <td>{{block.data.inViewAnimation}}</td>
+                </tr>
+                <tr>
+                    <td>Hover Title</td>
+                    <td>{{block.data.hoverTitle}}</td>
+                </tr>
+                <tr>
+                    <td>Hover Tip</td>
+                    <td ng-bind-html="block.data.hoverTip.markup"></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

@@ -1,0 +1,114 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Billboard with Form &nbsp;&nbsp;&nbsp;&nbsp;<strong>[E451]</strong></legend>
+
+        {{mediaItem = (block.data.backgroundImage[0].mediaKey | mediaItemResolver); ""}}
+
+        <table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 75%; vertical-align: top;">
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+
+                                <tr>
+                                    <td colspan="4">
+                                        <h4 style="text-align:center;"><strong>Left Side</strong></h4>
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="mediaItem">
+                                    <td>Background Image</td>
+                                    <td colspan="3">
+                                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width: 150px; height:auto;" />
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="block.data.overlayColor">
+                                    <td>Overlay Color</td>
+                                    <td colspan="3">
+                                        <span class="colorBlock" style="background-color: {{block.data.overlayColor}};"></span> {{block.data.overlayColor}}
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="block.data.overlayGradientColorA">
+                                    <td style="width: 25%;">Overlay Gradient Color- A</td>
+                                    <td style="width: 25%;">
+                                        <div>
+                                            <span class="colorBlock" style="background-color: {{block.data.overlayGradientColorA}};"></span> {{block.data.overlayGradientColorA}}
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%;">Overlay Gradient Color- B</td>
+                                    <td style="width: 25%;">
+                                        <div>
+                                            <span class="colorBlock" style="background-color: {{block.data.overlayGradientColorB}};"></span> {{block.data.overlayGradientColorB}}
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="block.data.leftContent">
+                                    <td>Left Content</td>
+                                    <td colspan="3">
+                                        <textarea rows="10" style="width: 100%;">{{block.data.leftContent}}</textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4">
+                                        <br />
+                                        <h4 style="text-align:center;"><strong>Right Side</strong></h4>
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="block.data.backgroundColor">
+                                    <td>Background Color</td>
+                                    <td colspan="3">
+                                        <span class="colorBlock" style="background-color: {{block.data.backgroundColor}};"></span> {{block.data.backgroundColor}}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Right Content</td>
+                                    <td colspan="3">
+                                        <textarea rows="10" style="width: 100%;">{{block.data.rightContent}}</textarea>
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="block.data.customScripts">
+                                    <td colspan="4">
+                                        <br />
+                                        <h4 style="text-align:center;"><strong>Custom Scripts</strong></h4>
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="block.data.customScripts">
+                                    <td>Custom Scripting</td>
+                                    <td colspan="3">
+                                        <textarea rows="10" style="width: 100%;">{{block.data.customScripts}}</textarea>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </td>
+                    <td style="width: 25%; vertical-align: top; text-align: center;">
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        <h4>Example from E451</h4>
+                                        <img ng-src="/images/screenshots/BillboardWithForm.jpg" style="width: 250px; max-width: 250px; height: auto;" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

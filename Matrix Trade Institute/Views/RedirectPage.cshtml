@@ -1,0 +1,40 @@
+﻿@using www.Models;
+@using www.ViewModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@model ComposedPageViewModel<RedirectPage, RedirectPageViewModel>
+@{
+    Layout = null;
+
+
+
+
+    //Obtain redirect link
+    string redirectTo = "";
+    string target = "";
+    switch (Model.Page?.RedirectOption)
+    {
+        case www.Models.Common.RedirectTo.RedirectToUrl:
+            redirectTo = Model.Page?.RedirectPageToUrl?.Url ?? "";
+            target = Model.Page?.RedirectPageToUrl?.Target ?? "";
+            break;
+
+        case www.Models.Common.RedirectTo.ToFirstChild:
+            redirectTo = Model.Page?.Children()?.FirstOrDefault()?.Url() ?? "";
+            break;
+
+        case www.Models.Common.RedirectTo.ToParent:
+            redirectTo = Model.Page?.Parent?.Url() ?? "";
+            break;
+
+        case www.Models.Common.RedirectTo.ToHome:
+            redirectTo = Model.Page?.Root().Url() ?? "";
+            break;
+
+        default:
+            break;
+    }
+
+
+    //Redirect
+    Context.Response.Redirect(redirectTo ?? "/");
+}

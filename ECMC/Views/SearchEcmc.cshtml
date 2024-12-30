@@ -1,0 +1,70 @@
+﻿@using ECMC_Umbraco.ViewModel
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@model ComposedPageViewModel<ContentModels.SearchEcmc, List<SearchResultViewModel>>
+@{
+    Layout = "MasterEcmc.cshtml";
+
+    //Obtain search query
+    string? searchFor = Context.Request.Query["search"];
+}
+
+
+@await Html.GetBlockGridHtmlAsync(Model.Page!.HeroBlockGrid)
+
+<section>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-y">
+            <div class="cell small-offset-2 small-20  ">
+                <div class="breadcrumb-container">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/search/">Search</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @await Html.GetBlockGridHtmlAsync(Model.Page.ContentBlockGrid)
+
+
+
+    <div class="grid-container search-conEcmce">
+        <div class="grid-x">
+            <div class="cell small-20 small-offset-2">
+
+                <h1>Search Results for “@searchFor”</h1>
+
+                <div class="grid-x grid-padding-y">
+                    @if (Model.ViewModel != null && Model.ViewModel.Any())
+                    {
+                        foreach (SearchResultViewModel record in Model.ViewModel)
+                        {
+                            <div class="cell">
+                                <h2><a href="@record.Url">@record.Title</a></h2>
+                                <p>
+                                    @Html.ReplaceLineBreaks(record.Summary ?? "")
+                                </p>
+                                <p><a class="read-more" href="@record.Url">Read More</a></p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="cell">
+                            <br />
+                            <h2>No Results Found</h2>
+                        </div>
+                    }
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</section>
+@await Html.GetBlockGridHtmlAsync(Model.Page.ContentBottomBlockGrid)

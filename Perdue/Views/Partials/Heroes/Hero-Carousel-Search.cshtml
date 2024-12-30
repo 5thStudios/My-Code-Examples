@@ -1,0 +1,28 @@
+﻿@model Umbraco.Cms.Core.Models.Blocks.BlockListModel
+@using ContentModels = www.Models.PublishedModels;
+
+
+<section class="hero-carousel">
+    <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
+        <div class="orbit-wrapper">
+
+            @if (Model.Count() > 1)
+            {
+                <div class="orbit-controls">
+                    <button class="orbit-previous">
+                        <img src="/images/icons/chevron-left-solid.svg" class="svg-btn" />
+                    </button>
+                    <button class="orbit-next">
+                        <img src="/images/icons/chevron-right-solid.svg" class="svg-btn" />
+                    </button>
+                </div>
+            }
+
+            <ul class="orbit-container">
+                @await Html.GetBlockListHtmlAsync(Model)
+                @* partial/blocklist/components/heroSlideSearch *@
+            </ul>
+        </div>
+
+    </div>
+</section>

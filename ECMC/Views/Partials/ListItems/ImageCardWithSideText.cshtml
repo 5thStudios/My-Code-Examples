@@ -1,0 +1,165 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ECMC_Umbraco.Models;
+@using Umbraco.Cms.Core.Models;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@model ImageCardWithSideText;
+
+
+@{
+    //Obtain image
+    string imgUrl = Model.Image?.GetCropUrl(Common.Crop.LearnMore_500x550, UrlMode.Absolute) ?? string.Empty;
+
+
+    //Determine if card needs a hover state
+    bool ShowHoverContent = false;
+    if (!string.IsNullOrWhiteSpace(Model.HoverTitle))
+    {
+        ShowHoverContent = true;
+    }
+    if (Model.HoverTip != null && !string.IsNullOrWhiteSpace(Model.HoverTip.ToString()))
+    {
+        ShowHoverContent = true;
+    }
+    string hoverClass = "img-slide-down";
+    if (!ShowHoverContent)
+    { hoverClass = string.Empty; }
+}
+
+
+
+
+@{
+    <div class="card image-card  with-side-content">
+        @if (Model.Link == null)
+        {
+            RenderCard(imgUrl ?? "", hoverClass, ShowHoverContent);
+        }
+        else
+        {
+            RenderCardWithLink(imgUrl ?? "", hoverClass, ShowHoverContent);
+        }
+    </div>
+}
+
+
+
+@functions {
+    private void RenderCard(string _imgUrl, string _hoverClass, bool _showHoverContent)
+    {
+        <figure class="@_hoverClass">
+
+            <div class="grid-x align-bottom">
+                <div class="cell small-8">
+                    <img src="@_imgUrl" alt="@Model.Headline">
+                </div>
+                <div class="cell small-16  card-content">
+                    @if (!string.IsNullOrWhiteSpace(Model.Headline))
+                    {
+                        <h4>@Model.Headline</h4>
+                    }
+                    <div class="social">
+                        @if (!string.IsNullOrWhiteSpace(Model.LinkedIn))
+                        {
+                            <a target="_blank" href="@Model.LinkedIn">
+                                <img src="/media/3majc550/social-icon_linkedin-gray.svg" alt="Follow us on LinkedIn">
+                            </a>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Model.Facebook))
+                        {
+                            <a target="_blank" href="@Model.Facebook">
+                                <img src="/media/ox0hobti/social-icon_facebook-gray.svg" alt="Follow us on Facebook">
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @if (_showHoverContent)
+            {
+                <figcaption>
+                    <div class="grid-y">
+                        <div class="cell auto vertical-align-middle">
+
+                            @if (!string.IsNullOrWhiteSpace(Model.HoverTitle))
+                            {
+                                <h3>@Model.HoverTitle</h3>
+                            }
+                            @if (Model.HoverTip != null)
+                            {
+                                <div>
+                                    @Html.Raw(Model.HoverTip)
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </figcaption>
+            }
+
+        </figure>
+    }
+}
+
+
+@functions {
+    private void RenderCardWithLink(string _imgUrl, string _hoverClass, bool _showHoverContent)
+    {
+        <figure class="@_hoverClass">
+
+            <div class="grid-x align-bottom">
+                <div class="cell small-8">
+                    <a href="@Model.Link?.Url" target="@Model.Link?.Target">
+                        <img src="@_imgUrl" alt="@Model.Headline">
+                    </a>
+                </div>
+                <div class="cell small-16  card-content">
+                    @if (!string.IsNullOrWhiteSpace(Model.Headline))
+                    {
+                        <h4>
+                            <a href="@Model.Link?.Url" target="@Model.Link?.Target">@Model.Headline</a>
+                        </h4>
+                    }
+                    <div class="social">
+                        @if (!string.IsNullOrWhiteSpace(Model.LinkedIn))
+                        {
+                            <a target="_blank" href="@Model.LinkedIn">
+                                <img src="/media/3majc550/social-icon_linkedin-gray.svg" alt="Follow us on LinkedIn">
+                            </a>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Model.Facebook))
+                        {
+                            <a target="_blank" href="@Model.Facebook">
+                                <img src="/media/ox0hobti/social-icon_facebook-gray.svg" alt="Follow us on Facebook">
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @if (_showHoverContent)
+            {
+                <figcaption>
+                    <div class="grid-y">
+                        <div class="cell auto vertical-align-middle">
+
+                            @if (!string.IsNullOrWhiteSpace(Model.HoverTitle))
+                            {
+                                <h3>@Model.HoverTitle</h3>
+                            }
+                            @if (Model.HoverTip != null)
+                            {
+                                <div>
+                                    @Html.Raw(Model.HoverTip)
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </figcaption>
+            }
+
+
+        </figure>
+    }
+}

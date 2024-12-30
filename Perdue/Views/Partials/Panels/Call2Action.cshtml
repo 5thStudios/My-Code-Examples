@@ -1,0 +1,56 @@
+﻿@using ContentModels = www.Models.PublishedModels;
+@using www.ViewModels;
+@model Call2ActionViewModel;
+
+
+
+
+@{
+    <style>
+        .call2Action .bgImg { background-image: url('@Model.ImgProduct'); }
+        .call2Action .call2ActionMsg { background-image: url('@Model.ImgCall2Action'); }
+    </style>
+
+
+    <div class="call2Action  grid-container">
+        <div class="grid-x">
+            <div class="cell small-24 medium-20 medium-offset-2">
+                @{
+                    if (Model.LeadInText != null)
+                    {
+                        if (!string.IsNullOrWhiteSpace(Model.LeadInText.ToString()))
+                        {
+                            <div class="leadInText">
+                                @Html.Raw(Model.LeadInText)
+                            </div>
+                        }
+                    }
+                }
+                <div class="grid-x">
+                    <div class="bgImg cell laptop-10 large-8 show-for-laptop">
+                        @{
+                            if (string.IsNullOrWhiteSpace(Model.EmbedVimeoId))
+                            {
+                                <br />
+                            }
+                            else
+                            {
+                                string embedLink = "https://vimeo.com/" + Model.EmbedVimeoId;
+                                <a rel="perduelibrary" href="@embedLink" title="@Model.EmbedVimeoTitle" class="button full-size">
+                                    <br />
+                                </a>
+                            }
+                        }
+                    </div>
+                    <div class="cell laptop-14 large-16 call2ActionMsg">
+                        <br>
+                        @Html.Raw(Model.Msg)
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+
+}

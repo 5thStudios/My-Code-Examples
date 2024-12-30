@@ -1,0 +1,36 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<FullWidthVideoPlayerYouTube>>
+@{
+    //Instantiate variables
+    var cmModel = Model.Content;
+
+    var src = cmModel.VideovemioOrYouTubeUrltoVideo;
+    int height = cmModel.VideoHeight;
+    bool muted = cmModel.VideoMute;
+    bool loop = cmModel.VideoLoop;
+    bool controls = cmModel.VideoControles;
+    bool autoplay = cmModel.VideoAutoPlay;
+    var cc = cmModel.VideoClosedCaptioningAternative;
+   
+
+    List<string> controlsList = new List<string>();
+    @if (true) { controlsList.Add("&showinfo=0"); }
+    @if (@loop) { controlsList.Add("&loop=1"); }
+    @if (@muted) { controlsList.Add("&mute=1"); }
+    @if (@controls) { controlsList.Add("&controls=0"); }
+    @if (@autoplay) { controlsList.Add("&autoplay=1"); }
+    var controlsConcat = String.Join("", controlsList.Distinct());
+
+    var SrcConcat = "https://www.youtube.com/embed/" + src + "?" + controlsConcat;
+}
+
+
+
+<h6>YOUTUBE</h6>
+<h6>SrcConcat = @SrcConcat</h6>
+<div class="grid-container full videoPlayer" data-blockgrid="Components/fullWidthVideoPlayerYouTube">
+    <iframe width="100%" height="@height" src="@SrcConcat" style="object-fit:cover; "></iframe>
+    <div class="sr-only">@cc</div>
+</div>
+

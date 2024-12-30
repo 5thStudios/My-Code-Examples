@@ -1,0 +1,27 @@
+﻿<style>
+    legend { color: #ff1600; }
+
+    /*  STYLES IN RTE TO MATCH STYLES ON SITE    */
+    .rich-text h2 { font-size: 34px; line-height: 36px; font-weight: 400; margin-bottom: 8px; color: #004b7e; }
+    .rich-text h3 { font-size: 30px; line-height: 36px; font-weight: 400; color: #004b7e; }
+    .rich-text h4 { font-size: 24px; line-height: 30px; font-weight: 400; }
+    .rich-text h5 { font-size: 22px; line-height: 30px; font-weight: 400; }
+    .rich-text h6 { font-size: 14px; line-height: 22px; font-weight: 400; color: #707070; }
+    .rich-text p { font-size: 20px; line-height: 30px; font-weight: 400; }
+    .rich-text div { font-size: 20px; line-height: 30px; font-weight: 400; }
+    .rich-text blockquote { }
+    .rich-text .btn-blue { color: #FFF; background-color: #004b7e; border-radius: 0; padding: 8px 15px; border: 0; text-transform: uppercase; }
+    .rich-text .btn-blue a { color: #FFF; text-decoration: none; text-transform: uppercase; }
+    .rich-text .btn-red { background-color: #781214; border-color: #781214; color: #FFF; text-decoration: none; border-radius: 0; padding: 8px 15px; border: 0; text-transform: uppercase; }
+    .rich-text .btn-red a { color: #FFF; text-decoration: none; text-transform: uppercase; }
+
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Rich Text Editor</legend>
+        <div class="rich-text" ng-bind-html="block.data.rte.markup | safe_html" style="--my-text-columns: {{block.layout.columnSpan === 24 ? 2 : 1}}"></div>
+    </fieldset>
+</div>
+<br />

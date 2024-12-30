@@ -1,0 +1,157 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Blog>
+@inject IPublishedValueFallback PublishedValueFallback
+@{
+    Layout = "TopLevel.cshtml";
+}
+
+
+
+<section class="blog">
+    <div class="title-pnl">
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x">
+                <div class="cell text-center">
+                    <h1 class="title">@Model.BlogTitle</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid-container">
+        <div class="grid-x  grid-padding-y grid-margin-x grid-margin-y">
+            <div class="cell laptop-14 laptop-offset-5">
+
+
+                @if (!Model.Children.Any())
+                {
+                    <article class="text-center">No blog posts found</article>
+                }
+                else
+                {
+                    <div class="pagination-page"></div>
+                    foreach (var post in Model.Descendants().Where(x => x.ContentType.Alias == "post").OrderByDescending(x => x.Value<DateTime>("publishedDate")))
+                    {
+                        ContentModels.Post cmPost = new Post(post, PublishedValueFallback);
+
+                        <div class="grid-x   grid-margin-x grid-margin-y grid-padding-y    listViewItem">
+                            <div class="cell laptop-8">
+                                @if (cmPost.PostImage != null)
+                                {
+                                    string altTxt = cmPost.PostImage.Content.Value<string>("altText") ?? "";
+                                    <figure>
+                                        <a href="@post.Url()">
+                                            <img class="postImage lazyload" alt="@altTxt" src="@cmPost.PostImage.GetCropUrl("Square_500x500")" />
+                                        </a>
+                                    </figure>
+                                }
+                            </div>
+                            <div class="cell laptop-16">
+
+                                <time datetime="@cmPost.PublishedDate.ToString(" yyyy-MM-dd")">
+                                    @cmPost.PublishedDate.ToString("dddd, MMMM dd, yyyy")
+                                </time>
+                                <p class="h3">
+                                    <a href="@post.Url()">
+                                        @cmPost.Name
+                                    </a><br />
+                                </p>
+                                <p>@cmPost.Excerpt</p>
+                                <br />
+                                <p><a class="btn" href="@post.Url()">Continue Reading</a></p>
+
+                            </div>
+                        </div>
+                    }
+                    <div class="pagination-page"></div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<script type="text/javascript">
+    //==================================================
+    //  Pagination
+    //==================================================
+    jQuery(function ($) {
+
+        function jsPagination() {
+            // Instantiate variables
+            var items = $(".listViewItem");
+            var numItems = items.length;
+            var perPage = 3;
+
+            // Only show the first # (or first `per_page`) items initially.
+            items.slice(perPage).hide();
+
+            //Hide pagination if the count is less than the page count
+            if (items.length <= perPage) { $('.pagination-page').hide(); }
+
+            // Now setup the pagination using the `.pagination-page` div.
+            $(".pagination-page").pagination({
+                items: numItems,
+                itemsOnPage: perPage,
+                cssStyle: "light-theme",
+                // This is the actual page changing functionality.
+                onPageClick: function (pageNumber) {
+                    // We need to show and hide `tr`s appropriately.
+                    var showFrom = perPage * (pageNumber - 1);
+                    var showTo = showFrom + perPage;
+
+                    // We'll first hide everything...
+                    items.hide()
+                        // ... and then only show the appropriate rows.
+                        .slice(showFrom, showTo).show();
+                }
+            });
+
+            // EDIT: Let's cover URL fragments (i.e. #page-3 in the URL).
+            // More thoroughly explained (including the regular expression) in:
+            // https://github.com/bilalakil/bin/tree/master/simplepagination/page-fragment/index.html
+
+            // We'll create a function to check the URL fragment
+            // and trigger a change of page accordingly.
+            function checkFragment() {
+                // If there's no hash, treat it like page 1.
+                var hash = window.location.hash || "#page-1";
+
+                // We'll use a regular expression to check the hash string.
+                hash = hash.match(/^#page-(\d+)$/);
+
+                if (hash) {
+                    // The `selectPage` function is described in the documentation.
+                    // We've captured the page number in a regex group: `(\d+)`.
+                    $(".pagination-page").pagination("selectPage", parseInt(hash[1]));
+                }
+            };
+
+            // We'll call this function whenever back/forward is pressed...
+            $(window).bind("popstate", checkFragment);
+
+            // ... and we'll also call it when the page has loaded
+            // (which is right now).
+            checkFragment();
+
+
+            //Add 'end' class to final gridview item.
+            var lastGridviewItem = $('div.gridViewItem:last-child');
+            lastGridviewItem.addClass("end");
+        };
+
+        //Run only if element exists
+        try {
+            //if ($('.pagination-page').length > 0) { jsPagination(); }
+            jsPagination();
+        }
+        catch (err) {
+            console.log('ERROR: [jsPagination] ' + err.message);
+        }
+    });
+</script>

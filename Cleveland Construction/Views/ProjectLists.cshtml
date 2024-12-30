@@ -1,0 +1,106 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using cm = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@using System.Web;
+@model ComposedPageViewModel<cm.ProjectLists, ProjectListViewModel>
+@using ContentModels = www.Models.PublishedModels;
+@{
+    Layout = "TopLevel.cshtml";
+}
+
+
+
+@await Html.GetBlockGridHtmlAsync(Model.Page?.MainContent)
+
+
+<section class="bg-light-grey">
+    <div class="grid-x">
+        <div class="cell">
+
+            <div class="grid-x grid-padding-x grid-padding-y  grid-margin-y">
+                <div class="cell laptop-4">
+
+                    <div class="portfolio-sidebar">
+                        @if (Model.ViewModel!.LstIndustries.Any())
+                        {
+                            <h3>Industries</h3>
+                            <ul>
+                                @foreach (var link in Model.ViewModel!.LstIndustries)
+                                {
+                                    <li>
+                                        <a data-attribute="@link.Class">@link.Title</a>
+                                    </li>
+                                }
+                            </ul>
+                            <br />
+
+                            <div class="grid-x">
+                                <div class="cell">
+                                    <div data-attribute="*" class="button expanded quinary" style="margin-bottom: 0;">
+                                        <a>View All</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (Model.ViewModel!.LstScopes.Any())
+                        {
+                            <h3>Scope of Work</h3>
+                            <ul>
+                                @foreach (var link in Model.ViewModel!.LstScopes)
+                                {
+                                    <li>
+                                        <a data-attribute="@link.Class">@link.Title</a>
+                                    </li>
+                                }
+                            </ul>
+                            <br />
+
+                            <div class="grid-x">
+                                <div class="cell">
+                                    <div data-attribute="*" class="button expanded quinary" style="margin-bottom: 0;">
+                                        <a>View All</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+                <div class="cell laptop-20">
+                    <div class="grid-x project-list grid-margin-x grid-margin-y laptop-up-3">
+                        @foreach (var cmProj in Model.ViewModel.LstProjects)
+                        {
+                            List<string> lstAttributes = new List<string>();
+                            foreach (var _industry in cmProj.Industries)
+                            {
+                                lstAttributes.Add(Common.ConvertToClass(_industry));
+                            }
+                            foreach (var _scope in cmProj.ScopesOfWork)
+                            {
+                                lstAttributes.Add(Common.ConvertToClass(_scope));
+                            }
+                            string _attributes = String.Join("   ", lstAttributes.Select(x => x.ToString()).ToArray());
+
+
+
+                            <div class="cell project-item   @_attributes" data-attributes="@_attributes">
+                                <partial name="@Common.Partial.ProjectCard" model="cmProj" />
+                            </div>
+                        }
+                    </div>
+                    <br />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+@section Footer {
+    @*  <script src="~/js/isotope.pkgd.min.js"></script> *@
+    <script type="text/javascript" src="/js/projectFilter.js"></script>
+}

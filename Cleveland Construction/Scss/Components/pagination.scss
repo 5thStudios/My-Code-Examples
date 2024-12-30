@@ -1,0 +1,15 @@
+/* PAGINATION
+----------------------------------------------------------*/
+.pagination-container { text-align: center;
+    .pagination {
+        li {
+            &.first { font-weight: 900; }
+            &.prev { font-weight: 900; }
+            &.page {
+                &.active { border-width: 0 0 1px 0; border-style: solid; border-color: #cd0202; border-radius: 0; }
+            }
+            &.next { font-weight: 900; }
+            &.last { font-weight: 900; }
+        }
+    }
+}

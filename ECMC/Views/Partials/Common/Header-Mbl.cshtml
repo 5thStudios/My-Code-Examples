@@ -1,0 +1,85 @@
+﻿@using ECMC_Umbraco.Models;
+@model HeaderViewModel;
+
+
+<header class="hide-for-menu">
+    <div class="search-bar">
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="cell auto"></div>
+                <div class="cell shrink" style="height:40px">
+                @if (!@Model.ToggleSearch)
+                    {
+                        <form>
+                            <input type="text" class="text-right" placeholder="Search" />
+                            <button type="submit" class="btn btn-success">
+                                <span class="fa fa-search" aria-hidden="true"></span>
+                            </button>
+                        </form>
+                    }
+                </div>
+                <div class="cell small-2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bar">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-y align-middle mbl-set-height">
+
+                <div class="cell small-18 small-offset-2 medium-18 small-offset-2">
+                    <a href="/">
+                        <img class="logo" src="@Model.SiteLogoUrl" alt="@Model.SiteName">
+                    </a>
+                </div>
+
+                <div class="cell auto text-right">
+                    <div class="mbl-btn">
+                        <button type="button" data-open="offCanvasPnl" class="btnOpenOffCanvasPnl">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <button type="button" data-toggle="offCanvasPnl" class="btnCloseOffCanvasPnl">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cell small-2"></div>
+
+            </div>
+        </div>
+
+
+        <div class="off-canvas position-top" id="offCanvasPnl" data-off-canvas data-content-scroll="true" data-transition="overlap" data-closable>
+            <div class="grid-container">
+                <div class="grid-x grid-padding-y" data-off-canvas-scrollbox>
+                    <nav class="cell small-20 small-offset-2 ">
+                        <ul>
+                            @foreach (var lnkParent in Model.LstLinks!)
+                            {
+                                <li>
+                                    <a href="@lnkParent.Url">@Html.Raw(lnkParent.Title)</a>
+                                    @* Second level *@
+                                    @if (lnkParent.LstChildLinks != null && lnkParent.LstChildLinks.Any())
+                                    {
+                                        <ul>
+                                            @foreach (var lnkChild in lnkParent.LstChildLinks)
+                                            {
+                                                <li>
+                                                    <a href="@lnkChild.Url">@Html.Raw(lnkChild.Title)</a>
+                                                    
+                                                   
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+

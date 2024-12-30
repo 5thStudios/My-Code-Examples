@@ -1,0 +1,25 @@
+/* PANELS
+----------------------------------------------------------*/
+.video-panel { background-color: #222222;
+    h2 { color: #ebea3b; }
+    p { color: #fff; }
+    .responsive-embed { margin-bottom: 0;
+        iframe { }
+    }
+}
+
+
+
+    fieldset:not(.umbraco-forms-field) { position: relative; box-sizing: border-box; border: solid #cd0202 6px; padding: 40px 65px 70px 65px; margin: 0 24px;
+        legend { background-color: #cd0202; font-family: "UnitedSansCdBd", Arial, sans-serif; font-size: initial; font-weight: initial; line-height: initial; position: absolute; bottom: 0; transform: translate(0%, 50%); margin: 0; transition: all ease-in-out .5s;
+            a, a:visited { color: #ffffff; padding: 16px 48px; display: block; text-transform: uppercase;
+                &:hover { color: #fff; }
+            }
+            &:hover { background-color: #8b0000; }
+        }
+    }
+
+    @media only screen and (max-width: 40em) {
+        fieldset:not(.umbraco-forms-field) { padding: 10px 15px 15px 15px; }
+    }
+

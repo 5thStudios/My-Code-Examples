@@ -1,0 +1,21 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@{
+    if (Model?.Areas.Any() != true) { return; }
+}
+
+@* <div data-blockgrid="areas" class="umb-block-grid__area-container       grid-x  grid-margin-x  grid-margin-y  grid-padding-y"
+     style="--umb-block-grid--area-grid-columns: @(Model.AreaGridColumns?.ToString() ?? Model.GridColumns?.ToString() ?? "24");">
+    @foreach (var area in Model.Areas)
+    {
+        @await Html.GetBlockGridItemAreaHtmlAsync(area)
+    }
+</div> *@
+
+
+<div data-blockgrid="areas" class="grid-x  grid-margin-x ">
+    @foreach (var area in Model.Areas)
+    {
+        @await Html.GetBlockGridItemAreaHtmlAsync(area)
+    }
+</div>

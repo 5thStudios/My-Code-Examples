@@ -1,0 +1,45 @@
+/* HEADER
+----------------------------------------------------------*/
+#perdue-tools {
+    input { margin: 0; }
+    h2 { }
+    h3 { }
+    h4 { margin-bottom: 9px; }
+    h5 { }
+    h6 { }
+    div { font-size: 14px; line-height: 20px; }
+    p { font-size: 14px; line-height: 20px; }
+    a { font-size: 14px; line-height: 20px; }
+    li { font-size: 14px; line-height: 20px; }
+
+    .image-toggle-rbl {
+        label { background-color: #fff; color: rgba(0, 75, 126, 0.50); display: inline-block; padding: 4px 11px; font-family: Arial; font-size: 16px; cursor: pointer; border: 1px solid #004b7e; border-radius: 3px; margin: 0;
+            &:nth-of-type(1) { border-radius: 3px 0 0 3px; }
+            &:nth-of-type(2) { margin-left: -6px; border-radius: 0 3px 3px 0; }
+            &:hover { color: #004b7e; }
+        }
+
+        input[type="radio"] { display: none;
+            &:checked + label { background-color: #004b7e; color: #fff; }
+        }
+    }
+    .button { margin: 0;
+        &.tertiary { background-color: #fff; color: rgba(0, 75, 126, 1); border: 1px solid #004b7e; border-radius: 3px;
+            &:hover { background-color: rgba(0, 75, 126, 0.15); }
+            &.active { background-color: #004b7e; color: #fff; }
+        }
+        &.small { padding: 6px 12px; }
+    }
+
+    img { width: 100%;
+        &.x100 { max-width: 100px; height: auto; }
+        &.x200 { max-width: 200px; height: auto; }
+        &.x300 { max-width: 300px; height: auto; }
+    }
+
+    table { width: 100%;
+        tr {
+            td, th { border: 1px solid #ddd; vertical-align: top; }
+        }
+    }
+}

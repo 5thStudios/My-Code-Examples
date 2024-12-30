@@ -1,0 +1,18 @@
+﻿@using ECMC_Umbraco.ViewModel;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@model GrantItemsViewModel;
+
+
+<nav class="pagination-container">
+    @Html.HiddenFor(x => Model!.Pagination)
+
+
+
+    <ul class="pagination">
+        @foreach (var link in Model!.Pagination.LstLinks) {
+            <li class="@link.Class">
+                <button type="submit" name="btnPaginate" value="@link.Level"  @link.Misc>@link.Title</button>
+            </li>
+        }
+    </ul>
+</nav>

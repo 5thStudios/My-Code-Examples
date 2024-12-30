@@ -1,0 +1,73 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Smart Teaser Block &nbsp;&nbsp;&nbsp;&nbsp;<strong>[E451]</strong></legend>
+       
+
+        {{mediaItem = (block.data.teaserImage[0].mediaKey | mediaItemResolver); ""}}
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+
+                <tr>
+                    <td colspan="5">
+                        <div style="color: rgb(120 144 157); text-align: center; font-weight: 900; margin: 0; "><strong>Content</strong></div>
+                    </td>
+                </tr>
+                <tr ng-if="mediaItem">
+                    <td>Teaser Image</td>
+                    <td colspan="4">
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width: 150px; height:auto;" />
+                    </td>
+                </tr>
+                <tr ng-if="block.data.altText">
+                    <td>Alt Text</td>
+                    <td colspan="4">{{block.data.altText}}</td>
+                </tr>
+                <tr>
+                    <td>Image Position</td>
+                    <td colspan="4" ng-If="block.data.showAfterContent == 0">Before Content</td>
+                    <td colspan="4" ng-If="block.data.showAfterContent == 1">After Content</td>
+                </tr>
+                <tr ng-if="block.data.content">
+                    <td>Content</td>
+                    <td colspan="4">{{block.data.content}}</td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="5">
+                        <br />
+                        <div style="color: rgb(120 144 157); text-align: center; font-weight: 900; margin: 0; "><strong>Position</strong></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Small </td>
+                    <td> Width: </td>
+                    <td style="text-align: left; color: black;">{{block.data.columnWidthSmall[0]}}</td>
+                    <td> Offset: </td>
+                    <td style="text-align: left; color: black;">{{block.data.columnOffsetSmall[0]}}</td>
+                </tr>
+                <tr>
+                    <td>Medium </td>
+                    <td> Width: </td>
+                    <td style="text-align: left; color: black;">{{block.data.columnWidthMedium[0]}}</td>
+                    <td> Offset: </td>
+                    <td style="text-align: left; color: black;">{{block.data.columnOffsetMedium[0]}}</td>
+                </tr>
+                <tr>
+                    <td>Large </td>
+                    <td> Width: </td>
+                    <td style="text-align: left; color: black;">{{block.data.columnWidthLarge[0]}}</td>
+                    <td> Offset: </td>
+                    <td style="text-align: left; color: black;">{{block.data.columnOffsetLarge[0]}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+
+    </fieldset>
+</div>
+<br />

@@ -1,0 +1,17 @@
+﻿@using Umbraco.Extensions;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inject IPublishedValueFallback PublishedValueFallback
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<RelatedNews>>
+
+
+
+<div data-blockgrid="Components/relatedNewsList">
+    <h2>Related News</h2>
+    <div class="grid-x ">
+        <div class="cell small-24">
+            @await Component.InvokeAsync(Common.Action.RelatedNews, Model)
+        </div>
+    </div>
+</div>
+<br />

@@ -1,0 +1,52 @@
+﻿<style>
+    
+</style>
+
+<fieldset>
+    <legend>Image - Bottom Feature</legend>
+    <div ng-click="block.edit()" ng-focus="block.focus">
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+
+                <tr>
+                    <td>Full Width Image</td>
+                    <td>
+                        {{mediaItem = (block.data.imageFullWidthImage[0].mediaKey | mediaItemResolver); ""}}
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width:250px;" />
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Type</td>
+                    <td>{{block.data.imageFullIntroHeadline}}</td>
+                </tr>
+                <tr>
+                    <td>Headline</td>
+                    <td>{{block.data.imageFullHeadline}}</td>
+                </tr>
+                <tr>
+                    <td>Sub Headline</td>
+                    <td>{{block.data.imageFullSubHeadline}}</td>
+                </tr>
+                <tr>
+                    <td>Intro Text</td>
+                    <td>{{block.data.imageFullIntroText}}</td>
+                </tr>
+                <tr>
+                    <td>Call to Action</td>
+                    <td>
+                        {{linkName = (block.data.imageFullCallToAction[0].name); ""}}
+                        {{linkUrl = (block.data.imageFullCallToAction[0].url); ""}}
+                        <span>{{linkName}}</span>
+                        <span ng-if="linkUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{linkUrl}}</em></span>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+<br />
+

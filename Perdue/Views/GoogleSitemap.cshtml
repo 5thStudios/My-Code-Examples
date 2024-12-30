@@ -1,0 +1,50 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using www.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.GoogleSitemap>
+@using ContentModels = www.Models.PublishedModels;
+@{
+    Layout = null;
+    Context.Response.ContentType = "text/xml";
+    IPublishedContent siteHomePage = Model.Root();
+}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemalocation="http://www.google.com/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    @{
+        RenderSiteMapUrlEntry(siteHomePage);
+        RenderSiteMapUrlEntriesForChildren(siteHomePage);
+    }
+</urlset>
+
+
+
+@{
+    void RenderSiteMapUrlEntriesForChildren(IPublishedContent parentPage)
+    {
+        foreach (var page in parentPage.Children.Where(x => !x.Value<bool>(Common.Property.UmbracoSitemapHide)))
+        {
+            RenderSiteMapUrlEntry(page);
+            if (page.Children.Any(x => !x.Value<bool>(Common.Property.UmbracoSitemapHide)))
+            {
+                RenderSiteMapUrlEntriesForChildren(page);
+            }
+        }
+    }
+
+    void RenderSiteMapUrlEntry(IPublishedContent node)
+    {
+        // The change frequency is recursive and should 'fallback to ancestor' when no value is given.
+        var changeFreq = "monthly"; // node.Value("searchEngineChangeFrequency", fallback: Fallback.To(Fallback.Ancestors, Fallback.DefaultValue), defaultValue: "monthly");
+
+        // The relative priority is a per-page setting only. We will not set Fallback.ToAncestors and instead default to 0.5 if no value is set.
+        var priority = "0.5"; // node.HasValue("searchEngineRelativePriority") ? node.Value<string>("searchEngineRelativePriority") : "0.5";
+
+        <url>
+            <loc>@node.Url(mode: UrlMode.Absolute)</loc>
+            <lastmod>@(string.Format("{0:s}+00:00", node.UpdateDate))</lastmod>
+            <changefreq>@changeFreq</changefreq>
+            <priority>@priority</priority>
+        </url>
+    }
+}

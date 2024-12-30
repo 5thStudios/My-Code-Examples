@@ -1,0 +1,31 @@
+﻿<style>
+    
+</style>
+
+<fieldset>
+    <legend>Icon List Item</legend>
+    <div ng-click="block.edit()" ng-focus="block.focus">
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Header</td>
+                    <td>{{block.data.header}}</td>
+                </tr>
+                <tr>
+                    <td>Text</td>
+                    <td>{{block.data.text}}</td>
+                </tr>
+                <tr>
+                    <td>Side Image</td>
+                    <td>
+                        {{mediaItem = (block.data.sideImage[0].mediaKey | mediaItemResolver); ""}}
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width:50px;" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</fieldset>
+<br />

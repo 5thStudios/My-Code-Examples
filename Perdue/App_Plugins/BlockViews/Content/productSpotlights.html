@@ -1,0 +1,166 @@
+﻿<style>
+    legend { color: #ff1600; }
+    .group-title { text-align: center; font-weight: 900; text-decoration: underline; }
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Product Spotlights</legend>
+
+
+        <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+            <tbody>
+                <tr>
+                    <td width="50%">
+                        <div class="group-title">Product Spotlight</div>
+
+                        {{sl_bgImg = (block.data.spotlightBgImg[0].mediaKey | mediaItemResolver); ""}}
+                        {{sl_titleName = (block.data.spotlightTitle[0].name); ""}}
+                        {{sl_titleUrl = (block.data.spotlightTitle[0].url); ""}}
+                        {{sl_prodName = (block.data.spotlightProduct); ""}}
+
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td>Product</td>
+                                    <td>
+                                        <span>{{sl_prodName}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+                                    <td>
+                                        {{block.data.spotlightDescription}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bg Image</td>
+                                    <td><img ng-src="{{sl_bgImg.mediaLink}}" style="max-width: 140px; height:auto;" /></td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="2">
+                                        <br />
+                                        <br />
+                                        <br />
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>Title</td>
+                                    <td>
+                                        <span>{{sl_titleName}}</span>
+                                        <span ng-if="sl_titleUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{sl_titleUrl}}</em></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Brands</td>
+                                    <td>
+                                        <table ng-repeat="record in block.data.brandList.contentData">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Link</td>
+                                                    <td>{{record.link[0].url}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Image</td>
+                                                    <td>
+                                                        {{mediaItem = (record.image[0].mediaKey | mediaItemResolver); ""}}
+                                                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width:50px;" />
+                                                    </td>
+                                                </tr>
+                                                <tr><td colspan="2"><hr /></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </td>
+                    <td width="50%">
+                        <div class="group-title">Featured Dish</div>
+
+                        {{fd_bgImg = (block.data.featuredBgImg[0].mediaKey | mediaItemResolver); ""}}
+                        {{fd_titleName = (block.data.featuredTitle[0].name); ""}}
+                        {{fd_titleUrl = (block.data.featuredTitle[0].url); ""}}
+                        {{fd_prodName = (block.data.featuredDish); ""}}
+
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td>Featured Dish</td>
+                                    <td>
+                                        <span>{{fd_prodName}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+                                    <td>
+                                        {{block.data.featuredDescription}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bg Image</td>
+                                    <td><img ng-src="{{fd_bgImg.mediaLink}}" style="max-width: 140px; height:auto;" /></td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="2">
+                                        <br />
+                                        <br />
+                                        <br />
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>Title</td>
+                                    <td>
+                                        <span>{{fd_titleName}}</span>
+                                        <span ng-if="fd_titleUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{fd_titleUrl}}</em></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Categories</td>
+                                    <td>
+                                        <table ng-repeat="record in block.data.categoryList">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Category</td>
+                                                    <td>
+                                                        <span>{{record.name}}</span>
+                                                        <span ng-if="record.url">&nbsp;&nbsp;==><br /><em>{{record.url}}</em></span>
+                                                    </td>
+                                                </tr>
+                                                <tr><td colspan="2"><hr /></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2">
+                                        <br />
+                                        <br />
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <br />
+    </fieldset>
+</div>
+<br />

@@ -1,0 +1,119 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using cm = www.Models.PublishedModels;
+@using www.Models;
+@using System.Text;
+@using www.ViewModels;
+@model ComposedPageViewModel<cm.BlogPost, BlogPostViewModel>
+@{
+    Layout = "TopLevel.cshtml";
+}
+
+
+
+<div class="grid-container">
+    <div class="grid-x      grid-padding-x     grid-margin-y grid-padding-y">
+        <div class="cell laptop-18">
+
+            <article>
+                @if (!string.IsNullOrWhiteSpace(Model.ViewModel?.Title))
+                {
+                    <h2>@Model.ViewModel?.Title</h2>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Model.ViewModel?.Subtitle))
+                {
+                    <h4>@Model.ViewModel?.Subtitle</h4>
+                }
+
+                <h5>
+                    @if (Model.ViewModel?.LnkAuthor != null)
+                    {
+                        <span>By </span> <a href="@Model.ViewModel?.LnkAuthor.Url">@Model.ViewModel?.LnkAuthor.Title</a> <span>on </span>
+                    }
+                    <time datetime="@Model.ViewModel?.DatePosted.ToString("yyyy-MM-dd")">@Model.ViewModel?.DatePosted.ToString("D")</time>
+                </h5>
+
+
+
+                <div class="sharing">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url='https://www.clevelandconstruction.com/general-contracting/blog/blog-feed/the-four-common-struck-by-hazards' data-text='The Four Common Struck-By Hazards'>Tweet</a>
+                    <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; js.async = true; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+                    <br />
+                    <div class="g-plusone" data-size="medium" href='https://www.clevelandconstruction.com/general-contracting/blog/blog-feed/the-four-common-struck-by-hazards'></div>
+                </div>
+                <br />
+
+
+
+                @if (!string.IsNullOrEmpty(Model.ViewModel?.PostImageUrl))
+                {
+                    <img alt="@Model.ViewModel?.Title" src="@Model.ViewModel?.PostImageUrl" style="float: right; max-width: 550px;" />
+                }
+
+                @await Html.GetBlockGridHtmlAsync(Model.ViewModel?.MainContent)
+            </article>
+
+        </div>
+
+        <div class="cell laptop-6">
+            <div class="sidebar">
+                <div class="header">
+                    <h4>Search Blog</h4>
+                    <div class="search-pnl">
+                        <form method="get" action="@Model.Page!.Parent!.Url()">
+                            <input type="text" name="search" placeholder="Search...">
+                            <button type="submit" class="remove-btn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <br />
+
+                    <div class="widget categorylist">
+                        <h4>Categories</h4>
+                        <ul>
+                            @foreach (var lnk in Model.ViewModel?.LstCategories)
+                            {
+                                <li>
+                                    <a href="@lnk.Url" title="Category: @lnk.Title">@lnk.Title</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <br />
+
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        @foreach (var lnk in Model.ViewModel?.LstSocialLinks)
+                        {
+                            <a class="icon @lnk.Class" href="@lnk.Url"></a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="background: #eee;">
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x grid-padding-y     prev-next    align-middle">
+            <div class="cell medium-9">
+                @if (Model.ViewModel?.LnkPrev != null)
+                {
+                    <a href="@Model.ViewModel?.LnkPrev.Url"><i class="fa-solid fa-chevron-left"></i>&nbsp; @Model.ViewModel?.LnkPrev.Title</a>
+                }
+            </div>
+            <div class="cell medium-auto text-center">
+                <a href="@Model.ViewModel?.LnkBlog?.Url">Back to Blog</a>
+            </div>
+            <div class="cell medium-9 text-right">
+                @if (Model.ViewModel?.LnkNext != null)
+                {
+                    <a href="@Model.ViewModel?.LnkNext.Url">@Model.ViewModel?.LnkNext.Title &nbsp;<i class="fa-solid fa-chevron-right"></i></a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<br />

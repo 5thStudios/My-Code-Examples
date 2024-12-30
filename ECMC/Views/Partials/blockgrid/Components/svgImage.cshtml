@@ -1,0 +1,17 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<SvgImage>>
+
+
+
+<div data-blockgrid="Components/SVGImage" class="svgImage">
+    <div class="grid-x ">
+        <div class="cell small-24">
+            @* <img class="svgImage" alt="" src="@Model.Content.SVG!.Url()" /> *@
+            <img class="svgImage @Model.Content.Class" alt="@Model.Content.AltText" src="@Model.Content.SVG!.Url()" />
+        </div>
+    </div>
+</div>
+

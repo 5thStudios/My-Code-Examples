@@ -1,0 +1,47 @@
+﻿@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@model ComposedPageViewModel<RedirectPage, RedirectPageViewModel>
+@{
+    Layout = null;
+
+
+    //Redirect to child pg.
+    var cmRedirectPage = new RedirectPage(Model.Page, PublishedValueFallback);
+
+
+    //Obtain redirect link
+    string redirectTo = "";
+    switch (cmRedirectPage.PageRedirectOption)
+    {
+        case "Internal Redirect":
+            redirectTo = cmRedirectPage.UmbracoInternalRedirectId.Url();
+            break;
+
+        case "External Redirect":
+            redirectTo = cmRedirectPage.UmbracoRedirect;
+            break;
+
+        case "To First Child":
+            redirectTo = cmRedirectPage.Children().FirstOrDefault().Url();
+            break;
+
+        case "To Parent":
+            redirectTo = cmRedirectPage.Parent.Url();
+            break;
+
+        case "To Home":
+            redirectTo = cmRedirectPage.Root().Url();
+            break;
+
+        default:
+            break;
+    }
+
+
+    //Redirect
+    Context.Response.Redirect(redirectTo ?? "/");
+}

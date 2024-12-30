@@ -1,0 +1,78 @@
+@using ECMC_Umbraco.Models;
+@using ECMC_Umbraco.ViewModel;
+@using System.Collections.Generic;
+@model ChartsViewModel;
+@{
+    //Create random string to attach to canvas name.  [allows multiple canvases on single page.]
+    string chartName = "chartPnl-";
+    Random rand = new Random();
+    int stringlen = rand.Next(6, 10);
+    for (int i = 0; i < stringlen; i++)
+    {
+        // Generating random character by converting a random number into character and append the letter to string.
+        chartName = chartName + Convert.ToChar(rand.Next(0, 26) + 65);
+    }
+
+
+    //Convert incoming model into json
+    string jsonModel = Newtonsoft.Json.JsonConvert.SerializeObject(Model);
+}
+
+
+
+<div data-blockgrid="Components/Charts/RadarChart">
+    <div>
+        <canvas id="@chartName" style="max-height: 600px;" aria-label="Model.Title" role="img">
+            <p>TBD</p>
+        </canvas>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //Obtain json model from result
+        var jsonModel = @Html.Raw(jsonModel);
+        console.log(jsonModel);
+
+
+        //Generate datasets
+        var datasetValue = [];
+        for (var x = 0; x < $(jsonModel.LstDatasets).length; x++) {
+            datasetValue[x] = {
+                label: jsonModel.LstDatasets[x].Label,
+                data: jsonModel.LstDatasets[x].LstData,
+                backgroundColor: jsonModel.LstDatasets[x].LstBackgroundColors,
+                borderColor: jsonModel.LstDatasets[x].LstBorderColors,
+                borderWidth: 2,
+                hoverOffset: 4,
+            }
+        }
+
+
+        //Build Config
+        var data = {
+            labels: jsonModel.LstLabels,
+            datasets: datasetValue
+        };
+        new Chart(document.getElementById('@chartName'), {
+            type: 'radar',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        display: jsonModel.ShowLegend,
+                    },
+                    title: {
+                        display: true,
+                        text: jsonModel.Title,
+                    },
+                },
+            },
+        });
+
+    });
+</script>

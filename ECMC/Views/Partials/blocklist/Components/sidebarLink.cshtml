@@ -1,0 +1,8 @@
+@using Umbraco.Extensions;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem<SidebarLink>>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+
+<p>
+    <a class="link-text" target="@Model.Content.Link?.Target" href="@Model.Content.Link?.Url">@Model.Content.Link?.Name</a>
+</p>

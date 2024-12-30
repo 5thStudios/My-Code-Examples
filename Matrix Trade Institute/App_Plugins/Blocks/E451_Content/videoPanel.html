@@ -1,0 +1,63 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Video Panel &nbsp;&nbsp;&nbsp;&nbsp;<strong>[E451]</strong></legend>
+
+
+        <table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 75%; vertical-align: top;">
+
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+                            <tbody>
+
+                                <tr ng-if="block.data.videoIframe">
+                                    <td>Video</td>
+                                    <td>
+                                        <!--<textarea rows="6" style="width: 100%;">{{block.data.videoIframe}}</textarea>-->
+                                        <strong>To Be Built</strong>
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.content">
+                                    <td>Content</td>
+                                    <td>
+                                        <textarea rows="10" style="width: 100%;">{{block.data.content}}</textarea>
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.customScripts">
+                                    <td>Custom Scripting</td>
+                                    <td colspan="3">
+                                        <textarea rows="8" style="width: 100%;">{{block.data.customScripts}}</textarea>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </td>
+                    <td style="width: 25%; vertical-align: top; text-align: center;">
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        <h4>Example from E451</h4>
+                                        <div>
+                                            <img ng-src="/images/screenshots/videoPnl.jpg" style="width: 250px; max-width: 250px; height: auto;" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+
+    </fieldset>
+</div>
+<br />

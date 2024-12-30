@@ -1,0 +1,185 @@
+﻿@using www.ViewModels;
+@model ProductServing
+@{
+    bool PerServing = false;
+    if (!string.IsNullOrWhiteSpace(ViewData["PerServing"].ToString()))
+    {
+        PerServing = (bool)ViewData["PerServing"];
+    }
+
+
+    // //Extract table data
+    // IO.Swagger.Model.NutritionInfo? NutInfo;
+    // if (PerServing)
+    // {
+    //     NutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<IO.Swagger.Model.NutritionInfo>(Newtonsoft.Json.JsonConvert.SerializeObject(Model!.NutritionPerServing));
+    // }
+    // else
+    // {
+    //     NutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<IO.Swagger.Model.NutritionInfo>(Newtonsoft.Json.JsonConvert.SerializeObject(Model!.NutritionPer100Gram));
+            // }
+}
+
+
+
+
+
+@if (Model != null)
+{
+    <table class="table">
+        @if (PerServing)
+        {
+            <tr>
+                <td colspan="2">@string.Format("Serving Size: {0} ({1})", Model.Servings.servingSizeDescription.ToLower(), Model.Servings.servingSize)</td>
+            </tr>
+            <tr>
+                <td colspan="2">Servings Per Case: @Model.Servings.servingsPerCase</td>
+            </tr>
+            <tr>
+                <td colspan="2"><h5>Amount Per Serving 1</h5></td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td colspan="2">@string.Format("Serving Size: {0}", Model.Servings.servingSize)</td>
+            </tr>
+            <tr>
+                <td colspan="2"><h5>Amount Per Serving 1</h5></td>
+            </tr>
+        }
+
+
+
+
+
+        <tr>
+            <td>
+                @if (Model.Calories.calories != null)
+                {
+                    <text>Calories: </text> @Model.Calories.calories
+                }
+            </td>
+            <td>
+                @if (Model.Calories.caloriesFromFat != null)
+                {
+                    <text>Calories from Fat: </text> @Model.Calories.caloriesFromFat
+                }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><hr /></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><strong>% Daily Value*</strong></td>
+        </tr>
+
+
+        @{
+            NutrientValueRow("Total Fat: ", Model.Fat.totalFat, Model.Fat.totalFatPercent, true, false, false);
+            NutrientValueRow("Saturated Fat: ", Model.Fat.saturatedFat, Model.Fat.saturatedFatPercent, false, true, false);
+            NutrientValueRow("Trans Fat: ", Model.Fat.transFat, "", false, true, false);
+            NutrientValueRow("Cholesterol: ", Model.Cholesterol.cholesterol, Model.Cholesterol.cholesterolPercent, true, false, false);
+            NutrientValueRow("Sodium: ", Model.Sodium.sodium, Model.Sodium.sodiumPercent, true, false, false);
+            NutrientValueRow("Total Carbohydrate: ", Model.Carbohydrates.totalCarbohydrates, Model.Carbohydrates.totalCarbohydratesPercent, true, false, false);
+            NutrientValueRow("Dietary Fiber: ", Model.Carbohydrates.dietaryFiber, Model.Carbohydrates.dietaryFiberPercent, false, true, false);
+            NutrientValueRow("Sugars: ", Model.Carbohydrates.sugars, "", false, true, false);
+            NutrientValueRow("Includes Added Sugars: ", Model.Carbohydrates.addedSugar, Model.Carbohydrates.addedSugarPercent, false, false, true);
+            NutrientValueRow("Protein: ", Model.Protein.protein, Model.Protein.proteinPercent, true, false, false);
+            <tr>
+                <td colspan="2"><hr /></td>
+            </tr>
+            NutrientValueRow("Vitamin A ", "", Model.VitaminsMinerals.vitaminAPercent, true);
+            NutrientValueRow("Vitamin C ", "", Model.VitaminsMinerals.vitaminCPercent, true);
+            NutrientValueRow("Vitamin D: ", Model.VitaminsMinerals.vitaminD, Model.VitaminsMinerals.vitaminDPercent, true);
+            NutrientValueRow("Calcium: ", Model.VitaminsMinerals.calcium, Model.VitaminsMinerals.calciumPercent, true);
+            NutrientValueRow("Iron: ", Model.VitaminsMinerals.iron, Model.VitaminsMinerals.ironPercent, true);
+            NutrientValueRow("Potassium: ", Model.VitaminsMinerals.potassium, Model.VitaminsMinerals.potassiumPercent, true);
+        }
+
+
+        <tr>
+            <td colspan="2">
+                <span style="font-size: 9px; line-height: 9px;"><em>*Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs.</em></span>
+            </td>
+        </tr>
+
+    </table>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <td>
+                <br />
+                <p>We appologize, but nutritional information is not currently available for this product.</p>
+                <br />
+            </td>
+        </tr>
+    </table>
+}
+
+
+
+@functions {
+    private void NutrientValueRow(string Label, string? Quantity, string? Percent, bool Bold = false, bool Indent = false, bool DoubleIndent = false)
+    {
+
+        <tr>
+            @{
+                string _indentStr = "";
+                if (Indent) { _indentStr = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"; }
+                if (DoubleIndent) { _indentStr = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"; }
+            }
+
+            @if (Bold)
+            {
+                if (string.IsNullOrEmpty(Quantity))
+                {
+                    <td>
+                        <strong>
+                            @Html.Raw(_indentStr)@Label
+                        </strong>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <strong>
+                            @Html.Raw(_indentStr)@Label
+                        </strong>
+                        @Quantity
+                    </td>
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(Quantity))
+                {
+                    <td>
+                        @Html.Raw(_indentStr)@Label
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.Raw(_indentStr)@Label
+                        @Quantity
+                    </td>
+                }
+            }
+
+
+
+            @if (string.IsNullOrEmpty(Percent))
+            {
+                <td>&nbsp;</td>
+            }
+            else
+            {
+                <td>@Percent</td>
+            }
+        </tr>
+    }
+}

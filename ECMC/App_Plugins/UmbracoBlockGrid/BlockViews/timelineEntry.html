@@ -1,0 +1,39 @@
+<style>
+    
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Timeline Entry</legend>
+                
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Entry Date</td>
+                    <td>{{block.data.entryDate.markup}}</td>
+                </tr>
+                <tr>
+                    <td>Title</td>
+                    <td>{{block.data.title}}</td>
+                </tr>
+                <tr>
+                    <td>Subtitle</td>
+                    <td>{{block.data.subtitle}}</td>
+                </tr>
+                <tr>
+                    <td>Content</td>
+                    <td>{{block.data.content}}</td>
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    <td>
+                        {{mediaItem = (block.data.image[0].mediaKey | mediaItemResolver); ""}}
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width:200px;" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

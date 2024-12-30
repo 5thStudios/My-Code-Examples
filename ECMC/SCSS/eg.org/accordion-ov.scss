@@ -1,0 +1,17 @@
+﻿@import'../common-B/_variables-com';
+
+
+
+.accordion.ui-accordion { background: $color_glob_gray_200;
+    .ui-accordion-header { border-top: none; 
+     
+        h3 { margin: 0 0 10px 20px; }
+
+    }
+
+    .ui-accordion-content { padding: 0 16px 0 0;
+        > *:last-child { margin-bottom: 3px; }
+    }
+
+    .grid-container { padding: unset; margin: unset; max-width: unset; }
+}

@@ -1,0 +1,15 @@
+﻿@import'../common-B/_variables-com';
+
+body {
+
+    main {
+
+
+        .card.image-card {
+
+            h3 { color: $color_glob_black !important; font-size: 1.25rem; line-height: 1em;
+                &:hover, &:focus { }
+            }
+        }
+    }
+}

@@ -1,0 +1,304 @@
+/*===================================================================================*/
+/* MISC CLASSES
+/*===================================================================================*/
+.no-print { }
+.flow-root { display: flow-root; }
+.weight-500 { font-weight: 500; }
+.no-wrap { white-space: nowrap; }
+.number-pages { margin-right: 16px; }
+
+@media only screen and (max-width: 40em) {
+    .hide-mbl-imgs img { display: none; }
+}
+
+
+
+
+
+
+/* ZURB OVERRIDES
+----------------------------------------------------------*/
+.grid-y { height: 100%; }
+.align-center-middle {
+    .grid-x { webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; -webkit-align-content: center; -ms-flex-line-pack: center; align-content: center; }
+}
+
+
+
+
+
+
+/*   Download Pnl  */
+/*----------------------------------------------------------*/
+.download-pnl {
+    h5 { margin-bottom: 24px; }
+    a { background-color: #004b7e; color: #ffffff; padding: 7px 28px; }
+}
+
+
+
+
+
+
+/*   Search Menu Ideas  */
+/*----------------------------------------------------------*/
+.searchMenuIdeas { background-color: #F8F9FA;
+    h2 { color: #004b7e; font-size: 36px; font-weight: 700; font-family: Montserrat; }
+}
+
+
+
+
+
+
+/*    Filter Items   */
+/*----------------------------------------------------------*/
+.filter-item { cursor: pointer }
+.filter-section-title { cursor: pointer;
+    img { height: 20px; filter: invert(20%) sepia(25%) saturate(4610%) hue-rotate(182deg) brightness(102%) contrast(102%); }
+}
+.filter-items-group { cursor: pointer }
+.filter-items-group label { top: -6px }
+.fa-caret-right {
+    .caret-right { display: inline-block; }
+    .caret-down { display: none; }
+    &:before { content: none; }
+}
+.fa-caret-down {
+    .caret-right { display: none; }
+    .caret-down { display: inline-block; }
+    &:before { content: none; }
+}
+
+
+
+
+
+
+/*  Brands Listing   */
+/*----------------------------------------------------------*/
+.BrandsListing {
+    .grid-image-widget { min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+}
+
+
+
+
+
+
+/*  Read Now Panel   */
+/*----------------------------------------------------------*/
+.read-now-pnl { background-color: #ecedee; padding: 60px 0;
+    .cell { align-self: center; }
+}
+
+
+
+
+
+
+/*  Get Recipe Panel   */
+/*----------------------------------------------------------*/
+.get-recipe-pnl { background-size: cover; background-repeat: no-repeat; background-position: bottom; height: 600px;
+    .cta-get-recipe {
+        p { color: #707070; margin: 8px 0; }
+        a { color: #004b7e; text-transform: uppercase; text-decoration: underline; }
+        .grid-rte { border: 2px solid #707070; background-color: #ffffff; border-radius: 100%; padding: 28px; display: inline-block; height: 215px; width: 215px; margin-top: 30px; margin-left: 50%;
+            &.float-txt-left { margin-left: -50%; }
+        }
+        @media only screen and (max-width: 40em) {
+            .grid-rte { margin-left: 0%;
+                &.float-txt-left { margin-left: 0%; }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 40em) {
+    .get-recipe-pnl { height: auto; }
+}
+
+
+
+
+
+
+/*  Brands   */
+/*----------------------------------------------------------*/
+.brand {
+    .blue-solid-bg {
+        a { text-decoration: none; }
+    }
+    .img-grid {
+        img { }
+    }
+    @media only screen and (max-width: 40em) {
+        .img-grid {
+            img { margin-top: 12px; }
+            .grid-x .grid-x .cell:first-child img { margin-top: 32px; }
+        }
+    }
+}
+
+
+
+
+
+
+/*  Brochure Panel   */
+/*----------------------------------------------------------*/
+.brochure-pnl {
+    display: flex;
+    align-items: center;
+    h2 { text-align: center; color: #004b7e; background-color: #F8F8F8; font-size: 25px !important; font-weight: bold; width: 100%; padding: 16px 0; font-family: "Open Sans"; }
+    a { color: #004b7e; text-decoration: underline; }
+    img { float: left; width: auto; height: 250px; margin-right: -50px; margin-left: 50px; z-index: 1; }
+    @media only screen and (max-width: 40em) {
+        img { display: none; }
+    }
+}
+
+
+
+
+
+
+
+/*  Search Field  */
+/*----------------------------------------------------------*/
+.search-field {
+    input { height: 2.4375rem; border-radius: 0; }
+    button { height: 2.4375rem; margin-left: 12px;
+        svg { padding: 5px 0px; }
+    }
+}
+
+
+
+
+
+
+/*   Halal See-All   */
+/*----------------------------------------------------------*/
+@media only screen and (min-width: 40.063em) and (max-width: 90em) {
+    .halal-see-all-btn { line-height: 18px; font-size: 16px !important; }
+}
+
+
+
+
+
+
+/*  Full Text Search Nav   */
+/*----------------------------------------------------------*/
+.fulltextsearch_pagination {
+    ul { list-style-type: none; margin: 0; padding: 0; }
+}
+.fulltextsearch_page { float: left; background: #ccc; border-radius: .8em; -moz-border-radius: .8em; -webkit-border-radius: .8em; color: #fff !important; display: inline-block; font-weight: 700; line-height: 1.6em; margin-right: 15px; text-align: center; width: 1.6em; margin: 3px;
+    a { color: #FFF; }
+    &:hover { background: #004b7e; }
+}
+.fulltextsearch_thispage { color: #FFF; background: #004b7e; }
+.fulltextsearch_previous { float: left; margin-right: 18px; margin-top: 3px; }
+.fulltextsearch_next { float: left; margin-left: 18px; margin-top: 3px; }
+
+
+
+
+
+
+/*    Layout 4x4x4x4x4x4      */
+/*----------------------------------------------------------*/
+.ResourcesSection {
+    .Layout_4x4x4x4x4x4 {
+        p { color: #004b7e; }
+        img { max-width: 83px; width: 100%; }
+    }
+}
+
+
+
+
+
+
+/*    Brands- Perdue Products      */
+/*----------------------------------------------------------*/
+.brandsPerdue-products {
+    .logo { display: block; margin-left: auto; margin-right: auto; }
+    .icon { max-width: 42px; max-height: 45px; width: -webkit-fill-available; margin: 6px; }
+    p { margin: 0; }
+    .btn {
+        sup { top: 5px; margin-right: 1px; }
+    }
+}
+
+
+
+
+
+
+/*    Breadcrumbs      */
+/*----------------------------------------------------------*/
+.Text-Page {
+    .breadcrumb-pnl { display: none;}
+}
+.hide-breadcrumb {
+    .breadcrumb-pnl { display: none; }
+}
+
+
+
+
+
+
+/*    SVG Icons      */
+/*----------------------------------------------------------*/
+img.svg-btn { height: 16px; width: auto; filter: brightness(0) invert(1);
+    &.toggle { height: 36px; filter: invert(72%) sepia(11%) saturate(1097%) hue-rotate(153deg) brightness(82%) contrast(85%); }
+    &.utilities { margin: -3px 6px 0 0; filter: invert(12%) sepia(62%) saturate(5708%) hue-rotate(191deg) brightness(97%) contrast(104%); }
+}
+
+
+
+
+
+
+/*    Hubspot Form     */
+/*----------------------------------------------------------*/
+.hbspt-form { padding: 0; max-width: fit-content; margin: 0 auto;
+
+    form { flex-direction: column; flex-wrap: nowrap; align-content: space-between; align-items: flex-start;
+        .actions { margin: 0; }
+        fieldset { display: flex; flex-direction: row; width: auto;
+            .smart-field { width: 100% !important;
+                > label { display: none; }
+                .input { padding: 0; margin: 0 6px 0 0;
+                    input { font-family: 'Montserrat', sans-serif; color: #6D757DBF; font-size: 15px; padding: 4px 6px; height: 40px; border-radius: 0; }
+                }
+            }
+        }
+        .hs-form-field {
+            input { width: 100% !important; }
+            textarea { width: 100% !important; }
+        }
+        .hs-message { width: 100%; }
+        .hs-address { width: 100%; }
+        .hs-hs_state_code { width: 100%; }
+    }
+
+    .hs-error-msgs { margin: 0;
+        li { list-style-type: none;
+            label { font-size: 0.65em; line-height: 1.5em; color: #ffacac; }
+        }
+    }
+    .hs_error_rollup { display: none; }
+    .submitted-message { display: block; font-weight: 700;
+        p { color: #88BE3B; text-align: center; border-top: 3px solid white; padding-top: 20px; margin-bottom: 0; }
+    }
+    .hs-submit { margin-top: 32px;
+        input[type="submit"] { min-width: 200px; height: 40px; margin: 0; border-radius: 0;
+            &:hover { cursor: pointer; }
+        }
+    }
+    .hs-form-required { color: red; }
+}

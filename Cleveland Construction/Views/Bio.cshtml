@@ -1,0 +1,255 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using System.Text;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Bio>
+@{
+    Layout = "TopLevel.cshtml";
+
+
+    //Create phone number strings
+    string? phoneNo = null;
+    if (!string.IsNullOrWhiteSpace(Model.PhoneNumber))
+    {
+        phoneNo = string.Concat(Model.PhoneNumber?.Where(Char.IsDigit));
+        if (phoneNo.Length == 10)
+        {
+            phoneNo = "1" + phoneNo;
+        }
+    }
+}
+
+
+<div class="grid-container">
+    <div class="grid-x   grid-margin-y grid-padding-x grid-padding-y ">
+        <div class="cell laptop-7 laptop-offset-3">
+            <img src="@Model.BioImage?.GetCropUrl(Common.Crop.Card_1000x1000)" alt="@Model.Name" />
+
+            @if (Model.OfficeLocations != null && Model.OfficeLocations.Any())
+            {
+                <div class="text-center">
+                    <h3>Office locations:</h3>
+                    @foreach (var location in Model.OfficeLocations)
+                    {
+                        <div class="project-detail-link">
+                            <a href="@location.Url()">@location.Name</a>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="cell laptop-11">
+            <div class="vcard">
+                <h2 class="detail-header-h2">
+                    @Model.Name
+                    @if (!string.IsNullOrWhiteSpace(Model.LinkedInUrl))
+                    {
+                        <a href="@Model.LinkedInUrl">
+                            <img src="/Images/icons/linkedin.png" width="20" alt="LinkedIn Icon">
+                        </a>
+                    }
+                </h2>
+                @if (!string.IsNullOrWhiteSpace(Model.Title))
+                {
+                    <h3>@Model.Title?.Trim()</h3>
+                }
+
+                @if (Model.YearStarted > 1)
+                {
+                    <div>Year Started: @Model.YearStarted</div>
+                }
+
+                @if (!string.IsNullOrEmpty(phoneNo))
+                {
+                    <div><i class="glyphicon glyphicon-earphone"></i> <a href="tel:@phoneNo">@Model.PhoneNumber</a></div>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.EmailAddress))
+                {
+                    <div><i class="glyphicon glyphicon-envelope"></i> <a href="mailto:@Model.EmailAddress">@Model.EmailAddress</a></div>
+                }  
+                <br />
+                <br />
+            </div>
+
+
+            @Html.Raw(Model.About)
+
+
+        </div>
+    </div>
+</div>
+
+
+@* @await Html.GetBlockGridHtmlAsync(Model.MainContent) *@
+
+
+@if (Model.RelatedProjects.Any())
+{
+    <section>
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="cell laptop-18 laptop-offset-3">
+                    <h2 class="text-center">Related Projects</h2>
+                    <div class="grid-x laptop-up-3 grid-margin-x">
+                        @foreach (var ipProj in Model.RelatedProjects)
+                        {
+                            <div class="cell">
+                                <partial name="@Common.Partial.ProjectCard" model="ipProj" />
+                            </div>
+                        }
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+
+
+
+
+
+@* @using ContentModels = Umbraco.Web.PublishedContentModels;
+@using app.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Bio>
+@{Layout = "TopLevel.cshtml";}
+
+
+
+@{
+    var parent = Model.Parent as LandingPage;
+}
+
+
+<section class="inside-header">
+    <div class="panel header-div inside" role="banner" style="background-image:url(@(parent.BannerImage != null ? string.Format("{0}&preset=headerimg", parent.BannerImage.GetCropUrl("banner")) : "/Images/billboard/billboard-1.jpg?prseet=headerimg"))">
+        <div class="wrap">
+            <h1>@Model.Parent.Name</h1>
+        </div>
+    </div>
+</section>
+
+@{ Html.RenderAction(Common.wwwAction.RenderAboveTheFoldCTA, Common.wwwController.General, new { ipModel = Model }); }
+
+<div class="grey-left">
+    <section class="content-div">
+        <div class="container">
+            <div class="row people">
+                <div class="col-xs-12 col-sm-8 col-sm-push-4">
+                    <div class="vcard">
+                        <h2 class="detail-header-h2">
+                            @Model.FullName
+                            @if (Model.LinkedInPublicProfileUrl.Any())
+                            {
+                                <a href="@Model.LinkedInPublicProfileUrl">
+                                    <img src="~/Images/icons/linkedin.png" width="20" alt="LinkedIn Icon" />
+                                </a>
+                            }
+                        </h2>
+                        <h3>
+                            @Model.Title
+                        </h3>
+                        <p>
+                            Year Started:
+                            @Model.YearStarted<br />
+                            <i class="glyphicon glyphicon-earphone"></i>
+                            <span class="tel">
+                                <a href="tel:@Model.PhoneNumber">@Model.PhoneNumber</a>
+                            </span><br />
+                            <i class="glyphicon glyphicon-envelope"></i>
+                            <span class="email">
+                                <a href="mailto:@Model.EmailAddress">email</a>
+                            </span>
+                        </p>
+                    </div>
+                    <p>
+                        @Html.Raw(Model.About)
+                    </p>
+                    <p>
+                        <br />
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-sm-pull-8">
+                    @if (Model.Image != null && !string.IsNullOrEmpty(Model.Image.Url))
+                    {
+                        <div class="wrap">
+                            <img src="@Model.Image.GetCropUrl("bio")&preset=bioimg" class="img-responsive" />
+                        </div>
+                    }
+                    @if (Model.OfficeLocations.Any())
+                    {
+                        <div class="recent-project">
+                            <div>
+                                <h3>Office locations:</h3>
+                                <div class="row">
+                                    @foreach (var location in Model.OfficeLocations)
+                                    {
+                                        <div class="project-detail-widget">
+                                            <a href="@location.Url">@location.Name</a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @if (Model.RelatedProjects.Any())
+                    {
+                        <div class="recent-project feature-block-panel">
+                            <h3 class="center">Related Projects:</h3>
+                            <div class="row row-centered flex-row ">
+                                @foreach (var project in Model.RelatedProjects)
+                                {
+                                    var media = project.HasValue("images") ? project.GetPropertyValue<List<IPublishedContent>>("images").FirstOrDefault() : null;
+                                    <div class="tertiary-feature col-sm-4 col-xs-12">
+                                        <div class="inner-container">
+                                            <div class="wrap">
+                                                <a href="@project.Url">
+                                                    @if (media != null)
+                                                    {
+                                                        <img class="img-responsive img100" src="@media.GetCropUrl("smallTile")" alt="@(media.GetPropertyValue<string>("altText"))" />
+                                                    }
+                                                </a>
+                                                <div class="stripe">
+                                                    <a href="@project.Url" class="btn btn-primary pull-right">View Project</a>
+                                                </div>
+                                                <a href="@project.Url">
+                                                    <h5>@project.Name</h5>
+                                                </a>
+                                                <p>
+                                                    @(project.GetPropertyValue<string>("location"))
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="row">
+
+                @if (Model.HasValue("contentModules"))
+                {
+                    var components = Model.GetPropertyValue<IEnumerable<IPublishedContent>>("contentModules");
+
+                    foreach (var content in components.ToContentSet())
+                    {
+                        @Html.Partial(string.Format("~/Views/Partials/Nested/{0}.cshtml", content.DocumentTypeAlias), content)
+                    }
+
+                }
+            </div>
+
+        </div>
+    </section>
+</div> *@

@@ -1,0 +1,22 @@
+﻿@import'_variables-com';
+
+
+/* Lists and Items
+----------------------------------------------------------*/
+.list-icon-left-txt-right { margin-top: 20px; padding: 12px;
+    h2 { color: #69be28; font-size: 36px; font-weight: 500; line-height: 1.25em; margin: 0 0 6px 0; }
+    .item {
+        img { width: 80px; height: auto; }
+        h3 { margin: 0; font-size: 24px; font-weight: 500; line-height: 1.25em; color: #303133; }
+        p { font-size: 16px; line-height: 1.25em; margin: 0; font-weight: 300; }
+        ul {padding: 10px 0 0 0; }
+        li { font-size: 16px; line-height: 1.25em; font-weight: 300; }
+    }
+
+    .showDividers {
+        .item { border-top: 1px solid $color_glob_navy; }
+        &.hideTopDivider {
+            .item:nth-child(-n+2) { border-top-style: none; }
+        }
+    }
+}

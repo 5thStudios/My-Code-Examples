@@ -1,0 +1,74 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.ViewModel;
+@using ECMC_Umbraco.Models;
+@using Newtonsoft.Json;
+@using System.Linq;
+@using Umbraco.Cms.Core.Web;
+@inject IUmbracoContextAccessor context;
+@model ComposedPageViewModel<ContentModels.HomeScholars, HomeScholarsViewModel>
+@{
+    Layout = "MasterScholars.cshtml";
+}
+
+<div class="home">
+    @await Html.GetBlockGridHtmlAsync(Model.Page?.HeroBlockGrid)
+
+    <section>
+        <div class="grid-container">
+            <div class="grid-x grid-padding-y">
+                <div class="cell small-offset-2 small-20  ">
+                    <div class="breadcrumb-container">
+                        <ul>
+                            <li><a href="@Model.Page?.Url()">Home</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-x grid-padding-y">
+                <div class="cell small-offset-2 small-20  ">
+
+                    <div class="grid-x grid-margin-x">
+                        <div class="cell laptop-17">
+
+                            @await Html.GetBlockGridHtmlAsync(Model.Page?.ContentBlockGrid)
+                            
+                            <div class="article-container">
+                                <div class="grid-x grid-margin-x grid-margin-y grid-padding-y">
+
+                                    @foreach (var _link in Model.ViewModel?.LstContent!)
+                                    {
+                                        <div class="cell medium-12">
+                                            <div class="headline-panel">
+                                                <h2>@_link.Title</h2>
+                                                <p>@_link.Summary</p>
+                                                <a class="link-text" target="" href="@_link.Url">Learn More</a>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+
+                            @await Html.GetBlockGridHtmlAsync(Model.Page?.ContentBottomBlockGrid)
+
+
+                        </div>
+                        <div class="cell laptop-7">
+
+                            <div class="sidebar">
+                                @await Html.GetBlockListHtmlAsync(Model.Page?.SidebarList)
+                            </div>
+                            <br />
+                            <br />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>

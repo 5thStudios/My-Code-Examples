@@ -1,0 +1,28 @@
+/*===================================================================================*/
+/*  Optional Row Classes   */
+/*===================================================================================*/
+.blue-gradient-bg {
+    background-image: url(/media/2648/group-7881.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    p { color: #fff; }
+    h2 { color: #fff; }
+    h3 { color: #fff; }
+    h4 { color: #fff; }
+    h5 { color: #fff; }
+    h6 { color: #fff; }
+    @media only screen and (max-width: 40em) {
+        h3 { font-size: 24px; line-height: 32px; }
+    }
+}
+
+.bi-colors-01 {
+    div { font-size: 24px; font-weight: 400; color: #000;
+        strong { color: #004B7E; }
+    }
+}
+.blue-solid-bg { background-color: #004b7e; padding: 6px 24px;
+    h4 { color: #FFF; font-size: 24px; font-weight: 400; }
+    h5 { color: #FFF; font-size: 22px; font-weight: 400; }
+    a, a:hover, a:visited { color: #FFF; text-decoration: underline; }
+}

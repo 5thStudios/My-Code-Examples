@@ -1,0 +1,8 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<VideoPanel>>
+@using www.Models.PublishedModels;
+
+
+
+<div class="video-panel responsive-embed widescreen">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/@Model.Content.VideoId" frameborder="0" allowfullscreen></iframe>
+</div>

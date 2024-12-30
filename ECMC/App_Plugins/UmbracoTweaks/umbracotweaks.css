@@ -1,0 +1,7 @@
+/* Top-banner colors depending on which environment we are in. */
+body.localhost .umb-app-header { background: rgb(105, 190, 40) !important; }
+body.dev .umb-app-header { background: rgb(227, 114, 34) !important; }
+body.staging .umb-app-header { background: rgb(0, 154, 166) !important; }
+body.live .umb-app-header { background: rgb(196, 38, 46) !important; }
+
+body div#applications ul.sections li.envLabel{color: #ffffff; font-weight: bold}

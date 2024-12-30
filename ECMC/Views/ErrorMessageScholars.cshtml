@@ -1,0 +1,11 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ErrorMessageScholars>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterScholars.cshtml";
+}
+
+
+@await Html.GetBlockGridHtmlAsync(Model.HeroBlockGrid)
+@await Html.GetBlockGridHtmlAsync(Model.ContentBlockGrid)
+@await Html.GetBlockGridHtmlAsync(Model.ContentBottomBlockGrid)

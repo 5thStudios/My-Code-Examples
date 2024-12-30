@@ -1,0 +1,75 @@
+﻿@using Umbraco.Cms.Core.Web;
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.LandingPage>
+@inject IUmbracoContextAccessor context;
+@{
+    Layout = null;
+    IPublishedContent ipModel = context.GetRequiredUmbracoContext().PublishedRequest!.PublishedContent!;
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matrix Trade Institute</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- STYLES & SCRIPTS -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/foundation.css">
+    <link rel="stylesheet" type="text/css" href="/css/simplePagination.css" />
+    <link rel="stylesheet" type="text/css" href="/css/prettyPhoto.css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/css/site.css?v=01">
+    <link rel="stylesheet" type="text/css" href="/css/element451.css?v=01">
+
+    <script src="https://kit.fontawesome.com/b880db5e82.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+    @await Component.InvokeAsync(www.Models.Common.ViewComponent.Header, new { ipModel = ipModel, isMobile = false })
+    <div class="outerContent" id="top">
+        <div class="innerContent">
+            @await Html.GetBlockGridHtmlAsync(Model.HeroArea)
+            @await Html.GetBlockGridHtmlAsync(Model.MainContent)
+        </div>
+    </div>
+    @await Component.InvokeAsync(www.Models.Common.ViewComponent.Footer, new { ipModel = ipModel })
+
+
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="/scripts/what-input.js"></script>
+    <script type="text/javascript" src="/scripts/foundation.js"></script>
+    <script type="text/javascript" src="/scripts/jquery-simplePagination.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.prettyPhoto.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/scripts/app.js?v=01"></script>
+
+</body>
+</html>

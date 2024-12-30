@@ -1,0 +1,6 @@
+@using Umbraco.Extensions;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem<SidebarSubheader>>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+
+@Html.Raw(@Model.Content.Subheader)

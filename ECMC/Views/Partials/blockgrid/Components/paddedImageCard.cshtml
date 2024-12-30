@@ -1,0 +1,94 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<PaddedImageCard>>
+
+
+
+<div data-blockgrid="Components/paddedImgCard" data-aos="@Model.Content.InViewAnimation">
+    <div class="grid-x grid-margin-y">
+        <div class="cell small-24">
+            @await Html.PartialAsync(Common.Partial.PaddedImgCard, Model.Content)
+        </div>
+    </div>
+</div>
+
+
+@* @{
+    //Obtain image
+    string imgUrl = Model.Content.Logo?.Url(); 
+}
+
+
+
+@{
+    <div data-blockgrid="Components/paddedImgCardCentered" data-aos="@Model.Content.InViewAnimation">
+        <div class="grid-x grid-padding-y  grid-margin-y   outer-card icon-card">
+            <figure class="cell card text-center   img-slide-down">
+                <div data-equalizer-watch="primary">
+                    @if (Model.Content.Link == null)
+                    {
+                        RenderCard(imgUrl ?? "");
+                    }
+                    else
+                    {
+                        <a href="@Model.Content.Link?.Url" target="@Model.Content.Link?.Target">
+                            @{
+                                RenderCard(imgUrl ?? "", true);
+                            }
+                        </a>
+                    }
+                </div>
+            </figure>
+        </div>
+    </div>
+}
+
+
+
+@functions {
+    private void RenderCard(string _imgUrl, bool _showBtn = false)
+    {
+        <div>
+            <div class="grid-x grid-padding-x grid-padding-y">
+                <div class="cell">
+
+                    <img src="@_imgUrl" alt="@Model.Content.Title" >
+
+                    @if (!string.IsNullOrWhiteSpace(@Model.Content.HoverTitle))
+                    {
+                        <figcaption>
+                            <h3>@Model.Content.HoverTitle</h3>
+
+                            @if (Model.Content.HoverTip != null && !string.IsNullOrWhiteSpace(Model.Content.HoverTip.ToString()))
+                            {
+                                <div>
+                                    @Html.Raw(Model.Content.HoverTip)
+                                </div>
+                            }
+                            @if (_showBtn)
+                            {
+                             
+                                <div class="read-more btn dark align-center">
+                                    @Model.Content.Link?.Name
+                                </div>
+                            }
+                        </figcaption>
+                    }
+                </div>
+            </div>
+
+        </div>
+        <div class="card-content text-center">
+            <h3>@Model.Content.Title</h3>
+            @if (Model.Content.Summary != null)
+            {
+                <div>
+                    @Html.Raw(Model.Content.Summary)
+                </div>
+            }
+
+        </div>
+    }
+} *@

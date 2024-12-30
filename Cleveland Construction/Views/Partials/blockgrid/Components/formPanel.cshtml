@@ -1,0 +1,13 @@
+﻿@using www.Models.PublishedModels;
+@using Microsoft.Extensions.Options;
+@using Umbraco.Forms.Core.Configuration;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<FormPanel>>
+@inject IOptions<PackageOptionSettings> PackageOptionSettings
+
+
+
+@if (Guid.TryParse(Model.Content.FormPicker?.ToString(), out Guid form))
+{
+    //Render Views/Partials/Forms/Themes/default/Form.cshtml
+    @(await Component.InvokeAsync("RenderForm", new { formId = form }))
+}

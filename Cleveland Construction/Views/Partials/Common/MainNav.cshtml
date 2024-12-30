@@ -1,0 +1,32 @@
+﻿@using www.Models;
+@using www.ViewModels;
+@model List<Link>;
+
+
+
+
+<ul class="main-nav   show-for-medium">
+    @foreach (var lnk in Model)
+    {
+        if (lnk.LstChildLinks != null)
+        {
+            <li>
+                <a hreflang="en-US" href="@lnk.Url" target="@lnk.Target">@lnk.Title</a>
+                <ul>
+                    @foreach (var lnkChld in lnk.LstChildLinks)
+                    {
+                        <li>
+                            <a hreflang="en-US" href="@lnkChld.Url" target="@lnkChld.Target">@lnkChld.Title</a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a hreflang="en-US" href="@lnk.Url" target="@lnk.Target">@lnk.Title</a>
+            </li>
+        }
+    }
+</ul>

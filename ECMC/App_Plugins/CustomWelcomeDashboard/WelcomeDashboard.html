@@ -1,0 +1,21 @@
+﻿<div class="welcome-dashboard" ng-controller="CustomWelcomeDashboardController as vm">
+
+    <h2>Welcome: {{vm.UserName}}</h2>
+    <h3>Your most recent edits:</h3>
+    <ul class="unstyled">
+        <li ng-repeat="logEntry in vm.UserLogHistory.items">
+            <i class="{{logEntry.Content.icon}}"></i> <a href="/Umbraco/#/{{logEntry.editUrl}}">{{logEntry.Content.name}} <span ng-if="logEntry.comment">- {{logEntry.comment}}</span></a> - <span class="text-muted">(Edited on: {{logEntry.timestamp  | date:'medium'}})</span>
+        </li>
+    </ul>
+
+    <p><localize key="welcomeDashboard_bodytext">Default bodytext</localize></p>
+    <p><localize key="welcomeDashboard_copyright">Default copyright</localize></p>
+
+
+    <!--<br />
+    <br />
+    <br />
+    <div style="border:1px solid red;">{{vm}}</div>-->
+
+
+</div>

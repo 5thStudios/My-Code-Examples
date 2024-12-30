@@ -1,0 +1,59 @@
+/* FOOTER
+----------------------------------------------------------*/
+footer {
+    background-color: #222222;
+    a { white-space: nowrap; }
+    .footer-description { background-color: #161616; }
+    .footer-services, .footer-locations {
+        nav {
+            h2 { color: #b4b2b2; display: inline; }
+            a { font-size: 33px; line-height: 66px; text-transform: uppercase; font-family: "UnitedSansCdBd",Arial,sans-serif; white-space: nowrap; }
+            .bullet { font-size: 20px; font-family: 'Open Sans',sans-serif; color: #333333 }
+        }
+    }
+    .footer-social {
+        ul.social-icons { margin: 0; list-style: none; display: inline-flex; flex-direction: row; padding-inline-start: 0;
+            li { color: #222222; font-size: 13px; line-height: 28px; padding: 0 2px;
+                a { background-color: #b4b2b2; color: #222222; padding: 0; margin: 0 12px; display: inline-block; text-align: center; transition: all 0.25s ease-in-out; height: 60px; width: 60px; font-size: 28px; line-height: 58px;
+                    &[class^="icon-"]:before,
+                    &[class*=" icon-"]:before { font-family: "fontello"; font-style: normal; font-weight: normal; speak: none; display: inline-block; text-decoration: inherit; width: 1em; text-align: center; font-variant: normal; text-transform: none; line-height: 1em }
+                    &.icon-youtube:before { content: '\e800' }
+                    &.icon-twitter:before { content: '\e801' }
+                    &.icon-facebook:before { content: '\e802' }
+                    &.icon-linkedin:before { content: '\e803' }
+                    &.icon-instagram:before { content: '\e804' }
+
+                    &:hover { text-decoration: none; }
+                    &.facebook:hover { background-color: #3B5998; }
+                    &.twitter:hover { background-color: #4099FF; }
+                    &.linkedin:hover { background-color: #0e76a8; }
+                    &.youtube:hover { background-color: #cd0202; }
+                    &.instagram:hover { background-color: #E5C527; }
+                }
+            }
+        }
+    }
+    .footer-minor-nav {
+        h6 { color: #b4b2b2; font-family: 'Open Sans',sans-serif; display: inline; }
+        span { color: #b4b2b2; }
+    }
+    .back-to-top { display: inline-block; color: #000; padding: 14px 24px; font-size: 16px; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif; background-color: #b4b2b2; transition: all 0.25s ease-in-out; line-height: 12px; }
+
+
+    @media only screen and (max-width: 40em) {
+        a { white-space: normal; }
+        .footer-services, .footer-locations {
+            nav { display: flex; flex-direction: column;
+                a { font-size: 23px; line-height: 46px; }
+                .bullet { display: none; }
+            }
+        }
+        .footer-social {
+            ul.social-icons {
+                li {
+                    a { margin: 0 2px; height: 50px; width: 50px; line-height: 48px; }
+                }
+            }
+        }
+    }
+}

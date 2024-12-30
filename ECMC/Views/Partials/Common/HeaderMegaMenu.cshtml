@@ -1,0 +1,394 @@
+﻿@* https://www.ecmcgroup.org/what-we-do/ecmc-group-impact *@
+@* Transition found here: https://stackoverflow.com/questions/3508605/how-can-i-transition-height-0-to-height-auto-using-css *@
+
+@using ECMC_Umbraco.Models;
+@model HeaderMegaMenuViewModel;
+
+
+<header class="show-for-menu">
+    <div class="search-bar">
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="cell auto"></div>
+                <div class="cell shrink">
+                    <form action="/search/">
+                        <input type="text" class="text-right" placeholder="Search" name="search" id="txbTopSearchField" />
+                        <button type="submit" class="btn btn-success">
+                            <span class="fa fa-search" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
+                <div class="cell laptop-2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bar">
+        <div class="grid-container">
+            <div class="grid-x align-middle">
+
+                <div class="cell small-2 small-offset-2 laptop-3 laptop-offset-2  large-3 large-offset-2">
+                    <a href="/">
+                        <img class="logo" src="@Model.SiteLogoUrl" alt="@Model.SiteName">
+                    </a>
+                </div>
+                <div class="cell auto text-right">
+                    <nav class="menu">
+
+
+
+                        <ul>
+                            @foreach (var lnkLvl1 in Model.LstLinks)
+                            {
+                                if (lnkLvl1.LstChildLinks != null && lnkLvl1.LstChildLinks.Any())
+                                {
+                                    <li>
+                                        <a class="can-expand">@lnkLvl1.Title</a>
+
+
+                                        <div class="mega-menu">
+                                            <div class="bg-gradient">
+                                                <div class="grid-container">
+                                                    <div class="grid-x">
+                                                        <div class="cell laptop-20 laptop-offset-2">
+
+                                                            <div class="grid-x">
+                                                                <div class="cell laptop-6    section-list-container">
+
+                                                                    <ul>
+                                                                        <li class="category-link">
+                                                                            <a href="@lnkLvl1.Url">
+                                                                                <i class="fal fa-chevron-right"></i>@lnkLvl1.Title
+                                                                            </a>
+                                                                        </li>
+
+                                                                        @{
+                                                                            string isActive = "active";
+
+                                                                            foreach (var lnkLvl2 in lnkLvl1.LstChildLinks)
+                                                                            {
+                                                                                if (lnkLvl2.LstChildLinks != null && lnkLvl2.LstChildLinks.Any())
+                                                                                {
+                                                                                    <li class="section-selector  @isActive">
+                                                                                        <a data-section="@lnkLvl2.Subtitle">
+                                                                                            @Html.Raw(lnkLvl2.ImgUrl)@lnkLvl2.Title
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    isActive = "";
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <li class="section-selector">
+                                                                                        <a data-section="" href="@lnkLvl2.Url">
+                                                                                            @Html.Raw(lnkLvl2.ImgUrl)@lnkLvl2.Title                                                                                            
+                                                                                        </a>
+                                                                                    </li>
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    </ul>
+                                                                </div>
+
+
+
+
+
+
+                                                                <div class="cell laptop-18   section-links-container">
+                                                                    @foreach (var lnkLvl2 in lnkLvl1.LstChildLinks)
+                                                                    {
+                                                                        <div class="megamenu-pnl section-links     @lnkLvl2.Subtitle">
+                                                                            <div class="grid-x  grid-padding-x grid-padding-y  description">
+                                                                                <div class="cell">
+                                                                                    <h2>@lnkLvl2.Title</h2>
+                                                                                    @if (!string.IsNullOrEmpty(lnkLvl2.Summary))
+                                                                                    {
+                                                                                        <h3>@lnkLvl2.Summary</h3>
+                                                                                    }                                                                                    
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="grid-x laptop-up-3 grid-padding-x grid-padding-y">
+                                                                                @if (lnkLvl2.LstChildLinks != null && lnkLvl2.LstChildLinks.Any())
+                                                                                {
+                                                                                    foreach (var lnkLvl3 in lnkLvl2.LstChildLinks)
+                                                                                    {
+                                                                                        <div class="cell">
+                                                                                            <h3>
+                                                                                                <a href="@lnkLvl3.Url">@lnkLvl3.Title</a>
+                                                                                            </h3>
+                                                                                            <p class="description">@lnkLvl3.Summary</p>
+                                                                                            <p class="additional-link">
+                                                                                                <a class="link-text" href="@lnkLvl3.Url">Learn More</a>
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    }
+                                                                                }
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+                                                                </div>
+
+
+
+
+
+
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@lnkLvl1.Url">@lnkLvl1.Title</a>
+                                    </li>
+                                }
+
+                            }
+                        </ul>
+
+
+
+
+
+                        @*     <ul>
+                        <li class="">
+                        <a href="/borrowers" class="can-expand">Borrowers</a>
+
+
+                        <div class="mega-menu">
+                        <div class="bg-gradient">
+                        <div class="grid-container">
+                        <div class="grid-x">
+                        <div class="cell laptop-20 laptop-offset-2">
+
+                        <div class="grid-x">
+                        <div class="cell laptop-6    section-list-container">
+
+                        <ul>
+                        <li class="category-link">
+                        <a href="/studentseducators">
+                        <i class="fal fa-chevron-right"></i>Borrowers
+                        </a>
+                        </li>
+
+
+
+
+                        <li class="section-selector active">
+                        <a data-section="student-resources">
+                        <i class="fal fa-user-friends"></i>Student Resources
+                        </a>
+                        </li>
+                        <li class="section-selector">
+                        <a data-section="educator-resources">
+                        <i class="fal fa-chalkboard-teacher"></i>Educator Resources
+                        </a>
+                        </li>
+                        <li class="section-selector">
+                        <a data-section="college-access-centers">
+                        <i class="fal fa-university"></i>College Access Centers
+                        </a>
+                        </li>
+                        <li class="section-selector">
+                        <a data-section="" href="https://dev.www.ecmcfoundation.org/">
+                        <i class="fal fa-user-graduate"></i>ECMC Foundation
+                        </a>
+                        </li>
+                        <li class="section-selector">
+                        <a data-section="" href="https://dev.annualreport.ecmcfoundation.org/">
+                        <i class="fal fa-university"></i>Annual Report
+                        </a>
+                        </li>
+                        </ul>
+
+                        </div>
+                        <div class="cell laptop-18   section-links-container">
+
+                        <div class="megamenu-pnl student-resources    section-links">
+                        <div class="grid-x  grid-padding-x grid-padding-y  description">
+                        <div class="cell">
+                        <h2>Student Resources</h2>
+                        <h3>These resources can help you make informed decisions about planning and paying for college.</h3>
+                        </div>
+                        </div>
+
+                        <div class="grid-x laptop-up-3 grid-padding-x grid-padding-y">
+                        <div class="cell">
+                        <h3>
+                        <a target="" href="/studentseducators/student-resources/opportunities-guide-and-workbook">
+                        Opportunities Guide and Workbook
+                        </a>
+                        </h3>
+                        <p class="description">This free college planning publication provides students and families with important information and tools to guide their pursuit of postsecondary education. <em>Opportunities</em> books are available in English and Spanish.</p>
+                        <p class="additional-link">
+                        <a target="" class="link-text" href="#">Learn More</a>
+                        </p>
+                        </div>
+                        <div class="cell">
+                        <h3>
+                        <a target="" href="/studentseducators/student-resources/financial-awareness-basics-fab">
+                        Financial Awareness Basics | FAB
+                        </a>
+                        </h3>
+                        <p class="description">Find information, tips and tools for managing your money.</p>
+                        <p class="additional-link">
+                        <a target="" class="link-text" href="#">Learn More</a>
+                        </p>
+
+                        </div>
+                        <div class="cell">
+                        <h3>
+                        <a target="" href="/studentseducators/student-resources/resource-guides">
+                        Resource Guides
+                        </a>
+                        </h3>
+                        <p class="description">The college resource guides cover a range of topics related to preparing for and going to college.</p>
+                        <p class="additional-link">
+                        <a target="" class="link-text" href="#">Learn More</a>
+                        </p>
+
+                        </div>
+                        <div class="cell">
+                        <h3>
+                        <a target="" href="/studentseducators/student-resources/estimate-your-college-costs">
+                        Estimate Your College Costs
+                        </a>
+                        </h3>
+                        <p class="description">Before you file the Free Application for Federal Student Aid (FAFSA), there are ways to get an estimate of how much college may cost you.</p>
+                        <p class="additional-link">
+                        <a target="" class="link-text" href="#">Learn More</a>
+                        </p>
+
+                        </div>
+                        <div class="cell">
+                        <h3>
+                        <a target="_blank" href="https://www.ecmcsolutions.org/">
+                        Students Whose Schools Engaged with Solutions
+                        </a>
+                        </h3>
+                        <p class="description">This link will take you to the Solutions website where we can help you understand the complexities of student loan repayment.</p>
+                        <p class="additional-link">
+                        <a target="" class="link-text" href="#">Learn More</a>
+                        </p>
+
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="megamenu-pnl educator-resources    section-links">
+                        <div class="grid-x  grid-padding-x grid-padding-y  description">
+                        <div class="cell">
+                        <h2>Educator Resources</h2>
+                        <h3>These decisions about planning and paying for college.</h3>
+                        </div>
+                        </div>
+
+                        <div class="grid-x laptop-up-3 grid-padding-x grid-padding-y">
+                        <div class="cell">
+                        <h3>
+                        <a target="" href="/studentseducators/student-resources/resource-guides">
+                        Resource Guides
+                        </a>
+                        </h3>
+                        <p class="description">The college resource guides cover a range of topics related to preparing for and going to college.</p>
+                        <p class="additional-link">
+                        <a target="" class="link-text" href="#">Learn More</a>
+                        </p>
+
+                        </div>
+                        <div class="cell">
+                        <h3>
+                        <a target="" href="/studentseducators/student-resources/estimate-your-college-costs">
+                        Estimate Your College Costs
+                        </a>
+                        </h3>
+                        <p class="description">Before you file the Free Application for Federal Student Aid (FAFSA), there are ways to get an estimate of how much college may cost you.</p>
+                        <p class="additional-link">
+                        <a target="" class="link-text" href="#">Learn More</a>
+                        </p>
+
+                        </div>
+                        <div class="cell">
+                        <h3>
+                        <a target="_blank" href="https://www.ecmcsolutions.org/">
+                        Students Whose Schools Engaged with Solutions
+                        </a>
+                        </h3>
+                        <p class="description">This link will take you to the Solutions website where we can help you understand the complexities of student loan repayment.</p>
+                        <p class="additional-link">
+                        <a target="" class="link-text" href="#">Learn More</a>
+                        </p>
+
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="megamenu-pnl college-access-centers    section-links">
+                        <div class="grid-x  grid-padding-x grid-padding-y  description">
+                        <div class="cell">
+                        <h2>College Access Centers</h2>
+                        </div>
+                        </div>
+
+                        <div class="grid-x laptop-up-3 grid-padding-x grid-padding-y">
+
+                        <div class="cell">
+                        <h3>
+                        <a target="" href="/studentseducators/student-resources/estimate-your-college-costs">
+                        Estimate Your College Costs
+                        </a>
+                        </h3>
+                        <p class="description">Before you file the Free Application for Federal Student Aid (FAFSA), there are ways to get an estimate of how much college may cost you.</p>
+                        <p class="additional-link">
+                        <a target="" class="link-text" href="#">Learn More</a>
+                        </p>
+
+                        </div>
+                        <div class="cell">
+                        <h3>
+                        <a target="_blank" href="https://www.ecmcsolutions.org/">
+                        Students Whose Schools Engaged with Solutions
+                        </a>
+                        </h3>
+                        <p class="description">This link will take you to the Solutions website where we can help you understand the complexities of student loan repayment.</p>
+                        <p class="additional-link">
+                        <a target="" class="link-text" href="#">Learn More</a>
+                        </p>
+
+                        </div>
+                        </div>
+                        </div>
+
+                        </div>
+                        </div>
+
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </li>
+                        </ul> *@
+
+
+
+
+
+
+
+
+
+                    </nav>
+                </div>
+                <div class="cell laptop-2"></div>
+            </div>
+        </div>
+    </div>
+</header>

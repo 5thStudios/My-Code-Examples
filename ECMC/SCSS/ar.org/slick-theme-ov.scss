@@ -1,0 +1,5 @@
+@import'../common-B/_variables-com';
+
+.slick-slider .slide .content a.link-button, .slick-slider .slide .content a:visited.link-button { color: $color_glob_white; background-color: $color_glob_green_ADA; border-color: $color_glob_green_ADA;
+    &:hover, &:focus { color: $color_glob_white; }
+}

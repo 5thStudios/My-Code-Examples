@@ -1,0 +1,31 @@
+﻿@model Umbraco.Cms.Core.Models.Blocks.BlockGridItem<LeadGeneratorCard>
+@inject IPublishedValueFallback PublishedValueFallback;
+@using www.Models.PublishedModels;
+@using www.Models;
+@using System.Text;
+
+
+
+<div class="card lead-generator">
+    @*  <div class="card-image">
+    <img src="@imgUrl">
+    </div>
+    <div class="card-header">
+    <span>View Location</span>
+    </div> *@
+    <div class="card-section">
+        @* <div class="title">@cmLocation.Name?.Trim()</div>
+        @if (!string.IsNullOrWhiteSpace(cmLocation.Address1))
+        {
+        <div class="content">@cmLocation.Address1?.Trim()</div>
+        }
+        @if (!string.IsNullOrWhiteSpace(cmLocation.Address2))
+        {
+        <div class="content">@cmLocation.Address2?.Trim()</div>
+        }
+        <div class="content">@sbAddress.ToString()</div> *@
+
+        <div data-blockgrid="Components/leadGeneratorCard" class="rich-text">@Html.Raw(Model.Content.CardContent)</div>
+
+    </div>
+</div>

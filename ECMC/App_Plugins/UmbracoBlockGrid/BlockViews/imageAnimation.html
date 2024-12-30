@@ -1,0 +1,54 @@
+﻿<style>
+    
+</style>
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Image - Animate/Hover</legend>
+        {{mediaItem = (block.data.imageFixedWidthImagePicker[0].mediaKey | mediaItemResolver); ""}}
+
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Image</td>
+                    <td>
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-height:125px; width:auto;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Resolutions</td>
+                    <td>{{block.data.imageResolutions}}</td>
+                </tr>
+                <tr>
+                    <td>Alt Text</td>
+                    <td>{{block.data.imageFixedWidthAltText}}</td>
+                </tr>
+                <tr>
+                    <td>Image Caption</td>
+                    <td>{{block.data.imageCaption}}</td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2" style="text-align:center;">- - Animation Features - -</td>
+                </tr>
+                <tr>
+                    <td>In-View Animation</td>
+                    <td>{{block.data.inViewAnimation}}</td>
+                </tr>
+                <tr>
+                    <td>Hover Title</td>
+                    <td>{{block.data.hoverTitle}}</td>
+                </tr>
+                <tr>
+                    <td>Hover Tip</td>
+                    <td ng-bind-html="block.data.hoverTip.markup"></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

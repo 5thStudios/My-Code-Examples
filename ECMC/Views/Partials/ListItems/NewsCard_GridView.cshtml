@@ -1,0 +1,67 @@
+﻿@using ECMC_Umbraco.ViewModel;
+@model ListItemViewModel;
+
+@{
+    //Determine if card needs a hover state
+    string hoverClass = "img-slide-down";
+    if (!Model.ShowHoverContent)
+    { hoverClass = string.Empty; }
+}
+
+
+<div class="card  news-section cell medium-8 laptop-6    " data-aos="@Model.InViewAnimation" data-areas-of-interest="@Model.jsonAreasOfInterest" data-staff="@Model.jsonStaff" data-audience="@Model.jsonAudience" data-title="@Model.Title" data-subtitle="@Model.Subtitle" data-summary="@Model.EncodedSummary">
+
+    <a href="@Model.Link!.Url">
+        <figure class="@hoverClass @Model.AdditionalClasses">
+
+            <img src="@Model.PrimaryImgUrl" alt="@Model.Title">
+
+            @if (Model.ShowHoverContent)
+            {
+                <figcaption>
+
+                    <div class="grid-y">
+                        <div class="cell auto vertical-align-middle">
+                            @if (!string.IsNullOrWhiteSpace(Model.HoverTitle))
+                            {
+                                <h3 class="text-center">@Model.HoverTitle</h3>
+                            }
+                            @if (Model.HoverTip != null)
+                            {
+                                <div class="text-center">
+                                    @Html.Raw(Model.HoverTip)
+                                </div>
+                            }
+                        </div>
+                        <div class="cell shrink">
+                            <div class="read-more btn">Learn More</div>
+                        </div>
+                    </div>
+
+                </figcaption>
+            }
+        </figure>
+    </a>
+
+    @if (Model.ShowCardContent)
+    {
+        <div class="card-content">
+            @if (!string.IsNullOrWhiteSpace(Model.PostDate))
+            {
+                <h6 class="date">@Model.PostDate</h6>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(Model.Title))
+            {
+                <a href="@Model.Link!.Url"><h3>@Model.Title</h3></a>
+            }
+
+            @if (Model.Summary != null)
+            {
+                <div>
+                    @Html.Raw(Model.Summary)
+                </div>
+            }
+        </div>
+    }
+</div>

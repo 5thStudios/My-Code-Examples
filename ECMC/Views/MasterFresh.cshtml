@@ -1,0 +1,115 @@
+﻿@using Umbraco.Cms.Core.WebAssets;
+@using Umbraco.Cms.Core.Web;
+@using ECMC_Umbraco.Models;
+@using Smidge;
+@using Microsoft.Extensions.Options
+@using Umbraco.Cms.Core.Configuration.Models
+@inject IUmbracoContextAccessor context;
+@inject IOptions<HostingSettings> hostingSettings
+@{
+    var debugMode = hostingSettings.Value.Debug;
+}
+
+
+@{
+    Layout = null;
+
+    //create body class
+    IPublishedContent ipModel = context.GetRequiredUmbracoContext().PublishedRequest!.PublishedContent!;
+    List<string> bodyClasses = new List<string>();
+    bodyClasses.Add(ipModel.ContentType.Alias.ToLower());
+    bodyClasses.Add(ipModel.UrlSegment()!.ToLower());
+    bodyClasses.Add("fresh");
+
+    //Smidge https://our.umbraco.com/forum/using-umbraco-and-getting-started/107906-smidge-cache-issue //
+    SmidgeHelper.CreateJsBundle("inline-js-bundle-fresh").RequiresJs(
+                    "~/js/jquery/jquery-3.7.1.js",
+                    "~/js/jquery/jquery-ui.min.js",
+                    "~/js/slick/slick.js",
+                    "~/js/scrollreveal/scrollreveal.js",
+                    "~/js/chart.js/chart.js",
+                    "~/js/dataTables/datatables.min.js",
+                    "~/js/chart.js/chart-utils.min.js",
+                    "~/js/chart.js/chartjs-plugin-datalabels.js",
+                    "~/js/simpleMaps/mapdata.js",
+                    "~/js/simpleMaps/usmap.js",
+                    "~/js/paginathing/paginathing.min.js",
+                    "~/js/zurb/what-input.js",
+                    "~/js/zurb/foundation.js",
+                    "~/js/zurb/popper.js",
+                    "~/js/aos/aos.js",
+                    "~/js/app.js");
+
+    SmidgeHelper.CreateCssBundle("inline-css-bundle-fresh").RequiresCss(
+        "~/css/font-awesome/css/all.css",
+        "~/css/accordion/jquery-ui.min.css",
+        "~/css/fresh.org/default.css");
+}
+
+
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+    @await Component.InvokeAsync(Common.ViewComponent.MetaAndAnalytics)
+    @await Component.InvokeAsync(Common.ViewComponent.Tooltips, new { ipCurrentPg = ipModel })
+
+
+    <!-- Inline Bundles -->
+    @await SmidgeHelper.JsHereAsync("inline-js-bundle-fresh", debug: @debugMode)
+    @await SmidgeHelper.CssHereAsync("inline-css-bundle-fresh", debug: @debugMode)
+    <!-- End Inline Bundles -->
+
+        <script type="module" src="/js/Countup/count-up-custom.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-28HWV5QHQ2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-28HWV5QHQ2');
+    </script>
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "https://ecmc.matomo.cloud/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '12']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = '//cdn.matomo.cloud/ecmc.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+
+
+</head>
+<body class="@String.Join(" ", bodyClasses.Distinct())">
+    <a class="show-on-focus" href="#mainContent">Skip to Content</a>
+
+    @await Component.InvokeAsync(Common.ViewComponent.Header, new { ipModel = ipModel, isMobile = true })
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-content" data-off-canvas-content>
+            @await Component.InvokeAsync(Common.ViewComponent.Header, new { ipModel = ipModel })
+            <main id="mainContent" role="main" tabindex="0">
+                <div data-equalizer="primary" data-equalize-on="medium" data-equalize-by-row="true">
+                    <div data-equalizer="secondary" data-equalize-on="medium" data-equalize-by-row="true">
+                        @RenderBody()
+                    </div>
+                </div>
+            </main>
+            @await Component.InvokeAsync(Common.ViewComponent.Footer, new { ipModel = ipModel, footerSelect = "footerB" })
+        </div>
+    </div>
+
+
+    @RenderSection("Footer", false)
+
+
+</body>
+</html>

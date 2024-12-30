@@ -1,0 +1,17 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<NoHeroA>>
+
+
+@{
+    //Determine if bottom padding should appear
+    string noBtmMrgn = string.Empty;
+    if (Model.Content.RemoveBottomPadding)
+    {
+        noBtmMrgn = "no-bottom-margin";
+    }
+}
+
+
+<div data-blockgrid="Components/noHero" class="hero empty  mbl-height-initial tbl-height-initial  @noBtmMrgn">
+</div>

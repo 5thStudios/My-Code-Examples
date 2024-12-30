@@ -1,0 +1,25 @@
+﻿@* @using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridArea>
+
+
+<div data-blockgrid="area" class="cell medium-@Model.ColumnSpan">
+    @await Html.GetBlockGridItemsHtmlAsync(Model)
+</div> *@
+
+
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridArea>
+@{
+    string gridSize = "cell medium-" + Model.ColumnSpan;
+
+    if (ViewBag.GridOverride != null && !string.IsNullOrEmpty(ViewBag.GridOverride))
+    {
+        gridSize = ViewBag.GridOverride;
+    }
+
+}
+
+
+<div data-blockgrid="area" class="@gridSize">
+    @await Html.GetBlockGridItemsHtmlAsync(Model)
+</div>

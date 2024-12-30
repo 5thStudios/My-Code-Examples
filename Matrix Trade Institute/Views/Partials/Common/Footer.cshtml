@@ -1,0 +1,128 @@
+﻿@using www.ViewModels;
+@model FooterViewModel;
+
+
+
+@{
+    //Determine dividing line for list
+    int counter = Model.LstFooterLinks.Count / 2;
+    if (Model.LstFooterLinks.Count % 2 > 0) { counter++; }
+}
+
+
+<footer>
+    <div class="grid-container">
+        <div class="grid-x grid-margin-y">
+            <div class="cell laptop-20 laptop-offset-2">
+
+                <div class="grid-x grid-margin-x small-margin-collapse">
+                    <div class="cell laptop-6">
+                        <a href="/">
+                            <img class="site-logo" src="@Model.SiteLogoUrl" alt="@Model.SiteName">
+                        </a>
+
+                        <div>
+                            <a href="/">
+                                <strong>@Model.SiteName</strong>
+                            </a>
+                        </div>
+                        <address>@Model.Address</address>
+                        <div>
+                            <strong>
+                            <a class="phone" href="tel:@Model.PhoneTel">
+                                <i class="fa-solid fa-phone-volume"></i> @Model.PhoneNo
+                            </a>
+                            <a href="mailto:@Model.ContactEmail">EMAIL US</a>
+                            </strong>
+                        </div>
+
+                    </div>
+                    <div class="cell  laptop-6">
+                        <p>Matrix Trade Institute is licensed under the Ohio State Board of Career Colleges and Schools Registration No. 2144</p>
+                        <div class="grid-x grid-margin-x align-bottom    medium-up-6  social">
+                           
+                           
+                           
+                           <div class="grid-x grid-margin-x align-bottom    medium-up-6  social">
+                                <div class="cell">
+                                    <a href="https://www.facebook.com/matrixtradeinstitute/" target="_blank">
+                                        <img src="/media/kucf1xzt/facebook-brands.svg" alt="Facebook">
+                                    </a>
+                                </div>
+                                <div class="cell">
+                                    <a href="https://twitter.com/matrixtradeins" target="_blank">
+                                        <img src="/media/xzcfd2pu/twitter-brands.svg" alt="Twitter">
+                                    </a>
+                                </div>
+                                <div class="cell">
+                                    <a href="https://www.tiktok.com/&#x40;matrix_trade" target="_blank">
+                                        <img src="/media/xzcfd2pu/tiktok-brands.svg" alt="tiktok">
+                                    </a>
+                                </div>
+                                <div class="cell">
+                                    <a href="https://www.linkedin.com/company/matrix-trade-institute/" target="_blank">
+                                        <img src="/media/io5n5y4k/linkedin-in-brands.svg" alt="LinkedIn">
+                                    </a>
+                                </div>
+                                <div class="cell">
+                                    <a href="https://www.youtube.com/channel/UCVv8DUthxJdcSKOKdmW9OAA" target="_blank">
+                                        <img src="/media/bjigbksl/youtube-brands.svg" alt="Youtube">
+                                    </a>
+                                </div>
+                                <div class="cell">
+                                    <a href="https://www.instagram.com/matrixtradeinstitute/" target="_blank">
+                                        <img src="/media/otsfsvpo/instagram-brands.svg" alt="Instagram">
+                                    </a>
+                                </div>
+                        </div>
+                        
+                        
+                        
+                        </div>
+
+                    </div>
+
+                    @if (Model.Bounce)
+                    {
+                        <nav class="cell  laptop-6">
+                            <ul class="list-unstyled footer-nav">
+                                @for (int i = 0; i < counter; i++)
+                                {
+                                    <li>
+                                        <a href="@Model.LstFooterLinks[i].Url" target="@Model.LstFooterLinks[i].Target">@Model.LstFooterLinks[i].Title</a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                        <nav class="cell  laptop-6">
+                            <ul class="list-unstyled footer-nav">
+                                @for (int i = counter; i < Model.LstFooterLinks.Count; i++)
+                                {
+                                    <li>
+                                        <a href="@Model.LstFooterLinks[i].Url" target="@Model.LstFooterLinks[i].Target">@Model.LstFooterLinks[i].Title</a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    }
+                    else
+                    {
+                        <nav class="cell  laptop-12">
+                            @Html.Raw(Model.CustomNavigation)
+                        </nav>
+                    }
+
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+<section class="copyright">
+    <div class="grid-x grid-padding-y">
+        <div class="cell text-center">
+            <p>&copy; @DateTime.Today.Year Matrix Trade Institute. All rights reserved.</p>
+        </div>
+    </div>
+</section>

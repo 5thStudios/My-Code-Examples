@@ -1,0 +1,60 @@
+﻿@using Umbraco.Extensions
+@* @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<GlobalMapBlock>> *@
+
+
+@* <section class="@Html.Raw(Model.Content?.OuterMostClass)" @Html.Raw(Model.Content?.OuterMostAttributes)>
+    <div class="@Html.Raw(Model.Content?.ContainerClasses)" @Html.Raw(Model.Content?.ContainerAttributes)>
+    </div>
+</section> *@
+
+
+
+<div class="umb-block-grid__layout-item map-footer" data-col-span="24" data-row-span="1" style=" --umb-block-grid--item-column-span: 24; --umb-block-grid--item-row-span: 1; ">
+
+<section class="cta map-block">
+
+    <img alt="" src="/media/xypncfqf/google-map-graphic.png" class="bgImg">
+    <div class="bgImgOverlay" style=""></div>
+
+        <div class="grid-container interior-wrap ">
+            <div class="grid-x   grid-margin-y grid-padding-y">
+                <div class="cell text-left dark-text textbox">
+                   <h4 class="heading">Cleveland Local & Proud!</h4>
+                   <div class="grey-text">
+                       <strong>MATRIX TRADE INSTITUTE</strong>
+                       <address>23632 Mercantile Road, <br />
+                       Beachwood, Ohio - 44122
+                       </address>
+                       <a href="https://maps.app.goo.gl/LfunrHzNSEf6ka4w8" target="_blank">Driving Directions</a>
+                       <br /><br /> 
+                       <strong>Tel:</strong> <a href="tel:+12169304225">216-930-4225</a> <br /> 
+                       <strong>Email:</strong> <a href="mailto:info@matrixtradeinstitute.com">info@matrixtradeinstitute.com</a> 
+                   </div>
+                </div>
+            </div>
+        </div>
+        
+</section>
+</div>
+
+<style scoped>
+    
+.map-footer { margin:0 0 0 0; padding: 0 0 0 0; } 
+.map-block { min-height:460px; } 
+.map-block .textbox {
+        padding: 30px 40px 40px 40px;
+    background: #fff;
+    position: absolute;
+    top: 35px;
+    width: 400px;
+    text-align: left;
+    right: 0;
+}
+.map-block .textbox .heading { font-size:22px; }
+.map-block .textbox div{     
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px; }
+</style>
+
+

@@ -1,0 +1,17 @@
+﻿@import'_variables-com';
+
+.breadcrumb-container { margin-top: 12px;
+    &:after { content: ""; margin-top: 5px; display: block; height: 1px; background-color: #75787b; }
+    ul { display: block; font-size: 0; box-sizing: border-box; list-style-type: none; margin: 0; padding: 0;
+        li { display: inline-block; box-sizing: border-box; vertical-align: top; font-size: 20px; margin-right: 10px;
+            a { font-size: 16px; color: #303133; text-decoration: none;
+                &:hover { color: #303133; }
+            }
+            &:after { display: inline-block; vertical-align: middle; margin-left: 10px; content: ""; font-family: "Font Awesome 6 Pro"; font-size: .5em; }
+            &:last-child {
+                a { font-weight: 600; }
+                &:after { display: none; }
+            }
+        }
+    }
+}

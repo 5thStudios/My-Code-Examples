@@ -1,0 +1,55 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Divided Teaser Block &nbsp;&nbsp;&nbsp;&nbsp;<strong>[E451]</strong></legend>
+
+
+        
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+
+                <tr>
+                    <td colspan="2">
+                        <div style="color: rgb(120 144 157); text-align: center; font-weight: 900; margin: 12px 0 0; "><strong>Panel Content</strong></div>
+                    </td>
+                </tr>
+                <tr ng-if="block.data.title">
+                    <td>Title</td>
+                    <td>{{block.data.title}}</td>
+                </tr>
+                <tr ng-if="block.data.subtitle">
+                    <td>Subtitle</td>
+                    <td>{{block.data.subtitle}}</td>
+                </tr>
+                <tr ng-if="block.data.content">
+                    <td>Content</td>
+                    <td>{{block.data.content}}</td>
+                </tr>
+
+
+
+                <tr ng-if="block.data.cellClass || block.data.cellAttributes">
+                    <td colspan="2">
+                        <div style="color: rgb(120 144 157); text-align: center; font-weight: 900; margin: 12px 0 0; "><strong>Cell Properties</strong></div>
+                    </td>
+                </tr>
+                <tr ng-if="block.data.cellClass">
+                    <td>Cell Classes</td>
+                    <td>{{block.data.cellClass}}</td>
+                </tr>
+                <tr ng-if="block.data.cellAttributes">
+                    <td>Cell Attributes</td>
+                    <td>{{block.data.cellAttributes}}</td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+
+
+    </fieldset>
+</div>
+<br />

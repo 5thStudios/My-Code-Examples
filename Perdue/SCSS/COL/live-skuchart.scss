@@ -1,0 +1,181 @@
+/* LIVE SKU CHART
+----------------------------------------------------------*/
+@media print, screen {
+    /*    html, body { margin: 0 auto; font-family: 'Open Sans',Arial,sans-serif; line-height: 1.5em; max-width: unset !important; }*/
+    .LiveSkuChart {
+        .header-center {
+            & > nav {
+                & > div {
+                    &:nth-child(3) {
+                        & > div {
+                            & > form {
+                                & > div {
+                                    & > input { margin: 0; }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .crumb-bg-nh { display: none; }
+        ul ul, ol ul, ul ol, ol ol { margin: initial; padding: revert; }
+        .container .content p, .container .content div { color: #543825; }
+        .liveSkuChart {
+            h2 { font-weight: 700; font-size: 25px !important; color: #143f6b; font-family: 'Montserrat',Arial,sans-serif; }
+        }
+        .chart-date, .chart-date div { font-size: 14px; font-weight: 400; opacity: 1; padding-right: 3px; color: #000 !important; }
+        .logo-banner { background-color: #7ebc42; height: 65px; text-align: center; margin-top: 45px; margin-bottom: 45px; color: #ffffff; font-size: 50px; display: flex; flex-direction: row; align-items: center; justify-content: center; /* align-content: center; */ flex-wrap: nowrap;
+            img { margin: -30px auto 0 auto; max-height: 110px; }
+            &.perdue-nae { background-color: #6fa0b3; }
+            &.perdue-nae-chicken---turkey { background-color: #6fa0b3; }
+            &.perdue-nae-turkey { background-color: #6fa0b3; }
+            &.coleman { background-color: #e12726; }
+        }
+
+        @media only screen and (max-width: 40em) {
+            .logo-banner { height: auto; display: grid; padding-bottom: 30px; line-height: 50px;
+                img { margin: -30px auto 20px auto; max-height: 110px; }
+            }
+        }
+
+
+        .table {
+            .grid-x { }
+            .cell { display: inline-table; border: 1px solid #a0a0a2; padding: 3px 9px;
+                div { display: table-cell; vertical-align: middle; }
+            }
+            .header {
+                background-color: #143f6b;
+                color: #ffffff;
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: 700;
+                div { color: #ffffff; font-weight: 700; }
+                @media only screen and (max-width: 40em) {
+                    div { /*font-size: 14px; line-height: 22px;*/ font-size: 3.2vw; line-height: 1em; }
+                }
+            }
+            .category { background-color: #6fa0b3; color: #ffffff; font-size: 20px; font-weight: 700;
+                div { color: #ffffff; font-weight: 700; }
+                .cell { border: 1px solid #6fa0b3; }
+            }
+            .subcategory { background-color: #7ebc42; color: #ffffff; font-size: 16px; font-weight: 700;
+                &.cvp { background-color: #ffcc33; color: #ffffff; font-size: 16px; font-weight: 700; text-indent: 24px; }
+                div { color: #ffffff; font-weight: 700; }
+            }
+            .content { font-size: 17px; line-height: 17px; color: #543825; }
+        }
+        .perdue-nae {
+            .table {
+                .subcategory { background-color: #6fa0b3; }
+            }
+        }
+        .perdue-nae-turkey {
+            .table {
+                .subcategory { background-color: #6fa0b3; }
+            }
+        }
+        .perdue-nae-chicken---turkey {
+            .table {
+                .subcategory { background-color: #6fa0b3; }
+            }
+        }
+        .coleman {
+            .table {
+                .header { background-color: #231f20; }
+                .subcategory { background-color: #00853f;
+                    &.cvp { background-color: #d59f0f; }
+                }
+            }
+        }
+
+
+
+
+
+        @media only screen and (min-width: 64.063em) { /* All Large screens | min-width 1025px */ .table {
+                .header {
+                    .cell {
+                        &:nth-child(1) { border-right-color: #ffffff; }
+                        &:nth-child(2) { border-right-color: #ffffff; border-left-color: #ffffff; }
+                        &:nth-child(3) { border-right-color: #ffffff; border-left-color: #ffffff; }
+                        &:nth-child(4) { border-right-color: #ffffff; border-left-color: #ffffff; }
+                        &:nth-child(5) { border-left-color: #ffffff; }
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: 63.9375em) { /* All screens | max-width 1023px */ .table {
+                .content {
+                    &.grid-x { border: 3px solid #a0a0a2; border-top-style: none;
+                        .cell { border: 1px solid #e5e5e5; border-top-style: none; border-left-style: none; }
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: 40em) { /* All Small screens | max-width 640px, mobile-only styles */ .table {
+                .header { font-size: 12px; line-height: 14px; font-weight: 400; }
+                .content {
+                    div { font-size: 4vw; line-height: 1.25em; }
+                }
+            }
+        }
+
+        @media only screen and (max-width: 23.375em) { /* Small screens [Chrome small] | max-width 374px */ .table {
+                .header { font-size: 9px; line-height: 11px; font-weight: 400; }
+                .content {
+                    div { font-size: 4vw; line-height: 1.25em; }
+                }
+            }
+        }
+
+
+        @media only screen and (max-width: 48em) { /* <= 768px */ .liveSkuChart h2 { font-size: 5.5vw !important; }
+        }
+
+        @media only screen and (min-width: 48.0625em) and (max-width: 80em) { /* 769px ==> 1280px */ .liveSkuChart h2 { font-size: 2.5vw !important; }
+        }
+        /*----------------------------------------------------------
+    Miscellanious
+    ----------------------------------------------------------*/
+        .avg-font { font-weight: 900; font-size: 16px; }
+    }
+}
+
+
+@media print {
+    /*body { -webkit-print-color-adjust: exact !important; color-adjust: exact !important; }*/
+    .LiveSkuChart {
+        .hide-for-small-only { display: inline !important; }
+        a, a:link, a:visited, a:hover, a:focus { color: #70A0B4; text-decoration: none; font-weight: 400; }
+        .table {
+            .category { font-size: 24px; line-height: 40px; color: #000000; background-color: #ffffff;
+                .cell { border-width: 0; }
+            }
+            .grid-x {
+                .cell { border-width: 0 1px 0 0; border-color: #cfcfcf;
+                    &:last-of-type { border-width: 0; }
+                }
+            }
+            .content { color: #000;
+                &.grid-x { padding-top: 0; padding-bottom: 0; border-width: 0 1px 1px 1px; border-color: #cfcfcf; border-style: solid;
+                    .cell {
+                        &:nth-of-type(3) {
+                            div { padding-left: 12px; padding-right: 12px; }
+                        }
+                        div { padding-top: 6px; padding-bottom: 6px; height: 100%; }
+                    }
+                }
+            }
+            .header { font-size: 12px; border-width: 1px 1px 1px 1px; border-color: #cfcfcf; border-style: solid; color: #000000; background-color: #f1f1f1; }
+            .subcategory { border-width: 1px 1px 1px 1px; border-color: #cfcfcf; border-style: solid; font-size: 17px; line-height: 26px; color: #000000; background-color: #cfcfcf;
+                &.cvp { color: #000000; background-color: #adadad; }
+            }
+        }
+        .table .category.grid-x, .table .subcategory.grid-x { padding-left: 6px; padding-right: 6px; }
+        .print-pad-top { padding-top: 10px; }
+    }
+}

@@ -1,0 +1,56 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<Layout_x24, ColumnSettings>>
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+
+@{
+    //
+    string rowPadding = "";
+    if (!string.IsNullOrEmpty(Model.Settings.RowPadding))
+    {
+        rowPadding = Common.ConvertRowPadding(Model.Settings.RowPadding ?? "");
+    }
+    string rowMargin = "";
+    if (!string.IsNullOrEmpty(Model.Settings.RowMargin))
+    {
+        rowMargin = Common.ConvertRowMargin(Model.Settings.RowMargin ?? "");
+    }
+
+    //Extract optional classes
+    string optionalSectionClasses = String.Join(" ", Model.Settings.OptionalSectionClasses?.ToArray());
+    string optionalContainerClasses = String.Join(" ", Model.Settings.OptionalContainerClasses?.ToArray());
+    string optionalRowClasses = String.Join(" ", Model.Settings.OptionalRowClasses?.ToArray());
+    string optionalCellClasses = String.Join(" ", Model.Settings.OptionalCellClasses?.ToArray());
+
+
+
+    //Obtain background Properties
+    string bgColor = "";
+    if (!string.IsNullOrEmpty(Model.Settings.BackgroundColor))
+    {
+        bgColor = "background-color: " + Model.Settings.BackgroundColor + " !important;";
+    }
+
+    //Obtain background Image
+    string bgImage = ""; 
+    if (Model.Settings.BackgroundImage != null)
+    {
+        bgImage = "background-image:url('" + Model.Settings.BackgroundImage.Url() + "'); background-size:cover; background-position: center center;";
+        if (Model.Settings.WhiteText)
+        {
+            optionalCellClasses += " text-white";
+        }
+    }
+
+
+}
+
+
+<section data-blockgrid="Components/Layout_x24" class="layout @Model.Settings.SectionClasses @rowPadding @rowMargin  @optionalSectionClasses" style="@bgColor">
+    <div class="grid-container @Model.Settings.GridContainerClasses @optionalContainerClasses">
+        <div class="grid-x   @Model.Settings.GridXclasses  @optionalRowClasses" style="@bgImage">
+            <div class="cell  @Model.Settings.CellClasses  @optionalCellClasses">
+                @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+            </div>
+        </div>
+    </div>
+</section>

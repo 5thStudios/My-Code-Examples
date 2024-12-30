@@ -1,0 +1,39 @@
+﻿<style>
+    legend { color: #ff1600; }
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Image Link</legend>
+
+        {{image = (block.data.image[0].mediaKey | mediaItemResolver); ""}}
+        {{linkName = (block.data.link[0].name); ""}}
+        {{linkUrl = (block.data.link[0].url); ""}}
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+
+                <tr>
+                    <td>Link URL</td>
+                    <td>
+                        <span>{{linkName}}</span>
+                        <span ng-if="linkUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{linkUrl}}</em></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Image</td>
+                    <td><img ng-src="{{image.mediaLink}}" style="max-width: 100px; height:auto;" /></td>
+                </tr>
+
+                <tr ng-if="block.data.crop">
+                    <td>Image Crop</td>
+                    <td>{{block.data.crop}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

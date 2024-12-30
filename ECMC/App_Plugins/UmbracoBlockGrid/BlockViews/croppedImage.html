@@ -1,0 +1,28 @@
+﻿<style>
+    legend { color: #ff1600; }
+</style>
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Cropped Image</legend>
+        <br />
+
+        {{mediaItem = (block.data.image[0].mediaKey | mediaItemResolver); ""}}
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Image</td>
+                    <td>
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-height:125px; width:auto;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Crop</td>
+                    <td>{{block.data.crop}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

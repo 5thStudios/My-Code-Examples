@@ -1,0 +1,58 @@
+﻿@model IPublishedContent;
+@inject IPublishedValueFallback PublishedValueFallback;
+@using www.Models.PublishedModels;
+@using www.Models;
+@using System.Text;
+@{
+    LocationPage cmLocation = new LocationPage(Model, PublishedValueFallback);
+    string imgUrl = cmLocation.LocationImage?.GetCropUrl(Common.Crop.Card_1100x600) ?? "";
+
+    StringBuilder sbAddress = new StringBuilder();
+    if (!string.IsNullOrEmpty(cmLocation.City))
+    {
+        sbAddress.Append(cmLocation.City.Trim() + ", ");
+    }
+    if (!string.IsNullOrEmpty(cmLocation.State))
+    {
+        sbAddress.Append(cmLocation.State.Trim() + " ");
+    }
+    sbAddress.Append(cmLocation.ZipCode?.Trim());
+
+    //Create phone number strings
+    string? phoneNo = null;
+    if (!string.IsNullOrWhiteSpace(cmLocation.PhoneNumber))
+    {
+        phoneNo = string.Concat(cmLocation.PhoneNumber!.Where(Char.IsDigit));
+        if (phoneNo.Length == 10)
+        {
+            phoneNo = "1" + phoneNo;
+        }
+    }
+}
+
+
+
+<a href="@cmLocation.Url()">
+    <div class="card location" data-equalizer-watch="card">
+        <div class="card-image">
+            <img src="@imgUrl">
+        </div>
+        <div class="card-header">
+            <span>View Location</span>
+        </div>
+        <div class="card-section">
+            <div class="title">@cmLocation.Name?.Trim()</div>
+            @if (!string.IsNullOrWhiteSpace(cmLocation.Address))
+            {
+                <div class="content">@cmLocation.Address?.Trim()</div>
+            }
+            <div class="content">@sbAddress.ToString()</div>
+            @if (!string.IsNullOrWhiteSpace(@phoneNo))
+            {
+                <div class="content">
+                    <a href="tel:@phoneNo">@cmLocation.PhoneNumber</a>
+                </div>
+            }
+        </div>
+    </div>
+</a>

@@ -1,0 +1,66 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<HeroImageA>>
+
+@{
+    //Instantiate variables
+    var cmModel = Model.Content;
+    string bgImg = "";
+    string noBtmMrgn = string.Empty;
+
+
+
+    //Obtain background image and height
+    if (cmModel.BackgroundImage is not null)
+    {
+        bgImg = cmModel.BackgroundImage?.GetCropUrl(Common.Crop.Hero_1903x900, UrlMode.Absolute) ?? string.Empty;
+    }
+
+    //Determine if bottom padding should appear
+    if (cmModel.RemoveBottomPadding)
+    {
+        noBtmMrgn = "no-bottom-margin";
+    }
+
+    //If home page, change laptop/large 8 to 10
+    string widthClasses = "small-12 small-offset-2    medium-10 medium-offset-2   laptop-8 laptop-offset-2   large-8 large-offset-2";
+    if (Umbraco.AssignedContentItem.ContentType.Alias == "homeEIF")
+    {
+        widthClasses = "small-12 small-offset-2    medium-10 medium-offset-2   laptop-10 laptop-offset-2   large-10 large-offset-2";
+    }
+}
+
+
+<div data-blockgrid="Components/heroImage" class="hero imageCover mbl-height-initial tbl-height-initial  @noBtmMrgn" style="height:@cmModel.HeroHeight;  background-image: url('@bgImg');   ">
+
+    <div class="grid-container">
+        <div class="grid-x align-middle mbl-height-initial tbl-height-initial" style=" height: @cmModel.HeroHeight; ">
+            <div class="cell   @widthClasses ">
+
+                <div class="content">
+                    @if (!string.IsNullOrWhiteSpace(cmModel.IntroHeadline))
+                    {
+                        <h2>@Html.Raw(cmModel.IntroHeadline)</h2>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(cmModel.Headline))
+                    {
+                        <h1>@Html.Raw(cmModel.Headline)</h1>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(cmModel.SubHeadline))
+                    {
+                        <h2>@Html.Raw(cmModel.SubHeadline)</h2>
+                    }
+
+
+                    @if (!string.IsNullOrWhiteSpace(cmModel.CallToAction?.Name))
+                    {
+                        <p><a class="link-button" target="@cmModel.CallToAction.Target" href="@cmModel.CallToAction.Url">@cmModel.CallToAction.Name</a></p>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

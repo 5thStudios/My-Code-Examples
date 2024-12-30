@@ -1,0 +1,71 @@
+﻿@using Umbraco.Cms.Core.Models.Blocks;
+@using cm = Umbraco.Cms.Web.Common.PublishedModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<Quote>>
+
+@{
+    //Format overlay color(s)
+    string overlayColor = "";
+    if (!string.IsNullOrWhiteSpace(Model.Content.OverlayColor))
+    {
+        overlayColor = string.Format("background-color: {0} !important;", Model.Content.OverlayColor);
+    }
+
+    string direction = "90deg";
+    if (Model.Content.GradientDirection)
+    {
+        //Change to vertical direction
+        direction = "180deg";
+    }
+
+    if (!string.IsNullOrWhiteSpace(Model.Content.OverlayGradientColorA) && !string.IsNullOrWhiteSpace(Model.Content.OverlayGradientColorB))
+    {
+        overlayColor = string.Format("background: linear-gradient({0}, {1}, {2});", direction, Model.Content.OverlayGradientColorA, Model.Content.OverlayGradientColorB);
+    }
+}
+
+
+
+
+<div class="quotePnl 	@Html.Raw(Model.Content?.OuterMostClass)" @Html.Raw(Model.Content?.OuterMostAttributes) style="position:relative;">
+    @Html.Raw(Model.Content?.CustomScripts)
+
+    <div class="@Html.Raw(Model.Content?.ContainerClasses)" @Html.Raw(Model.Content?.ContainerAttributes) style="position: relative; z-index:9;">
+        <div class="grid-x grid-margin-y grid-padding-x grid-padding-y">
+
+            <div class="cell laptop-14 laptop-offset-5 text-center">
+
+                <br />
+                <div class="quote-bar">
+                    <i class="fa-solid fa-quote-left"></i>
+                </div>
+
+                <p class="quote">@Html.Raw(Model.Content?.QuoteText)</p>
+
+                <div class="quote-bar">
+                    <i class="fa-solid fa-quote-right"></i>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(Model.Content?.AuthorName))
+                {
+                <p class="author">@Html.Raw(Model.Content?.AuthorName)</p>                    
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Model.Content?.AuthorTitle))
+                {
+                <p class="title">@Html.Raw(Model.Content?.AuthorTitle)</p>
+                }
+
+                <br />
+
+            </div>
+        </div>
+    </div>
+
+
+    @if (Model.Content?.BackgroundImage != null)
+    {
+        <img alt="" src="@Model.Content.BackgroundImage.Url()" class="bgImg" />
+    }
+    <div class="bgImgOverlay" style="@overlayColor"></div>
+</div>

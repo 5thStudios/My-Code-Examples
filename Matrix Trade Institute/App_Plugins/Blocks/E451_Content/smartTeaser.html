@@ -1,0 +1,216 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Smart Teaser &nbsp;&nbsp;&nbsp;&nbsp;<strong>[E451]</strong></legend>
+
+
+
+        {{bgMediaItem = (block.data.backgroundImage[0].mediaKey | mediaItemResolver); ""}}
+
+        <table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 75%; vertical-align: top;">
+
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+
+
+                                <tr>
+                                    <td> </td>
+                                    <td colspan="4">
+                                        <div style="color: rgb(120 144 157); text-align: left; font-weight: 900; margin: 12px 0 0; "><strong>Panel Content</strong></div>
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="block.data.headingContent">
+                                    <td>Content</td>
+                                    <td colspan="4">
+                                        <textarea rows="6" style="width: 100%;">{{block.data.headingContent}}</textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Outer-Most Data </td>
+                                    <td> Class: </td>
+                                    <td style="text-align: left; color: black;">{{record.outerMostClass}}</td>
+                                    <td> Attributes: </td>
+                                    <td style="text-align: left; color: black;">{{record.outerMostAttributes}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Container Data </td>
+                                    <td> Class: </td>
+                                    <td style="text-align: left; color: black;">{{record.containerClass}}</td>
+                                    <td> Attributes: </td>
+                                    <td style="text-align: left; color: black;">{{record.containerAttributes}}</td>
+                                </tr>
+
+                                <tr ng-if="block.data.customScripts">
+                                    <td>Content</td>
+                                    <td colspan="4">
+                                        <textarea rows="6" style="width: 100%;">{{block.data.customScripts}}</textarea>
+                                    </td>
+                                </tr>
+
+
+
+
+
+
+
+                                <tr>
+                                    <td> </td>
+                                    <td colspan="4">
+                                        <div style="color: rgb(120 144 157); text-align: left; font-weight: 900; margin: 12px 0 0; "><strong>Background Design</strong></div>
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.overlayColor">
+                                    <td>Overlay Color</td>
+                                    <td colspan="4">
+                                        <span class="colorBlock" style="background-color: {{block.data.overlayColor}};"></span> {{block.data.overlayColor}}
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.overlayGradientColorA">
+                                    <td>Gradient Direction</td>
+                                    <td colspan="4" ng-If="block.data.gradientDirection == 0">Horizontal</td>
+                                    <td colspan="4" ng-If="block.data.gradientDirection == 1">Vertical</td>
+                                </tr>
+                                <tr ng-if="block.data.overlayGradientColorA">
+                                    <td>Overlay Gradient Color- A</td>
+                                    <td>
+                                        <div>
+                                            <span class="colorBlock" style="background-color: {{block.data.overlayGradientColorA}};"></span> {{block.data.overlayGradientColorA}}
+                                        </div>
+                                    </td>
+                                    <td>Overlay Gradient Color- B</td>
+                                    <td colspan="2">
+                                        <div>
+                                            <span class="colorBlock" style="background-color: {{block.data.overlayGradientColorB}};"></span> {{block.data.overlayGradientColorB}}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr ng-if="bgMediaItem">
+                                    <td>Background Image</td>
+                                    <td colspan="4">
+                                        <img ng-src="{{bgMediaItem.mediaLink}}" style="max-width: 150px; height:auto;" />
+                                    </td>
+                                </tr>
+
+
+
+
+
+
+                            </tbody>
+                        </table>
+
+
+
+                        <table ng-repeat="record in block.data.smartTeaserBlocks.contentData" class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td colspan="5">
+                                        <br />
+                                        <h4><strong>Block</strong></h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> </td>
+                                    <td colspan="4">
+                                        <div style="color: rgb(120 144 157); font-weight: 900; margin: 0; "><strong>Content</strong></div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Teaser Image</td>
+                                    <td colspan="4">
+                                        {{teaserImage = (record.teaserImage[0].mediaKey | mediaItemResolver); ""}}
+                                        <img ng-src="{{teaserImage.mediaLink}}" style="max-width: 150px; height:auto;" />
+                                    </td>
+                                </tr>
+                                <tr ng-if="record.altText">
+                                    <td>Alt Text</td>
+                                    <td colspan="4">{{record.altText}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Image Position</td>
+                                    <td colspan="4" ng-If="record.showAfterContent == 0">Before Content</td>
+                                    <td colspan="4" ng-If="record.showAfterContent == 1">After Content</td>
+                                </tr>
+                                <tr ng-if="record.content">
+                                    <td>Content</td>
+                                    <td colspan="4">{{record.content}}</td>
+                                </tr>
+
+
+                                <tr>
+                                    <td> </td>
+                                    <td colspan="4">
+                                        <br />
+                                        <div style="color: rgb(120 144 157); font-weight: 900; margin: 0; "><strong>Position</strong></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Small </td>
+                                    <td> Width: </td>
+                                    <td style="text-align: left; color: black;">{{record.columnWidthSmall[0]}}</td>
+                                    <td> Offset: </td>
+                                    <td style="text-align: left; color: black;">{{record.columnOffsetSmall[0]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Medium </td>
+                                    <td> Width: </td>
+                                    <td style="text-align: left; color: black;">{{record.columnWidthMedium[0]}}</td>
+                                    <td> Offset: </td>
+                                    <td style="text-align: left; color: black;">{{record.columnOffsetMedium[0]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Large </td>
+                                    <td> Width: </td>
+                                    <td style="text-align: left; color: black;">{{record.columnWidthLarge[0]}}</td>
+                                    <td> Offset: </td>
+                                    <td style="text-align: left; color: black;">{{record.columnOffsetLarge[0]}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </td>
+                    <td style="width: 25%; vertical-align: top; text-align: center;">
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        <h4>Examples from E451</h4>
+                                        <div>
+                                            <img ng-src="/images/screenshots/smartTeaser.jpg" style="width: 250px; max-width: 250px; height: auto;" />
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <div>
+                                            <img ng-src="/images/screenshots/smartTeaser02.jpg" style="width: 250px; max-width: 250px; height: auto;" />
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <div>
+                                            <img ng-src="/images/screenshots/smartTeaser02B.jpg" style="width: 250px; max-width: 250px; height: auto;" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </fieldset>
+</div>
+<br />

@@ -1,0 +1,101 @@
+﻿@using Umbraco.Cms.Core.Models.Blocks;
+@using cm = Umbraco.Cms.Web.Common.PublishedModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<SmartTeaser>>
+
+@{
+    //Format overlay color(s)
+    string overlayColor = "";
+    if (!string.IsNullOrWhiteSpace(Model.Content.OverlayColor))
+    {
+        overlayColor = string.Format("background-color: {0} !important;", Model.Content.OverlayColor);
+    }
+
+    string direction = "90deg";
+    if (Model.Content.GradientDirection)
+    {
+        //Change to vertical direction
+        direction = "180deg";
+    }
+
+    if (!string.IsNullOrWhiteSpace(Model.Content.OverlayGradientColorA) && !string.IsNullOrWhiteSpace(Model.Content.OverlayGradientColorB))
+    {
+        overlayColor = string.Format("background: linear-gradient({0}, {1}, {2});", direction, Model.Content.OverlayGradientColorA, Model.Content.OverlayGradientColorB);
+    }
+}
+
+
+
+<div class="smartTeaserPanel 	@Html.Raw(Model.Content?.OuterMostClass)" @Html.Raw(Model.Content?.OuterMostAttributes) style="position:relative;">
+    @* grid-container *@
+    @Html.Raw(Model.Content.CustomScripts)
+
+
+
+    <div class="@Html.Raw(Model.Content?.ContainerClasses)" @Html.Raw(Model.Content?.ContainerAttributes) style="position: relative; z-index:9;">
+        @* interior-wrap *@
+        <div class="grid-x grid-margin-y grid-padding-x grid-padding-y">
+
+            @if (!string.IsNullOrWhiteSpace(Model.Content.HeadingContent))
+            {
+                <div class="cell text-center HeadingContent">
+                    @Html.Raw(Model.Content.HeadingContent)
+                </div>
+            }
+
+
+            @foreach (var _block in Model.Content.SmartTeaserBlocks)
+            {
+                //Get teaser block model
+                var cmBlk = new cm.SmartTeaserBlock(_block.Content, PublishedValueFallback);
+
+
+                if (Model.Content.SmartTeaserBlocks.Count == 1)
+                {
+                    <div class="cell  SmartTeaserBlock small-@cmBlk.ColumnWidthSmall small-offset-@cmBlk.ColumnOffsetSmall   medium-@cmBlk.ColumnWidthMedium medium-offset-@cmBlk.ColumnOffsetMedium   large-@cmBlk.ColumnWidthLarge large-offset-@cmBlk.ColumnOffsetLarge">
+                        <div class="grid-x grid-margin-y grid-padding-x grid-padding-y">
+                            @if (!cmBlk.ShowAfterContent)
+                            {
+                                <div class="cell medium-12 align-center-middle">
+                                    <img alt="@cmBlk.AltText" src="@cmBlk.TeaserImage?.Url()" style="width:100%; height:auto;" />
+                                </div>
+                            }
+                            <div class="cell medium-12 align-center-middle">
+                                @Html.Raw(cmBlk.Content)
+                            </div>
+                            @if (cmBlk.ShowAfterContent)
+                            {
+                                <div class="cell medium-12 align-center-middle">
+                                    <img alt="@cmBlk.AltText" src="@cmBlk.TeaserImage?.Url()" style="width:100%; height:auto;" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="cell SmartTeaserBlock align-center-middle  small-@cmBlk.ColumnWidthSmall small-offset-@cmBlk.ColumnOffsetSmall   medium-@cmBlk.ColumnWidthMedium medium-offset-@cmBlk.ColumnOffsetMedium   large-@cmBlk.ColumnWidthLarge large-offset-@cmBlk.ColumnOffsetLarge">
+                        @if (!cmBlk.ShowAfterContent)
+                        {
+                            <img alt="@cmBlk.AltText" src="@cmBlk.TeaserImage?.GetCropUrl(www.Models.Common.Crop.Portrait_600x400))" style="width:100%; height:auto;" />
+                        }
+                        @Html.Raw(cmBlk.Content)
+                        @if (cmBlk.ShowAfterContent)
+                        {
+                            <img alt="@cmBlk.AltText" src="@cmBlk.TeaserImage?.GetCropUrl(www.Models.Common.Crop.Portrait_600x400))" style="width:100%; height:auto;" />
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+
+    @if (Model.Content.BackgroundImage != null)
+    {
+        <img alt="" src="@Model.Content.BackgroundImage.Url()" class="bgImg" />
+    }
+    <div class="bgImgOverlay" style="@overlayColor"></div>
+
+
+</div>

@@ -1,0 +1,12 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.YearFolderAR>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterAR.cshtml";
+}
+
+<div class="home">
+    @await Html.GetBlockGridHtmlAsync(Model.HeroBlockGrid)
+    @await Html.GetBlockGridHtmlAsync(Model.ContentBlockGrid)
+    @await Html.GetBlockGridHtmlAsync(Model.ContentBottomBlockGrid)
+</div>

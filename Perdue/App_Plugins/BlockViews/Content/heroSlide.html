@@ -1,0 +1,55 @@
+﻿<style>
+    legend { color: #ff1600; }
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Hero Slide</legend>
+
+        {{backgroundImg = (block.data.BackgroundImage[0].mediaKey | mediaItemResolver); ""}}
+        {{overlaidImg = (block.data.OverlaidImage[0].mediaKey | mediaItemResolver); ""}}
+        {{linkName = (block.data.Link[0].name); ""}}
+        {{linkUrl = (block.data.Link[0].url); ""}}
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Background</td>
+                    <td><img ng-src="{{backgroundImg.mediaLink}}" style="max-width: 140px; height:auto;" /></td>
+                </tr>
+
+                <tr>
+                    <td>Slide Content</td>
+                    <td>{{block.data.Content}}</td>
+                </tr>
+
+                <tr>
+                    <td>Link URL</td>
+                    <td>
+                        <span>{{linkName}}</span>
+                        <span ng-if="linkUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{linkUrl}}</em></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><br /></td>
+                </tr>
+
+                <tr>
+                    <td>Dark Overlay &nbsp; &nbsp; &nbsp;</td>
+                    <td>{{block.data.darkOverlay == true ? "Yes" : "No"}}</td>
+                </tr>
+                <tr>
+                    <td>Overlaid Text</td>
+                    <td>{{block.data.overlaidText}}</td>
+                </tr>
+                <tr valign="top">
+                    <td>Overlaid Image</td>
+                    <td><img ng-src="{{overlaidImg.mediaLink}}" style="max-width: 100px; height:auto; background-color:rgba(0, 0, 0, 0.10);" /></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

@@ -1,0 +1,5 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<RichTextEditor>>
+@using ContentModels = www.Models.PublishedModels;
+
+
+<div data-blockgrid="Components/richTextEditor" class="rich-text">@Model.Content.Rte</div>

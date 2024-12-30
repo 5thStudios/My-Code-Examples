@@ -1,0 +1,27 @@
+﻿@import'../common-B/_variables-com';
+
+
+/* Lists and Items
+----------------------------------------------------------*/
+.list-icon-left-txt-right { margin-bottom: 20px;
+    h2 { }
+    .item {
+        img { }
+        h3 { }
+        p { }
+        ul {   }
+    }
+
+    &.tealHeadline {
+        .item {
+            h3 { color: $color_glob_teal }
+        }
+    }
+
+    .showDividers {
+        .item { border-top: 1px solid $color_glob_gray_400; }
+        &.hideTopDivider {
+            .item:nth-child(-n+2) { border-top: 1px solid $color_glob_gray_400; }
+        }
+    }
+}

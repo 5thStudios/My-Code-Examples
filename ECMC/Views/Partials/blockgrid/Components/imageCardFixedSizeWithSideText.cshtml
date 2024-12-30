@@ -1,0 +1,15 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ImageCardFixedSizeWithSideText>>
+
+
+
+<div data-blockgrid="Components/ImageCardFixedSizeWithSideText">
+    <div class="grid-x grid-margin-y">
+        <div class="cell small-24">
+            @await Html.PartialAsync(Common.Partial.ImageCardFixedSizeWithSideText, Model.Content)
+        </div>
+    </div>
+</div>

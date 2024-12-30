@@ -1,0 +1,119 @@
+/* HERO
+----------------------------------------------------------*/
+.hero-carousel {
+    .orbit {
+        .breadcrumb-pnl { position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+            ul { margin: 0 0 0 45px; padding: 10px 16px; list-style: none; background-color: #004b7e; color: #fff; display: inline-block; overflow: hidden; max-width: 1151px; white-space: nowrap; text-overflow: ellipsis;
+                li { display: inline-block; text-transform: uppercase; padding-left: 10px;
+                    &.active { text-decoration: none; color: #fff; }
+                    a { color: #fff; text-decoration: none;
+                        &:hover { text-decoration: underline; }
+                    }
+                    .fa-caret-right { color: #fff; }
+                }
+            }
+        }
+        .orbit-wrapper {
+            .orbit-controls {
+                button { font-size: 40px; opacity: .65;
+                    .svg-btn { height: 64px; }
+                    &:hover { opacity: 1; background-color: transparent; }
+                }
+                @media only screen and (max-width: 40em) {
+                    button { display: none; }
+                }
+            }
+            .orbit-container {
+                li.orbit-slide {
+                    @media only screen and (max-width: 40em) {
+                        > .grid-container { padding: 0; }
+                    }
+                    figure {
+                        img { }
+
+                        figcaption {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            background-color: transparent;
+                            .grid-container { height: 100%;
+                                .grid-x { height: 100%; }
+                            }
+
+                            h1 { font-size: 4.3vw; line-height: 4vw; font-weight: 700; text-shadow: 4px 4px 15px rgba(0,0,0,.7); text-transform: uppercase;
+                                sup { top: -30px !important; }
+                            }
+                            h3 { color: #fff; font-size: 33px; line-height: 38px; }
+                            .sysco { padding: 12px 6px 30px; background-color: rgba(0,0,0,.3); width: 50%; margin: 14px auto;
+                                img { width: 260px; /*margin-top: -40px;*/ margin-bottom: -36px; }
+                            }
+                            @media only screen and (max-width: 40em) {
+                                .sysco { width: unset;
+                                    img { margin-top: -50px; margin-bottom: -60px; position: unset; width: 100%; max-width: 200px; object-fit: contain; }
+                                    h3 { font-size: 26px; line-height: 28px; }
+                                }
+                            }
+                            @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+                                h1 { /*font-size: 3.3vw; line-height: 3vw;*/ }
+                                .sysco { width: unset; padding: 3px 6px 3px;
+                                    img { width: 120px; margin-top: -16px; margin-bottom: 0px; }
+                                    h3 { font-size: 20px; line-height: 24px; }
+                                }
+                            }
+                            @media only screen and (min-width: 64.001em) and (max-width: 90em) {
+                                .sysco {
+                                    img { width: 200px; margin-top: -30px; margin-bottom: -36px; }
+                                }
+                            }
+
+                            p { color: #fff; }
+                        }
+                    }
+                    .carousel-logo { top: 24px; right: 24px; position: absolute;
+                        img { width: 200px; height: auto; }
+                    }
+                    .carousel-text-overlay { bottom: 24px; right: 24px; position: absolute; color: #fff; font-size: 30px; line-height: 40px; font-weight: 900;
+                        &.dark-txt { color: #004b7e; }
+                    }
+                }
+
+                @media only screen and (max-width: 40em) { overflow: unset;
+                    li.orbit-slide {
+                        figure {
+                            img { position: absolute; height: 100%; min-height: 150px; object-fit: cover; object-position: center;
+                                &.hero-icon { }
+                            }
+                            figcaption { position: relative;
+                                .grid-x { min-height: 150px;
+                                    img.hero-icon { height: 36px; min-height: auto; position: unset; }
+                                    p { display: flex; justify-content: center; flex-direction: row; font-size: 16px; }
+                                    h1 { font-size: 7vw; line-height: 7vw; }
+                                }
+                            }
+                        }
+                        .carousel-logo { display: none; /*img { width: 100px; }*/ }
+                        .carousel-text-overlay { display: none; }
+                    }
+                }
+                @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+                    li.orbit-slide {
+                        figure {
+                            img {
+                                &.hero-icon { }
+                            }
+                            figcaption {
+                                .grid-x {
+                                    img.hero-icon { width: 65px; }
+                                    p { }
+                                    h1 { }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

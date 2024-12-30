@@ -1,0 +1,23 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend><strong>[Static Content]</strong> &nbsp;&nbsp;&nbsp;&nbsp;Why Matrix</legend>
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+
+                <tr>
+                    <td>Static Screenshot</td>
+                    <td>
+                        {{mediaItem = (block.data.screenshot[0].mediaKey | mediaItemResolver); ""}}
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width: 800px; height:auto;" />
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

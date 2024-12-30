@@ -1,0 +1,8 @@
+﻿{
+  "name": "Umbraco Block Controllers",
+  "version": "1.0.0",
+  "allowPackageTelemetry": true,
+  "javascript": [
+    "~/App_Plugins/Blocks/bootcamp.controller.js"
+  ]
+}

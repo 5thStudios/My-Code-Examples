@@ -1,0 +1,42 @@
+﻿@using Umbraco.Extensions;
+@using Umbraco.Forms.Web;
+@using Umbraco.Forms.Web.Extensions;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<Form>>
+
+@* https://our.umbraco.com/forum/using-umbraco-and-getting-started/111826-render-forms-in-block-element *@
+@{
+    var cmModel = Model.Content;
+    var formIdVal = cmModel.FormPicker;
+}
+
+
+
+@* FORM PICKER *@
+@if (cmModel.FormPicker != null)
+{
+    @Html.RenderUmbracoFormDependencies(Url)
+
+
+    <div class="form-background ">
+        <div class="grid-container form-background ">
+            <div class="grid-x">
+                <div class="cell small-20 small-offset-2">
+                    @if (cmModel.FormPicker is Guid formId)
+                    {
+                        @if (!string.IsNullOrEmpty(cmModel.Title))
+                        {
+                            <br />
+                                <h2>@cmModel.Title</h2>
+                        }                    
+                        <umb-forms-render form-id="@formId" theme="default" exclude-scripts="true" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+

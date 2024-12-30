@@ -1,0 +1,50 @@
+﻿<style>
+    
+</style>
+
+
+<fieldset>
+    <legend>Hero without Image</legend>
+    <div ng-click="block.edit()" ng-focus="block.focus">
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Intro Headline</td>
+                    <td>{{block.data.introHeadline}}</td>
+                </tr>
+                <tr>
+                    <td>Headline</td>
+                    <td>{{block.data.headline}}</td>
+                </tr>
+                <tr>
+                    <td>Sub Headline</td>
+                    <td>{{block.data.subHeadline}}</td>
+                </tr>
+
+                <tr>
+                    <td>Call to Action</td>
+                    <td>
+                        {{linkName = (block.data.callToAction[0].name); ""}}
+                        {{linkUrl = (block.data.callToAction[0].url); ""}}
+                        <span>{{linkName}}</span>
+                        <span ng-if="linkUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{linkUrl}}</em></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Hero Height</td>
+                    <td>{{block.data.heroHeight[0]}}</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Remove Bottom Padding
+                    </td>
+                    <td>{{block.data.removeBottomPadding == true ? "Yes" : "No"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+<br />

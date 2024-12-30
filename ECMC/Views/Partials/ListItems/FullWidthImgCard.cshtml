@@ -1,0 +1,112 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ECMC_Umbraco.Models;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@model FullWidthImageCard;
+
+
+
+@{
+    //Obtain image
+    string imgUrl = Model.CardImage?.GetCropUrl(Common.Crop.LearnMore_500x550, UrlMode.Absolute) ?? string.Empty;
+
+
+    //Determine if card needs a hover state
+    bool ShowHoverContent = false;
+    if (!string.IsNullOrWhiteSpace(Model.HoverTitle))
+    {
+        ShowHoverContent = true;
+    }
+    if (Model.HoverTip != null && !string.IsNullOrWhiteSpace(Model.HoverTip.ToString()))
+    {
+        ShowHoverContent = true;
+    }
+    string hoverClass = "img-slide-down";
+    if (!ShowHoverContent)
+    { hoverClass = string.Empty; }
+}
+
+
+
+
+    <div class="card image-card  learn-more" style="margin-top: 0.9375rem">
+        @if (Model.Link == null)
+        {
+            RenderCard(imgUrl ?? "", hoverClass);
+        }
+        else
+        {
+            <a href="@Model.Link?.Url" target="@Model.Link?.Target">
+                @{
+                    RenderCard(imgUrl ?? "", hoverClass, true);
+                }
+            </a>
+        }
+    </div>
+
+
+
+
+@functions {
+    private void RenderCard(string _imgUrl, string _hoverClass, bool _showBtn = false)
+    {
+        <figure class="@_hoverClass text-center">
+
+            <img src="@_imgUrl" alt="@Model.Title">
+
+            @if (!string.IsNullOrWhiteSpace(Model.HoverTitle) || !string.IsNullOrWhiteSpace(Model.HoverTip?.ToString()))
+            {
+                <figcaption>
+
+                    <div class="grid-y">
+                        <div class="cell auto vertical-align-middle">
+                            @if (!string.IsNullOrWhiteSpace(Model.HoverTitle))
+                            {
+                                <h3>@Model.HoverTitle</h3>
+                            }
+                            @if (Model.HoverTip != null)
+                            {
+                                <div>
+                                    @Html.Raw(Model.HoverTip)
+                                </div>
+                            }
+                        </div>
+                        <div class="cell shrink">
+                            @if (_showBtn)
+                            {
+                                <div class="read-more btn">
+                                    @Model.Link?.Name
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </figcaption>
+            }
+
+        </figure>
+
+        @if (!string.IsNullOrWhiteSpace(Model.Title) || !string.IsNullOrWhiteSpace(Model.PostDate) || !string.IsNullOrWhiteSpace(Model.Summary?.ToString()))
+        {
+            <div class="card-content" data-equalizer-watch>
+
+                @if (!string.IsNullOrWhiteSpace(Model.PostDate))
+                {
+                    <h6>@Model.PostDate</h6>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Model.Title))
+                {
+                    <h3>@Model.Title</h3>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Model.Summary?.ToString()))
+                {
+                    <div>
+                        @Html.Raw(Model.Summary)
+                    </div>
+                }
+            </div>
+        }
+    }
+}

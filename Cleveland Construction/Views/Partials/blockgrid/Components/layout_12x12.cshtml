@@ -1,0 +1,8 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<Layout_12x12, ColumnSettings>>
+@using www.Models.PublishedModels;
+@using www.Models;
+@{
+    Model.Settings.LayoutName = "Components/Layout_12x12";
+}
+
+@await Html.GetBlockGridItemAreasHtmlAsync(Model)

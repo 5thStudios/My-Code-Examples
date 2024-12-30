@@ -1,0 +1,75 @@
+/* MENU IDEAS & RECIPE
+----------------------------------------------------------*/
+.Recipe {
+    .recipe-photos {
+        img { width: 100%; height: auto; }
+    }
+    .recipe-description-block {
+        hr { border-bottom: 2px solid #70A0B4; margin: 1rem 0; }
+        .recipe-title { text-transform: uppercase; font-weight: 700; }
+        .recipe-info { }
+        .share-fields {
+            h4 { /*text-align: right;*/ font-weight: 600; color: #004b7e; }
+            .jssocials {
+                .jssocials-shares {
+                    .jssocials-share {
+                        .jssocials-share-linkedin { }
+                        .jssocials-share-pinterest { }
+                        .jssocials-share-email { }
+                        .jssocials-share-print { }
+                    }
+                }
+            }
+        }
+    }
+    .recipe-ingredients {
+        h3 { color: #004b7e; margin-bottom: 16px; }
+        h4 { color: #004b7e; }
+        h5 { color: #004b7e; margin-top: 36px; }
+    }
+    .recipe-instructions {
+        h3 { color: #004b7e; margin-bottom: 16px; }
+        h4 { color: #004b7e; }
+        h5 { color: #004b7e; margin-top: 36px; }
+    }
+    .related-products {
+        .related-product-block {
+            img { width: 300px; height: auto; }
+            a {
+                p { color: #004b7e; }
+            }
+        }
+    }
+}
+
+
+
+.RecipesListing {
+    .filter-items-group { cursor: pointer;
+        label { top: -6px; display: inline; }
+        .parentContainer { margin-left: 24px; }
+    }
+}
+
+
+/*===================================================================================*/
+/*  Recipe Block and Filter   */
+/*===================================================================================*/
+.recipe-block { width: 260px; height: 300px; float: left; margin: 5px; padding: 5px; background-color: #f8f9fa; overflow: hidden;
+    img { width: 250px; height: 180px; }
+    p { padding: 10px 0 0; text-align: center; font-size: 1em; line-height: 1.5em; }
+}
+.pager { background: #ccc; border-radius: .8em; -moz-border-radius: .8em; -webkit-border-radius: .8em; color: #fff; display: inline-block; font-weight: 700; line-height: 1.6em; margin-right: 15px; text-align: center; width: 1.6em; margin: 3px;
+    &:hover { color: #FFF; background: #004b7e; }
+}
+.pager-current { background: #004b7e; }
+.item img { margin: 5px 10px }
+.item p { margin: 5px 10px; color: #004b7e; }
+
+#recipe-filters .checks-group { margin: 3px 0 }
+#recipe-filters h5 { text-align: left; font-weight: 700; text-transform: uppercase; display: block; color: #004b7e;
+    img { height: 20px; filter: invert(20%) sepia(25%) saturate(4610%) hue-rotate(182deg) brightness(102%) contrast(102%); }
+}
+#recipe-filters { display: none }
+#recipe-title { text-transform: uppercase; font-weight: 700; }
+.recipe-description-block p { font-size: 1.25em; line-height: 1.5em; }

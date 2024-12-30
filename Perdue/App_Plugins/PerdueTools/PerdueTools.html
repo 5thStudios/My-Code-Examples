@@ -1,0 +1,313 @@
+﻿<div class="perdue-tools">
+    <div class="section" id="PT-MainNav">
+        <h3>Product API Data Update</h3>
+
+        <h4 style="margin: 10px 0 5px 0;"><a href="/umbraco/api/ReadApi/CallApiToUpdateProducts" target="_blank" rel="noopener noreferrer"><strong>Import Updated Products</strong> from API</a></h4>
+        <p>
+            <em>
+                &mdash; This will call the READ API to retrieve <strong>UPDATED</strong> product data and rebuild the local cache.<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;Useful when the ContentOne database has been updated and you don't want to wait for the daily scheduled data pull.
+            </em>
+        </p>
+        <br />
+
+
+
+        <h4 style="margin: 10px 0 5px 0;"><a href="/umbraco/api/ReadApi/CallApiToUpdateProducts?refreshAll=true" target="_blank" rel="noopener noreferrer"><strong>Override All Products</strong> from API</a></h4>
+        <p>
+            <em>
+                &mdash; This will call the READ API to retrieve product data and <strong>FORCE</strong> a refresh of all products.<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;Useful when the api code base has been updated and you need to force a refresh of all products.
+            </em>
+        </p>
+        <br />
+
+
+
+        <form id="formImportSingleProductId" onsubmit="return ImportSingleProductId(this)">
+            <h4 style="margin: 10px 0 5px 0; font-weight:700;">Override Single Product from API</h4>
+            <input type="text" name="productId" placeholder="Enter Product Id">
+            <input type="submit" title="submit" name="submit" />
+            <p>
+                <em>
+                    &mdash; This will call the READ API to retrieve product data and FORCE a refresh of a <strong>SINGLE</strong> product.<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>BE PATIENT!</strong> A popup message will appear once complete.  DO NOT CLICK SUBMIT MULTIPLE TIME.
+                </em>
+            </p>
+            <script type="text/javascript">
+                function ImportSingleProductId(form) {
+                    var protocol = window.location.protocol;
+                    var host = window.location.host;
+                    const url = '/umbraco/api/ReadApi/CallApiToUpdateSingleProducts?';
+                    const senderParameter = 'updateProductId=' + form.productId.value;
+                    const newUrl = protocol + '//' + host +  url + senderParameter;
+                    console.log('ImportSingleProductId(' + form.productId.value + ")");
+                    console.log(newUrl);
+
+                    fetch(
+                        newUrl,
+                        {
+                            headers: { "Content-Type": "application/json" },
+                            method: "POST",
+                            body: ""
+                        }
+                    )
+                        .then(data => data.json())
+                        .then((json) => {
+                            //alert(JSON.stringify(json));
+                            alert('product ' + form.productId.value + ' has been submitted for updating.');
+                            document.getElementById("formImportSingleProductId").reset();
+                        });
+                    return false;
+                }
+            </script>
+        </form>
+
+
+
+
+        <br />
+        <br />
+        <h3>Product Data Check</h3>
+
+        <h4 style="margin: 10px 0 5px 0;"><a href="/umbraco/backoffice/Api/PrivateApi/ViewProductData" target="_blank" rel="noopener noreferrer">View Data for a Single Product</a></h4>
+        <p><em>&mdash; View the Raw API response data as well as the website Food Product Model data for a specific Product. (JSON Format)</em></p>
+        <br />
+
+        <h4 style="margin: 10px 0 5px 0;"><a href="/administrative/perdue-tools/view-all-products/" target="_blank" rel="noopener noreferrer">View All Products</a></h4>
+        <p><em>&mdash; View information about all Product Nodes. (Table format)</em></p>
+        <br />
+
+
+        <h4 style="margin: 10px 0 5px 0;"><a href="/umbraco/backoffice/Api/PrivateApi/ViewProductAttributes" target="_blank" rel="noopener noreferrer">View Attributes for All Products</a></h4>
+        <p><em>&mdash; View the Product Attributes data for all Products.</em></p>
+        <br />
+
+
+        <h4 style="margin: 10px 0 5px 0;"><a href="/administrative/perdue-tools/view-product-images/" target="_blank" rel="noopener noreferrer">View Product Images for All Products</a></h4>
+        <p><em>&mdash; View the images for all API-provided Products. (Table format)</em></p>
+
+    </div>
+</div>
+
+
+
+
+
+
+<!--<div class="section" id="PT-ViewAllProducts">
+    <h5><a class="api-btn" data-section="PT-MainNav" data-href=""><span class="icon">&laquo;</span> Main Menu</a></h5>
+    <h2>View All Products</h2>
+    <hr />
+
+
+    <div class="subsection select-a-site">
+        <h3>Select a Site to View Products</h3>
+        <div class="btn-group" role="group">
+            <a data-href="/Umbraco/backoffice/Api/AuthorizedApi/ViewAllProducts?ExcludeImages=false" class="btn btn-default active" role="button" aria-pressed="true">Include Images</a>
+            <a data-href="/Umbraco/backoffice/Api/AuthorizedApi/ViewAllProducts?ExcludeImages=true" class="btn btn-default" role="button" aria-pressed="false">Exclude Images</a>
+        </div>
+        <br />
+        <p>
+            View Products for Site:&nbsp;&nbsp;&nbsp;
+            <a data-href="/Umbraco/backoffice/Api/AuthorizedApi/ViewAllProducts?ProductsNode=1173">PER</a>&nbsp;&nbsp;&nbsp;
+            <a data-href="/Umbraco/backoffice/Api/AuthorizedApi/ViewAllProducts?ProductsNode=15836">COL</a>&nbsp;&nbsp;&nbsp;
+            <a data-href="/Umbraco/backoffice/Api/AuthorizedApi/ViewAllProducts?ProductsNode=9774">CHE</a>
+
+        </p>
+    </div>
+
+    <div class="subsection PER">
+
+    </div>
+    <div class="subsection COL">
+        <br />
+        <br />
+        <h4>Displaying Products from Site 'COL'</h4>
+        <p>Total Nodes Returned: 43</p>
+        <br />
+
+        <div id="umbracodata_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+            <div>
+                <table style="background-color:transparent;" border="0" cellpadding="12">
+                    <tr>
+                        <td>
+                            <p><a class="button btn btn-primary" href="/Umbraco/backoffice/Api/AuthorizedApi/ExportAllProducts?ProductsNode=15836">Download CSV</a></p>
+                        </td>
+                        <td valign="middle">
+                            <div id="umbracodata_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="umbracodata"></label></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <table class="umbracodata table-striped table-bordered table-hover" cellspacing="0" cellpadding="0" border="1" align="left">
+                        <thead>
+                            <tr role="row">
+                                <th>#</th>
+                                <th>Actions</th>
+                                <th>Product Name</th>
+                                <th>Product Code</th>
+                                <th>Product Type &raquo; SubType</th>
+                                <th>Primary Product Image Url</th>
+                                <th>Primary Product Image</th>
+                                <th>All Product Images</th>
+                                <th>Attributes</th>
+                                <th>GTIN</th>
+                                <th>API Ref Id</th>
+                                <th>Database Last Changed</th>
+                                <th>Node ID</th>
+                                <th>Node Create Date</th>
+                                <th>Node Update Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr role="row" class="odd">
+                                <td class="sorting_1">1</td>
+                                <td>
+                                    <a href="/umbraco#/content/content/edit/17564" target="_blank" rel="noopener noreferrer">Edit</a>
+                                    <span> | </span><a href="https://www.colemanfoodservice.com/products/1534452-coleman-natural-no-antibiotics-ever-6-oz-single-lobe-boneless-skinless-chicken-breast-filets-with-rib-meat-fresh-small-bird-cvp/" target="_blank" rel="noopener noreferrer">View</a>
+                                    <span> | <a href="/umbraco/api/PublicApi/ViewProductData?Data=FP&amp;RefId=8Jnko3" target="_blank" rel="noopener noreferrer">View All Data</a></span>
+                                </td>
+                                <td>COLEMAN NATURAL® NO ANTIBIOTICS EVER, 6 oz., Single Lobe, Boneless, Skinless Chicken Breast Filets with Rib Meat, Fresh, Small Bird, CVP</td>
+                                <td>59636</td>
+                                <td>
+                                    <span>Fresh Chicken » Breast Filets CVP</span>
+                                </td>
+                                <td>
+                                    <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-6085761656946688" target="_blank" rel="noopener noreferrer">https://dam.catalog.1worldsync.com/im/dwn/GCP-6085761656946688</a>
+                                </td>
+                                <td><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-6085761656946688?v=1&amp;width=300&amp;height=300&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></td>
+                                <td>
+                                    <div style="padding: 5px; width: 110px; height: 120px; display: inline-block;">
+                                        <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-4778316569509888" target="_blank" rel="noopener noreferrer"><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-4778316569509888?v=1&amp;width=100&amp;height=100&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></a>
+                                        <br><span>1743 x 1200</span>
+                                    </div>
+                                    <div style="padding: 5px; width: 110px; height: 120px; display: inline-block;">
+                                        <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-6682408682258432" target="_blank" rel="noopener noreferrer"><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-6682408682258432?v=1&amp;width=100&amp;height=100&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></a>
+                                        <br><span>1200 x 1379</span>
+                                    </div>
+                                    <div style="padding: 5px; width: 110px; height: 120px; display: inline-block;">
+                                        <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-5597026255372288" target="_blank" rel="noopener noreferrer"><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-5597026255372288?v=1&amp;width=100&amp;height=100&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></a>
+                                        <br><span>1200 x 1253</span>
+                                    </div>
+                                    <div style="padding: 5px; width: 110px; height: 120px; display: inline-block;">
+                                        <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-6024196387766272" target="_blank" rel="noopener noreferrer"><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-6024196387766272?v=1&amp;width=100&amp;height=100&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></a>
+                                        <br><span>1837 x 1200</span>
+                                    </div>
+                                    <div style="padding: 5px; width: 110px; height: 120px; display: inline-block;">
+                                        <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-6085761656946688" target="_blank" rel="noopener noreferrer"><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-6085761656946688?v=1&amp;width=100&amp;height=100&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></a>
+                                        <br><span>1600 x 1200</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li title="AddSearchData-FunctionalName">Proteins : Chicken</li>
+                                        <li title="AddSearchData-BrandName">Brand : Coleman Natural®</li>
+                                        <li title="AddSearchData-PreparationType">Preparation : Bake</li>
+                                        <li title="AddSearchData-CookingStatus2">Cooking Status : Ready-to-Cook</li>
+                                        <li title="AddSearchData-StorageMethod5">Fresh-Frozen : Fresh</li>
+                                        <li title="AddSearchData-NoAntibiotics2A">Attributes : No Antibiotics Ever / Antibiotic Free</li>
+                                        <li title="AddSearchData-VegFed3A">Attributes : 100% Vegetarian Fed with No Animal By-Products</li>
+                                        <li title="AddSearchData-VegFed3B">Attributes : 100% Vegetarian Fed with No Animal By-Products</li>
+                                        <li title="AddSearchData-Halal5A">Attributes : Halal Certified</li>
+                                        <li title="AddSearchData-FreshCVP9A">Attributes : Fresh CVP</li>
+                                    </ul>
+                                </td>
+                                <td>10072745596367</td>
+                                <td>8Jnko3</td>
+                                <td>2023-06-20</td>
+                                <td>17564</td>
+                                <td>
+                                    <span>3/4/2020</span>
+                                </td>
+                                <td>
+                                    <span>3/26/2024</span>
+                                </td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td class="sorting_1">2</td>
+                                <td>
+                                    <a href="/umbraco#/content/content/edit/17562" target="_blank" rel="noopener noreferrer">Edit</a>
+                                    <span> | </span><a href="https://www.colemanfoodservice.com/products/1534472-coleman-natural-no-antibiotics-ever-8-oz-double-lobe-boneless-skinless-chicken-breast-filets-with-rib-meat-fresh-small-bird-cvp/" target="_blank" rel="noopener noreferrer">View</a>
+                                    <span> | <a href="/umbraco/api/PublicApi/ViewProductData?Data=FP&amp;RefId=rO1Uoh" target="_blank" rel="noopener noreferrer">View All Data</a></span>
+                                </td>
+                                <td>COLEMAN NATURAL® NO ANTIBIOTICS EVER, 8 oz., Double Lobe, Boneless, Skinless Chicken Breast Filets with Rib Meat, Fresh, Small Bird, CVP</td>
+                                <td>59626</td>
+                                <td>
+                                    <span>Fresh Chicken » Breast Filets CVP</span>
+                                </td>
+                                <td>
+                                    <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-5160213384527872" target="_blank" rel="noopener noreferrer">https://dam.catalog.1worldsync.com/im/dwn/GCP-5160213384527872</a>
+                                </td>
+                                <td><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-5160213384527872?v=2&amp;width=300&amp;height=300&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></td>
+                                <td>
+                                    <div style="padding: 5px; width: 110px; height: 120px; display: inline-block;">
+                                        <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-4778995677659136" target="_blank" rel="noopener noreferrer"><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-4778995677659136?v=1&amp;width=100&amp;height=100&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></a>
+                                        <br><span>1787 x 1200</span>
+                                    </div>
+                                    <div style="padding: 5px; width: 110px; height: 120px; display: inline-block;">
+                                        <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-5904895584501760" target="_blank" rel="noopener noreferrer"><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-5904895584501760?v=1&amp;width=100&amp;height=100&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></a>
+                                        <br><span>1779 x 1200</span>
+                                    </div>
+                                    <div style="padding: 5px; width: 110px; height: 120px; display: inline-block;">
+                                        <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-6095781111005184" target="_blank" rel="noopener noreferrer"><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-6095781111005184?v=1&amp;width=100&amp;height=100&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></a>
+                                        <br><span>1597 x 1200</span>
+                                    </div>
+                                    <div style="padding: 5px; width: 110px; height: 120px; display: inline-block;">
+                                        <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-4906816689405952" target="_blank" rel="noopener noreferrer"><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-4906816689405952?v=1&amp;width=100&amp;height=100&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></a>
+                                        <br><span>1797 x 1200</span>
+                                    </div>
+                                    <div style="padding: 5px; width: 110px; height: 120px; display: inline-block;">
+                                        <a href="https://dam.catalog.1worldsync.com/im/dwn/GCP-5160213384527872" target="_blank" rel="noopener noreferrer"><img src="https://dam.catalog.1worldsync.com/im/dwn/GCP-5160213384527872?v=2&amp;width=100&amp;height=100&amp;quality=50&amp;upscale=false&amp;bgcolor=FFFFFF"></a>
+                                        <br><span>1200 x 1596</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li title="AddSearchData-FunctionalName">Proteins : Chicken</li>
+                                        <li title="AddSearchData-BrandName">Brand : Coleman Natural®</li>
+                                        <li title="AddSearchData-PreparationType">Preparation : Bake</li>
+                                        <li title="AddSearchData-CookingStatus2">Cooking Status : Ready-to-Cook</li>
+                                        <li title="AddSearchData-StorageMethod5">Fresh-Frozen : Fresh</li>
+                                        <li title="AddSearchData-NoAntibiotics2A">Attributes : No Antibiotics Ever / Antibiotic Free</li>
+                                        <li title="AddSearchData-VegFed3A">Attributes : 100% Vegetarian Fed with No Animal By-Products</li>
+                                        <li title="AddSearchData-VegFed3B">Attributes : 100% Vegetarian Fed with No Animal By-Products</li>
+                                        <li title="AddSearchData-Halal5A">Attributes : Halal Certified</li>
+                                        <li title="AddSearchData-FreshCVP9A">Attributes : Fresh CVP</li>
+                                    </ul>
+                                </td>
+                                <td>10072745596268</td>
+                                <td>rO1Uoh</td>
+                                <td>2023-06-20</td>
+                                <td>17562</td>
+                                <td>
+                                    <span>3/4/2020</span>
+                                </td>
+                                <td>
+                                    <span>3/26/2024</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="subsection CHE">
+
+    </div>
+
+
+</div>-->
+<!--<div class="section" id="PT-ViewAllProductImgs">
+    <h5><a class="api-btn" data-section="PT-MainNav" data-href=""><span class="icon">&laquo;</span> Main Menu</a></h5>
+
+    <h2>View Product Images for All Products</h2>
+</div>-->
+<!--<br />
+<br />
+<div style="color:red">{{vm}}</div>-->

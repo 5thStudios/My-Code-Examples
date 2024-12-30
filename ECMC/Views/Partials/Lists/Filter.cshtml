@@ -1,0 +1,132 @@
+﻿@using ECMC_Umbraco.ViewModel;
+@model ECMC_Umbraco.ViewModel.FilterViewModel
+
+@{
+    //No Longer Used
+    //Default filter size
+    int filterSize = 12;
+    //Adjust based on # of filters AND if search panel if visible.  (Search takes up more space than the filters.)
+    if (Model.FilterCount > 1)
+    {
+        filterSize = 8;
+        if (Model.ShowSearchPnl)
+        {
+            if (Model.FilterCount > 2)
+            {
+                filterSize = 20 / Model.FilterCount;
+            }
+        }
+        else
+        {
+            filterSize = 24 / Model.FilterCount;
+        }
+    }
+}
+
+
+
+
+<div class="filter-pnl grid-x grid-padding-x grid-padding-y">
+    <div class="cell">
+
+        <div class="grid-x">
+            <div class="cell medium-16 laptop-8">
+
+                @if (Model.ShowViewSelector)
+                {
+                    <input type="hidden" value="true" id="hfldShowViewSelector" />
+                    <div class="listViews grid-x small-up-2">
+                        <div class="cell">
+                            <input id="rbGrid" type="radio" name="viewType" value="grid-view" checked="checked">
+                            <label for="rbGrid" class="rbGridView"><span></span>&nbsp;&nbsp;GRID VIEW</label>
+                        </div>
+                        <div class="cell">
+                            <input id="rbList" type="radio" name="viewType" value="list-view">
+                            <label for="rbList" class="rbListView"><span></span>&nbsp;&nbsp;LIST VIEW</label>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @* <div class="cell auto text-right">
+                <a id="btnClearFilter">Clear Filters</a>
+            </div> *@
+
+        </div>
+
+        <div class="umbraco-forms-form">
+            <form style="margin: 0px;">
+                <div class="grid-x grid-margin-x">
+
+
+                    @if (Model.ShowAreaOfInterestFilter)
+                    {
+                        <div class="cell medium-auto">
+                            @* laptop-@filterSize *@
+                            <h6 style="margin:6px 0 0;">Area of Interest</h6>
+                            <select data-filterby="AreaOfInterest">
+                                <option></option>
+                                @foreach (string value in Model.LstAreaOfInterestFilter)
+                                {
+                                    <option value="@value">@value</option>
+                                }
+                            </select>
+                        </div>
+                    }
+
+                    @if (Model.ShowAudienceFilter)
+                    {
+                        <div class="cell medium-auto">
+                            <h6 style="margin:6px 0 0;">Audience</h6>
+                            <select data-filterby="Audience">
+                                <option></option>
+                                @foreach (string value in Model.LstAudienceFilter)
+                                {
+                                    <option value="@value">@value</option>
+                                }
+                            </select>
+                        </div>
+                    }
+
+                    @if (Model.ShowStaffFilter)
+                    {
+                        <div class="cell medium-auto">
+                            <h6 style="margin:6px 0 0;">Staff</h6>
+                            <select data-filterby="Staff">
+                                <option></option>
+                                @foreach (string value in Model.LstStaffFilter)
+                                {
+                                    <option value="@value">@value</option>
+                                }
+                            </select>
+                        </div>
+                    }
+
+
+                    @if (Model.ShowSearchPnl)
+                    {
+                        <div class="cell medium-auto">
+                            <h6 style="margin:6px 0 0;">Search</h6>
+                            <input type="search" style="width:100%;" id="txbSearch" />
+                        </div>
+                        <div class="cell shrink">
+                            <div style="margin:6px 0 0;">&nbsp;</div>
+                            <input type="button" class="button" id="btnSearch" value="Search" />
+                        </div>
+                    }
+
+
+
+                    <div class="cell shrink">
+                        <div style="margin:6px 0 0;">&nbsp;</div>
+                        <a id="btnClearFilter" class="button">Clear</a>
+                    </div>
+
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

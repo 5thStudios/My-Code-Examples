@@ -1,0 +1,114 @@
+﻿@model string;
+
+
+
+<style>
+.outline .grid-container { position: relative; border: 2px solid orange; background-color: #ffa5003d; }
+.outline .grid-x { background-color: #258f25; }
+.outline .cell { border: 2px solid blue; background-color:white; }
+</style>
+
+
+
+
+<div class="outline">
+    <div>
+        <h4 class="text-center" style="color:darkred; font-weight:700;">Site's Column Breakdown</h4>
+        <div class="text-center"><strong>Full Width- 24 Columns</strong><br /><em>*each block = 2 columns</em></div>
+        <div class="grid-x">
+            <div class="cell large-2 text-center">2</div>
+            <div class="cell large-2 text-center">4</div>
+            <div class="cell large-2 text-center">6</div>
+            <div class="cell large-2 text-center">8</div>
+            <div class="cell large-2 text-center">10</div>
+            <div class="cell large-2 text-center">12</div>
+            <div class="cell large-2 text-center">14</div>
+            <div class="cell large-2 text-center">16</div>
+            <div class="cell large-2 text-center">18</div>
+            <div class="cell large-2 text-center">20</div>
+            <div class="cell large-2 text-center">22</div>
+            <div class="cell large-2 text-center">24</div>
+        </div>
+        <br />
+        <div class="text-center"><strong>*Full Width- 24 Columns with Margins</strong></div>
+        <div class="grid-x grid-margin-x">
+            <div class="cell large-2 text-center">2+m</div>
+            <div class="cell large-2 text-center">4</div>
+            <div class="cell large-2 text-center">6</div>
+            <div class="cell large-2 text-center">8</div>
+            <div class="cell large-2 text-center">10</div>
+            <div class="cell large-2 text-center">12</div>
+            <div class="cell large-2 text-center">14</div>
+            <div class="cell large-2 text-center">16</div>
+            <div class="cell large-2 text-center">18</div>
+            <div class="cell large-2 text-center">20</div>
+            <div class="cell large-2 text-center">22</div>
+            <div class="cell large-2 text-center">24</div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="text-center"><strong>*1600px Width Container- 24 Columns</strong><br /><em>(p = padding, m = margin)</em></div>
+    <div class="grid-container">
+        <div style="padding: 3px 0px;">Grid Container - 1600px</div>
+        <div class="grid-x grid-padding-x">
+            <div class="cell large-2 text-center">2+p</div>
+            <div class="cell large-2 text-center">4</div>
+            <div class="cell large-2 text-center">6</div>
+            <div class="cell large-2 text-center">8</div>
+            <div class="cell large-2 text-center">10</div>
+            <div class="cell large-2 text-center">12</div>
+            <div class="cell large-2 text-center">14</div>
+            <div class="cell large-2 text-center">16</div>
+            <div class="cell large-2 text-center">18</div>
+            <div class="cell large-2 text-center">20</div>
+            <div class="cell large-2 text-center">22</div>
+            <div class="cell large-2 text-center">24</div>
+        </div>
+        <br />
+        <div class="grid-x grid-padding-x grid-margin-x">
+            <div class="cell large-2 text-center" style="padding:0px;">2+p+m</div>
+            <div class="cell large-2 text-center">4</div>
+            <div class="cell large-2 text-center">6</div>
+            <div class="cell large-2 text-center">8</div>
+            <div class="cell large-2 text-center">10</div>
+            <div class="cell large-2 text-center">12</div>
+            <div class="cell large-2 text-center">14</div>
+            <div class="cell large-2 text-center">16</div>
+            <div class="cell large-2 text-center">18</div>
+            <div class="cell large-2 text-center">20</div>
+            <div class="cell large-2 text-center">22</div>
+            <div class="cell large-2 text-center">24</div>
+        </div>
+        <br />
+        <div class="grid-x grid-margin-x">
+            <div class="cell large-2 text-center">2+m</div>
+            <div class="cell large-2 text-center">4</div>
+            <div class="cell large-2 text-center">6</div>
+            <div class="cell large-2 text-center">8</div>
+            <div class="cell large-2 text-center">10</div>
+            <div class="cell large-2 text-center">12</div>
+            <div class="cell large-2 text-center">14</div>
+            <div class="cell large-2 text-center">16</div>
+            <div class="cell large-2 text-center">18</div>
+            <div class="cell large-2 text-center">20</div>
+            <div class="cell large-2 text-center">22</div>
+            <div class="cell large-2 text-center">24</div>
+        </div>
+        <br />
+        <div class="grid-x">
+            <div class="cell large-2 text-center">2</div>
+            <div class="cell large-2 text-center">4</div>
+            <div class="cell large-2 text-center">6</div>
+            <div class="cell large-2 text-center">8</div>
+            <div class="cell large-2 text-center">10</div>
+            <div class="cell large-2 text-center">12</div>
+            <div class="cell large-2 text-center">14</div>
+            <div class="cell large-2 text-center">16</div>
+            <div class="cell large-2 text-center">18</div>
+            <div class="cell large-2 text-center">20</div>
+            <div class="cell large-2 text-center">22</div>
+            <div class="cell large-2 text-center">24</div>
+        </div>
+    </div>
+</div>

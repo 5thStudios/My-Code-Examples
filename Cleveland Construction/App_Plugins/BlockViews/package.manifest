@@ -1,0 +1,9 @@
+﻿{
+  "name": "Umbraco Block Grids",
+  "version": "1.0.0",
+  "allowPackageTelemetry": true,
+  "javascript": [
+    "~/App_Plugins/BlockViews/cards.controller.js",
+    "~/App_Plugins/BlockViews/forms.controller.js"
+  ]
+}

@@ -1,0 +1,115 @@
+﻿@model Umbraco.Cms.Core.Models.Blocks.BlockListModel
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+
+
+@{
+    //Breadcrumb variables
+    bool ShowBreadcrumb = false;
+    List<www.Models.Link> LstBreadcrumbs = new List<www.Models.Link>();
+    IPublishedContent? ipModel = null;
+
+
+    //Determine which site this is being called from.
+    string site = "";
+    if (ViewData["ipPage"] != null)
+    {
+        ipModel = (IPublishedContent)ViewData["ipPage"];
+        site = ipModel.Root().Value<string>(Common.Property.Site);
+    }
+
+
+    //Generate breadcrumb list
+    if (ipModel != null && site != Common.Site.Coleman)
+    {
+        if (ipModel.Level > 1)
+        {
+            if (ipModel.ContentType.Alias != Common.Doctype.LiveSkuChart)
+            {
+                //Set to true only if alias does not equal.
+                ShowBreadcrumb = true;
+            }
+
+            //Loop through ancestors to create breadcrumbs
+            @foreach (var ipPg in ipModel.AncestorsOrSelf())
+            {
+                if (ipPg.Level == ipModel.Level)
+                {
+                    //Add label without link
+                    LstBreadcrumbs.Add(new www.Models.Link()
+                            {
+                                Title = ipPg.Name.ToUpper(),
+                                IsActive = true
+                            });
+                }
+                else if (ipPg.Level > 1)
+                {
+                    //Add link
+                    LstBreadcrumbs.Add(new www.Models.Link()
+                            {
+                                Title = ipPg.Name.ToUpper(),
+                                Url = ipPg.Url()
+                            });
+                }
+            }
+        }
+    }
+
+}
+
+
+
+
+<section class="hero-carousel">
+    <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
+
+        @if (ShowBreadcrumb)
+        {
+            <div class="breadcrumb-pnl show-for-laptop">
+                <div class="grid-container">
+                    <div class="grid-x">
+                        <div class="cell">
+                            <ul>
+                                @for (var i = LstBreadcrumbs.Count - 1; i >= 0; i--)
+                                {
+                                    if (LstBreadcrumbs[i].IsActive)
+                                    {
+                                        <li class="active">@LstBreadcrumbs[i].Title</li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a href="@LstBreadcrumbs[i].Url" target="_self">@LstBreadcrumbs[i].Title</a>
+                                            <span>&nbsp;&nbsp;</span>
+                                            <img src="/images/icons/caret-right-solid.svg" class="svg-btn" />
+                                        </li>
+                                    }
+                                }
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        <div class="orbit-wrapper">
+            @if (Model.Count() > 1)
+            {
+                <div class="orbit-controls">
+                    <button class="orbit-previous">
+                        <img src="/images/icons/caret-left-solid.svg" class="svg-btn" />
+                    </button>
+                    <button class="orbit-next">
+                        <img src="/images/icons/caret-right-solid.svg" class="svg-btn" />
+                    </button>
+                </div>
+            }
+            <ul class="orbit-container">
+                @await Html.GetBlockListHtmlAsync(Model)
+                @* partial/blocklist/components/heroSlide *@
+            </ul>
+        </div>
+    </div>
+</section>

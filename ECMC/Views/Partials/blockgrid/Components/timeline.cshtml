@@ -1,0 +1,49 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<Timeline>>
+
+
+
+<section data-blockgrid="Components/timeline" class="cd-container">
+    @foreach (var data in Model.Content.TimelineEntries)
+    {
+        //Convert data into model
+        var record = (ContentModels.TimelineEntry)data.Content;
+
+        <div class="cd-timeline-block">
+            <div class="cd-timeline-img"></div>
+            <div class="cd-timeline-content">
+                <div class="header">
+                    <div class="number-box">
+                        @*  @record.EntryDate.ToString("MMM") @record.EntryDate.Day <br />@record.EntryDate.Year *@
+                        @if (!string.IsNullOrEmpty(record.EntryDate))
+                        {
+                            @record.EntryDate;
+                        }
+                    </div>
+                    <div class="side-text">
+                        <h2>
+                            @if (!string.IsNullOrEmpty(record.Subtitle))
+                            {
+                                <span class="small">@record.Subtitle<br /></span>
+                            }
+                            @if (!string.IsNullOrEmpty(record.Title))
+                            {
+                                @record.Title
+                            }
+                        </h2>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>@record.Content</p>
+                    @if (record.Image != null)
+                    {
+                        <img src="@record.Image.Url()" alt="@record.Title">
+                    }                    
+                </div>
+            </div>
+        </div>
+    }
+</section>

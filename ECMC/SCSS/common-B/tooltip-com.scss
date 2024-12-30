@@ -1,0 +1,10 @@
+﻿@import'_variables-com';
+
+.tip { display: inline-block; text-decoration: none; font-weight: 300; color: $def_font_color; border-bottom: dashed 1px $color_glob_teal; cursor: help; position: relative;
+    .tooltip { position: fixed; background-color: white; width: 350px; border: solid 1px $color_glob_teal; display: none; z-index: 9999; font-size: 16px; line-height: 25px; max-width: unset;
+        > span { display: block; padding: 10px; }
+        > .title { background-color: $color_glob_teal; font-weight: $weight_Book; color: white; }
+        > .text { color: $def_font_color; }
+        > img { display: block; padding: 10px; box-sizing: border-box; }
+    }
+}

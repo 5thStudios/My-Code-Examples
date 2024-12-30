@@ -1,0 +1,39 @@
+﻿<style>
+    legend { color: #ff1600; }
+    .type { color: #6a329f; }
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Attribute Table</legend>
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0" ng-repeat="record in block.data.attributeItemList.contentData track by $index" ng-value="{{$index}}">
+            <tbody>
+                <tr>
+                    <td class="type">Attribute {{$index + 1}}</td>
+                    <td>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Image</td>
+                                    <td>
+                                        {{mediaItem = (record.image[0].mediaKey | mediaItemResolver); ""}}
+                                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width:50px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Text</td>
+                                    <td>{{record.text}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br />
+    </fieldset>
+</div>
+<br />

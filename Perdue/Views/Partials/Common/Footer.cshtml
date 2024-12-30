@@ -1,0 +1,74 @@
+﻿@using www.Models;
+@using www.ViewModels;
+@model FooterViewModel;
+
+
+
+
+<footer>
+    <br />
+    <div class="grid-container">
+        <div class="grid-x grid-padding-y text-center medium-text-left">
+            <div class="cell medium-6 laptop-5 laptop-offset-1">
+                <a href="@Model.FooterLogo?.Url" target="@Model.FooterLogo?.Target">
+                    <img class="hungry-4-better" alt="@Model.FooterLogo?.Title" src="@Model.FooterLogo?.ImgUrl" />
+                </a>
+            </div>
+            <div class="cell medium-6 laptop-5 laptop-offset-1">
+                <nav>
+                    <ul>
+                        @for (Int16 i = 0; i < Model.LstFooterNav.Count; i += 2)
+                        {
+                            <li>
+                                <a href="@Model.LstFooterNav[i].Url" target="@Model.LstFooterNav[i].Target">@Model.LstFooterNav[i].Title</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+            <div class="cell medium-5">
+                <nav>
+                    <ul>
+                        @for (Int16 i = 1; i < Model.LstFooterNav.Count; i += 2)
+                        {
+                            <li>
+                                <a href="@Model.LstFooterNav[i].Url" target="@Model.LstFooterNav[i].Target">@Model.LstFooterNav[i].Title</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+            <div class="cell medium-6  text-center medium-text-right  align-self-middle">
+                <a class="phone" href="tel:18887373832">
+                    1-888-PERDUE-2<br>
+                    (1-888-737-3832)
+                </a>
+            </div>
+
+
+            <div class="cell border-top">
+                <h6 class="text-center"><strong>@Html.Raw(Model.CopyrightText)</strong></h6>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="grid-container">
+        <div class="cookie-Policy grid-x">
+            <div class="cell">
+                <img src="/images/icons/xmark-solid.svg" class="svg-btn" id="cookie-close" />
+                <div class="tbl">
+                    <div class="tbl-row">
+                        <div class="tbl-cell">
+                            <button id="cookie-acknowledge" title="Accept" class="btn btn-blue bannerAcceptButton">Accept</button>
+                        </div>
+                        <div class="tbl-cell">
+                            By continuing to use and navigate this website, you are agreeing to the use of cookies.&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>

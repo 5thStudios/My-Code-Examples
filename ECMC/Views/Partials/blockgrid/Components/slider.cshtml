@@ -1,0 +1,51 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<Slider>>
+
+
+@{
+    var slideCount = Model.Content.NumberOfSlidesToShowOnScreen ?? "1";
+}
+<input type="hidden" id="hfldSlideCount" value="@slideCount" />
+
+
+
+<div class="grid-x" data-blockgrid="Components/slider">
+    <div class="cell">
+
+        <div class="carousel">
+            <div class="slick-slider">
+                @foreach (SlideForSlider slide in Model.Content.SlideList!.Select(x => x.Content).OfType<SlideForSlider>())
+                {
+                    <div class="slide">
+                        <img alt="" src="@slide.SlideImage?.MediaUrl()" />
+                        @if (@slide.ShowSideContent)
+                        {
+                            <div class="content">
+                                @if (!string.IsNullOrEmpty(slide.Title))
+                                {
+                                    <h2>@slide.Title</h2>
+                                }
+                                @if (!string.IsNullOrEmpty(slide.Content))
+                                {
+                                    <p>@slide.Content</p>
+                                }
+                                @if (!string.IsNullOrEmpty(slide.Link?.Url))
+                                {
+                                    <div>
+                                        <a class="link-button" target="@slide.Link?.Target" href="@slide.Link?.Url">
+                                            @Html.Raw(slide.Link?.Name)
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

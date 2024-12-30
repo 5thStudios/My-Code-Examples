@@ -1,0 +1,18 @@
+﻿@import'../_variables-com';
+
+/* RTS
+----------------------------------------------------------*/
+
+.none {
+}
+
+.intro-text {
+    > p {
+        font-size: $def_font_size_B;
+    }
+}
+
+.pull-quote { padding: 10px; background-color: $color_glob_gray_200;
+
+    > p { padding-bottom: 10px; font-size: $def_font_size_B; font-style: italic; }
+}

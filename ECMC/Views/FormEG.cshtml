@@ -1,0 +1,27 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.FormEG>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterEG.cshtml";
+}
+
+
+@await Html.GetBlockGridHtmlAsync(Model.HeroBlockGrid)
+@await Html.GetBlockGridHtmlAsync(Model.ContentBlockGrid)
+
+@* FORM PICKER *@
+<div class="form-background ">
+    <div class="grid-container form-background ">
+        <div class="grid-x">
+            <div class="cell small-20 small-offset-2">
+                @if (Model.FormPicker is Guid formId)
+                {
+                    <umb-forms-render form-id="@formId" theme="default" exclude-scripts="true" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.GetBlockGridHtmlAsync(Model.ContentBottomBlockGrid)

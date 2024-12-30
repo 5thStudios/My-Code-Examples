@@ -1,0 +1,12 @@
+/* COOKIES
+----------------------------------------------------------*/
+.cookie-Policy { display: none; font-weight: 700; border-radius: 6px 6px 0 0; color: #527382; background-color: #E9F1F5; position: -webkit-sticky; position: sticky; bottom: 0; z-index: 999; box-shadow: 0px 0px 12px rgb(170 170 170 / 50%); -webkit-box-shadow: 0px 0px 12px rgb(170 170 170 / 50%); text-align: left;
+    #cookie-close { float: right; margin: 15px 15px 5px 5px; font-size: 18px; }
+    .tbl { display: table; padding: 10px 15px 10px 15px;
+        .tbl-row { display: table-row;
+            .tbl-cell { display: table-cell; font-size: 16px; font-weight: 700; color: #527382;
+                button { margin: 0px 24px; font-size: 18px; padding: 6px 18px !important; }
+            }
+        }
+    }
+}

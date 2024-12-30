@@ -1,0 +1,79 @@
+﻿@import'../_variables-com';
+
+
+
+main {
+    section {
+        &.centerOnMobile {
+            @media only screen and (max-width: $bp_sm) { text-align: center; }
+        }
+        &.ecmcGradient {
+            @include ecmcGradient();
+        }
+        &.fdn_Navy-Green {
+            @include navyToGreenGradient();
+        }
+        &.fdn_Navy-DkTeal {
+            @include navy-DkTealGradient();
+        }
+        &.columnWhiteText {
+            div.grid-container {
+                div.grid-x {
+                    div.cell {
+                        p { color: $color_glob_white }
+                        h1 { color: $color_glob_white }
+                        h2 { color: $color_glob_white }
+                        h3 { color: $color_glob_white }
+                        h4 { color: $color_glob_white }
+                        .pull-quote { background-color: $header_color_solid_bkg; }
+                        > div.rich-text {
+                            > p { color: $color_glob_white }
+                            @media only screen and (max-width: $bp_sm) { text-align: center; }
+                        }
+
+                        a, a:visited { color: $color_glob_white;
+                            &:hover, &:focus { color: $color_glob_gray_300; }
+                        }
+                        a.read-more, a.read-more:visited, div.read-more { color: $color_glob_white;
+                            &:hover, &:focus { color: $color_glob_white; text-decoration: underline; }
+                        }
+
+                        a.link-button { color: $color_glob_white; background-color: transparent !important; border: 2px solid $color_glob_white;
+                            &:hover, &:focus { text-decoration: underline }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+    /*    &.columnDarkGreyWhiteText {
+        div.grid-container {
+            div.grid-x {
+                div.cell {
+                    p { color: $color_glob_white }
+                    h1 { color: $color_glob_white }
+                    h2 { color: $color_glob_white }
+                    h3 { color: $color_glob_white }
+                    h4 { color: $color_glob_white }
+                    .pull-quote { background-color: $header_color_solid_bkg; }
+                    > div.rich-text {
+                        > p { color: $color_glob_white }
+                        @media only screen and (max-width: $bp_sm) { text-align: center; }
+                    }
+
+                    a, a:visited { color: $color_glob_white;
+                        &:hover, &:focus { color: $color_glob_gray_300; }
+                    }
+                    a.read-more, a.read-more:visited, div.read-more { color: $color_glob_white;
+                        &:hover, &:focus { color: $color_glob_white; text-decoration: underline; }
+                    }
+
+                    a.link-button { color: $color_glob_white; background-color: transparent !important; border: 2px solid $color_glob_white;
+                        &:hover, &:focus { background-color: $color_glob_navy !important; border: 2px solid $color_glob_navy; }
+                    }
+                }
+            }
+        }
+    } }
+}*/

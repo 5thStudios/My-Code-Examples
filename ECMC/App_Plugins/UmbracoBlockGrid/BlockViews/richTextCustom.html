@@ -1,0 +1,14 @@
+﻿<style>
+    
+</style>
+
+<fieldset>
+    <legend>Rich Text</legend>
+
+    <div ng-click="block.edit()" ng-focus="block.focus">
+        <div ng-bind-html="block.data.richTextContent.markup" style="--my-text-columns: {{block.layout.columnSpan === 12 ? 2 : 1}}">
+        </div>
+        <br />
+    </div>
+</fieldset>
+<br />

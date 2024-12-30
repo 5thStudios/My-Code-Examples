@@ -1,0 +1,46 @@
+﻿@import'../common-B/_variables-com';
+
+body {
+    main {
+        .hero {
+            margin-top: 140px !important;
+
+            h1 { font-size: $h2_size; font-weight: $weight_Normal; color: $color_glob_white; }
+            h2 { color: $color_glob_white; }
+
+
+            @media only screen and (max-width: $bp_sm) {
+                h2 { font-size: $h4_size }
+            }
+
+            .content { margin-top: 20px }
+        }
+
+        .home {
+            .hero {
+                h1 { font-size: $h2_size; font-weight: $weight_Bold; }
+                h2 { font-size: calc( 20px + (40 - 20) * ( (100vw - 600px) / ( 1440 - 600) )); line-height: calc(1em + 0.1vw); font-weight: $weight_Normal; text-transform: none; margin: 0 0 0.25em 0; text-shadow: 0px 0px 30px $color_glob_black; }
+            }
+        }
+    }
+}
+        @media only screen and (max-width: $bp_sm) {
+
+            body {
+                main {
+                    .hero { margin-top: 120px; }
+                    h2 { font-size: $h4_size; }
+
+                    .home {
+                        .hero {
+                            h1{font-size: $h3_size; }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        @media only screen and (min-width: $bp_tablet_min) and (max-width: $bp_tablet) {
+            h2 { font-size: $h4_size !important; }
+        }

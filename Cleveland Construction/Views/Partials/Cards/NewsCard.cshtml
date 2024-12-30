@@ -1,0 +1,31 @@
+﻿@model IPublishedContent;
+@inject IPublishedValueFallback PublishedValueFallback
+@using www.Models.PublishedModels;
+@using www.Models;
+@{
+    BlogPost cmNews = new BlogPost(Model, PublishedValueFallback);
+    string imgUrl = cmNews.PostImage?.GetCropUrl(Common.Crop.Card_1100x600) ?? "";
+}
+
+
+<a href="@cmNews.Url()">
+    <div class="card news" data-equalizer-watch="card">
+        <div class="card-image">
+            <img src="@imgUrl">
+        </div>
+        <div class="card-header">
+            <span>Read More</span>
+        </div>
+        <div class="card-section">
+            <div class="date">@cmNews.DatePosted.ToString("MMMM d, yyyy")</div>
+            <div class="title">@cmNews.Name?.Trim()</div>
+            @if (!string.IsNullOrWhiteSpace(cmNews.Excerpt))
+            {
+                <div class="content">@cmNews.Excerpt?.Trim()</div>
+            }
+        </div>
+        <div class="card-footer">
+            <span>News</span>
+        </div>
+    </div>
+</a>

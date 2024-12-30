@@ -1,0 +1,28 @@
+﻿<style>
+
+    .nested-tbls p, .nested-tbls h2, .nested-tbls h3, .nested-tbls h4, .nested-tbls h5, .nested-tbls h6 { margin: 0; }
+</style>
+
+<fieldset>
+    <legend>Table Row</legend>
+    <div ng-click="block.edit()" ng-focus="block.focus">
+        
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0" style="margin:0;">
+            <tbody>
+                <tr>
+                    <td>Table Cells</td>
+                    <td class="nested-tbls">
+
+                        <table cellspacing="0" cellpadding="0" border="1" style="border-color: rgb(105 190 40 / 15%); width: 100%; display: inline-table; ">
+                            <tr style="width:100%;" ng-repeat="td in block.data.dataCells.contentData">
+                                <td style="width:100%;font-weight:400;" ng-bind-html="td.dataCell.markup"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</fieldset>
+<br />

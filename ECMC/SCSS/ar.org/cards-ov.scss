@@ -1,0 +1,44 @@
+﻿@import'../common-B/_variables-com';
+
+body {
+    main {
+        .card {
+
+            .read-more.btn { background-color: $color_glob_green !important; 
+                &:after {  }
+            }
+            .read-more.btn.align-left { } 
+            .read-more.btn.dark { }
+
+            a {
+                h3 { color: $color_glob_green_ADA !important; line-height: $def_line_height_B_alt !important; }
+            }
+
+            h3 { color: $color_glob_green_ADA !important; line-height: $def_line_height_B_alt !important; }
+
+
+            &.image-card.with-side-content {
+                figure {
+
+                    .card-content {
+                        h4 {
+                            a { color: $color_glob_green_ADA !important; }
+                        }
+                        .social {
+                            a {
+                                img { }
+                            }
+                        }
+                    }
+                    figcaption {
+                        h3 { }
+                        ul { margin-bottom: 0;
+                            li { }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

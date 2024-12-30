@@ -1,0 +1,50 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Hero Banner</legend>
+
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Headline</td>
+                    <td>{{block.data.headline}}</td>
+                </tr>
+                <tr>
+                    <td>Headline Level<br /><br /><br /></td>
+                    <td>{{block.data.headlineLevel}}</td>
+                </tr>
+
+
+                <tr>
+                    <td>Content</td>
+                    <td>
+                        <textarea rows="10">{{block.data.content}}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Encompassing Class<br /><br /><br /></td>
+                    <td>{{block.data.encompassingClass}}</td>
+                </tr>
+
+
+                <tr>
+                    <td>Side Image</td>
+                    <td>
+                        {{mediaItem = (block.data.sideImage[0].mediaKey | mediaItemResolver); ""}}
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width:150px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Is Located On The </td>
+                    <td>{{block.data.imageIsLocatedOnThe == 0 ? "Left" : "Right"}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </fieldset>
+</div>
+<br />

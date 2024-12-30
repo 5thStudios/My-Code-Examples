@@ -1,0 +1,49 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ECMC_Umbraco.Models;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.ViewModel;
+@model ListItemViewModel;
+
+
+<div class="card cell medium-8 laptop-6" data-aos="@Model.InViewAnimation" data-areas-of-interest="@Model.jsonAreasOfInterest" data-staff="@Model.jsonStaff" data-audience="@Model.jsonAudience" data-title="@Model.Title" data-subtitle="@Model.Subtitle?" data-summary="@Model.Summary">
+
+    <figure class="img-slide-down">
+        <a href="@Model.Link?.Url" target="@Model.Link?.Target">
+            <img src="@Model.PrimaryImgUrl" alt="@Model.Title">
+
+            @if (Model.ShowHoverContent)
+            {
+                <figcaption>
+                    @if (!string.IsNullOrWhiteSpace(Model.HoverTitle))
+                    {
+                        <h3>@Model.HoverTitle</h3>
+                    }
+                    @if (Model.HoverTip != null)
+                    {
+                        <div>
+                            @Html.Raw(Model.HoverTip)
+                        </div>
+                    }
+                </figcaption>
+            }
+        </a>
+    </figure>
+
+    @if (Model.ShowCardContent)
+    {
+        <div class="card-content">
+
+            @if (!string.IsNullOrEmpty(Model.Title))
+            {
+                <h4><a href="@Model.Link?.Url" target="@Model.Link?.Target">@Model.Title</a></h4>
+            }
+            @if (!string.IsNullOrEmpty(Model.Subtitle))
+            {
+                <h6><a href="@Model.Link?.Url" target="@Model.Link?.Target">@Model.Subtitle</a></h6>
+            }
+
+        </div>
+    }
+
+</div>

@@ -1,0 +1,30 @@
+﻿@import'../common-B/_variables-com';
+
+
+body {
+    main {
+
+        .hero {
+            h1 { font-size: $h2_size; color: $color_glob_white; }
+        }
+
+
+
+        @media only screen and (max-width: $bp_sm) {
+            .hero { margin-top: 120px; padding: 24px 0;
+                h1 { font-size: $h4_size; }
+            }
+            .home {
+                .hero {
+                    h1 { font-size: $h3_size - 5px; }
+                }
+            }
+        }
+
+        @media only screen and (min-width:$bp_tablet_min) and (max-width: $bp_tablet) {
+            .hero { 
+                h1 { font-size: $h3_size; }
+            }
+        }
+    }
+}

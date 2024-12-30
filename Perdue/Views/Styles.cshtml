@@ -1,0 +1,36 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Styles>
+@{
+    //Determine proper toplevel to use.
+    switch (Model.Site)
+    {
+        case "Coleman":
+            Layout = Common.Layout.TopLevelMinimumCOL;
+            break;
+
+        case "Cheney":
+            Layout = Common.Layout.TopLevelMinimumCHE;
+            break;
+
+        default:
+            Layout = Common.Layout.TopLevelMinimumPER;
+            break;
+    }
+}
+
+
+<h2 style="color: darkred; text-decoration:underline; font-weight:600;">@Model.Site Site</h2>
+<br />
+<partial name="@Common.Partial.ZurbTestPg" model="Model.Site" />
+<br />
+<br />
+<br />
+<partial name="@Common.Partial.GridOutline" model="Model.Site" />
+<br />
+<br />
+<br />

@@ -1,0 +1,130 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Quote Panel &nbsp;&nbsp;&nbsp;&nbsp;<strong>[E451]</strong></legend>
+
+
+        {{mediaItem = (block.data.teaserImage[0].mediaKey | mediaItemResolver); ""}}
+        <table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 75%; vertical-align: top;">
+
+
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+
+
+                                <tr>
+                                    <td colspan="4">
+                                        <h4 style="text-align:center;"><strong>Content</strong></h4>
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.authorName">
+                                    <td>Author</td>
+                                    <td colspan="3">{{block.data.authorName}}</td>
+                                </tr>
+                                <tr ng-if="block.data.authorTitle">
+                                    <td>Title</td>
+                                    <td colspan="3">{{block.data.authorTitle}}</td>
+                                </tr>
+                                <tr ng-if="block.data.quoteText">
+                                    <td>Quote</td>
+                                    <td colspan="3">
+                                        <textarea rows="4" style="width: 100%;">{{block.data.quoteText}}</textarea>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td colspan="4">
+                                        <br />
+                                        <h4 style="text-align:center;"><strong>Design</strong></h4>
+                                    </td>
+                                </tr>
+                                <tr ng-if="mediaItem">
+                                    <td>Background Image</td>
+                                    <td colspan="3">
+                                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width: 150px; height:auto;" />
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.quoteMarkColor">
+                                    <td>Quote Mark Color</td>
+                                    <td colspan="3">
+                                        <span class="colorBlock" style="background-color: {{block.data.quoteMarkColor}};"></span> {{block.data.quoteMarkColor}}
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.overlayColor">
+                                    <td>Overlay Color</td>
+                                    <td colspan="3">
+                                        <span class="colorBlock" style="background-color: {{block.data.overlayColor}};"></span> {{block.data.overlayColor}}
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.overlayGradientColorA">
+                                    <td>Gradient Direction</td>
+                                    <td colspan="3" ng-If="block.data.gradientDirection == 0">Horizontal</td>
+                                    <td colspan="3" ng-If="block.data.gradientDirection == 1">Vertical</td>
+                                </tr>
+                                <tr ng-if="block.data.overlayGradientColorA">
+                                    <td style="width: 25%;">Overlay Gradient Color- A</td>
+                                    <td style="width: 25%;">
+                                        <div>
+                                            <span class="colorBlock" style="background-color: {{block.data.overlayGradientColorA}};"></span> {{block.data.overlayGradientColorA}}
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%;">Overlay Gradient Color- B</td>
+                                    <td style="width: 25%;">
+                                        <div>
+                                            <span class="colorBlock" style="background-color: {{block.data.overlayGradientColorB}};"></span> {{block.data.overlayGradientColorB}}
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr ng-if="block.data.customScripts">
+                                    <td colspan="4">
+                                        <br />
+                                        <h4 style="text-align:center;"><strong>Custom Scripts</strong></h4>
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.customScripts">
+                                    <td>Custom Scripting</td>
+                                    <td colspan="3">
+                                        <textarea rows="10" style="width: 100%;">{{block.data.customScripts}}</textarea>
+                                    </td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+
+
+                    </td>
+                    <td style="width: 25%; vertical-align: top; text-align: center;">
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        <h4>Examples from E451</h4>
+                                        <div>
+                                            <img ng-src="/images/screenshots/Quote.jpg" style="width: 250px; max-width: 250px; height: auto;" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+
+
+
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

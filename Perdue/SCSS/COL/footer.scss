@@ -1,0 +1,16 @@
+/* FOOTER
+----------------------------------------------------------*/
+footer {
+    ul { display: inline-flex; flex-direction: row;
+        li { color: #646464; list-style: none; padding: 0 42px; border-right: 2px solid #646464;
+            &:last-of-type { border-right: none; }
+        }
+    }
+    h6 { color: #646464; font-size: 17px; line-height: 24px; }
+    a { color: #646464; }
+    @media only screen and (max-width: 40em) {
+        nav.grid-padding-y {
+            .cell { padding-top: .5rem; padding-bottom: 0.5rem; }
+        }
+    }
+}

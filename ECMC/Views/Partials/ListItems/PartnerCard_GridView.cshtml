@@ -1,0 +1,95 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ECMC_Umbraco.Models;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.ViewModel;
+@model ListItemViewModel;
+
+
+
+<div class="card partner-card cell   medium-8 laptop-6" data-aos="@Model.InViewAnimation" data-areas-of-interest="@Model.jsonAreasOfInterest" data-staff="@Model.jsonStaff" data-audience="@Model.jsonAudience" data-title="@Model.Title" data-subtitle="@Model.Subtitle?" data-summary="@Model.Summary">
+
+    <figure class="img-slide-down align-center">
+        @if (Model.Link == null)
+        {
+            RenderPartnerCard(Model);
+        }
+        else
+        {
+            <a href="@Model.Link?.Url" target="@Model.Link?.Target">
+                @{
+                    RenderPartnerCard(Model, true);
+                }
+            </a>
+        }
+    </figure>
+    @if (Model.ShowCardContent)
+    {
+        <div class="card-content">
+            @if (Model.Link == null)
+            {
+                @if (!string.IsNullOrEmpty(Model.Title))
+                {
+                    <h4>@Model.Title</h4>
+                }
+                @if (!string.IsNullOrEmpty(Model.Subtitle))
+                {
+                    <h6>@Model.Subtitle</h6>
+                }
+            }
+            else
+            {
+                <a href="@Model.Link?.Url" target="@Model.Link?.Target">
+                    @if (!string.IsNullOrEmpty(Model.Title))
+                    {
+                        <h4>@Model.Title</h4>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Subtitle))
+                    {
+                        <h6>@Model.Subtitle</h6>
+                    }
+                </a>
+            }
+        </div>
+    }
+
+</div>
+
+
+
+@functions {
+    private void RenderPartnerCard(ListItemViewModel item, bool _showBtn = false)
+    {
+        <img src="@Model.PrimaryImgUrl" alt="@Model.Title">
+
+        @if (item.ShowHoverContent)
+        {
+            <figcaption class="text-center">
+                <div class="grid-y">
+                    <div class="cell auto vertical-align-middle">
+
+                        @if (!string.IsNullOrWhiteSpace(item.HoverTitle))
+                        {
+                            <h3>@Model.HoverTitle</h3>
+                        }
+                        @if (item.HoverTip != null && !string.IsNullOrWhiteSpace(item.HoverTip.ToString()))
+                        {
+                            <div>
+                                @Html.Raw(item.HoverTip)
+                            </div>
+                        }
+
+                    </div>
+                    <div class="cell shrink">
+                        @if (_showBtn)
+                        {
+                            <div class="read-more btn">
+                                @Model.Link?.Title
+                            </div>
+                        }
+                    </div>
+                </div>
+            </figcaption>
+        }
+    }
+}

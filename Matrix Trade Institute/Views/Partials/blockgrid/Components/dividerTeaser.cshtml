@@ -1,0 +1,79 @@
+﻿@using www.ViewModels;
+@using Umbraco.Cms.Core.Models.Blocks;
+@using cm = Umbraco.Cms.Web.Common.PublishedModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<DividerTeaser>>
+
+
+@{
+    //Format overlay color(s)
+    string overlayColor = "";
+    if (!string.IsNullOrWhiteSpace(Model.Content.OverlayColor))
+    {
+        overlayColor = string.Format("background-color: {0} !important;", Model.Content.OverlayColor);
+    }
+
+    string direction = "90deg";
+    if (Model.Content.GradientDirection)
+    {
+        //Change to vertical direction
+        direction = "180deg";
+    }
+
+    if (!string.IsNullOrWhiteSpace(Model.Content.OverlayGradientColorA) && !string.IsNullOrWhiteSpace(Model.Content.OverlayGradientColorB))
+    {
+        overlayColor = string.Format("background: linear-gradient({0}, {1}, {2});", direction, Model.Content.OverlayGradientColorA, Model.Content.OverlayGradientColorB);
+    }
+
+    //Create zurb up string
+    string _small = string.IsNullOrWhiteSpace(Model.Content.BlocksPerRowSmall) ? "1" : Model.Content.BlocksPerRowSmall;
+    string _medium = string.IsNullOrWhiteSpace(Model.Content.BlocksPerRowMedium) ? _small : Model.Content.BlocksPerRowMedium;
+    string _large = string.IsNullOrWhiteSpace(Model.Content.BlocksPerRowLarge) ? _medium : Model.Content.BlocksPerRowLarge;
+    string strZurbUp = string.Format(" small-up-{0} medium-up-{1} large-up-{2} ", _small, _medium, _large);
+
+}
+
+
+<section class="dividerTeaser 	@Html.Raw(Model.Content?.OuterMostClass)" data-blockgrid="blockgrid/Components/teaser" @Html.Raw(Model.Content?.OuterMostAttributes) style=" @overlayColor">
+    @Html.Raw(Model.Content?.CustomScripts)
+
+    <div class="grid-container">
+        <div class="grid-x   grid-padding-y grid-margin-y   @Html.Raw(Model.Content?.ContainerClasses)" @Html.Raw(Model.Content?.ContainerAttributes)>
+            <div class="cell interior-wrap ">
+                @* laptop-16 laptop-offset-4 *@ 
+
+                <div class="grid-x  grid-padding-x grid-padding-y   @strZurbUp">
+                    @foreach (BlockListItem teaserBlock in Model.Content?.TeaserBlocks)
+                    {
+                        TeaserBlock(new cm.DividerTeaseBlock(teaserBlock.Content, PublishedValueFallback));
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    @if (Model.Content.BackgroundImage != null)
+    {
+        <img alt="" src="@Model.Content.BackgroundImage.Url()" class="bgImg" />
+    }
+
+
+</section>
+
+
+
+@functions {
+    public void TeaserBlock(cm.DividerTeaseBlock cmTeaserBlk)
+    {
+        <div class="cell block text-center   @cmTeaserBlk.CellClass" @cmTeaserBlk.CellAttributes>
+            <div class="title">@Html.Raw(cmTeaserBlk.Title)</div>
+            @if (!string.IsNullOrWhiteSpace(cmTeaserBlk.Subtitle))
+            {
+                <div class="subtitle">@Html.Raw(cmTeaserBlk.Subtitle)</div>
+            }
+           <div class="footer"> @Html.Raw(cmTeaserBlk.Content)</div>
+        </div>
+    }
+}

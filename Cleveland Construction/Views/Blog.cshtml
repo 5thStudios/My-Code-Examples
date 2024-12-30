@@ -1,0 +1,97 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using cm = www.Models.PublishedModels;
+@using www.Models;
+@using System.Text;
+@using www.ViewModels;
+@model ComposedPageViewModel<cm.Blog, BlogListViewModel>
+@{
+    Layout = "TopLevel.cshtml";
+}
+
+
+<section class="grid-container">
+    <div class="grid-x      grid-padding-x     grid-margin-y grid-padding-y">
+        <div class="cell laptop-18">
+
+            @if (Model.ViewModel!.ShowSearchPnl)
+            {
+                <h4 style="margin: 0; color: #000;">SEARCH FOR &nbsp;&nbsp;"@Model.ViewModel.SearchQuery"</h4>
+                <div><a href="@Model.Page!.Url()">Clear Search</a></div>
+            }
+
+            @if (Model.ViewModel!.ShowCategoryPnl)
+            {
+                <h4 style="margin: 0; color: #000;">FILTERED BY &nbsp;&nbsp;"@Model.ViewModel.CategoryQuery"</h4>
+                <div><a href="@Model.Page!.Url()">Clear Filter</a></div>
+            }
+
+            @if (Model.ViewModel!.LstBlogPosts.Any())
+            {
+                <div class="grid-x    blog-post-list    grid-margin-x grid-margin-y    small-up-1 medium-up-2">
+                    @foreach (var _post in Model.ViewModel!.LstBlogPosts)
+                    {
+                        <div class="cell blog-post-card">
+                            <a href="@_post.Url">
+                                <img alt="@_post.Title" src="@_post.PostImageUrl" />
+                                <div class="content">
+                                    <h6>
+                                        <time datetime="@_post.DatePosted.ToString("yyyy-MM-dd")">@_post.DatePosted.ToString("D")</time>
+                                    </h6>
+                                    <h3>@_post.Title</h3>
+                                    <div class="ellipsis">@_post.Excerpt</div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <br />
+                <br />
+                <h3 class="text-center">&mdash; NO RESULTS FOUND &mdash;</h3>
+            }
+
+
+
+        </div>
+
+        <div class="cell laptop-6">
+            <div class="sidebar">
+                <div class="header">
+                    <h4>Search Blog</h4>
+                    <div class="search-pnl">
+                        <form method="get" action="@Model.Page!.Url()">
+                            <input type="text" name="search" placeholder="Search...">
+                            <button type="submit" class="remove-btn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <br />
+
+                    <div class="widget categorylist">
+                        <h4>Categories</h4>
+                        <ul>
+                            @foreach (var lnk in Model.ViewModel?.LstCategories)
+                            {
+                                <li>
+                                    <a href="@lnk.Url" title="Category: @lnk.Title">@lnk.Title</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <br />
+
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        @foreach (var lnk in Model.ViewModel?.LstSocialLinks)
+                        {
+                            <a class="icon @lnk.Class" href="@lnk.Url"></a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

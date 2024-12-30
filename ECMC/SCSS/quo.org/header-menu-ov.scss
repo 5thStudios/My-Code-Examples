@@ -1,0 +1,63 @@
+﻿@import'../common-B/_variables-com';
+
+body {
+
+
+    header {
+        .search-bar { background-color: $color_glob_black;
+            form {
+                input[type=text] { background-color: transparent; font-family: "NHaasGroteskDSPro"; }
+            }
+        }
+
+        .header-bar { background-color: $color_glob_black;
+
+            &:hover { background-color: $color_glob_black; }
+            .logo { height: 70px; width: auto; }
+            a {
+                &:hover, &:focus { background: none; }
+            }
+            .menu {
+                ul {
+                    li {
+                        a { font-family: "NHaasGroteskDSPro";
+                            &.active { color: $color_QTQ_Green; }
+                        }
+                        ul { background-color: $color_glob_black;
+                            a { font-family: "NHaasGroteskDSPro";
+                                &:hover { background-color: transparent; color: $color_QTQ_Green; }
+                            }
+                        }
+                        &:hover {
+                            > a { color: $color_QTQ_Green; }
+                            > ul { display: inline-table; visibility: visible; opacity: 1; }
+                        }
+                        &.active > a { color: $color_QTQ_Green; }
+                    }
+                }
+            }
+            .mbl-btn{
+                button {
+                    i { color: $color_glob_white !important; }
+                }
+            }
+        }
+        .off-canvas { background-color: $color_glob_black !important;
+            nav {
+                ul { list-style-type: none;
+                    li {
+                        a { color: $color_glob_white !important;
+                            &:hover { color: $color_glob_white !important; }
+                        }
+                    }
+                }
+            }
+        }
+        .mbl-btn button i {
+            button {
+                i { color: $color_glob_white !important; }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,59 @@
+﻿<style>
+
+    .nested-tbls p, .nested-tbls h2, .nested-tbls h3, .nested-tbls h4, .nested-tbls h5, .nested-tbls h6 { margin: 0; }
+</style>
+
+<fieldset>
+    <legend>Data Table</legend>
+    <div ng-click="block.edit()" ng-focus="block.focus">
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+
+                <tr>
+                    <td>Title</td>
+                    <td>{{block.data.dataTableTitle}}</td>
+                </tr>
+                <tr>
+                    <td>Summary</td>
+                    <td>{{block.data.summary}}</td>
+                </tr>
+                <tr>
+                    <td>Caption</td>
+                    <td>{{block.data.caption}}</td>
+                </tr>
+                <tr>
+                    <td>Is Table Sortable</td>
+                    <td>
+                        <span ng-if="block.data.isTableSortable == 1">True</span>
+                        <span ng-if="block.data.isTableSortable == 0">False</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Table Data</td>
+                    <td class="nested-tbls">
+
+                        <table cellspacing="0" cellpadding="0" border="1" style="border-color: rgb(105 190 40 / 39%); display: inline-block; ">
+                            <tr>
+                                <td ng-repeat="td in block.data.headerRow.contentData">
+                                    <div style="font-weight:500 !important" ng-bind-html="td.title.markup"></div>
+                                </td>
+                            </tr>
+
+                            <tr ng-repeat="tr in block.data.rowData.contentData">
+                                <td ng-repeat="td in tr.dataCells.contentData">
+                                    <div style="font-weight:300 !important" ng-bind-html="td.dataCell.markup"></div>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</fieldset>
+<br />

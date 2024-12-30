@@ -1,0 +1,83 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@using ECMC_Umbraco.ViewModel;
+@using Newtonsoft.Json;
+@using System.Linq;
+@model ComposedPageViewModel<ContentModels.PersonLandingPageFnd, PersonLandingPgViewModel>
+@{
+    Layout = "MasterFnd.cshtml";
+}
+
+
+
+
+<div class="grid-container landing-pg-person" style="margin-top: 220px;">
+    <div class="grid-x  ">
+        <div class="cell small-20 small-offset-2 border-bottom">
+            <div>
+                @if (!string.IsNullOrEmpty(Model.Page?.Title))
+                {
+                    <h1>@Model.ViewModel?.PrefixTitle@Model.Page?.Title</h1>
+                }
+                @if (!string.IsNullOrEmpty(Model.Page?.Subtitle))
+                {
+                    <h3>@Model.Page?.Subtitle</h3>
+                }
+
+
+                <div class="social-icons">
+                    @if (!string.IsNullOrEmpty(Model.Page?.LinkedIn))
+                    {
+                        <a target="_blank" href="@Model.Page?.LinkedIn">
+                            <img src="/media/3majc550/social-icon_linkedin-gray.svg" alt="Follow us on LinkedIn">
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Page?.Facebook))
+                    {
+                        <a target="_blank" href="@Model.Page?.Facebook">
+                            <img src="/media/ox0hobti/social-icon_facebook-gray.svg" alt="Follow us on Facebook">
+                        </a>
+                    }
+                </div>
+                <br />
+            </div>
+
+            <p style="float: right;width: 40%;margin-left: 1em;margin-bottom: 1em;">
+                <img alt="" src="@Model.Page?.PrimaryImage?.Url()" style="float:right;" />
+            </p>
+
+            @Html.Raw(Model.Page?.Content)
+
+
+
+        </div>
+    </div>
+    <div>
+        <div class="grid-x def-margin-b">
+            <div class="cell small-20 small-offset-2">
+
+                @if (!string.IsNullOrWhiteSpace(Model.ViewModel?.LearnMoreTitle))
+                {
+                    <h2>@Model.ViewModel?.LearnMoreTitle</h2>
+                }
+
+                <div class="list-type grid-view">
+                    <div class="grid-x   grid-margin-x  grid-margin-y">
+                        @if (Model.ViewModel?.LstListItems != null && Model.ViewModel.LstListItems.Any())
+                        {
+                            foreach (ListItemViewModel item in Model.ViewModel.LstListItems)
+                            {
+
+                                @await Html.PartialAsync(Common.Partial.PersonCard_GridView, item)
+
+                            }
+                        }
+                    </div>
+
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

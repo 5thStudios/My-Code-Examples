@@ -1,0 +1,17 @@
+﻿@import'_variables-com';
+
+/* Search
+----------------------------------------------------------*/
+.search-console {
+
+    h2 { margin-bottom: 0;
+        a { text-decoration: none; color: $color_glob_teal;
+            &:hover { text-decoration: underline; color: $color_glob_teal; }
+        }
+    }
+    p { margin-bottom: 0; color: $def_font_color;
+        a { text-decoration: none; color: $def_font_color;
+            &:hover { color: $color_glob_teal; }
+        }
+    }
+}

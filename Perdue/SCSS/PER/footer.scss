@@ -1,0 +1,20 @@
+/* HEADER
+----------------------------------------------------------*/
+footer {
+    background-color: #F7F8F9;
+    img.hungry-4-better { }
+    nav {
+        ul {
+            li { /*padding: 6px 0;*/list-style: none; 
+                a { font-size: 20px; font-weight: 700; line-height: 24px; color: #004b7e; }
+            }
+        }
+    }
+    h6 { color: #004b7e; }
+    .border-top { border-top: 1px solid #cacaca; }
+    hr { margin: 0; }
+    a.phone { font-size: 30px; font-weight: 700; line-height: 32px; color: #004b7e; }
+    @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+        a.phone { font-size: 2.5vw; }
+    }
+}

@@ -1,0 +1,130 @@
+﻿//Defaults
+//Template A = ECMC.org
+//Template B = ECMCGroup.org
+
+
+$def_max_width: 1440;
+$def_font_size_A: 16px;
+$def_font_size_B: 20px;
+$def_line_height_A: 1.5em;
+$def_line_height_B: 1.25em;
+$def_line_height_B_alt: 1em;
+$def_line_height_C: 3em;
+$def_font_color: #303133;
+$def_padding: 75px;
+$def_margin: 75px;
+$def_zurb_gutter: 0.9375rem;
+$def_hero_margin: 220px;
+
+$def_font: 'ff-meta-web-pro';
+$def_font_condensed: 'ff-meta-web-pro-condensed';
+
+$def_font_headline_regular: 'ff-meta-headline-web-pro';
+$def_font_headline_compact: 'ff-meta-headline-web-pro-com';
+$def_font_headline_condenced: 'ff-meta-headline-web-pro-con';
+
+//Global Weights
+$weight_light: 300;
+$weight_Normal: 400;
+$weight_Book: 500;
+$weight_Medium: 600;
+$weight_Bold: 700;
+$weight_Extra_Bold: 800;
+$weight_Black: 900;
+
+
+//Global Colors
+$color_glob_white: #ffffff;
+$color_glob_black: #000000;
+$color_glob_teal: #13818b;
+$color_glob_green: #69BE28;
+$color_glob_gray_100: #fafafa;
+$color_glob_gray_200: #f6f6f6;
+$color_glob_gray_300: #f0f0f0;
+$color_glob_gray_400: #D9D9D6;
+$color_glob_gray_500: #95989a;
+$color_glob_gray_600: #75787B;
+$color_glob_gray_700: #4d4d4d;
+$color_glob_alert: #C4262E;
+$color_glob_transparent: rgba(255, 255, 255, 0.00);
+
+
+//Global Link Colors
+$link_color: $color_glob_green;
+$link_color_hov: $color_glob_green;
+
+//Colors specific to websites
+
+//ECMC Solutions
+$color_Sol_Green: #69BE28;
+$color_Sol_teal: #13818b;
+$color_Sol_teal-lt: #ebf8f7;
+$color_Sol_brown: #74401e;
+
+//College Nights
+$color_CN_Blue: #2453a1;
+$color_CN_Blue_Bkg: #ebf2fa;
+$color_CN_Blue_Bkg_Hl: #d9e8f6;
+$color_CN_Blue_Bkg_Hl_Hov: #c4d6e8;
+$color_CN_orange: #e37222;
+$color_CN_orange_Bkg: #fff3cf;
+
+//ECMC
+$color_ECMC_green: #56a60a;
+$color_glob_navy: #093266;
+$color_ECMC_light_teal: #E8F7F3;
+$color_ECMC_teal: #13818B;
+$color_ECMC_red: #C4262E;
+$color_ECMC_form_background: $color_ECMC_light_teal;
+
+//ECMC Foundation
+
+//ECMC Group
+
+//ECMC EIF
+
+
+//Global Headline
+
+$h1_size: 40px;
+$h2_size: 20px;
+$h3_size: 16px;
+$h4_size: 20px;
+$h5_size: 16.6px;
+$h6_size: 13.4px;
+
+$h1_color: $color_glob_teal;
+$h2_color: $color_glob_teal;
+$h3_color: $color_glob_teal;
+$h4_color: $def_font_color;
+$h5_color: $def_font_color;
+$h6_color: $def_font_color;
+
+//Header Defaults
+$header_color_solid_bkg: rgb( 51, 51, 51 );//#333333
+$header_color_bkg_transp: rgba( $header_color_solid_bkg, 0.8 );
+$header_color: $color_glob_green;
+
+$header_logo_width: auto;
+$header_logo_height: 65px;
+
+//Footer Defaults
+
+//Main Menu Defaults
+$menu_main_color: $color_glob_white;
+$menu_main_color_hov: $color_glob_green;
+
+//Secondary Menu Defaults
+$menu_secondary_color: $def_font_color;
+$menu_secondary_color_hov: $color_glob_green;
+
+
+//Break Points
+$bp_sm: 40em;
+$bp_tablet: 64em;
+$bp_tablet_min: 40.063em;
+$bp_lap_min: 64.063em;
+$bp_lap: 90em;
+$bp_large-min: 90.063em;
+$bp_large: 120em;
+$bp_Xlarge-min: 120.063em;

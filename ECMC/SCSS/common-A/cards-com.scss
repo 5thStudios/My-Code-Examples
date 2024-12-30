@@ -1,0 +1,103 @@
+﻿@import'_variables-com';
+
+
+/* Cards
+----------------------------------------------------------*/
+.outer-card { width: 100%; }
+
+.card { margin: 0 0 30px 0; padding: 0; border: 1px solid $color_glob_gray_400; border-radius: 0;
+    &.learn-more { background-color: $color_glob_gray_200; border: 1px solid $color_glob_gray_300 }
+    &.no-border { border: none; }
+    &.icon-card { background: rgb(82,160,76); background: linear-gradient(90deg, rgba(82,160,76,1) 0%, rgba(22,139,149,1) 100%); color: $color_glob_white; height: 375px;
+        img { height: 50px; max-height: 50px; margin-top: 20px; filter: brightness(0) invert(1); }
+        h1, h2, h3, h4, h5, h6, p, div { color: $color_glob_white; }
+        .card-content { padding: 12px 18px; }
+    }
+
+    &.image-card {
+        .card-content { background-color: $color_glob_gray_200 }
+
+        &.with-side-content { border-width: 0px; margin-top: 0.9375rem;
+            figure {
+                .feature-img { }
+                .card-content { background-color: transparent; padding: 0 0 0 12px;
+                    h4 {
+                        a { color: $color_ECMC_teal; }
+                    }
+                    .social {
+                        a {
+                            img { }
+                        }
+                    }
+                }
+                figcaption {
+                    h3 { }
+                    ul { margin-bottom: 0;
+                        li { }
+                    }
+                }
+            }
+        }
+    }
+
+    .card-content { padding: 12px 18px; background-color: transparent; }
+
+    a { text-decoration: none;
+        .card-content { padding: 24px; }
+        img { width: 100%; height: auto; }
+        p { color: $def_font_color; margin: 0; }
+        h3 { color: $color_glob_teal; margin: 0 0 6px 0; font-size: 1.75rem; line-height: 24px; }
+        h6 { color: $def_font_color; margin: 0 0 12px 0; font-size: 15px; }
+    }
+
+    h3 { color: $color_glob_teal; margin: 0 0 6px 0; font-size: 1.75rem; line-height: 24px; }
+    h4 { margin: 0; font-weight: $weight_Book; font-size: $h4_size; line-height: 25px;
+        a { font-family: $def_font_condensed; color: $color_glob_navy; text-decoration: none;
+            &:hover { color: $color_glob_green; }
+        }
+    }
+    h5 { font-weight: $weight_Book; font-size: $h5_size; line-height: 25px;
+        a { color: $h5_color;
+            &:after { display: inline-block; position: relative; content: '\f054'; font-family: 'Font Awesome 6 Pro'; font-weight: $weight_Book; background-image: none; margin-left: 0.5em; bottom: 1px; height: auto; font-size: 14px; }
+        }
+    }
+    h6 { color: $def_font_color; margin: 0 0 12px 0; font-size: 15px; font-size: 16px; font-weight: $weight_light; line-height: $def_line_height_B; margin: 0;
+        &.date { line-height: $def_line_height_C; }
+        a { text-decoration: none;
+            &:hover { color: $color_glob_green; }
+        }
+    }
+    ul, ol { margin: 0 0 20px 30px; display: inline-block; }
+
+
+    .read-more.btn { background-color: $color_glob_teal; font-weight: $weight_light; color: $color_glob_white; border-style: none; padding: 8px; width: fit-content; margin: 12px auto 0 auto; width: 100%; display: flex; justify-content: space-around; flex-wrap: wrap; flex-direction: column; align-content: center; align-items: center;
+        &:after { content: none; margin-left: 0; }
+    }
+    .read-more.btn.align-left { margin: initial; }
+    .read-more.btn.dark { border-color: $color_glob_gray_700; color: $color_glob_gray_700; }
+
+    .img-animation { background-color: $color_glob_gray_200;
+        cite { color: $color_glob_gray_600; line-height: 1.25em; padding: 6px 12px; }
+        img { width: 100%; height: auto; }
+    }
+    .social {
+        a { text-decoration: none;
+            img { max-width: 24px; margin: 6px 6px 0 0; filter: invert(12%) sepia(0%) saturate(1406%) hue-rotate(157deg) brightness(107%) contrast(81%); }
+        }
+    }
+    &[class*=img-] figcaption { padding: 0 13%; color: $color_glob_white; }
+    figcaption {
+        h1, h2, h3, h4, h5, h6, p, div { color: $color_glob_white !important; }
+        .vertical-align-middle { display: flex !important; flex-direction: column; justify-content: center; }
+    }
+}
+
+.list-type.list-view .card { border-style: none;
+    img { border: 1px solid #D9D9D6; }
+}
+
+.list-type.grid-view {
+    .card.partner-card { height: 300px; }
+}
+
+

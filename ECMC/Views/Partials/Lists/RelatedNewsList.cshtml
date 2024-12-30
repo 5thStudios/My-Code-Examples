@@ -1,0 +1,35 @@
+﻿@using ECMC_Umbraco.Models;
+@model RelatedNewsViewModel;
+
+
+
+<div class="grid-x grid-margin-x grid-margin-y     small-up-1 medium-up-2 laptop-up-4">
+    @foreach (var pnl in Model.LstNewsItems)
+    {
+        <div class="cell" data-tags="@pnl.JsonMisc">
+            <div class="card image-card  learn-more">
+                <a href="@pnl.Url">
+                    <figure class=" text-center">
+                        <img src="@pnl.ImgUrl" alt="@pnl.Title">
+                    </figure>
+                    <div class="card-content" data-equalizer-watch>
+                        @if (!string.IsNullOrWhiteSpace(pnl.Misc))
+                        {
+                            <h6>@pnl.Misc</h6>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(pnl.Title))
+                        {
+                            <h3>@pnl.Title</h3>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(pnl.Summary?.ToString()))
+                        {
+                            <div>
+                                @Html.Raw(pnl.Summary)
+                            </div>
+                        }
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>

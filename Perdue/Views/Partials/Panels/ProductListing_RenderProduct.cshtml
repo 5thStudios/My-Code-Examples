@@ -1,0 +1,41 @@
+﻿@using Dragonfly
+@using Dragonfly.NetHelpers
+@using Dragonfly.UmbracoModels
+@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@model ProductsSectionViewModel;
+
+
+
+<a name="top" id="top"></a>
+<div id="products-list" class="products-list">
+
+    @if (Model.HasSearchQuery)
+    {
+        <div class="grid-x">
+            <div class="cell medium-12">
+                <h5>@Model.LstProductListings.Count() Results Found</h5>
+            </div>
+        </div>
+    }
+
+
+    <div class="grid-x" id="products" style="">
+        @foreach (var listing in Model.LstProductListings)
+        {
+            <div class="cell product-block bg-light item  @string.Join(" ", listing.LstAttribClasses)  1">
+                <a href="@listing.Product.Url" title="@listing.Product.Title">
+                    <img src="@listing.Product.ImgUrl" alt="@listing.Product.Title" />
+
+                    <p>@Html.Raw(listing.Product.Title)</p>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+
+@* <div style="color:red; font-size:9px;">@Newtonsoft.Json.JsonConvert.SerializeObject(Model.LstProductListings)</div> *@

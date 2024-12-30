@@ -1,0 +1,117 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using cm = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@model ComposedPageViewModel<cm.ListOfHomePgs, ListOfHomePgsViewModel>
+@{
+    Layout = "TopLevel.cshtml";
+}
+
+
+<div class="grid-y">
+    <div class="cell">
+
+        <div class="hide-for-medium">
+            <div class="grid-x">
+                @{
+                    //
+                    int indexSm = 1;
+                    foreach (var _site in Model.ViewModel?.LstSites)
+                    {
+                        <div class="cell">
+                            <div class="banner_btn   btn-@indexSm  @_site.Class" data-url="@_site.Url">
+                                <h3>@Html.Raw(_site.Title)</h3>
+                            </div>
+                        </div>
+                        indexSm++;
+                    }
+                }
+            </div>
+            <div class="grid-x">
+                <div class="cell">
+                    @{
+                        //
+                        int counterSm = 1;
+                        string _classSm = "";
+                        foreach (var _site in Model.ViewModel?.LstSites)
+                        {
+                            if (!_site.Equals(Model.ViewModel?.LstSites.First()))
+                            {
+                                _classSm = "hide";
+                            }
+                            <div class="banner   banner-@counterSm   @_classSm" data-url="@_site.Url" style="background-image:url('@_site.ImgUrl'); ">
+                                <div class="grid-x     align-bottom ">
+                                    <div class="cell laptop-11 laptop-offset-1">
+                                        <a href="@_site.Url">
+                                            <h1>@Html.Raw(_site.Title)</h1>
+                                        </a>
+                                    </div>
+                                    <div class="cell laptop-11 text-right">
+                                        <a href="@_site.Url" class="btnExplore">EXPLORE</a>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                            </div>
+
+                            counterSm++;
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="grid-x  show-for-medium">
+            <div class="cell laptop-6">
+                @{
+                    //
+                    int index = 1;
+                    foreach (var _site in Model.ViewModel?.LstSites)
+                    {
+                        <div class="banner_btn   btn-@index  @_site.Class" data-url="@_site.Url">
+                            <h3>@Html.Raw(_site.Title)</h3>
+                        </div>
+                        index++;
+                    }
+                }
+            </div>
+            <div class="cell laptop-18">
+                @{
+                    //
+                    int counter = 1;
+                    string _class = "";
+                    foreach (var _site in Model.ViewModel?.LstSites)
+                    {
+                        if (!_site.Equals(Model.ViewModel?.LstSites.First()))
+                        {
+                            _class = "hide";
+                        }
+                        <div class="banner   banner-@counter   @_class" data-url="@_site.Url" style="background-image:url('@_site.ImgUrl'); ">
+                            <div class="grid-x     align-bottom ">
+                                <div class="cell laptop-11 laptop-offset-1">
+                                    <a href="@_site.Url">
+                                        <h1>@Html.Raw(_site.Title)</h1>
+                                    </a>
+                                </div>
+                                <div class="cell laptop-11 text-right">
+                                    <a href="@_site.Url" class="btnExplore">EXPLORE</a>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+
+                        counter++;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Footer {
+    <script type="text/javascript" src="/js/listOfHomePgs.js"></script>
+}

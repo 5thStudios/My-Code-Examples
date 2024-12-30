@@ -1,0 +1,10 @@
+﻿<link href="/css/Umbraco RTE.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Rich Text Editor</legend>
+        <div class="rich-text" ng-bind-html="block.data.rte.markup" style="--my-text-columns: {{block.layout.columnSpan === 24 ? 2 : 1}}"></div>
+    </fieldset>
+</div>
+<br />

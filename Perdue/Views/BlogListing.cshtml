@@ -1,0 +1,105 @@
+﻿@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@model ComposedPageViewModel<ContentModels.BlogListing, BlogListingViewModel>
+@{
+    Layout = Common.Layout.TopLevelPER;
+}
+@section Footer {
+    <script type="text/javascript" src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script type="text/javascript" src="/js/Isotope/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="/js/custom/blog-listing.js"></script>
+}
+
+
+<div class="BlogListing">
+    <partial name="@Common.Partial.HeroCarousel" model="Model.Page?.HeroSlides" view-data='@new ViewDataDictionary(ViewData) { { "ipPage", Model.Page } }' />
+
+    <br />
+    <div class="grid-container main-content">
+        <div class="grid-x">
+
+            <div class="cell">
+
+                <div id="filter"></div>
+                <div class="grid-x grid-padding-y text-center" id="category-filter">
+                    <div class="cell laptop-22 laptop-offset-1 large-20 large-offset-2 text-center">
+                        @*  <p id="output" style="display: none;">.cat-Featured</p> *@
+
+                        <!-- Hardcode for the purpose for reordering until we can later address doing this with dynamic links -->
+                        <div class="button-group filter-button-group" style="display: block;">
+
+                            @if (Model.ViewModel.HasFeatured)
+                            {
+                                <button class="btn btn-blue my-1 is-checked" data-filter=".cat-Featured">Featured</button>
+                            }
+                            <button class="btn btn-blue my-1" data-filter=".cat-All">All</button>
+                            @if (Model.ViewModel.HasCollegeAndUniversity)
+                            {
+                            <button class="btn btn-blue my-1" data-filter=".cat-CollegeandUniversity">College &amp; University</button>
+                            }
+                            @if (Model.ViewModel.HasHealthcare)
+                            {
+                            <button class="btn btn-blue my-1" data-filter=".cat-Healthcare">Healthcare</button>
+                            }
+                            @if (Model.ViewModel.HasK12)
+                            {
+                            <button class="btn btn-blue my-1" data-filter=".cat-K-12">K-12</button>
+                            }
+                            @if (Model.ViewModel.HasCulinaryTrends)
+                            {
+                            <button class="btn btn-blue my-1" data-filter=".cat-CulinaryTrends">Culinary Trends</button>
+                            }
+                            @if (Model.ViewModel.HasMenuClaims)
+                            {
+                            <button class="btn btn-blue my-1" data-filter=".cat-MenuClaims">Menu Claims</button>
+                            }
+                            @if (Model.ViewModel.HasProfitDrivingTips)
+                            {
+                            <button class="btn btn-blue my-1" data-filter=".cat-ProfitDrivingTips">Profit Driving Tips</button>
+                            }
+                            @if (Model.ViewModel.HasArchived)
+                            {
+                            <button class="btn btn-blue my-1" data-filter=".cat-Archived">Archived</button>
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="grid-x">
+                    <div class="cell laptop-22 laptop-offset-1 large-20 large-offset-2">
+
+
+
+                        <div class="grid-x  grid-padding-y " id="all-posts">
+
+                            @foreach (var post in Model.ViewModel?.LstBlogPosts)
+                            {
+                                <div class="cell   post-block item @string.Join(" ", post.LstCategories)">
+                                    <a href="@post.Url">
+                                        <img src="@post.ImgUrl" alt="@post.Title" class="post-image" width="310" height="184">
+                                        <h4><strong>@post.Title</strong></h4>
+                                        @Html.Raw(post.Summary)
+                                    </a>
+                                </div>
+                            }
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    @await Html.GetBlockGridHtmlAsync(Model.Page?.MainContent)
+</div>

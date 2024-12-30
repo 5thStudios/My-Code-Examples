@@ -1,0 +1,24 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<AttributeList>>
+@using ContentModels = www.Models.PublishedModels;
+
+
+<section class="attribute-tbl">
+    <div class="grid-x grid-margin-x grid-padding-x grid-padding-y align-middle ">
+
+        @foreach (AttributeItem item in Model.Content.AttributeItemList!.Select(x => x.Content).OfType<AttributeItem>())
+        {
+            <div class="cell medium-12">
+                <img src="@item.Image?.Url()" alt="@item.Text">
+               @*  <h5>@Html.ReplaceLineBreaks(item.Text ?? "")</h5> *@
+
+                <div class="hide-for-medium">
+                    <h5>@item.Text</h5>
+                </div>
+                <div class="show-for-medium">
+                    <h5>@Html.ReplaceLineBreaks(item.Text ?? "")</h5>
+                </div>
+            </div>
+        }
+
+    </div>
+</section>

@@ -1,0 +1,66 @@
+﻿@using www.ViewModels;
+@using Umbraco.Cms.Core.Models.Blocks;
+@using cm = Umbraco.Cms.Web.Common.PublishedModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<Teaser>>
+
+
+@{
+    //Instantiate variables
+    TeaserViewModel vmTeaser = new TeaserViewModel();
+
+    try
+    {
+        //
+        int counter = 0;
+        foreach (BlockListItem teaserBlock in Model.Content.TeaserBlocks)
+        {
+            //Get teaser block model
+            var cmTeaserBlk = new cm.TeaserBlock(teaserBlock.Content, PublishedValueFallback);
+
+            //Add block to list
+            vmTeaser.LstTeaserBlocks.Add(new TeaserBlockViewModel()
+                    {
+                        Content = cmTeaserBlk.Content,
+                        BgColor = cmTeaserBlk.BackgroundColor,
+                        BgImageUrl = cmTeaserBlk.BackgroundImage?.GetCropUrl(www.Models.Common.Crop.Portrait_600x400),
+                        IsImgFirst = (counter >= 2),
+                        CellClasses = cmTeaserBlk.CellClass,
+                        CellAttributes = cmTeaserBlk.CellAttributes
+                    });
+
+            counter++;
+            if (counter == 4)
+                counter = 0;
+        }
+    }
+    catch { }
+}
+
+
+
+<section class="teaser 	@Html.Raw(Model.Content?.OuterMostClass)" data-blockgrid="blockgrid/Components/teaser" @Html.Raw(Model.Content?.OuterMostAttributes)>
+    @Html.Raw(Model.Content.CustomScripts)
+
+    <div class="grid-x  @Html.Raw(Model.Content?.ContainerClasses)" @Html.Raw(Model.Content?.ContainerAttributes)>
+        @foreach (var teaserBlk in vmTeaser.LstTeaserBlocks)
+        {
+
+            @if (teaserBlk.IsImgFirst)
+            {
+                <div class="cell medium-12 laptop-6 align-center-middle  text-center " style="line-height: 0;">
+                    <img src="@teaserBlk.BgImageUrl" style="width: 100%; height:auto;" />
+                </div>
+            }
+            <div class="cell medium-12 laptop-6 align-center-middle text-center @teaserBlk.CellClasses  content"    @teaserBlk.CellAttributes    style="background-color: @teaserBlk.BgColor;">
+                @Html.Raw(teaserBlk.Content)
+            </div>
+            @if (!teaserBlk.IsImgFirst)
+            {
+                <div class="cell medium-12 laptop-6    align-center-middle  text-center " style="line-height: 0;">
+                    <img src="@teaserBlk.BgImageUrl" style="width: 100%; height:auto;" />
+                </div>
+            }
+        }
+    </div>
+</section>

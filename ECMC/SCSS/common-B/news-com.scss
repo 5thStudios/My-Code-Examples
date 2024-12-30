@@ -1,0 +1,33 @@
+﻿@import'_variables-com';
+
+
+/*News Lattus Pages
+----------------------------------------------------------*/
+
+body {
+
+    main {
+        #newsLattus, #newsCategory, #newsLearnMore, #news-landing-pg {
+
+            .border-top { border-top: 1px solid $color_glob_black; margin-top: 30px; padding-top: 30px; }
+            h1 { font-size: $h2_size }
+
+            .card.news-section, .card.news-events { background-color: $color_glob_gray_200; border: 3px solid $color_glob_gray_200;
+                figure {
+                    &.no-crop-vsn { height: 300px; display: flex; flex-direction: column; padding: 20px; background-color: #fff; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; }
+                }
+                a { text-decoration: none;
+                    h3 { color: $color_glob_black !important; font-size: $h5_size; font-weight: $weight_Medium; margin-bottom: 18px; margin-top: 0px;
+                        &:hover, &:focus { color: #000; text-decoration: underline; background-color: $color_QTQ_Green }
+                    }
+                }
+            }
+        }
+
+        #newsLattus { padding-top: 175px; }
+        #newsCategory { padding-top: 175px; }
+    }
+}
+    /*News Landing Pages
+----------------------------------------------------------*/
+

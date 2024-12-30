@@ -1,0 +1,64 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Post>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "TopLevel.cshtml";
+}
+
+
+
+<section class="post">
+    <div class="title-pnl">
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x">
+                <div class="cell text-center">
+                    <h1>@Model.Name</h1>
+                    <p class="author">
+                        @if (!string.IsNullOrEmpty(Model.Author))
+                        {
+                            <span>By @Model.Author on </span>
+                        }
+                        @Model.PublishedDate.ToString("MMMM d, yyyy")
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid-container">
+        <div class="grid-x  grid-padding-y grid-margin-x grid-margin-y">
+            <div class="cell laptop-4 laptop-offset-4 text-center   call-out">
+                <div>
+                    @if (Model.PostImage != null)
+                    {
+                        string altTxt = Model.PostImage.Content.Value<string>("altText") ?? "";
+                        <img class="postImage" alt="@altTxt" src="@Model.PostImage.Url()" />
+                        <br />
+                    }
+                </div>
+                <p class="h5">Get started with your career today!</p>
+                <a class="btn" target="_blank" href="/contact-us/?utm_source=MTI_BLOG" title="Contact US">Learn More!</a>
+                <br />
+            </div>
+            <div class="cell laptop-8   content">
+                @Html.Raw(Model.Content)
+            </div>
+            <div class="cell laptop-4   category-list">
+                <strong>Categories</strong>
+                <hr>
+                <div class="content">
+                    <ul id="categorylist list-unstyled widget-list">
+                        @{
+                            //Get blog parent pg
+                            var ipBlog = Model.AncestorOrSelf("Blog");
+
+                            foreach (var ipCategory in ipBlog.Children().Where(x => x.ContentType.Alias == "category"))
+                            {
+                                <li><a href="@ipCategory.Url(mode: UrlMode.Absolute)" title="Category: @ipCategory.Name">@ipCategory.Name</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

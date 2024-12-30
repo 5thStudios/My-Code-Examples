@@ -1,0 +1,69 @@
+/* ----------------------------------------------------------------
+  Overlay Menu
+-----------------------------------------------------------------*/
+.food {
+    .overlay-content { position: relative;
+        .overlay-item { position: relative; overflow: hidden;
+            &.hover {
+                .overlay { border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -o-border-radius: 10px; height: 100%;
+                    .icons { top: 40%;
+                        .label { display: none; }
+                    }
+                    a {
+                        &.close-overlay { display: block; }
+                    }
+                }
+            }
+            &:hover {
+                .overlay { border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -o-border-radius: 10px; height: 100%; }
+                .icons {
+                    a { color: #c59d5f; }
+                }
+            }
+            .icons {
+                a { color: #ffffff; }
+            }
+        }
+        a {
+            &.close-overlay { display: none; position: absolute; top: 0; right: 0; z-index: 100; width: 45px; height: 45px; font-size: 20px; color: #fff; line-height: 45px; text-align: center; background-color: #000; cursor: pointer;
+                &.hidden { display: none; }
+            }
+        }
+        .overlay { position: absolute; z-index: 2; background: rgba(0, 0, 0, 0.7); overflow: hidden; -webkit-transition: all .5s; -o-transition: all .5s; transition: all .5s; border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -o-border-radius: 10px; bottom: 0; left: 0; right: 0; width: 100%; height: 0;
+            .icons { -webkit-transition: all .5s; -o-transition: all .5s; transition: all .5s; position: relative; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); text-align: center;
+                h1, h2, h3, h4, h5, h6 { margin: 0 5px 15px; }
+            }
+        }
+        .icons {
+            a { font-size: 16px; line-height: 22px; margin-right: 15px; vertical-align: baseline; color: #ffffff;
+                &:last-child { margin-right: 0; }
+            }
+        }
+        .desc { position: absolute; bottom: 0; text-align: center; z-index: 3; background: #262626; width: 100%; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; }
+        .button { margin-top: 20px;
+            a { font-size: 16px;
+                &:hover {
+                    i { color: #fff; }
+                }
+            }
+            i { color: #c59d5f; }
+        }
+    }
+    .overlay-menu {
+        .overlay {
+            &:hover {
+                .icons { top: 50% !important; }
+            }
+        }
+    }
+    .menu-grid {
+        #menu-items { margin: 0; padding: 0; }
+        .menu-type {
+            img { max-width: 100%; border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -o-border-radius: 10px; }
+        }
+        .overlay-content {
+            .overlay { border-top-right-radius: 0; border-top-left-radius: 0; height: 18%; overflow: visible; }
+        }
+        .menu-item { margin: 0 0 30px 0; }
+    }
+}

@@ -1,0 +1,35 @@
+﻿<link href="/css/Umbraco RTE.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Fieldset</legend>
+
+        {{linkName = (block.data.titleLink[0].name); ""}}
+        {{linkUrl = (block.data.titleLink[0].url); ""}}
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+
+                <tr>
+                    <td>Title-Link</td>
+                    <td>
+                        <span>{{linkName}}</span>
+                        <span ng-if="linkUrl">&nbsp;&nbsp;==><br />&nbsp;&nbsp;&nbsp;<em>{{linkUrl}}</em></span>
+                        <div><br /></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Content</td>
+                    <td>
+                        <div class="rich-text" ng-bind-html="block.data.content.markup"></div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </fieldset>
+</div>
+<br />

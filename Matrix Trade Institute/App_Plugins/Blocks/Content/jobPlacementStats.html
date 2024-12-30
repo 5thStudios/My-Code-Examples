@@ -1,0 +1,71 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Job Placement Stats</legend>
+
+
+        {{mediaItem = (block.data.image[0].mediaKey | mediaItemResolver); ""}}
+        <table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 75%; vertical-align: top;">
+
+                        [TO BE BUILT]
+                        <!--<table class="bvTable" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+                            <tbody>
+
+                                <tr ng-if="mediaItem">
+                                    <td>Image</td>
+                                    <td>
+                                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width: 150px; height:auto;" />
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.altText">
+                                    <td>Alt Text</td>
+                                    <td>{{block.data.altText}}</td>
+                                </tr>
+                                <tr ng-if="block.data.content">
+                                    <td>Content</td>
+                                    <td>
+                                        <textarea rows="10" style="width: 100%;">{{block.data.content}}</textarea>
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.customScripts">
+                                    <td>Custom Scripting</td>
+                                    <td colspan="3">
+                                        <textarea rows="8" style="width: 100%;">{{block.data.customScripts}}</textarea>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>-->
+
+
+                    </td>
+                    <td style="width: 25%; vertical-align: top; text-align: center;">
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        <!--<h4>Example from E451</h4>
+                                        <div>
+                                            <img ng-src="/images/screenshots/smartTeaser02.jpg" style="width: 250px; max-width: 250px; height: auto;" />
+                                        </div>-->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+
+    </fieldset>
+</div>
+<br />

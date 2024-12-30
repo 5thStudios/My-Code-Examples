@@ -1,0 +1,32 @@
+﻿@import'../_variables-com';
+
+/* RTS
+----------------------------------------------------------*/
+
+.none {
+}
+
+.intro-text {
+    > p {
+        font-size: $def_font_size_B + 5px;
+    }
+}
+
+.pull-quote { padding: 10px 10px 0 15px ; background-color: $color_glob_gray_200;
+
+    > p { padding-bottom: 10px; font-size: $def_font_size_B;  }
+}
+
+.count-up-rte * {
+    font-family: $def_font_headline_compact;
+    color: $color_glob_green_ADA;
+    font-size: $h1_size_fnd;
+    font-weight: $weight_Extra_Bold;
+    white-space: nowrap;
+    margin: 0 0 0.2em 0;
+    line-height: 60px;
+
+    @media only screen and (min-width:$bp_tablet_min) and (max-width: $bp_tablet) { font-size: $h1_size_fnd - 20px; }
+
+    @media only screen and (max-width: $bp_sm) { margin: 0.5em 0 0.2em 0; font-size: $h1_size_fnd - 20px; }
+}

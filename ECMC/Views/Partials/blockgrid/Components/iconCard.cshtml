@@ -1,0 +1,15 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<IconCard>>
+
+
+
+<div data-blockgrid="Components/iconCard" data-aos="@Model.Content.InViewAnimation">
+    <div class="grid-x grid-margin-y">
+        <div class="cell small-24">
+            @await Html.PartialAsync(Common.Partial.IconCard_GridView, Model.Content)
+        </div>
+    </div>
+</div>

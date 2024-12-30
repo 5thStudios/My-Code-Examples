@@ -1,0 +1,75 @@
+﻿@using Umbraco.Cms.Core.WebAssets;
+@using Umbraco.Cms.Core.Web;
+@using Smidge;
+@using Microsoft.Extensions.Options
+@using Umbraco.Cms.Core.Configuration.Models
+@using www.Models;
+@inject IUmbracoContextAccessor context;
+@inject IOptions<HostingSettings> hostingSettings
+
+@{
+    Layout = null;
+
+
+    //create body class
+    IPublishedContent ipModel = context.GetRequiredUmbracoContext().PublishedRequest!.PublishedContent!;
+    string doctype = ipModel.ContentType.Alias.ToLower();
+
+    //Determine if site is running in debug mode
+    bool debugMode = hostingSettings.Value.Debug;
+
+
+    //Bundle JS files
+    SmidgeHelper.CreateJsBundle("inline-js-bundle").RequiresJs(
+    "~/js/jquery-3.7.1.min.js",
+    "~/js/jquery-ui.min.js",
+    "~/js/foundation.js",
+    "~/js/jquery.validate.min.js",
+    "~/js/jquery.validate.unobtrusive.js",
+    "~/js/jquery.lazy.js",
+    "~/js/jquery.lazy.plugins.js",
+    "~/js/fotorama.js",
+    "~/js/paginathing.js",
+    "~/js/app.js");
+
+
+    //Bundle CSS files
+    SmidgeHelper.CreateCssBundle("inline-css-bundle").RequiresCss(
+    "~/css/fotorama.min.css",
+    "~/css/jquery-ui.css",
+    "~/css/zurbFoundation.css",
+    "~/css/site.css");
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    @await Component.InvokeAsync(www.Models.Common.ViewComponent.Meta, new { ipModel = ipModel })
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css" />
+
+    @await SmidgeHelper.CssHereAsync("inline-css-bundle", @debugMode)
+    @await SmidgeHelper.JsHereAsync("inline-js-bundle", @debugMode)
+    <script src="https://kit.fontawesome.com/98b9102afd.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    @RenderSection("Header", false)
+</head>
+<body class="@doctype">
+    <a name="top" id="top"></a>
+
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-content" data-off-canvas-content>
+            @await Component.InvokeAsync(www.Models.Common.ViewComponent.Header, new { ipModel = ipModel })
+            @await Component.InvokeAsync(www.Models.Common.ViewComponent.Hero, new { ipModel = ipModel })
+            <main>
+                @RenderBody()
+            </main>
+            @await Component.InvokeAsync(www.Models.Common.ViewComponent.Footer, new { ipModel = ipModel })
+        </div>
+    </div>
+    @RenderSection("Footer", false)
+</body>
+</html>

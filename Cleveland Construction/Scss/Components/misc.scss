@@ -1,0 +1,72 @@
+/*  TEMP- USED FOR WIREFRAMING
+----------------------------------------------------------*/
+/*.grid-container { border: 1px solid rgba(255, 0, 0, 0.25); }
+.grid-x { border: 1px solid rgba(0, 128, 0, 0.25); }
+.cell { border: 1px solid rgba(0, 0, 255, 0.25); }
+*/
+
+
+
+
+/*===================================================================================*/
+/* MISC CLASSES
+/*===================================================================================*/
+.center { text-align: center }
+
+.form-control { border: 1px solid #eaeaea;
+    &:hover { border: 1px solid #b4b2b2; }
+    &:focus { border: 1px solid #cd0202; box-shadow: none; outline: none; }
+    &:active { border: 1px solid #cd0202; box-shadow: none; outline: none; }
+}
+
+.z-index-100 { z-index: 100; }
+.z-index-200 { z-index: 200; }
+
+.project-detail-link { border: 1px solid #eaeaea; display: block; padding: 12px 0; margin-bottom: 12px; transition: all 0.25s ease-in-out;
+    &:hover { background-color: rgb(205 2 2 / 5%); }
+}
+
+.no-bottom-margin { margin-bottom: 0; }
+
+
+
+
+/*===================================================================================*/
+/* BACKGROUND COLORS
+/*===================================================================================*/
+.bg-red { background-color: #ba1917; color: #fff;
+    h2 { color: #fff; }
+}
+.bg-light-grey { background-color: #ebebeb; }
+.bg-medium-grey { background-color: #222222; color: #fff;
+    p, div { color: #fff; }
+    h2 { color: #ebea3b; }
+}
+.bg-dark-grey { background-color: #161616; color: #fff;
+    p, div { color: #b4b2b2; }
+    h2 { color: #b4b2b2; }
+    h4 { color: #b4b2b2; }
+    a { color: #cd0202;
+        &:hover { color: #8b0000; }
+    }
+}
+
+
+
+
+/*===================================================================================*/
+/* SLICK SLIDER
+/*===================================================================================*/
+.slideshow { position: relative; }
+.slick-container {
+    .slick-slider { display: inline;
+        .slick-slide { opacity: 0.4; transition: all 300ms ease; -moz-transform: scale(.66); -ms-transform: scale(.66); -o-transform: scale(.66); -webkit-transform: scale(.66); transform: scale(.66);
+            &.slick-center { -moz-transform: scale(1); -ms-transform: scale(1); -o-transform: scale(1); -webkit-transform: scale(1); transform: scale(1); opacity: 1; }
+            img { margin: 0 auto; }
+        }
+    }
+    .mbl {
+        &.lft-arrow { position: absolute; left: 0; top: 50%; -webkit-transform: translate(0, -50%); -ms-transform: translate(0, -50%); transform: translate(0, -50%); width: 42px; z-index: 1; }
+        &.rgt-arrow { position: absolute; right: 0; top: 50%; -webkit-transform: translate(0, -50%); -ms-transform: translate(0, -50%); transform: translate(0, -50%); width: 42px; z-index: 1; }
+    }
+}

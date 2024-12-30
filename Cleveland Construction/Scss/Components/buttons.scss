@@ -1,0 +1,54 @@
+/* BUTTONS
+----------------------------------------------------------*/
+button, .button { background-color: #cd0202; color: #ffffff; border: 1px solid #cd0202; display: inline-block; border-radius: 0; text-transform: uppercase; font-family: 'UnitedSansCdBd',Arial,sans-serif; -webkit-transition: all 0.25s ease-in-out; -moz-transition: all 0.25s ease-in-out; -ms-transition: all 0.25s ease-in-out; -o-transition: all 0.25s ease-in-out; transition: all 0.25s ease-in-out; padding: 8px 24px; font-size: initial; font-weight: initial; line-height: initial;
+    a { color: #ffffff; text-decoration: none; }
+    &:hover, &:focus, &:visited { color: #ffffff; }
+    &:hover, &:focus { background-color: #8b0000; border-color: #8b0000; }
+
+    &.secondary { background-color: #b4b2b2; border: 1px solid #b4b2b2; color: #000000;
+        a { color: #000000; }
+        &:hover { background-color: #b4b2b2; border: 1px solid #b4b2b2; color: #cd0202; }
+    }
+
+    &.tertiary { background-color: #031227; color: #ffffff; border: 1px solid #031227;
+        a { color: #ffffff; }
+        &:hover { background-color: #031227; color: #ffffff; border: 1px solid #031227; }
+    }
+
+    &.quaternary { background-color: #556B2F; color: #ffffff; border: 1px solid #556B2F;
+        a { color: #ffffff; }
+        &:hover { background-color: #556B2F; color: #ffffff; border: 1px solid #556B2F; }
+    }
+
+    &.quinary { background-color: #ffffff; color: #000000; border: 1px solid #556B2F;
+        a { color: #000000; }
+        &:hover { background-color: rgb(255 255 255 / 75%); border: 1px solid #000000; }
+    }
+    &.menu-control { color: #cd0202; background-color: transparent; border-style: none; font-size: 24px; }
+}
+
+
+.btnPrimary { background-color: #cd0202; color: #ffffff; border: 1px solid #cd0202; display: inline-block; padding: 8px 24px; font-size: initial; font-weight: initial; line-height: initial; transition: all 0.25s ease-in-out; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif;
+    a { color: #ffffff; text-decoration: none; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif; }
+    &:hover { background-color: #8b0000; border-color: #8b0000; }
+}
+
+.btnSecondary { background-color: #b4b2b2; border: 1px solid #b4b2b2; color: #000000; display: inline-block; padding: 8px 24px; font-size: initial; font-weight: initial; line-height: initial; transition: all 0.25s ease-in-out; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif;
+    a { color: #000000; text-decoration: none; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif; }
+    &:hover { background-color: #b4b2b2; border: 1px solid #b4b2b2; color: #cd0202; }
+}
+
+.btnTertiary { background-color: #031227; color: #ffffff; border: 1px solid #031227; display: inline-block; padding: 8px 24px; font-size: initial; font-weight: initial; line-height: initial; transition: all 0.25s ease-in-out; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif;
+    a { color: #ffffff; text-decoration: none; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif; }
+    &:hover { background-color: #031227; color: #ffffff; border: 1px solid #031227; }
+}
+
+.btnQuaternary { background-color: #556B2F; color: #ffffff; border: 1px solid #556B2F; display: inline-block; padding: 8px 24px; font-size: initial; font-weight: initial; line-height: initial; transition: all 0.25s ease-in-out; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif;
+    a { color: #ffffff; text-decoration: none; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif; }
+    &:hover { background-color: #556B2F; color: #ffffff; border: 1px solid #556B2F; }
+}
+
+.btnQuinary { background-color: #ffffff; color: #000000; border: 1px solid #000000; display: inline-block; padding: 8px 24px; font-size: initial; font-weight: initial; line-height: initial; transition: all 0.25s ease-in-out; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif;
+    a { color: #000000; text-decoration: none; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif; }
+    &:hover { background-color: rgb(255 255 255 / 75%); border: 1px solid #000000; }
+}

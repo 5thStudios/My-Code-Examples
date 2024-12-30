@@ -1,0 +1,26 @@
+/* HERO
+----------------------------------------------------------*/
+
+#hero { height: 100vh; max-height: 435px; position: relative; background-size: cover; background-repeat: no-repeat; background-position: center center; transition: all 0.5s ease; color: #fff; display: flex; -webkit-box-align: center; align-items: center; align-content: center; overflow: hidden; flex-direction: column;
+    > div { z-index: 20; }
+    .grid-y { height: 100vh; max-height: 435px; }
+    h1 { color: #ffffff; font-size: 48px; line-height: 56px; margin: 0 0 10px; }
+    h2 { color: #ffffff; font-size: 48px; margin: 20px 0 10px; }
+    h3 { color: #ffffff; font-size: 27px; line-height: 32px; margin: 24px 0 10px; }
+    .button { font-size: 24px; padding: 8px 48px; margin: 0; line-height: 34px; }
+    video { position: absolute; z-index: 10; min-width: 100%; min-height: 100%; width: auto; height: auto; top: 50%; left: 50%; -o-object-fit: contain; object-fit: contain; transform: translate(-50%, -50%); }
+    .title-pnl { border: 1px solid red; background-color: #333333; position: absolute; bottom: 0; right: 0; left: 25px;
+        h1 { font-size: 24px; line-height: 24px; text-transform: uppercase; background-color: #222222; color: #fff; padding: 14px 26px; margin: 0; letter-spacing: 1px; }
+    }
+    &.project-pg { max-height: 925px;
+        .grid-y { max-height: 925px; }
+        h1 { }
+        h3 { margin: -20px 0 30px; }
+        .grid-container { width: 100%; }
+    }
+}
+@media only screen and (max-width: 40em) {
+    #hero {
+        h1 { font-size: 40px; line-height: 41px; }
+    }
+}

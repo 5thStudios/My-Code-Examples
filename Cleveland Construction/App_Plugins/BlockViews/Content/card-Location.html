@@ -1,0 +1,33 @@
+﻿<link href="/css/Umbraco RTE.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus" ng-controller="locationCardController as vm">
+    <fieldset class="blockContent">
+        <legend>Location Card</legend>
+
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr ng-if="vm.ImgUrl">
+                    <td>Image</td>
+                    <td><img ng-src="{{vm.ImgUrl}}" style="max-width: 100px; height:auto;" /></td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>{{vm.Location}}</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>
+                        <div class="rich-text" ng-bind-html="vm.Address"></div>
+                    </td>
+                </tr>
+                <!--<tr>
+                    <td>Url</td>
+                    <td>{{vm.Url}}</td>
+                </tr>-->
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

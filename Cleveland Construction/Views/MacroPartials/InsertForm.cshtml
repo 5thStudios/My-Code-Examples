@@ -1,0 +1,12 @@
+﻿@using Microsoft.Extensions.Options;
+@using Umbraco.Forms.Core.Configuration;
+@inherits Umbraco.Cms.Web.Common.Macros.PartialViewMacroPage
+@inject IOptions<PackageOptionSettings> PackageOptionSettings
+
+
+
+@if (Guid.TryParse(Model.MacroParameters["FormGuid"]?.ToString(), out Guid form))
+{
+    //Render Views/Partials/Forms/Themes/default/Form.cshtml
+    @(await Component.InvokeAsync("RenderForm", new { formId = form }))
+}

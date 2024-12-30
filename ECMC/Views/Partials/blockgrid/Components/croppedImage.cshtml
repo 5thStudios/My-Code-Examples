@@ -1,0 +1,27 @@
+﻿@using Umbraco.Extensions;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<CroppedImage>>
+@{
+    //Instantiate variables
+    var cmModel = Model.Content;
+    var image = "";
+
+
+    //Obtain image
+    if (string.IsNullOrEmpty(cmModel.Crop) || cmModel.Crop == "None")
+    {
+        //No crop
+        image = cmModel.Image?.Url();
+    }
+    else
+    {
+        //Cropped image
+        image = cmModel.Image?.GetCropUrl(cmModel.Crop, UrlMode.Absolute) ?? string.Empty;
+    }
+}
+
+
+<p>
+    <img alt="@cmModel.Image?.Name" src="@image" />
+</p>

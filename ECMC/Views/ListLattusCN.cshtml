@@ -1,0 +1,62 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.ViewModel;
+@using ECMC_Umbraco.Models;
+@using Newtonsoft.Json;
+@using System.Linq;
+@model ComposedPageViewModel<ContentModels.ListLattusCN, ListViewModel>
+@{
+    Layout = "MasterCN.cshtml";
+}
+@section Footer {
+    <script type="text/javascript" src="/js/paginathing/paginathing.min.js"></script>
+}
+
+
+
+@await Html.GetBlockGridHtmlAsync(Model.Page?.HeroBlockGrid)
+@await Html.GetBlockGridHtmlAsync(Model.Page?.ContentBlockGrid)
+
+
+
+@* ================================================================================= *@
+<input type="hidden" id="hfldPaginationCount" name="hfldPaginationCount" value="@Model.ViewModel?.PaginationCount" />
+
+<div class="grid-container" style="margin-top: 30px;">
+    <div class="grid-x   def-margin-b">
+        <div class="cell small-20 small-offset-2">
+
+            @if (Model.Page?.ShowFilterPanel == true)
+            {
+                @await Html.PartialAsync(Common.Partial.Filter, Model.ViewModel?.filterViewModel)
+                <br />
+                <br />
+            }
+
+
+            <div class="list-type grid-view">
+                <div class="grid-x   grid-margin-x  grid-margin-y       @(Model.ViewModel.ShowPagination == true ? "paginate" : "") ">
+                    @if (Model.ViewModel.LstListItems != null && Model.ViewModel.LstListItems.Any())
+                    {
+                        <partial name="@Common.Partial.LattusList_GridView" model="Model.ViewModel.LstListItems" />
+                    }
+                </div>
+            </div>
+
+            <div class="list-type list-view    grid-x   grid-margin-x  grid-margin-y grid-padding-y   hide">
+                <div class="cell">
+                    <div class="@(Model.ViewModel.ShowPagination == true ? "paginate" : "") ">
+                        @if (Model.ViewModel.LstListItems != null && Model.ViewModel.LstListItems.Any())
+                        {
+                            <partial name="@Common.Partial.LattusList_ListView" model="Model.ViewModel.LstListItems" />
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <br />
+        </div>
+    </div>
+</div>
+
+@await Html.GetBlockGridHtmlAsync(Model.Page?.ContentBottomBlockGrid)

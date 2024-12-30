@@ -1,0 +1,31 @@
+﻿@import'../_variables-com';
+
+
+
+
+section {
+
+    &.ecmcGradient { background: rgb(79,161,72); background: -moz-linear-gradient(90deg, rgba(79,161,72,1) 0%, rgba(65,156,90,1) 35%, rgba(4,139,149,1) 100%); background: -webkit-linear-gradient(90deg, rgba(79,161,72,1) 0%, rgba(65,156,90,1) 35%, rgba(4,139,149,1) 100%); background: linear-gradient(90deg, rgba(79,161,72,1) 0%, rgba(65,156,90,1) 35%, rgba(4,139,149,1) 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4fa148",endColorstr="#048b95",GradientType=1); }
+    &.columnWhiteText {
+        div.grid-container {
+            div.grid-x {
+                div.cell {
+                    p { color: $color_glob_white }
+                    h2 { color: $color_glob_white }
+                    h3 { color: $color_glob_white }
+                    h4 { color: $color_glob_white }
+                    > div.rich-text {
+                        > p { color: $color_glob_white }
+                        @media only screen and (max-width: $bp_sm) { text-align: center; }
+                    }
+                    a, a:visited {
+                        &.read-more, div.read-more { color: $color_glob_white; }
+                        &:hover, &:focus { color: $color_glob_white;
+                            &.read-more, div.read-more { color: $color_glob_white; }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

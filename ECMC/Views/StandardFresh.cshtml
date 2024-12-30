@@ -1,0 +1,12 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.StandardFresh>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterFresh.cshtml";
+}
+
+
+@await Html.GetBlockGridHtmlAsync(Model.HeroBlockGrid)
+@await Html.GetBlockGridHtmlAsync(Model.ContentBlockGrid)
+@await Html.GetBlockGridHtmlAsync(Model.ContentBottomBlockGrid)

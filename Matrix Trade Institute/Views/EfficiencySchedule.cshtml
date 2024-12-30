@@ -1,0 +1,43 @@
+﻿@using www.Models;
+@using www.ViewModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@model ComposedPageViewModel<EfficiencySchedule, List<EfficiencyScheduleViewModel>>
+@{
+    Layout = "TopLevel.cshtml";
+    string json = Newtonsoft.Json.JsonConvert.SerializeObject(Model.ViewModel);
+}
+
+
+
+@await Html.GetBlockGridHtmlAsync(Model.Page?.HeroArea)
+@await Html.GetBlockGridHtmlAsync(Model.Page?.MainContent)
+
+
+
+<section class="grid-container">
+    <div class="grid-x">
+        <div class="cell laptop-16 laptop-offset-4">
+            <table class="schedule">
+                <thead>
+                    <tr>
+                        <th>Dates</th>
+                        <th>Bootcamp</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Record in Model.ViewModel)
+                    {
+                        <tr class="@Record.Category">
+                            <td>@Record.DateRange</td>
+                            <td>@Record.Bootcamp</td>
+                            <td>@Record.TimeFrame</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            <br />
+        </div>
+    </div>
+</section>

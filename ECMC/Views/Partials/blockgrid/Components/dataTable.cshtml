@@ -1,0 +1,67 @@
+@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<DataTable>>
+@{
+    //
+    string? title = Model.Content.DataTableTitle;
+    string? caption = Model.Content.Caption;
+    string? summary = Model.Content.Summary;
+    var row = (ContentModels.DataTable)Model.Content;
+
+    bool allowOrdering = Model.Content.IsTableSortable;
+
+    @* https://datatables.net/examples/index *@
+
+    //Create random string to attach to canvas name.  [allows multiple canvases on single page.]
+    string tableName = "tablePnl-";
+    Random rand = new Random();
+    int stringlen = rand.Next(6, 10);
+    for (int i = 0; i < stringlen; i++)
+    {
+        // Generating random character by converting a random number into character and append the letter to string.
+        tableName = tableName + Convert.ToChar(rand.Next(0, 26) + 65);
+    }
+}
+
+
+
+
+<table summary="@summary" title="@title" id="@tableName" data-table="dataTableOnPage" class="display" style="width:100%" data-allowsort="@allowOrdering">
+    
+    @if (!string.IsNullOrWhiteSpace(caption))
+    {
+        <caption>@caption</caption>
+    }
+
+    <thead>
+        <tr>
+
+            @foreach (var headerData in row.HeaderRow)
+            {
+                var headRow = (ContentModels.TableHeader)headerData.Content;
+                <th>@headRow.Title</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rowData in row.RowData)
+        {
+            var rowItem = (ContentModels.TableRow)rowData.Content;
+
+
+            <tr>
+                @foreach (var cellData in rowItem.DataCells)
+                {
+                    var cellItem = (ContentModels.DataTableDataCell)cellData.Content;
+
+                    <td> @cellItem.DataCell </td>
+                }
+            </tr>
+
+
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,11 @@
+﻿@import'../common-B/_variables-com';
+
+.copyright { margin: 15px 0 30px 0; }
+
+footer { background-color: $color_glob_black;
+    a {
+        &:hover, &:focus { background: none; }
+    }
+    .logo { height: 70px; width: auto; }
+    .copyright { color: $color_glob_white; }
+}

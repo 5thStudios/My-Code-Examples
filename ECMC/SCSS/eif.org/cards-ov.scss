@@ -1,0 +1,26 @@
+﻿@import'../common-B/_variables-com';
+
+.card {
+    div.homeNewsLinks { white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        > ul { list-style-type: none;
+            > li { }
+        }
+        a { color: $link_color;
+            &:hover { color: $link_color_hov; }
+        }
+    }
+    .grid-y {
+        .cell.auto { display: table; min-height: 140px; }
+    }
+
+    .read-more.btn { background-color: $color_glob_teal; font-weight: $weight_light; color: $color_glob_white; border-style: none; padding: 8px; width: fit-content; margin: 12px auto 0 auto; width: 100%; display: flex; justify-content: center; flex-wrap: wrap; flex-direction: row; align-content: center; align-items: center;
+        &:after { content: none; margin-left: 0; }
+    }
+    .read-more.btn.align-left { margin: initial; }
+    .read-more.btn.dark { border-color: $color_glob_gray_700; color: $color_glob_gray_700; }
+
+}
+
+.homeeif .card { background-color: $color_glob_white; }
+
+

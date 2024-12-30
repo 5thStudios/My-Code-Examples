@@ -1,0 +1,45 @@
+﻿@using www.Models;
+@using www.ViewModels;
+@model List<Link>;
+
+
+
+
+
+<div class="off-canvas position-right" id="offCanvas" data-off-canvas data-transition="push">
+    <ul class="vertical menu">
+        <li class="close-menu text-right">
+            <a aria-label="Close menu" data-close>
+                Close <span>&times;</span>
+            </a>
+        </li>
+    </ul>
+    <hr />
+    <ul class="main-nav vertical menu drilldown" data-responsive-menu="drilldown" data-smooth-scroll data-auto-height="true" data-animate-height="true">
+        @foreach (var lnk in Model)
+        {
+            if (lnk.LstChildLinks != null)
+            {
+                <li>
+                    <a hreflang="en-US" href="@lnk.Url" target="@lnk.Target">@lnk.Title</a>
+                    <ul class="vertical menu">
+                        @foreach (var lnkChld in lnk.LstChildLinks)
+                        {
+                            <li>
+                                <a hreflang="en-US" href="@lnkChld.Url" target="@lnkChld.Target">@lnkChld.Title</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a hreflang="en-US" href="@lnk.Url" target="@lnk.Target">@lnk.Title</a>
+                </li>
+            }
+        }
+    </ul>
+
+
+</div>

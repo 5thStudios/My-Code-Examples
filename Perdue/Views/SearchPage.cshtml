@@ -1,0 +1,171 @@
+﻿@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@model ComposedPageViewModel<ContentModels.SearchPage, SearchPageViewModel>
+@{
+    Layout = Common.Layout.TopLevelPER;
+}
+
+
+<div class="SearchPage">
+    <partial name="@Common.Partial.HeroCarousel" model="Model.Page?.HeroSlides" view-data='@new ViewDataDictionary(ViewData) { { "ipPage", Model.Page } }' />
+
+    @await Html.GetBlockGridHtmlAsync(Model.Page?.MainContent)
+
+    <div class="grid-container">
+        <div class="grid-x">
+            <div class="cell laptop-16 laptop-offset-4">
+                <div class="search-form">
+                    <br />
+                    <br />
+
+                    <form action="/search/">
+                        <div class="grid-x search-field">
+                            <div class="cell auto">
+                                <input class="form-control mr-sm-2 rounded-0" type="text" placeholder="Search" name="search" value="@Model.ViewModel?.SearchQuery">
+                            </div>
+                            <div class="cell shrink">
+                                <button class="btn btn-secondary rounded-0    align-center-middle" type="submit">                                    
+                                    <img src="/images/icons/magnifying-glass-solid.svg" class="svg-btn" />
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <br />
+                    <br />
+                </div>
+            </div>
+
+            <div class="cell laptop-20 laptop-offset-2">
+
+
+                <div class="search-results">
+                    <h2>Search Results for "@Model.ViewModel?.SearchQuery"</h2>
+
+                    @if (Model.ViewModel!.LstResults!.Any())
+                    {
+                        <p class="results-count">Showing results @Model.ViewModel.ResultStartNo through @Model.ViewModel.ResultThroughNo of @Model.ViewModel.TotalItems</p>
+
+                        foreach (var record in Model.ViewModel?.LstResults!)
+                        {
+                            <div class="search-result">
+                                <a href="@record.Url">
+                                    <h3>@Html.Raw(record.Title)</h3>
+                                </a>
+                                <p>@Html.Raw(record.Summary)</p>
+                            </div>
+                        }
+
+
+                        if (Model.ViewModel!.TotalPages > 1)
+                        {
+                            Pagination();
+                        }
+
+                    }
+                    else
+                    {
+                        <p class="search-error">No results found.</p>
+                    }
+
+
+
+
+                    @*
+                    <div class="search-result my-3">
+                    <a href="/products/50120-perdue-no-antibiotics-ever-fully-cooked-turkey-sausage-links-10-oz/">
+                    <h3><strong>50120</strong> - PERDUE® NO ANTIBIOTICS EVER Fully Cooked Turkey Sausage Links, 1.0 oz</h3>
+                    </a>
+
+                    <p>
+                    <strong>50120</strong> - PERDUE® NO ANTIBIOTICS EVER Fully Cooked Turkey Sausage Links, 1.0 oz | Perdue Foodservice Product Code: <strong>50120</strong> PERDUE ® NO ANTIBIOTICS EVER Fully Cooked Turkey Sausage Links, 1.0 oz
+                    No Antibiotics Ever 100% Vegetarian Fed Meet consumer demand for free-from additives by serving turkey raised with No Antibiotics Ever and on a 100% vegetarian diet with no animal by-products. Fully cooked, sage based mild flavored ground turkey sausage formed into 1.0 oz links. A healthy, lower fat alternative to pork sausages these links …
+                    </p>
+
+
+                    </div>
+                    *@
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+
+
+
+@functions {
+    private void Pagination() 
+    {
+
+        // <div>
+        //     <h5 style="color:red;">PageNo: @Model.ViewModel!.PageNo</h5>
+        //     <h5 style="color:red;">TotalPages: @Model.ViewModel!.TotalPages</h5>
+        //     <h5 style="color:red;">TotalItems: @Model.ViewModel!.IsFirstPg</h5>
+        //     <h5 style="color:red;">SkipCount: @Model.ViewModel!.IsLastPg</h5>
+        //     <h5 style="color:red;">StartPageNo: @Model.ViewModel!.StartPageNo</h5>
+        //     <h5 style="color:red;">EndPageNo: @Model.ViewModel!.EndPageNo</h5>
+        //     <br />
+        // </div>
+
+
+        <div class="fulltextsearch_pagination">
+            <ul class="fulltextsearch_pagination_ul">
+
+                @if (Model.ViewModel!.PageNo > 1)
+                {
+                    <li class="fulltextsearch_previous">
+                        <a class="fulltextsearch_pagination_link" href="?search=@(Model.ViewModel!.SearchQuery)&page=@(Model.ViewModel!.PageNo - 1)">Previous</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="fulltextsearch_previous fulltextsearch_previous_inactive">
+                        <a class="fulltextsearch_pagination_link">Previous</a>
+                    </li>
+                }
+
+
+
+                @for (var curPage = Model.ViewModel!.StartPageNo; curPage <= Model.ViewModel!.EndPageNo; curPage++)
+                {
+                    if (curPage == Model.ViewModel!.PageNo)
+                    {
+                        <li class="fulltextsearch_page fulltextsearch_thispage">@curPage</li>
+                    }
+                    else
+                    {
+                        <li class="fulltextsearch_page">
+                            <a class="fulltextsearch_pagination_link" href="?search=@(Model.ViewModel!.SearchQuery)&page=@(curPage)">@curPage</a>
+                        </li>
+                    }
+                }
+
+
+
+                @if (Model.ViewModel!.PageNo < Model.ViewModel!.TotalPages)
+                {
+                    <li class="fulltextsearch_next">
+                        <a class="fulltextsearch_pagination_link" href="?search=@(Model.ViewModel!.SearchQuery)&page=@(Model.ViewModel!.PageNo + 1)">Next</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="fulltextsearch_next fulltextsearch_next_inactive">
+                        <a class="fulltextsearch_pagination_link">Next</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+
+    }
+}

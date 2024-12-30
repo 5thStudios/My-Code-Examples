@@ -1,0 +1,24 @@
+<style>
+    
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Slider</legend>
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td># of slides on screen @ once</td>
+                    <td>{{block.data.numberOfSlidesToShowOnScreen}}</td>
+                </tr>
+                <tr>
+                    <td>Total # of slides</td>
+                    <td>{{block.data.slideList.contentData.length}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

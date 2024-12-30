@@ -1,0 +1,32 @@
+﻿<link href="/css/Umbraco RTE.css" rel="stylesheet" />
+
+<style>
+    .tblRow { display: flex; flex-direction: row; flex-wrap: wrap; }
+    .tblColumn { padding: 12px !important; max-width: 20%; }
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Carousel</legend>
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td>Images</td>
+                    <td>
+                        <table>
+                            <tr class="tblRow">
+                                <td class="tblColumn" ng-repeat="record in block.data.carouselImages">
+                                    {{mediaItem = (record.mediaKey | mediaItemResolver); ""}}
+                                    <img ng-src="{{mediaItem.mediaLink}}" style="max-width: 250px; height:auto;" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

@@ -1,0 +1,22 @@
+﻿@using ECMC_Umbraco.ViewModel;
+@model ECMC_Umbraco.Models.NewsTop5ViewModel;
+
+
+
+
+
+<div data-blockgrid="Components/richTextCustom" class="rich-text">
+    <div class="homeNewsLinks">
+        @foreach (var item in Model.LstTop5)
+        {
+            <div>
+                <span class="date">@item.Summary</span>
+                <span class="space">&nbsp;|&nbsp;</span>
+                <span class="link">
+                    <a href="@item.Url" title="@item.Title">@item.Title</a>
+                </span>
+            </div>
+        }
+    </div>
+    <br />
+</div>

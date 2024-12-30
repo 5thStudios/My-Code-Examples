@@ -1,0 +1,86 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.ViewModel;
+@using ECMC_Umbraco.Models;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@model ComposedPageViewModel<ContentModels.NewsCategoryFnd, NewsListViewModel>
+@{
+    Layout = "MasterFnd.cshtml";
+}
+<input type="hidden" id="hfldPaginationCount" name="hfldPaginationCount" value="@Model.ViewModel?.PaginationCount" />
+
+<div id="newsCategory">
+
+<div class="grid-container newsCategory no-hero-top-margin">
+    <div class="grid-x">
+        <div class="cell small-20 small-offset-2">
+
+            @*            <h1 style="color: #13818b;">@Model.Page.Name</h1>
+            <div class="horizontal-nav">
+            <ul class="menu">
+            @if (Model.ViewModel!.LstCategories.Any())
+            {
+            foreach (var _link in Model.ViewModel.LstCategories)
+            {
+            <li>
+            <a href="@_link.Url">@_link.Title</a>
+            </li>
+            }
+            }
+            </ul>
+            </div> *@
+        </div>
+    </div>
+</div>
+
+@await Html.GetBlockGridHtmlAsync(Model.Page?.Parent.Value<Umbraco.Cms.Core.Models.Blocks.BlockGridModel>("contentBlockGrid"))
+
+<div class="grid-container">
+    <div class="grid-x   def-margin-b">
+        <div class="cell small-20 small-offset-2">
+
+
+
+            @if (Model.Page?.Parent.Value<bool>("showFilterPanel") == true)
+            {
+                @await Html.PartialAsync(Common.Partial.Filter, Model.ViewModel?.filterViewModel)
+
+            }
+
+
+            <div class="list-type grid-view">
+                <div class="grid-x   grid-margin-x  grid-margin-y       @(Model.ViewModel.ShowPagination == true ? "paginate" : "") ">
+                    @if (Model.ViewModel.LstListItems != null && Model.ViewModel.LstListItems.Any())
+                    {
+                        foreach (ListItemViewModel item in Model.ViewModel.LstListItems)
+                        {
+                            @await Html.PartialAsync(Common.Partial.NewsAndEventCard_GridView, item)
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="list-type list-view    grid-x   grid-margin-x  grid-margin-y grid-padding-y   hide">
+                <div class="cell">
+                    <div class="@(Model.ViewModel.ShowPagination == true ? "paginate" : "") ">
+
+                        @if (Model.ViewModel.LstListItems != null && Model.ViewModel.LstListItems.Any())
+                        {
+                            foreach (var item in Model.ViewModel.LstListItems)
+                            {
+                                @await Html.PartialAsync(Common.Partial.NewsAndEventCard_ListView, item)
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+</div>
+
+@section Footer {
+    <script type="text/javascript" src="/js/paginathing/paginathing.min.js"></script>
+}

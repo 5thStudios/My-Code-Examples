@@ -1,0 +1,24 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Custom HTML</legend>
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td style="padding-bottom: 9px;">Surrounding Class</td>
+                    <td style="padding-bottom: 9px;">{{block.data.class}}</td>
+                </tr>
+                <tr>
+                    <td>Html</td>
+                    <td>
+                        <textarea rows="10">{{block.data.bodyHTML}}</textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

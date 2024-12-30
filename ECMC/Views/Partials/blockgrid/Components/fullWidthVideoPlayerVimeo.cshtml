@@ -1,0 +1,58 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<FullWidthVideoPlayerVimeo>>
+@{
+    //Instantiate variables
+    var cmModel = Model.Content;
+
+    var src = cmModel.VideovemioOrYouTubeUrltoVideo;
+    int height = cmModel.VideoHeight;
+    bool muted = cmModel.VideoMute;
+    bool loop = cmModel.VideoLoop;
+    bool controls = cmModel.VideoControles;
+    bool autoplay = cmModel.VideoAutoPlay;
+    var cc = cmModel.VideoClosedCaptioningAternative;
+
+    List<string> controlsList = new List<string>();
+    @if (@muted) { controlsList.Add("muted"); }
+    @if (@loop) { controlsList.Add("loop"); }
+    @if (!@controls) { controlsList.Add("controls"); }
+    @if (@autoplay) { controlsList.Add("autoplay"); }
+    var cntrlList = String.Join(" ", controlsList.Distinct());
+
+    List<string> controlsList2 = new List<string>();
+    if (autoplay) { controlsList2.Add("&autoplay=1"); }
+    if (loop) { controlsList2.Add("&loop=1"); }
+    if (muted) { controlsList2.Add("&mute=1"); }
+    if (controls) { controlsList2.Add("&controls=0"); }
+    var cntrlList2 = String.Join("", controlsList2.Distinct());
+
+    var SrcConcat = "https://player.vimeo.com/video/" + src + "?" + cntrlList2;
+
+}
+
+
+
+<h6>VIMEO</h6>
+<h6>src = @src</h6>
+<h6>cntrlList = @cntrlList</h6>
+<h6>SrcConcat = @SrcConcat</h6>
+
+<div class="grid-container full videoPlayer" data-blockgrid="Components/fullWidthVideoPlayerVimeo">
+    <video width="100%" height="@height" style="object-fit:cover" @cntrlList style="position: absolute;z-index: -1;">
+        <source src="@SrcConcat" type="video/mp4">
+    </video>
+    <div class="sr-only">@cc</div>
+</div>
+
+
+
+@*
+<div class="grid-container full videoPlayer" data-blockgrid="Components/fullWidthVideoPlayerVimeo">
+    <video width="100%" height="@height" style="object-fit:cover" @String.Join(" ", controlsList.Distinct() ) style="position: absolute;z-index: -1;">
+        <source src="@src" type="video/mp4">
+    </video>
+    <div class="sr-only">@cc</div>
+</div>
+*@
+

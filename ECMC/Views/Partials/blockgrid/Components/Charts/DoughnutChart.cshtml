@@ -1,0 +1,149 @@
+@using ECMC_Umbraco.Models;
+@using ECMC_Umbraco.ViewModel;
+@using System.Collections.Generic;
+@model ChartsViewModel;
+@{
+    //Create random string to attach to canvas name.  [allows multiple canvases on single page.]
+    string chartName = "chartPnl-";
+    Random rand = new Random();
+    int stringlen = rand.Next(6, 10);
+    for (int i = 0; i < stringlen; i++)
+    {
+        // Generating random character by converting a random number into character and append the letter to string.
+        chartName = chartName + Convert.ToChar(rand.Next(0, 26) + 65);
+    }
+
+
+    //Convert incoming model into json
+    string jsonModel = Newtonsoft.Json.JsonConvert.SerializeObject(Model);
+}
+
+
+
+<div data-blockgrid="Components/Charts/DoughnutChart">
+    <div class="chart doughnutChart">
+        <canvas id="@chartName" style="max-height: 600px; margin: 30px 0;" aria-label="Model.Title" role="img">
+            <p>@Model.ADASummary</p>
+        </canvas>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //Obtain json model from result
+        var jsonModel = @Html.Raw(jsonModel);
+        //console.log(jsonModel);
+
+        //Generate datasets
+        var datasetValue = [];
+        for (var x = 0; x < $(jsonModel.LstDatasets).length; x++) {
+            datasetValue[x] = {
+                label: jsonModel.LstDatasets[x].Label,
+                data: jsonModel.LstDatasets[x].LstData,
+                tooltip: jsonModel.LstDatasets[x].LstTooltip,
+                backgroundColor: jsonModel.LstDatasets[x].LstBackgroundColors,
+                borderColor: jsonModel.LstDatasets[x].LstBorderColors,
+                hoverBackgroundColor: jsonModel.LstDatasets[x].LstBackgroundHoverColors,
+                borderWidth: 0,
+                hoverOffset: 4,
+                valueType: jsonModel.ValueType
+            }
+        }
+        //console.log(jsonModel.LstDatasets);
+
+
+        var footerTooltip = (tooltipItems) => {
+            //Obtain the tooltip if it exists.
+            var index = tooltipItems[0].dataIndex;
+            var tooltip = tooltipItems[0].dataset.tooltip[index];
+            return tooltip;
+        };
+
+
+        var formatLabel = (context) => {
+            //Rewrite label
+            //================================
+
+            //get dataset name
+            let label = context.dataset.label || '';
+
+            if (label) {
+                label += ': ';
+            }
+            //label = '';  //clears dataset name.
+
+            //Determine how to format
+            if (context.dataset.valueType == 'Percentage') {
+                label += context.formattedValue + '%';
+            }
+            else if (context.dataset.valueType == 'Currency') {
+                label += '$' + context.formattedValue;
+            }
+            else {
+                label += context.formattedValue;
+            }
+
+            return label;
+        }
+
+
+        //Build Config
+        var data = {
+            labels: jsonModel.LstLabels,
+            datasets: datasetValue
+        };
+
+
+
+        new Chart(document.getElementById('@chartName'), {
+            //plugins: [ChartDataLabels], //registers plugin if needed.
+            type: 'doughnut',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        display: jsonModel.ShowLegend,
+                        labels: {
+                            padding: 25,
+                            color: 'rgb(48, 49, 51)',
+                            font: {
+                                family: 'ff-meta-web-pro',
+                                size: 12,
+                                weight: 300
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: jsonModel.Title,
+                        color: 'rgb(48, 49, 51)',
+                        padding: {
+                            top: 10,
+                            bottom: 20
+                        },
+                        font: {
+                            family: 'ff-meta-web-pro',
+                            size: 16,
+                            weight: 500
+                        }
+                    },
+                    tooltip: {
+                        titleFont: { family: 'ff-meta-web-pro', weight: 500 },
+                        bodyFont: { family: 'ff-meta-web-pro', weight: 300 },
+                        displayColors: false,
+                        cornerRadius: 0,
+                        callbacks: {
+                            footer: footerTooltip,
+                            label: formatLabel
+                        }
+                    },
+                }
+            },
+        });
+
+    });
+</script>

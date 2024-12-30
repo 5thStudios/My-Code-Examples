@@ -1,0 +1,54 @@
+<style>
+    
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Timeline</legend>
+
+
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0" ng-repeat="entry in block.data.timelineEntries.contentData">
+            <tbody>
+                <tr>
+                    <td style="color: #3f51b5;">Timeline Entry</td>
+                    <td class="nested-tbls">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Entry Date</td>
+                                    <td>{{entry.entryDate.markup}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Title</td>
+                                    <td>{{entry.title}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Subtitle</td>
+                                    <td>{{entry.subtitle}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Content</td>
+                                    <td>{{entry.content}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Image</td>
+                                    <td>
+                                        {{mediaItem = (entry.image[0].mediaKey | mediaItemResolver); ""}}
+                                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width:200px;" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+
+    </fieldset>
+</div>
+<br />

@@ -1,0 +1,69 @@
+﻿@* https://www.ecmcgroup.org/what-we-do/ecmc-group-impact *@
+@* Transition found here: https://stackoverflow.com/questions/3508605/how-can-i-transition-height-0-to-height-auto-using-css *@
+
+@using ECMC_Umbraco.Models;
+@model HeaderViewModel;
+
+
+<header class="show-for-menu">
+    <div class="search-bar">
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="cell auto"></div>
+                <div class="cell shrink" style="height:40px">
+                    @if (!@Model.ToggleSearch)
+                    {
+                    <form action="/search/">
+                        <input type="text" class="text-right" placeholder="Search" name="search" id="txbTopSearchField" />
+                        <button type="submit" class="btn btn-success">
+                            <span class="fa fa-search" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                    }
+                </div>
+                <div class="cell laptop-2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bar">
+        <div class="grid-container">
+            <div class="grid-x align-middle">
+
+                <div class="cell small-2 small-offset-2 laptop-3 laptop-offset-2  large-3 large-offset-2">
+                    <a href="/">
+                        <img class="logo" src="@Model.SiteLogoUrl" alt="@Model.SiteName">
+                    </a>
+                </div>
+
+                <div class="cell auto text-right">
+                    <nav class="menu">
+                        <ul >
+                            @foreach (var lnkParent in Model.LstLinks!)
+                            {
+                                <li>
+                                    <a href="@lnkParent.Url" class="@(lnkParent.IsActive == true ? "active" : "")">@Html.Raw(lnkParent.Title)</a>
+
+                                    @* second level *@
+                                    @if (lnkParent.LstChildLinks != null && lnkParent.LstChildLinks.Any())
+                                    {
+                                        <ul>
+                                        @foreach (var lnkChild in lnkParent.LstChildLinks)
+                                        {
+                                            <li>
+                                                    <a href="@lnkChild.Url" class="@(lnkChild.IsActive == true ? "active" : "")">@lnkChild.Title</a>
+                                                            
+                                            </li>
+                                        }
+                                        </ul>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="cell laptop-2"></div>
+            </div>
+        </div>
+    </div>
+</header>

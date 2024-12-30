@@ -1,0 +1,52 @@
+﻿@using ECMC_Umbraco.ViewModel;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@model GrantItemsViewModel;
+
+
+
+<div class="filter-pnl grid-x grid-padding-x grid-padding-y">
+    <div class="cell">
+
+        <div class="umbraco-forms-form">
+            <div class="grid-x grid-margin-x">
+
+
+
+                <div class="cell medium-auto">
+                    <h6 style="margin:6px 0 0;">Years</h6>
+                    @Html.DropDownListFor(x => x.YearFilter, new SelectList(Model.LstYears, "Value", "Text", Model.YearFilter), "")
+                </div>
+
+                <div class="cell medium-auto">
+                    <h6 style="margin:6px 0 0;">Locations</h6>
+                    @Html.DropDownListFor(x => x.LocationFilter, new SelectList(Model.LstLocations, "Value", "Text", Model.LocationFilter), "")
+                </div>
+
+
+
+                <div class="cell medium-auto large-10">
+                    <h6 style="margin:6px 0 0;">Search</h6>
+                    @Html.TextBoxFor(m => m.SearchQuery)
+                </div>
+
+
+                <div class="cell shrink">
+                    <div style="margin:6px 0 0;">&nbsp;</div>
+                    <input type="submit" class="button" title="Submit" />
+                </div>
+
+
+
+                <div class="cell shrink">
+                    <div style="margin:6px 0 0;">&nbsp;</div>
+                    <a href="@Model.PageUrl" class="button">Clear</a>
+                    @Html.HiddenFor(x => x.PageUrl)
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

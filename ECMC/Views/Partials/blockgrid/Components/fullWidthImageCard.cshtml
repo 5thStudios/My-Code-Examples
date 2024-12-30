@@ -1,0 +1,16 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<FullWidthImageCard>>
+
+
+
+<div data-blockgrid="Components/fullWidthImgCard" data-aos="@Model.Content.InViewAnimation" class="fullWidthImgCard">
+    <div class="grid-x ">
+        <div class="cell small-24">
+            @await Html.PartialAsync(Common.Partial.FullWidthImgCard, Model.Content)
+        </div>
+    </div>
+</div>
+

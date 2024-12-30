@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<Fieldset>>
+@using www.Models.PublishedModels;
+
+
+
+
+<fieldset data-blockgrid="Components/fieldset">
+    <legend>
+        <a href="@Model.Content.TitleLink?.Url" target="@Model.Content.TitleLink?.Target">@Model.Content.TitleLink?.Name</a>
+    </legend>
+  
+
+    @Html.Raw(Model.Content.Content)
+
+</fieldset>
+<br />
+<br />

@@ -1,0 +1,52 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<HeroNoImageA>>
+
+@{
+    //Instantiate variables
+    var cmModel = Model.Content;
+    string noBtmMrgn = string.Empty;
+
+    //Determine if bottom padding should appear
+    if (cmModel.RemoveBottomPadding)
+    {
+        noBtmMrgn = "no-bottom-margin";
+    }
+}
+
+
+
+<div data-blockgrid="Components/heroNoImage" class="hero heroNoImage mbl-height-initial tbl-height-initial  @noBtmMrgn">
+
+    <div class="grid-container">
+        <div class="grid-x align-middle mbl-height-initial tbl-height-initial">
+            <div class="cell    small-20 small-offset-2     medium-20 medium-offset-2    large-20 large-offset-2">
+
+                <div class="content">
+                    @if (!string.IsNullOrWhiteSpace(cmModel.IntroHeadline))
+                    {
+                        <h2>@Html.Raw(cmModel.IntroHeadline)</h2>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(cmModel.Headline))
+                    {
+                        <h1>@Html.Raw(cmModel.Headline)</h1>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(cmModel.SubHeadline))
+                    {
+                        <h2>@Html.Raw(cmModel.SubHeadline)</h2>
+                    }
+
+
+                    @if (!string.IsNullOrWhiteSpace(cmModel.CallToAction?.Name))
+                    {
+                        <p><a class="link-button" target="@cmModel.CallToAction.Target" href="@cmModel.CallToAction.Url">@cmModel.CallToAction.Name</a></p>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

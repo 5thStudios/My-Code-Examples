@@ -1,0 +1,103 @@
+/* CARDS
+----------------------------------------------------------*/
+.card { border: 1px solid #b4b2b2; margin: 0;
+    &.news {
+        .card-image {
+            img { }
+        }
+        .card-header { background-color: #d42828; text-align: right;
+            span { font-family: "UnitedSansCdBd",Arial,sans-serif; display: inline-block; background-color: #cd0202; color: #fff; font-size: 14px; line-height: 12px; padding: 14px 24px; text-transform: uppercase; }
+        }
+        .card-section {
+            text-align: center;
+            .date { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 18px; font-weight: 400; }
+            .content { font-family: 'Open Sans',sans-serif; font-size: 14px; color: #161616; }
+            .title { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 30px; line-height: 34px; font-weight: 700; color: #cd0202; }
+            @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+                .title { font-size: 24px; line-height: 26px; }
+            }
+        }
+        .card-footer { text-align: right;
+            span { font-family: "UnitedSansCdBd",Arial,sans-serif; display: inline-block; background-color: #eee; color: #888; font-size: 17px; line-height: 13px; padding: 15px 24px 12px; text-transform: uppercase; }
+        }
+    }
+    &.readmore {
+        .card-image {
+            img { }
+        }
+        .card-header { background-color: #d42828; text-align: right;
+            span { font-family: "UnitedSansCdBd",Arial,sans-serif; display: inline-block; background-color: #cd0202; color: #fff; font-size: 14px; line-height: 12px; padding: 14px 24px; text-transform: uppercase; }
+        }
+        .card-section {
+            text-align: center;
+            .pretitle { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 18px; font-weight: 400; }
+            .content { font-family: 'Open Sans',sans-serif; font-size: 14px; color: #161616; }
+            .title { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 30px; font-weight: 700; color: #cd0202; }
+            @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+                .title { font-size: 24px; line-height: 26px; }
+            }
+        }
+    }
+    &.info {
+        .card-image {
+            img { }
+        }
+        .card-header { background-color: #d42828; text-align: right;
+            span { font-family: "UnitedSansCdBd",Arial,sans-serif; display: inline-block; background-color: #cd0202; color: #fff; font-size: 14px; line-height: 12px; padding: 14px 24px; text-transform: uppercase; }
+        }
+        .card-section {
+            text-align: center;
+            .content { font-family: 'Open Sans',sans-serif; font-size: 17px; color: #161616; }
+            .title { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 27px; font-weight: 400; color: #cd0202; }
+            @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+                .title { font-size: 24px; line-height: 26px; }
+            }
+        }
+    }
+    &.project {
+        .card-image {
+            img { }
+        }
+        .card-header { background-color: #d42828; text-align: right;
+            span { font-family: "UnitedSansCdBd",Arial,sans-serif; display: inline-block; background-color: #cd0202; color: #fff; font-size: 14px; line-height: 12px; padding: 14px 24px; text-transform: uppercase; }
+        }
+        .card-section {
+            text-align: center;
+            .content { font-family: 'Open Sans',sans-serif; font-size: 17px; color: #161616; }
+            .title { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 27px; line-height: 32px; font-weight: 400; color: #cd0202; }
+            @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+                .title { font-size: 24px; line-height: 26px; }
+            }
+        }
+    }
+    &.location {
+        .card-image {
+            img { }
+        }
+        .card-header { background-color: #d42828; text-align: right;
+            span { font-family: "UnitedSansCdBd",Arial,sans-serif; display: inline-block; background-color: #cd0202; color: #fff; font-size: 14px; line-height: 12px; padding: 14px 24px; text-transform: uppercase; }
+        }
+        .card-section { text-align: center;
+            .title { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 18px; font-weight: 400; color: #cd0202; }
+            .content { font-family: 'Open Sans',sans-serif; font-size: 18px; color: #161616; }
+        }
+    }
+    &.bio {
+        .card-image {
+            img { }
+        }
+        .card-header { background-color: #d42828; text-align: right;
+            span { font-family: "UnitedSansCdBd",Arial,sans-serif; display: inline-block; background-color: #cd0202; color: #fff; font-size: 14px; line-height: 12px; padding: 14px 24px; text-transform: uppercase; }
+        }
+        .card-section { text-align: center;
+            .title { font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 18px; font-weight: 400; color: #cd0202; }
+            .content { font-family: 'Open Sans',sans-serif; font-size: 18px; color: #161616; }
+        }
+    }
+    &.lead-generator { border-radius: 12px; background-color: #ffffff; -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.35); -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.35); box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.35); border-style: none;
+        .umbraco-forms-field-wrapper { /*display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;*/ display: flex; flex-direction: row; flex-wrap: nowrap; align-items: baseline; }
+        input[type=submit] { margin-top: 12px; }
+        input[type=checkbox] { margin-right: 9px; }
+        .umbraco-forms-page label { line-height: 18px; }
+    }
+}

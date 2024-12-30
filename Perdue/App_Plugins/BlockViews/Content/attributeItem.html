@@ -1,0 +1,29 @@
+﻿<style>
+    legend { color: #ff1600; }
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Attribute Table</legend>
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Image</td>
+                    <td>
+                        {{mediaItem = (block.data.image[0].mediaKey | mediaItemResolver); ""}}
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width:50px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Text</td>
+                    <td>{{block.data.text}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br />
+    </fieldset>
+</div>
+<br />

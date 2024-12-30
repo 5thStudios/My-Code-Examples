@@ -1,0 +1,13 @@
+/* HEADER
+----------------------------------------------------------*/
+header { background-color: #fff; padding-top: 12px;
+    img.site-logo { width: 100%; padding: 0 0 16px 0; }
+    input[type='text'] { margin: 0; font-size: 16px; font-weight: 600; line-height: 24px; height: 44px; }
+    button[type='submit'] { font-size: 16px; font-weight: 600; line-height: 24px; height: 44px; margin-left: 9px;
+        &:hover { cursor: pointer; background-color: #cc0001; }
+    }
+
+    .menu-control { display: inline-block; vertical-align: middle; content: ' '; background: 50%/100% 100% no-repeat; border: 1px solid rgb(0 0 0 / 35%); width: 52px; height: 46px;
+        img { padding: 0; width: 40px; height: 30px; -webkit-filter: grayscale(100%);  filter: grayscale(100%); }
+    }
+}

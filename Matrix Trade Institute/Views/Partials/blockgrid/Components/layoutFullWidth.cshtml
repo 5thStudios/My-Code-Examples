@@ -1,0 +1,10 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<LayoutFullWidth, ColumnSettings>>
+@using www.Models;
+
+@{
+    Model.Settings.LayoutName = "Components/Layout_x24";
+    Model.Settings.IsFullWidth = true;
+}
+
+
+@await Html.GetBlockGridItemAreasHtmlAsync(Model)

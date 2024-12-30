@@ -1,0 +1,21 @@
+﻿@import'../common-B/_variables-com';
+
+
+
+/* Landing Pages
+----------------------------------------------------------*/ 
+
+.landing-pg-person {
+        .border-bottom { border-bottom: 1px solid $header_color_solid_bkg; margin-bottom: 30px; padding-bottom: 30px; }
+        h1 { color: $color_glob_green_ADA; font-size: $h2_size }
+        h2 { color: $color_glob_green_ADA; font-size: $h3_size; }
+        h3 { color: $color_glob_black; font-size: $h5_size; font-weight: 700; }
+    }
+    .news-and-events-landing-pg {
+        .border-top { border-top: 1px solid $header_color_solid_bkg; margin-top: 30px; padding-top: 30px; }
+        h1 { color: $color_glob_green_ADA; font-size: $h2_size; }
+        h2 { color: $color_glob_green_ADA; font-size: $h3_size; }
+    }
+
+
+

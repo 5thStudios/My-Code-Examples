@@ -1,0 +1,163 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ContentSpotlights>>
+@using ContentModels = www.Models.PublishedModels;
+@using Umbraco.Cms.Core.Models;
+@using www.Models;
+
+@{
+    //Obtain site
+    IPublishedContent ipCurrentPag = Umbraco.AssignedContentItem;
+    string site = ipCurrentPag.Root().Value<string>(Common.Property.Site);
+    bool showBrandLink = true;
+
+    if (site == Common.Site.Cheney)
+    {
+        showBrandLink = false;
+    }
+}
+
+
+<section class="content-spotlight" data-equalizer="featuretxt">
+    <div class="grid-x grid-margin-x grid-margin-y" data-equalizer="searchbox" data-equalize-on="small">
+        <div class="cell laptop-12">
+
+            @if (string.IsNullOrEmpty(Model.Content.SpotlightTitle?.Url))
+            {
+                <br />
+            }
+            else
+            {
+                <a href="@Model.Content.SpotlightTitle?.Url">
+                    <h2 class="text-center   SpotlightTitle">@Model.Content.SpotlightTitle?.Name <img src="/images/icons/caret-right-solid.svg" class="svg-btn" /></h2>
+                </a>
+            }
+
+            @if (Model.Content.BrandList != null && Model.Content.BrandList?.Count() > 0)
+            {
+                <div class="grid-x grid-margin-x  grid-padding-y   align-middle    related-brands-searchbox  searchbox" data-equalizer-watch="searchbox">
+                    <div class="cell laptop-15">
+                        <div class="grid-x small-up-@Model.Content.BrandList?.Count()  grid-margin-x ">
+                            @foreach (LinkWithImage brand in Model.Content.BrandList!.Select(x => x.Content).OfType<LinkWithImage>())
+                            {
+                                <div class="cell">
+                                    @if (showBrandLink)
+                                    {
+                                        <a href="@brand.Link?.Url">
+                                            <img src="@brand.Image?.Url()" alt="@brand.Link?.Name" class="brand-logo-icon">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <img src="@brand.Image?.Url()" alt="@brand.Link?.Name" class="brand-logo-icon">
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="cell laptop-9   align-self-center">
+                        <div class="">
+                            <form action="/products/">
+
+                                <div class="grid-x search-pnl">
+                                    <div class="cell auto">
+                                        <input id="search-field" type="text" placeholder="keyword/product code" name="productkeyword" value="">
+                                    </div>
+                                    <div class="cell shrink">
+                                        <button class="button    align-center-middle" type="submit">
+                                            
+                                            <img src="/images/icons/magnifying-glass-solid.svg" class="svg-btn" />
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="grid-x">
+                <div class="cell  featured-cta">
+                    <img alt="@Model.Content.SpotlightBgImg?.Name" src="@Model.Content.SpotlightBgImg?.GetCropUrl(Common.Crop.Spotlight_760x600)" />
+                    
+                    <div class="featured-cta-label">
+                        <img src="@Model.Content.SpotlightBannerIcon?.Url()" alt="@Model.Content.SpotlightBannerIcon?.Name">&nbsp;
+                        <h3>@Model.Content.SpotlightBannerTitle</h3>
+                    </div>
+
+                    <div class="featured-cta-heading">
+                        <a target="@Model.Content.SpotlightContent?.Target" href="@Model.Content.SpotlightContent?.Url">
+                            <h5>@Model.Content.SpotlightDescriptionTitle</h5>
+                            <div data-equalizer-watch="featuretxt">
+                                @Html.Raw(Model.Content.SpotlightDescription)
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="cell laptop-12">
+
+            @if (string.IsNullOrEmpty(Model.Content.FeaturedTitle?.Url))
+            {
+                <br />
+            }
+            else
+            {
+                <a href="@Model.Content.FeaturedTitle?.Url">
+                    <h2 class="text-center  FeaturedTitle">@Model.Content.FeaturedTitle?.Name <img src="/images/icons/caret-right-solid.svg" class="svg-btn" /></h2>
+                </a>
+            }
+
+            @if (Model.Content.CategoryList != null && Model.Content.CategoryList?.Count() > 0)
+            {
+
+                <div class="grid-x grid-padding-x   align-middle    featured-dish-sub  searchbox" data-equalizer-watch="searchbox">
+                    @{
+                        List<Umbraco.Cms.Core.Models.Link> lstCategories = Model.Content.CategoryList!.ToList();
+                    }
+
+                    <div class="cell auto text-right">
+                        <h3><a href="@lstCategories[0].Url">@lstCategories[0].Name <img src="/images/icons/caret-right-solid.svg" class="svg-btn" /></a></h3>
+                    </div>
+                    <div class="cell shrink text-center">
+                        <h3><a href="@lstCategories[1].Url">@lstCategories[1].Name <img src="/images/icons/caret-right-solid.svg" class="svg-btn" /></a></h3>
+                    </div>
+                    <div class="cell auto text-left">
+                        <h3><a href="@lstCategories[2].Url">@lstCategories[2].Name <img src="/images/icons/caret-right-solid.svg" class="svg-btn" /></a></h3>
+                    </div>
+                </div>
+            }
+            else
+            {
+                @if (Model.Content.BrandList != null && Model.Content.BrandList?.Count() > 0)
+                {
+                    <div class="searchbox" data-equalizer-watch="searchbox">&nbsp;</div>
+                }                
+            }
+
+            <div class="grid-x">
+                <div class="cell  featured-cta">
+                    <img alt="@Model.Content.FeaturedBgImg?.Name" src="@Model.Content.FeaturedBgImg?.GetCropUrl(Common.Crop.Spotlight_760x600)" />
+
+                    <div class="featured-cta-label">
+                        <img src="@Model.Content.FeaturedBannerIcon?.Url()" alt="@Model.Content.FeaturedBannerIcon?.Name">&nbsp;
+                        <h3>@Model.Content.FeaturedBannerTitle</h3>
+                    </div>
+
+                    <div class="featured-cta-heading">
+                        <a href="@Model.Content.FeaturedContent?.Url">
+                            <h5>@Model.Content.FeaturedDescriptionTitle</h5>
+                            <div data-equalizer-watch="featuretxt">
+                                @Html.Raw(Model.Content.FeaturedDescription)
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

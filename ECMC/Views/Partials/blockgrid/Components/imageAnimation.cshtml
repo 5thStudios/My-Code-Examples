@@ -1,0 +1,86 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ImageAnimation>>
+
+@{
+    // Instantiate variables
+    var cmModel = Model.Content;
+    string bgImg = "";
+
+    //Obtain background image is available.
+    if (cmModel.ImageFixedWidthImagePicker is not null)
+    {
+
+        //Obtain image
+        if (string.IsNullOrEmpty(cmModel.ImageResolutions) || cmModel.ImageResolutions == "No Crop")
+        {
+            //No crop
+            bgImg = cmModel.ImageFixedWidthImagePicker?.Url();
+        }
+        else
+        {
+            //Cropped image
+            bgImg = cmModel.ImageFixedWidthImagePicker?.GetCropUrl(cmModel.ImageResolutions.Replace(" ", "_"), UrlMode.Absolute) ?? string.Empty;
+        }
+
+
+        //
+        // switch (cmModel.ImageResolutions?.Replace(" ", "_"))
+        // {
+        //     case Common.Crop.Landscape_1440x810:
+        //         bgImg = cmModel.ImageFixedWidthImagePicker?.GetCropUrl(Common.Crop.Landscape_1440x810, UrlMode.Absolute) ?? string.Empty;
+        //         break;
+
+        //     case Common.Crop.Portrait_810x1440:
+        //         bgImg = cmModel.ImageFixedWidthImagePicker?.GetCropUrl(Common.Crop.Portrait_810x1440, UrlMode.Absolute) ?? string.Empty;
+        //         break;
+
+        //     case Common.Crop.Square_1440x1440:
+        //         bgImg = cmModel.ImageFixedWidthImagePicker?.GetCropUrl(Common.Crop.Square_1440x1440, UrlMode.Absolute) ?? string.Empty;
+        //         break;
+
+        //     case Common.Crop.Landscape_1440x1080:
+        //         bgImg = cmModel.ImageFixedWidthImagePicker?.GetCropUrl(Common.Crop.Landscape_1440x1080, UrlMode.Absolute) ?? string.Empty;
+        //         break;
+
+        //     case Common.Crop.Portrait_1080x1440:
+        //         bgImg = cmModel.ImageFixedWidthImagePicker?.GetCropUrl(Common.Crop.Portrait_1080x1440, UrlMode.Absolute) ?? string.Empty;
+        //         break;
+
+        //     default:
+        //         bgImg = cmModel.ImageFixedWidthImagePicker.Url();
+        //         break;
+        // }
+    }
+}
+
+
+
+<div data-aos="@cmModel.InViewAnimation" class="no-border">
+    <figure class="img-animation img-slide-down">
+        
+        @if (!string.IsNullOrWhiteSpace(@cmModel.ImageCaption))
+        {
+            <img src="@bgImg" alt="@cmModel.ImageFixedWidthAltText">
+            <cite>
+                @cmModel.ImageCaption
+            </cite>
+        }
+        else
+        {
+            <p>
+                @* <img class="" src="@bgImg" alt="@cmModel.ImageFixedWidthAltText"> *@
+                <img class="@cmModel.Class" src="@bgImg" alt="@cmModel.ImageFixedWidthAltText">
+            </p>
+        }
+        @if (!string.IsNullOrEmpty(cmModel.HoverTip.ToString()) || !string.IsNullOrEmpty(cmModel.HoverTitle))
+        {
+            <figcaption>
+                <h3>@cmModel.HoverTitle</h3>
+                <div>
+                    @Html.Raw(cmModel.HoverTip)
+                </div>
+            </figcaption>
+        }
+    </figure>
+</div>

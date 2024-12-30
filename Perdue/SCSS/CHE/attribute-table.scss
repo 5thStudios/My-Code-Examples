@@ -1,0 +1,20 @@
+/* ATTRIBUTE TABLES
+----------------------------------------------------------*/
+.attribute-tbl {
+    img { float: left; width: 80px; height: auto; margin-right: 36px; /*margin-right: 70px;*/ }
+    h5 { }
+    .align-middle {
+        > .cell { display: inline-flex; align-items: center;
+            div { width: 100%; }
+        }
+    }
+
+
+    @media only screen and (max-width: 40em) {
+        img { margin-right: 12px; }
+        h5 { text-align: center; width: 100%; }
+    }
+    @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+        img { margin-right: 25px; }
+    }
+}

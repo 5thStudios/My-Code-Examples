@@ -1,0 +1,13 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ContactUs>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "TopLevel.cshtml";
+}
+
+
+
+<div class="ContactUs">
+    @await Html.GetBlockGridHtmlAsync(Model.HeroArea)
+    @await Html.GetBlockGridHtmlAsync(Model.MainContent)
+</div>

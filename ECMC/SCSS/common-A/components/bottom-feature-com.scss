@@ -1,0 +1,21 @@
+﻿@import'../_variables-com';
+
+.bottom-feature { overflow: hidden; position: relative;
+
+    .callout {
+        width: 400px;
+        h4 { font-size: $h3_size }
+
+        @media only screen and (max-width: $bp_sm) { width: 300px; padding: 5%;
+            h4 { font-size: $h3_size }
+        }
+
+        @media only screen and (min-width:$bp_tablet_min) and (max-width: $bp_tablet) { width: 300px; padding: 5%;
+            h4 { font-size: $h3_size }
+        }
+
+        @media only screen and (min-width: $bp_lap_min) and (max-width: $bp_lap) { width: 300px;
+            h4 { font-size: $h3_size }
+        }
+    }
+}

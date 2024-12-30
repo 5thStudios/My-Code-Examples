@@ -1,0 +1,60 @@
+﻿@using www.Models;
+@using www.ViewModels;
+@model FooterViewModel;
+
+
+
+
+<footer>
+    <br />
+    <div class="grid-container">
+
+
+        <div class="grid-x   text-center medium-text-left">
+            <div class="cell text-center medium-text-right">
+                <a href="@Model.FooterLogo?.Url" target="@Model.FooterLogo?.Target">
+                    <img class="logo" alt="@Model.FooterLogo?.Title" src="@Model.FooterLogo?.ImgUrl" />
+                </a>
+            </div>
+            <div class="cell laptop-16 large-12 ">
+                <br class="hide-for-medium" />
+                <nav>
+                    <ul>
+                        @for (Int16 i = 0; i < Model.LstFooterNav.Count; i++)
+                        {
+                            <li>
+                                <a href="@Model.LstFooterNav[i].Url" target="@Model.LstFooterNav[i].Target">@Model.LstFooterNav[i].Title</a>
+                            </li>
+                        }
+                    </ul>
+
+                </nav>
+                <br class="hide-for-laptop" />
+            </div>
+            <div class="cell laptop-auto    text-center laptop-text-right ">
+                <h6>@Html.Raw(Model.CopyrightText)</h6>
+                <h6>@Html.Raw(Model.MoreInformation)</h6>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="grid-container">
+        <div class="cookie-Policy grid-x">
+            <div class="cell">
+                <img src="/images/icons/xmark-solid.svg" class="svg-btn" id="cookie-close" />
+                <div class="tbl">
+                    <div class="tbl-row">
+                        <div class="tbl-cell">
+                            <button id="cookie-acknowledge" title="Accept" class="btn btn-blue bannerAcceptButton">Accept</button>
+                        </div>
+                        <div class="tbl-cell">
+                            By continuing to use and navigate this website, you are agreeing to the use of cookies.&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>

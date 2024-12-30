@@ -1,0 +1,36 @@
+﻿<style>
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus" ng-controller="relatedNewscontroller as vm">
+    <fieldset>
+        <legend><strong>Related News</strong></legend>
+
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Root List</td>
+                    <td>{{vm.RootListName}}</td>
+                </tr>
+                <tr>
+                    <td>Item Count</td>
+                    <td>
+                        {{block.data.itemCount}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tags</td>
+                    <td class="nested-tbls">
+                        <table ng-repeat="tag in vm.Tags" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td style="font-weight:400">&mdash; {{tag}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

@@ -1,0 +1,36 @@
+﻿@using ECMC_Umbraco.ViewModel;
+@model ListItemViewModel;
+
+
+
+<div class="card" data-areas-of-interest="@Model.jsonAreasOfInterest" data-staff="@Model.jsonStaff" data-audience="@Model.jsonAudience" data-title="@Model.Title" data-subtitle="@Model.Subtitle?" data-summary="@Model.EncodedSummary">
+    <div class="grid-x grid-margin-x grid-margin-y grid-padding-y">
+        <div class="cell small-4">
+            <a href="@Model.Link.Url">
+                <img src="@Model.PrimaryImgUrl" alt="@Model.Title">
+            </a>
+        </div>
+        <div class="cell small-20">
+            <div class="grid-y">
+                <div class="cell  auto">
+                    <h4><a href="@Model.Link.Url">@Model.Title</a></h4>
+                    @if (!string.IsNullOrEmpty(Model.Subtitle))
+                    {
+                        <h6><a href="@Model.Link.Url">@Model.Subtitle</a></h6>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.PostDate))
+                    {
+                        <h6 class="date">@Model.PostDate</h6>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Summary))
+                    {
+                        <p>@Model.Summary</p>
+                    }
+                </div>
+                <div class="cell shrink">
+                    <h5><a href="@Model.Link.Url" title="Read More" class="read-more">READ MORE</a></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

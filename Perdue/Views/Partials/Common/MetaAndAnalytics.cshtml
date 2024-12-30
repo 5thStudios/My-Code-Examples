@@ -1,0 +1,58 @@
+﻿@using www.ViewModels;
+@using Umbraco.Cms.Core.Models;
+@model MetaViewModel;
+
+
+
+<!------------- SEO TAGS ------------->
+<title>@Model.Title</title>
+<meta name="description" content="@Model.Description">
+<meta name="keywords" content="@Model.Keywords">
+<link rel="canonical" href="@Model.Canonical">
+<meta name="page" content="@Model.PgUrl" />
+<meta name="robots" content="index, follow" />
+@if (Model.ImgUrl != "")
+{
+    <meta itemprop="image" content="@Model.ImgUrl">
+}
+<meta property="og:title" content="@Model.OgTitle" />
+<meta property="og:type" content="@Model.OgType" />
+<meta property="og:url" content="@Model.PgUrl" />
+@if (Model.ImgUrl != "")
+{
+    <meta property="og:image" content="@Model.ImgUrl">
+    <meta property="og:image:type" content="@Model.ImgType" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+}
+<meta property="og:description" content="@Model.OgDescription" />
+<meta property="og:site_name" content="@Model.OgSiteName" />
+<!--<meta name="google-site-verification" content="[AT]Model.GoogleSiteVerification" />-->
+
+
+
+<!------------- GENERAL META ------------->
+<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="apple-touch-icon" sizes="57x57" href="@Model.Directory/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="@Model.Directory/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="@Model.Directory/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="@Model.Directory/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="@Model.Directory/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="@Model.Directory/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="@Model.Directory/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="@Model.Directory/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="@Model.Directory/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="@Model.Directory/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="@Model.Directory/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="@Model.Directory/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="@Model.Directory/favicon-16x16.png">
+<link rel="icon" type="image/x-icon" href="@Model.Directory/favicon.ico">
+<link rel="manifest" href="@Model.Directory/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="@Model.Directory/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<!------------- END META COMPONENT ------------->

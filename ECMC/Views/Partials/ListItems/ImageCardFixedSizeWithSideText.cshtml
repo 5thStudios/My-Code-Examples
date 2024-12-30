@@ -1,0 +1,49 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ECMC_Umbraco.Models;
+@using Umbraco.Cms.Core.Models;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@model ImageCardFixedSizeWithSideText;
+
+
+
+
+@{
+    //Obtain image
+    string imgUrl = Model.CardImage?.GetCropUrl(Common.Crop.Card_100x130, UrlMode.Absolute) ?? string.Empty;
+}
+
+
+
+
+@{
+    <div class="card image-card  with-side-content fixed-size @Model.AdditionalClass">
+        <div class="grid-x grid-margin-x">
+            <div class="cell shrink">
+                <img src="@imgUrl" alt="@Model.Headline" style="border:1px solid rgba(0, 0, 0, 0.10);">
+            </div>
+            <div class="cell auto contentArea">
+
+                @if (!string.IsNullOrWhiteSpace(Model.Headline))
+                {
+                    <h3>@Model.Headline </h3>
+                }
+                @if (!string.IsNullOrWhiteSpace(@Model.Content.ToString()))
+                {
+                    @Html.Raw(@Model.Content)
+                }
+                <div>
+                @{
+                    foreach (var lnk in Model.Links)
+                    {
+                            <a class="read-more fixed-size-link" href="@lnk.Url" target="@lnk.Target">@lnk.Name</a>
+                    }
+                }
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+}

@@ -1,0 +1,38 @@
+/* ----------------------------------------------------------------
+  Contact Pg
+-----------------------------------------------------------------*/
+.contact {
+    #intro { text-align: center; }
+    .border { text-align: center; margin: 70px 50px; }
+    h1 { color: #d5731b; }
+    h2 { font-family: 'Univers Bold Condensed',sans-serif; font-size: 30px; line-height: 32px; margin-bottom: 30px; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
+    .info { background-color: #d5731b; padding: 50px 0;
+        .row { overflow: auto; }
+        p, a { color: #fff; font-size: 18px; line-height: 24px; }
+    }
+    .contact-form {
+        h2 { color: #d5731b; text-align: center; }
+        textarea { height: 100px; }
+        label { font-family: 'Univers Bold Condensed',sans-serif; font-size: 18px; line-height: 24px; color: #d5731b; }
+        .row-padding { margin: 10px; }
+        #State { width: 58%; display: inline; vertical-align: top; }
+        #ZipCode { width: 41%; display: inline; }
+        #Comment { margin-top: 10px; }
+        .radio { border: 1px solid #bfbfbf; padding: 13px 8px 8px;
+            p { font-family: 'Univers Bold Condensed',sans-serif; font-size: 24px; line-height: 26px; color: #d5731b; padding-right: 10px; white-space: nowrap; }
+            label { text-align: left; cursor: pointer; display: inline; white-space: nowrap;
+                span { font-family: 'Univers Bold',sans-serif; font-size: 18px; line-height: 24px; text-align: left; cursor: pointer; display: inline; color: #000; padding-right: 10px; }
+            }
+            input[type="radio"] { display: inline; width: 15px; height: auto; }
+            input[type="radio"]:checked {
+                & + * { color: #d5731b; }
+            }
+        }
+        .req { font-size: 14px; color: #d5731b; }
+
+        input, select, textarea { width: 100%; color: #d5731b; font-family: 'Univers Bold Condensed',sans-serif; font-size: 18px; line-height: 24px; padding: 13px 8px 8px; border: 1px solid #bfbfbf; background-color: transparent; height: 40px; }
+        #foodservice_info, #complaint_info { display: none; }
+    }
+    .input-validation-error { background: #f8dbdf !important; border: 1px solid #e13433 !important; }
+    .hidden-success { text-align: center; display: none; }
+}

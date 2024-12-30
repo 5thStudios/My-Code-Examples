@@ -1,0 +1,61 @@
+/* PRODUCT SPOTLIGHT
+----------------------------------------------------------*/
+.product-spotlight {
+    h2 { font-size: 34px; /*font-weight: 700;*/ line-height: 36px; color: #555555;
+        &.SpotlightTitle { text-align: left; }
+        &.FeaturedTitle { text-align: right; }
+    }
+    h3 { font-size: 1.25vw; font-weight: 600; line-height: 32px;
+        a { color: #004b7e; }
+    }
+    .search-pnl {
+        input[type='text'] { margin: 0; height: 44px; font-size: 18px; }
+        button { height: 44px; }
+    }
+
+    .featured-dish-sub {
+        .cell:not(:first-child) { border-left: 1px solid #B0B0B0; }
+    }
+    @media only screen and (max-width: 40em) {
+        .featured-dish-sub { margin-bottom: 12px;
+            h3 { font-size: 2.1vw; line-height: 6vw; }
+        }
+    }
+    @media only screen and (min-width: 641px) and (max-width: 1023px) {
+        .featured-dish-sub { margin-bottom: 12px;
+            h3 { font-size: 3vw; line-height: 6vw; }
+        }
+    }
+    @media only screen and (min-width: 1024px) and (max-width: 1440px) {
+        .featured-dish-sub { margin-bottom: 12px;
+            h3 { font-size: 1.4vw; line-height: 6vw; }
+        }
+    }
+
+    .featured-cta {
+        position: relative;
+        > img { width: 100%; height: auto; }
+        .featured-cta-label { background: rgba(255,255,255,0.4); position: absolute; top: 0; left: 20px; padding: 10px; display: flex; flex-direction: row; align-items: center; flex-wrap: nowrap;
+            img { width: 30px; height: auto; }
+            h3 { color: #fff; font-size: 18px; margin: 0; }
+        }
+        .featured-cta-heading { position: absolute; left: 15%; right: 15%; bottom: 25%; top: 25%; border: 2px solid red !important; border-style: unset !important;
+            h4 { font-size: 41px; font-weight: 700; line-height: 50px; color: #ffffff; margin-bottom: 16px; }
+            h5 { font-size: 37px; font-weight: 400; line-height: 24px; color: #ffffff; margin-bottom: 16px; text-transform: uppercase; }
+            .btn { background-color: #fff; color: #004b7e; padding: 2px 16px; }
+        }
+        @media only screen and (max-width: 40em) {
+            .featured-cta-heading { position: unset; text-align: center;
+                h4 { font-size: 28px; line-height: 36px; color: #646464; }
+                h5 { font-size: 24px; line-height: 24px; margin: 24px 0 12px 0; color: #646464; }
+                .button { font-size: 16px; }
+            }
+        }
+        @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+            .featured-cta-heading { right: 35px; left: 35px; top: 100px; bottom: 35px; }
+        }
+        @media only screen and (min-width: 64.063em) and (max-width: 90em) {
+            .featured-cta-heading { right: 30%; }
+        }
+    }
+}

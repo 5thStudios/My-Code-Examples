@@ -1,0 +1,102 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<Carousel>>
+@using www.Models;
+@using www.Models.PublishedModels;
+
+@* <partial name="@Common.Partial.BioCard" model="Model.Content.Bio" /> *@
+
+
+@if (Model.Content.CarouselImages != null)
+{
+    switch (Model.Content.CarouselImages.Count())
+    {
+        case 1:
+            <section>
+                <div class="grid-container">
+                    <div class="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y">
+                        <div class="cell auto"></div>
+                        <div class="cell shrink">
+                            @foreach (var slide in Model.Content!.CarouselImages)
+                            {
+                                <img class="carousel-img" alt="" src="@slide.GetCropUrl(500)" />
+                            }
+                        </div>
+                        <div class="cell auto"></div>
+                    </div>
+                </div>
+            </section>
+            break;
+
+        case 2:
+            <section>
+                <div class="grid-container">
+                    <div class="grid-x">
+                        <div class="cell laptop-offset-2 laptop-20">
+                            <div class="grid-x laptop-up-2    grid-margin-x grid-margin-y grid-padding-x grid-padding-y">
+                                @foreach (var slide in Model.Content!.CarouselImages)
+                                {
+                                    <div class="cell">
+                                        <img class="carousel-img" alt="" src="@slide.GetCropUrl(500)" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            break;
+
+        case 3:
+            <section>
+                <div class="grid-container">
+                    <div class="grid-x laptop-up-3    grid-margin-x grid-margin-y grid-padding-x grid-padding-y">
+                        @foreach (var slide in Model.Content!.CarouselImages)
+                        {
+                            <div class="cell">
+                                <img class="carousel-img" alt="" src="@slide.GetCropUrl(500)" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </section>
+            break;
+
+        default:
+            <div class="grid-x grid-padding-y align-middle    slideshow slick-container  show-for-medium">
+                <div class="cell    medium-1 medium-offset-1    text-center">
+                    <a class="lft-arrow slick-prev carousel-nav carousel-prev">
+                        <img class="carousel-img" alt="Scroll Left" src="/images/icons/left.jpg">
+                    </a>
+                </div>
+                <div class="cell    medium-20">
+                    <section class="slick-slider" data-equalizer data-equalizer-mq="medium-up">
+                        @foreach (var slide in Model.Content!.CarouselImages)
+                        {
+                            <div>
+                                <div class="align-center-middle" data-equalizer-watch>
+                                    <img class="carousel-img" alt="" data-lazy="@slide.GetCropUrl(500)" />
+                                </div>
+                            </div>
+                        }
+                    </section>
+                </div>
+                <div class="cell    medium-1    text-center">
+                    <a class="rgt-arrow slick-next carousel-nav carousel-next">
+                        <img class="carousel-img" alt="Scroll Right" src="/images/icons/right.jpg">
+                    </a>
+                </div>
+                <div class="cell">
+                    <br />
+                </div>
+            </div>
+
+            <div class="grid-x grid-padding-y hide-for-medium">
+                @foreach (var slide in Model.Content!.CarouselImages)
+                {
+                    <div class="cell">
+                        <img class="carousel-img" alt="" src="@slide.GetCropUrl(500)" />
+                    </div>
+                }
+            </div>
+            break;
+    }
+}

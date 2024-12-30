@@ -1,0 +1,113 @@
+/*===================================================================================*/
+/*  Difference Tiers   */
+/*===================================================================================*/
+.differenceTiers {
+    > div {
+        > div {
+            > div {
+                &:nth-child(2) {
+                    > div {
+                        > div { /*margin: 25px 0 6px;*/ margin: 0; display: flex; flex-direction: row; justify-content: space-around;
+                            > img { height: 65px; width: auto;
+                                &:nth-child(1) { height: 92px; width: auto; /*margin: 0 0 0 3%;*/ margin: 0; }
+                            }
+                            > a {
+                                > img { height: 65px; width: auto; }
+                            }
+                            .mbl {
+                                img { max-height: 92px; }
+                            }
+                        }
+                    }
+                }
+                &:nth-child(1) {
+                    min-height: 78px; /*margin: 6px 0 0;*/
+                    margin: 0;
+                    > h3 { font-weight: 700; color: #004b7e; font-size: 1.4em; line-height: 1.18em; }
+                    @media only screen and (min-width: 64.063em) and (max-width: 90em) {
+                        > h3 { font-size: 1.45vw; }
+                    }
+                    @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+                        > h3 { font-size: 2.2vw; }
+                    }
+                }
+            }
+            &:nth-child(n+3) {
+                > div {
+                    > div {
+                        &:nth-child(2) { max-width: 226px; margin: auto; }
+                    }
+                }
+            }
+            &:nth-child(1) {
+                > div {
+                    &:nth-child(2) {
+                        > div {
+                            > div {
+                                > img { margin: auto; }
+                                @media only screen and (max-width: 40em) {
+                                    > img { margin: 0; }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &:nth-child(4) {
+                > div {
+                    > div {
+                        &:nth-child(2) {
+                            > div {
+                                > img {
+                                    &:nth-child(1) { /*margin: 0 0 0 6%;*/ margin: 0; }
+                                }
+                            }
+                        }
+                    }
+                    &:nth-child(2) {
+                        > div {
+                            > div {
+                                > a {
+                                    > img { /*padding: 4% 12% 0 0;*/ padding: 0; height: 80px; }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &:nth-child(2) {
+                > div {
+                    &:nth-child(2) {
+                        > div {
+                            > div {
+                                > a {
+                                    > img { height: 65px !important; }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &:nth-child(n + 2) {
+                > div:nth-child(2) {
+                    margin-left: -10px;
+                    > div { border-left-width: 1px; border-left-style: solid; border-color: #646464; min-height: 300px; padding: 0; }
+                    @media only screen and (max-width: 64em) {
+                        > div { border-left-width: 0; border-left-style: none; }
+                    }
+                }
+            }
+        }
+    }
+
+    .equalize { height: 100px; display: flex; flex-direction: column; align-content: center; justify-content: flex-start; }
+    @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+        .equalize { height: 0px; }
+    }
+    @media only screen and (min-width: 64.063em) and (max-width: 90em) {
+        .equalize { height: 0px; }
+    }
+    @media only screen and (max-width: 40em) {
+        .equalize { height: unset; justify-content: flex-end; }
+    }
+}

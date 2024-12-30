@@ -1,0 +1,84 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<CTA>>
+@{
+    //Format overlay color(s)
+    string overlayColor = "";
+    if (!string.IsNullOrWhiteSpace(Model.Content.OverlayColor))
+    {
+        overlayColor = string.Format("background-color: {0} !important;", Model.Content.OverlayColor);
+    }
+
+    string direction = "90deg";
+    if (Model.Content.GradientDirection)
+    {
+        //Change to vertical direction
+        direction = "180deg";
+    }
+
+    if (!string.IsNullOrWhiteSpace(Model.Content.OverlayGradientColorA) && !string.IsNullOrWhiteSpace(Model.Content.OverlayGradientColorB))
+    {
+        overlayColor = string.Format("background: linear-gradient({0}, {1}, {2});", direction, Model.Content.OverlayGradientColorA, Model.Content.OverlayGradientColorB);
+    }
+
+
+
+    //Obtain background image and position if exists.
+    string bgURL = "";
+    if (Model.Content?.BackgroundImage != null)
+    {
+        //Get positioning
+        string bgPosition = "50%";
+        if (Model.Content?.BgPosition != null)
+        {
+            bgPosition = Model.Content?.BgPosition.ToString() + "%";
+        }
+
+        //Create image url
+        bgURL = string.Format("background-size: cover; background-position-y: {0}; background-image:url({1}); background-repeat: no-repeat;", bgPosition, Model.Content.BackgroundImage.Url());
+    }
+
+}
+
+
+
+<section data-blockgrid="blockgrid/Components/CTA" style="@bgURL"
+         class="cta  @Html.Raw(Model.Content?.OuterMostClass)" @Html.Raw(Model.Content?.OuterMostAttributes)>
+    @Html.Raw(Model.Content.CustomScripts)
+
+    @*if (Model.Content.BackgroundImage != null) {
+        <img alt="" src="@Model.Content.BackgroundImage.Url()" class="bgImg" />
+    } *@ 
+
+    <div class="bgImgOverlay" style="@overlayColor"></div>
+
+
+
+    @if (Model.Content.Layout)
+    {
+        //COMPACT VIEW
+        <div class="grid-container interior-wrap align-center-middle @Html.Raw(Model.Content?.ContainerClasses)" @Html.Raw(Model.Content?.ContainerAttributes)>
+            <div class="grid-x   grid-margin-x grid-padding-x    grid-margin-y grid-padding-y    align-middle">
+                <div class="cell    laptop-12 laptop-offset-2    large-12 large-offset-4    text-center laptop-text-left">
+                    @Html.Raw(Model.Content.Title)
+                    @Html.Raw(Model.Content.Subtitle)
+                </div>
+                <div class="cell     laptop-shrink     text-center laptop-text-left">
+                    @Html.Raw(Model.Content.Button)
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        //NORMAL VIEW
+        <div class="grid-container interior-wrap align-center-middle @Html.Raw(Model.Content?.ContainerClasses)" @Html.Raw(Model.Content?.ContainerAttributes)>
+            <div class="grid-x   grid-margin-y grid-padding-y">
+                <div class="cell text-center">
+                    @Html.Raw(Model.Content.Title)
+                    @Html.Raw(Model.Content.Subtitle)
+                    @Html.Raw(Model.Content.Button)
+                </div>
+            </div>
+        </div>
+    }
+</section>

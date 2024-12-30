@@ -1,0 +1,64 @@
+﻿@import'../_variables-com';
+
+.Count-Option-1 {
+    font-family: $def_font_headline_compact;
+    color: $color_glob_white;
+    font-weight: $weight_Extra_Bold;
+    white-space: nowrap;
+    margin: 0 0 0.2em 0;
+    line-height: 60px;
+
+    .prefix { font-size: $h1_size_fnd }
+    .countValue { font-size: $h1_size_fnd }
+    .suffix { font-size: $h1_size_fnd - 20px; }
+
+    @media only screen and (min-width:$bp_tablet_min) and (max-width: $bp_tablet) {
+        .prefix { font-size: $h1_size_fnd - 20px }
+        .countValue { font-size: $h1_size_fnd - 20px; }
+        .suffix { font-size: $h1_size_fnd - 30px; }
+    }
+
+    @media only screen and (max-width: $bp_sm) { margin: 40px 0 0 0;
+        .prefix { font-size: $h1_size_fnd }
+        .countValue { font-size: $h1_size_fnd }
+        .suffix { font-size: $h1_size_fnd - 20px }
+    }
+}
+
+.Count-Option-2 {
+    @extend .Count-Option-1;
+
+    .prefix { font-size: $h1_size_fnd }
+    .countValue { font-size: $h1_size_fnd + 30px; }
+    .suffix { font-size: $h1_size_fnd }
+
+    @media only screen and (max-width: $bp_sm) {
+        .prefix { font-size: $h1_size_fnd - 40px }
+        .countValue { font-size: $h1_size_fnd }
+        .suffix { font-size: $h1_size_fnd - 40px }
+    }
+
+    @media only screen and (min-width:$bp_tablet_min) and (max-width: $bp_tablet) {
+        .prefix { font-size: $h1_size_fnd - 20px }
+        .countValue { font-size: $h1_size_fnd + 10px; }
+        .suffix { font-size: $h1_size_fnd - 20px }
+    }
+}
+
+.Count-Option-3 {
+    @extend .Count-Option-1;
+    font-size: $h2_size + 25px;
+
+    .prefix { font-size: $h1_size_fnd }
+    .countValue { font-size: $h1_size_fnd + 30px; }
+    .suffix { font-size: $h1_size_fnd }
+}
+
+.Count-Option-4 {
+    @extend .Count-Option-1;
+    font-size: $h4_size + 25px;
+
+    .prefix { font-size: $h1_size_fnd }
+    .countValue { font-size: $h1_size_fnd + 30px; }
+    .suffix { font-size: $h1_size_fnd }
+}

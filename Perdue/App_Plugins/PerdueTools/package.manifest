@@ -1,0 +1,14 @@
+﻿{
+  "dashboards": [
+    {
+      "alias": "PerdueTools",
+      "view": "/App_Plugins/PerdueTools/PerdueTools.html",
+      "sections": [ "content" ],
+      "weight": 5
+    }
+  ],
+  "css": [
+    "/app_plugins/PerdueTools/PerdueTools.css"
+  ]
+
+}

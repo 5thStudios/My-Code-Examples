@@ -1,0 +1,51 @@
+﻿@using www.Models;
+@using www.ViewModels;
+@model HeaderViewModel;
+
+
+
+<header>
+    <div class="grid-container">
+
+        <div class="grid-x  show-for-laptop">
+            <div class="cell laptop-3">
+                <a href="/">
+                    <img class="site-logo" alt="@Model.SiteName" src="@Model.SiteLogoUrl" />
+                </a>
+            </div>
+            <div class="cell laptop-21">
+
+                <div class="grid-y align-right">
+                    <div class="cell shrink">
+                        <div class="grid-x">
+                            @await Component.InvokeAsync(www.Models.Common.ViewComponent.MainNav, new { ipModel = Model.IpPage, isMobile = false })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div class="grid-x  align-middle  hide-for-laptop">
+            <div class="cell small-8 medium-4">
+                <a href="/">
+                    <img class="site-logo" alt="@Model.SiteName" src="@Model.SiteLogoUrl" />
+                </a>
+            </div>
+            <div class="cell small-16 medium-20">
+                <div class="text-right  ">
+                    <button class="menu-control open" data-toggle="mblNav">
+                        <img alt="hamburger-icon" src="/images/icons/hamburger4.svg">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</header>
+
+
+

@@ -1,0 +1,389 @@
+﻿@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@model ComposedPageViewModel<ContentModels.Recipe, RecipeViewModel>
+@{
+    Layout = Common.Layout.TopLevelPER;
+}
+@section Footer {
+    <script type="text/javascript" src="/js/jquery/jssocials.js"></script>
+
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.equalizer.js" integrity="sha512-WiTt+Fh0p4IQx255wcIhwK/KTeLjxZ4oP8b6fJUd1a6U+RIAkspsXgFjN3evCkjJx3ufU9h9OrQXUhwwIKui/w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> *@
+
+
+}
+
+
+
+<div class="Recipe">
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x grid-padding-y">
+            <div class="cell medium-10 medium-offset-2">
+                <div class="recipe-photos">
+                    <img src="@Model.Page?.Photo?.Url()" alt="@Model.Page?.Name">
+                </div>
+            </div>
+            <div class="cell medium-10">
+                <div class="recipe-description-block">
+                    <h2 class="recipe-title">@Model.Page?.Name</h2>
+
+                    <div class="recipe-info">
+                        <p><strong>Servings: @Model.Page?.NumberOfServings</strong></p>
+                    </div>
+
+                    @Html.Raw(Model.Page?.Description)
+
+                    <hr />
+
+                    <div class="share-fields no-print">
+                        <h4 class="text-center medium-text-right">Share</h4>
+                        <div id="share"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="grid-x grid-margin-x grid-margin-y grid-padding-y">
+            <div class="cell medium-10 medium-offset-2">
+                <div class="recipe-ingredients">
+                    <h3>Ingredients</h3>
+
+                    @{
+                        //Set initial value
+                        var lastIngredientType = NcRecipeIngredient.ItemType.Unknown;
+
+
+                        foreach (NcRecipeIngredient ingredient in Model.Page?.Ingredients!.Select(x => x.Content).OfType<NcRecipeIngredient>())
+                        {
+
+                            if (
+                            ingredient.Type == NcRecipeIngredient.ItemType.Ingredient &&
+                            lastIngredientType != NcRecipeIngredient.ItemType.Ingredient)
+                            {
+                                @Html.Raw("<ul>")
+                            }
+
+                            if (
+                            ingredient.Type != NcRecipeIngredient.ItemType.Ingredient &&
+                            lastIngredientType == NcRecipeIngredient.ItemType.Ingredient)
+                            {
+                                @Html.Raw("</ul>")
+                            }
+
+                            if (ingredient.Type == NcRecipeIngredient.ItemType.Subhead)
+                            {
+                                <h5>@ingredient.SubheadNote</h5>
+                            }
+                            else if (ingredient.Type == NcRecipeIngredient.ItemType.Ingredient)
+                            {
+                                <li>
+                                    @{
+                                        RenderIngredients(ingredient);
+                                    }
+                                </li>
+                            }
+
+                            //Save for next loop
+                            lastIngredientType = ingredient.Type;
+                        }
+                    }
+
+                </div>
+            </div>
+            <div class="cell medium-10">
+                <div class="recipe-instructions">
+                    <h3>Instructions</h3>
+
+                    @if (Model.Page.Instructions.Any())
+                    {
+                        if (Model.Page?.Instructions.Count() > 1)
+                        {
+                            //Set initial value
+                            var lastInstructionType = NcRecipeInstruction.InstructionType.Unspecified;
+
+                            foreach (NcRecipeInstruction instruction in Model.Page.Instructions!.Select(x => x.Content).OfType<NcRecipeInstruction>())
+                            {
+                                if (
+                                instruction.Type == NcRecipeInstruction.InstructionType.RecipeStep &&
+                                lastInstructionType != NcRecipeInstruction.InstructionType.RecipeStep)
+                                {
+                                    @Html.Raw("<ol>")
+                                }
+
+
+                                if (
+                                instruction.Type != NcRecipeInstruction.InstructionType.RecipeStep &&
+                                lastInstructionType == NcRecipeInstruction.InstructionType.RecipeStep)
+                                {
+                                    @Html.Raw("</ol>")
+                                }
+
+
+                                if (instruction.Type == NcRecipeInstruction.InstructionType.RecipeStep)
+                                {
+                                    <li>@Html.Raw(instruction.InstructionText)</li>
+                                }
+
+
+                                else if (instruction.Type == NcRecipeInstruction.InstructionType.Subheading)
+                                {
+                                    <h5>@Html.Raw(instruction.InstructionText)</h5>
+                                }
+
+
+                                else if (instruction.Type == NcRecipeInstruction.InstructionType.Note)
+                                {
+                                    <p class="instruction-note">@Html.Raw(instruction.InstructionText)</p>
+                                }
+
+
+                                else
+                                {
+                                    <li>@Html.Raw(instruction.InstructionText)</li>
+                                }
+
+                                lastInstructionType = instruction.Type;
+                            }
+
+
+                        }
+                        else
+                        {
+                            //Only a single instruction, just render it all as a paragraph
+                            NcRecipeInstruction instruction = Model.Page.Instructions!.Select(x => x.Content).OfType<NcRecipeInstruction>().FirstOrDefault();
+
+                            <p>@Html.Raw(instruction.InstructionText)</p>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <br />
+        <br />
+        @if (Model.Page?.RelatedProducts != null && Model.Page?.RelatedProducts.Count() > 0)
+        {
+            <div class="grid-x grid-margin-y grid-padding-y" id="RelatedProducts">
+                <div class="cell text-center">
+                    <h2>Related Products</h2>
+
+
+                    @if (Model.Page?.RelatedProducts.Count() > 3)
+                    {
+                        <div class="slick-container          grid-x   grid-padding-x  align-center-middle">
+                            <div class="cell    show-for-medium  medium-2 laptop-1    text-center">
+                                <a class="lft-arrow slick-prev carousel-nav carousel-prev">
+                                    <img src="~/images/icons/chevron-left-solid.svg" style="filter: invert(19%) sepia(99%) saturate(1233%) hue-rotate(180deg) brightness(94%) contrast(103%);" />
+                                </a>
+                            </div>
+
+
+
+
+                            <div class="cell medium-20 laptop-22">
+                                <div class="slick-slider">
+                                    @foreach (var link in Model.ViewModel.LstRelatedProducts)
+                                    {
+                                        <div class="related-product-block2">
+                                            <a href="@link.Url">
+
+                                                <img src="@link.ImgUrl" alt="@link.Title" class="equalize-img">
+
+                                                <p class="equalize-text">
+                                                    <br />
+                                                    @Html.Raw(link.Title)
+                                                    <br />
+                                                    (@link.Summary)
+                                                </p>
+
+                                            </a>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="cell    show-for-medium medium-2 laptop-1    text-center">
+                                <a class="rgt-arrow slick-next carousel-nav carousel-next">
+                                    <img src="~/images/icons/chevron-right-solid.svg" style="filter: invert(19%) sepia(99%) saturate(1233%) hue-rotate(180deg) brightness(94%) contrast(103%);" />
+                                </a>
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="grid-x grid-padding-x small-up-1 medium-up-2  laptop-up-@Model.Page?.RelatedProducts.Count()   related-products">
+                            @foreach (var link in Model.ViewModel.LstRelatedProducts)
+                            {
+                                <div class="cell related-product-block">
+                                    <a href="@link.Url">
+                                        <img src="@link.ImgUrl" alt="@link.Title">
+                                        <p>
+                                            @Html.Raw(link.Title)
+                                            <br />
+                                            (@link.Summary)
+
+                                        </p>
+                                    </a>
+                                </div>
+                            }
+                            <br />
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+@functions {
+    private void RenderIngredients(NcRecipeIngredient ingredient)
+    {
+        //Instantiate content models
+        ContentModels.IngredientUnit cmIngredientUnit = new IngredientUnit(ingredient.IngredientUnit, PublishedValueFallback);
+
+
+        @if (
+                                ingredient.DisplayQuantity != "" &&
+                                cmIngredientUnit.Type != IngredientUnit.UnitTypes.Variable &&
+                                cmIngredientUnit.Type != IngredientUnit.UnitTypes.None)
+        {
+            <span class="qty">@ingredient.DisplayQuantity </span>
+        }
+
+        @if (ingredient.QuantityQualifier != "")
+        {
+            <span class="qualifier">@ingredient.QuantityQualifier </span>
+        }
+
+
+        @if (
+                                ingredient.IngredientUnit != null &&
+                                cmIngredientUnit.DisplayUnitLabel &&
+                                !cmIngredientUnit.DisplayLabelAfterIngredient)
+        {
+            //true = prefer abbreviation
+            <span class="unit">@GetBestIngredientUnitLabel(ingredient.AbsoluteQty, cmIngredientUnit, true) </span>
+        }
+
+        @if (ingredient.Ingredient != "")
+        {
+            <span class="ingredient">@ingredient.Ingredient </span>
+        }
+
+        @if (
+                                cmIngredientUnit != null &&
+                                cmIngredientUnit.DisplayUnitLabel &&
+                                cmIngredientUnit.DisplayLabelAfterIngredient)
+        {
+            //true = prefer abbreviation
+            <span class="unit">@GetBestIngredientUnitLabel(ingredient.AbsoluteQty, cmIngredientUnit, true) </span>
+        }
+
+        @if (ingredient.IngredientPrep != "")
+        {
+            <span class="prep"> &mdash; @ingredient.IngredientPrep </span>
+        }
+
+        @if (ingredient.MeasurementNote != "")
+        {
+            <span class="measurement-note">(@ingredient.MeasurementNote) </span>
+        }
+
+        @if (ingredient.IsOptional)
+        {
+            <span class="optional">(optional) </span>
+        }
+
+    }
+
+    private string GetBestIngredientUnitLabel(decimal Quantity, IngredientUnit Unit, bool PreferAbbreviation = true)
+    {
+        if (Quantity <= 1)
+        {
+            //Singular
+            if (PreferAbbreviation)
+            {
+                if (Unit.SingularAbbreviation != "")
+                {
+                    return Unit.SingularAbbreviation;
+                }
+                else if (Unit.SingularName != "")
+                {
+                    return Unit.SingularName;
+                }
+                else
+                {
+                    return Unit.Name;
+                }
+            }
+            else
+            {
+                if (Unit.SingularName != "")
+                {
+                    return Unit.SingularName;
+                }
+                else if (Unit.SingularAbbreviation != "")
+                {
+                    return Unit.SingularAbbreviation;
+                }
+                else
+                {
+                    return Unit.Name;
+                }
+            }
+        }
+        else
+        {
+            //Plural
+            if (PreferAbbreviation)
+            {
+                if (Unit.PluralAbbreviation != "")
+                {
+                    return Unit.PluralAbbreviation;
+                }
+                else if (Unit.SingularAbbreviation != "")
+                {
+                    return Unit.SingularAbbreviation;
+                }
+                else if (Unit.PluralName != "")
+                {
+                    return Unit.PluralName;
+                }
+                else
+                {
+                    return Unit.Name;
+                }
+            }
+            else
+            {
+                if (Unit.PluralName != "")
+                {
+                    return Unit.PluralName;
+                }
+                else if (Unit.PluralAbbreviation != "")
+                {
+                    return Unit.PluralAbbreviation;
+                }
+                else
+                {
+                    return Unit.Name;
+                }
+            }
+        }
+    }
+}

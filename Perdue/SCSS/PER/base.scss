@@ -1,0 +1,162 @@
+/* Small screens | max-width 640px, mobile-only styles */
+@media only screen and (max-width: 40em) {
+}
+
+/* Medium screens | min-width 641px */
+@media only screen and (min-width: 40.063em) {
+}
+
+/* Medium screens | min-width 641px and max-width 1024px  */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+}
+
+/* Laptop screens | min-width 1025px*/
+@media only screen and (min-width: 64.063em) {
+}
+
+/* Laptop screens | min-width 1025px and max-width 1440px  */
+@media only screen and (min-width: 64.063em) and (max-width: 90em) {
+}
+
+/* Large screens | min-width 1441px */
+@media only screen and (min-width: 90.063em) {
+}
+
+/* Large screens | min-width 1441px and max-width 1920px */
+@media only screen and (min-width: 90.063em) and (max-width: 120em) {
+}
+
+/* XLarge screens | min-width 1921px */
+@media only screen and (min-width: 120.063em) {
+}
+
+
+
+
+/*  Color Palette
+----------------------------------------------------------*/
+COLORS { color: #577489; color: #004b7e; color: #003c64; color: #50aa4b; color: #558039; color: #88be3b; color: #eda14f; color: #f7f8f9; color: #f1f1f1; color: #d6d4d5; color: #cccccc; color: #b0b0b0; color: #707070; color: #6d757d; color: #646464; }
+
+
+
+
+
+/*  Font Families
+----------------------------------------------------------*/
+FONTS { font-family: 'Montserrat', sans-serif; font-family: 'Open Sans'; }
+
+
+
+
+/* GENERAL
+----------------------------------------------------------*/
+html, body { height: 100%; margin: 0; font-size: 20px; line-height: 30px; font-weight: 400; font-family: 'Open Sans'; color: #212529; background-color: #fff; overflow-x: hidden; }
+
+abbr, address, article, aside, audio, b, blockquote, canvas, caption, cite, code, dd, del, details, dfn, div, dl, dt, em, fieldset, figcaption, figure, footer, form,
+h1, h2, h3, h4, h5, h6, header, hgroup, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, p, pre, q, samp, section, small, span, strong, sub, summary, sup,
+table, tbody, td, tfoot, th, thead, time, tr, ul, var, video { /*margin: 0;*/ padding: 0; border: 0; outline: 0; /*vertical-align: baseline;*/ background: transparent }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block }
+
+p, div, li { font-size: 20px; line-height: 30px; font-weight: 400; color: #646464; }
+p { margin-bottom: 24px; }
+    p.small { font-size: 14px; line-height: 17px; }
+    p.smaller { font-size: 12px; line-height: 16px; }
+    p.smallest { font-size: 10px; line-height: 15px; }
+
+h1, h2, h3, .h1, .h2, .h3 { font-family: 'Montserrat', sans-serif; }
+h4, h5, h6, .h4, .h5, .h6 { font-family: 'Open Sans'; }
+
+h1, .h1 { font-size: 2.9vw; line-height: 3.3vw; font-weight: 400; color: #fff; /*font-size: 48px; line-height: 55px;*/ }
+h2, .h2 { font-size: 34px; line-height: 36px; font-weight: 400; color: #004b7e; margin-bottom: 8px; }
+h3, .h3 { font-size: 30px; line-height: 36px; font-weight: 400; color: #004b7e; }
+h4, .h4 { font-size: 24px; line-height: 30px; font-weight: 400; }
+h5, .h5 { font-size: 22px; line-height: 30px; font-weight: 400; }
+h6, .h6 { font-size: 14px; line-height: 22px; font-weight: 400; color: #707070; /*font-size: 16px; line-height: 24px;*/ }
+
+a { transition: .3s ease all; color: #004b7e; }
+    a:hover { color: #cb7e12; text-decoration: none; }
+
+ul, ol { margin-left: 24px; }
+li { }
+    li li { }
+select { }
+strong { font-weight: 600; }
+
+sup { top: -10px !important; }
+
+::placeholder { color: #cacaca; opacity: 1; /* Firefox */ }
+::-ms-input-placeholder { color: #cacaca; /* Edge 12 -18 */ }
+
+
+
+
+
+/*===================================================================================*/
+/*  Buttons   */
+/*===================================================================================*/
+.btn, a.btn { display: inline-flex; font-size: 16px; line-height: 24px; font-weight: 600; font-family: "Open Sans"; padding: 10px 20px; color: #FFF; background-color: #004b7e; border-radius: 0; cursor: pointer; border: 0; text-transform: uppercase; }
+.button, a.button { font-size: 16px; line-height: 24px; font-weight: 600; font-family: "Open Sans"; padding: 10px 20px; color: #FFF; background-color: #004b7e; border-radius: 0; cursor: pointer; border: 0; text-transform: uppercase; }
+.btn-secondary { background-color: #004b7e; border-color: #004b7e; color: #FFF;
+    &:hover { background-color: #003c64; border-color: #003c64; }
+}
+
+
+.btn-blue { padding: 0; border-radius: 0; border: 0; text-decoration: none; text-transform: uppercase; transition: .3s ease all;
+    a { padding: 8px 15px; color: #FFF; background-color: #004b7e; border-color: #004b7e; text-decoration: none; text-transform: uppercase;
+        &:hover { background-color: #004b7ee4; color: #FFF; }
+    }
+    &:focus { border-color: #CCC !important; -webkit-box-shadow: 2px 2px 2px #CCC !important; box-shadow: 2px 2px 2px #CCC !important; }
+    h3 { font-size: 1em !important; font-weight: bold !important; text-transform: uppercase !important; padding: 6px 15px !important; text-shadow: none; }
+    &.tertiary { font-size: 18px; font-weight: 700; font-family: 'Montserrat',Arial,sans-serif; width: 100%; display: block; text-align: center; text-transform: initial; }
+}
+a.btn-blue { padding: 8px 15px; color: #FFF; background-color: #004b7e; border-color: #004b7e;
+    &:hover { background-color: #004b7ee4; color: #FFF; }
+}
+
+
+.btn-red { padding: 0; border-radius: 0; border: 0; text-decoration: none; text-transform: uppercase; transition: .3s ease all;
+    a { padding: 8px 15px; color: #FFF; background-color: #781214; border-color: #781214; text-decoration: none; text-transform: uppercase;
+        &:hover { background-color: #781214d2; color: #FFF; }
+    }
+}
+a.btn-red { padding: 8px 15px; color: #FFF; background-color: #781214; border-color: #781214;
+    &:hover { background-color: #781214d2; color: #FFF; }
+}
+
+
+
+
+
+/*.hs-button.primary { margin-top: 15px !important }    CONFLICTS WITH SIGN-UP BTN   */
+/* SECTION PADDING AND MARGINS
+----------------------------------------------------------*/
+section { padding-top: 0; padding-bottom: 0;
+    &.padding-top-only { padding-top: 32px; padding-bottom: 0; }
+    &.padding-bottom-only { padding-top: 0; padding-bottom: 32px; }
+    &.padding-both { padding-top: 32px; padding-bottom: 32px; }
+    &.padding-none { padding-top: 0; padding-bottom: 0; }
+}
+
+
+section { margin-top: 0; margin-bottom: 0;
+    &.margin-top-only { margin-top: 32px; margin-bottom: 0; }
+    &.margin-bottom-only { margin-top: 0; margin-bottom: 32px; }
+    &.margin-both { margin-top: 32px; margin-bottom: 32px; }
+    &.margin-none { margin-top: 0; margin-bottom: 0; }
+}
+
+
+
+.offersCTA {
+    span { display: block }
+    h4 { margin: 3% 9%; color: #004b7e; }
+    h2 { color: #004b7e; font-size: 48px; line-height: 48px; }
+}
+
+
+
+
+
+/* CONTACT US
+----------------------------------------------------------*/
+.hs-submit { margin-top: 32px; }

@@ -1,0 +1,93 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@using Umbraco.Cms.Core.Models.Blocks;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockGridItem<IconListWithTextRight>>
+
+@{
+    //Create background color if provided.
+    string bgColor = "";
+    if (!string.IsNullOrEmpty(Model.Content.BackgroundColor))
+    {
+        bgColor = "background-color: " + Model.Content.BackgroundColor + ";";
+    }
+
+    //Determine column sizes
+    string columnWidths = "";
+    switch (Model.Content.Columns)
+    {
+        case "1":
+            break;
+        case "2":
+            columnWidths = "medium-12 laptop-12";
+            break;
+        case "3":
+            columnWidths = "medium-12 laptop-8";
+            break;
+        case "4":
+            columnWidths = "medium-12 laptop-6";
+            break;
+        default:
+            break;
+    }
+
+
+    //Determin classes 
+    string classShowDividers = "";
+    string classHideTopDivider = "";
+    if (Model.Content.ShowDividers)
+    {
+        classShowDividers = "showDividers";
+    }
+    if (string.IsNullOrEmpty(Model.Content.Title))
+    {
+        classHideTopDivider = "hideTopDivider";
+    }
+
+}
+
+<div data-blockgrid="Components/iconListWithTextRight">
+    <div class="grid-x">@*  grid-margin-y *@
+        <div class="cell small-24">
+
+            <div class="list-icon-left-txt-right @Model.Content.Class" style="@bgColor">
+            @* <div class="list-icon-left-txt-right" style="@bgColor" > *@
+                <div class="grid-x grid-padding-x grid-padding-y">
+                    <div class="cell">
+                        
+                        @if (!string.IsNullOrEmpty(Model.Content.Title))
+                        {
+                            <div class="grid-x   grid-margin-x grid-padding-y">
+                                <div class="cell">
+                                    <h2>@Model.Content.Title </h2>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="grid-x   grid-margin-x grid-padding-y   @classShowDividers @classHideTopDivider">
+                            @foreach (ContentModels.IconListItem record in Model.Content.IconListItems.Select(x => x.Content))
+                            {
+                                <div class="item cell   @columnWidths">
+                                    <div class="grid-x grid-margin-x  align-middle">
+                                        @* grid-margin-x grid-padding-y grid-margin-y grid-padding-x  *@
+                                        @if (!string.IsNullOrEmpty(@record.SideImage?.Url()))
+                                        {
+                                            <div class="cell shrink">
+                                                <img src="@record.SideImage?.Url()" alt="@record.Header" />
+                                            </div>
+                                        }
+                                        <div class="cell auto">
+                                            <h3>@record.Header</h3>
+                                            <p>@Html.Raw(record.Text)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

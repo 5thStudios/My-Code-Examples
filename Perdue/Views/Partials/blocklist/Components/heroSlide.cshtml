@@ -1,0 +1,222 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem<HeroSlide>>
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+
+
+@{
+    //Obtain background image
+    string bgImg = Model.Content.BackgroundImage!.GetCropUrl(Common.Crop.Hero_1903x550) ?? "";
+    if (!bgImg.Contains(".gif"))
+    {
+        bgImg += "&format=webp";
+    }
+
+    //Obtain dark overlay value
+    string darkOverlay = "";
+    if (Model.Content.DarkOverlay)
+    {
+        darkOverlay = "dark-txt";
+    }
+
+
+    //Determine which site this is being called from.
+    string site = "";
+    bool isHome = false;
+    if (ViewData["ipPage"] != null)
+    {
+        IPublishedContent ipModel = (IPublishedContent)ViewData["ipPage"];
+        site = ipModel.Root().Value<string>(Common.Property.Site);
+
+        //Determine if current page is the home page
+        if (ipModel.Equals(ipModel.Root()))
+        {
+            isHome = true;
+        }
+    }
+}
+
+
+@if (site == Common.Site.Perdue)
+{
+    <li class="orbit-slide">
+        @if (Model.Content.Link != null)
+        {
+            <a href="@Model.Content.Link?.Url" alt="@Model.Content.Link?.Target" target="@Model.Content.Link?.Target">
+                @{
+                    RenderContent(bgImg, darkOverlay);
+                }
+            </a>
+        }
+        else
+        {
+            RenderContent(bgImg, darkOverlay);
+        }
+    </li>
+}
+else if (site == Common.Site.Coleman)
+{
+    <li class="orbit-slide">
+        @if (isHome)
+        {
+            RenderContentCOL_Home(bgImg);
+        }
+        else
+        {
+            RenderContentCOL(bgImg);
+        }
+    </li>
+}
+else if (site == Common.Site.Cheney)
+{
+    <li class="orbit-slide">
+        @if (isHome)
+        {
+            RenderContentCHE_Home(bgImg);
+        }
+        else
+        {
+            RenderContentCHE(bgImg);
+        }
+    </li>
+}
+
+
+
+
+@functions {
+    private void RenderContent(string bgImg, string darkOverlay)
+    {
+        <figure class="orbit-figure">
+            <img class="orbit-image" src="@bgImg" alt="@Model.Content.Content">
+            <figcaption class="orbit-caption">
+                <div class="grid-container">
+                    <div class="grid-x align-middle">
+                        <div class="cell  medium-22 medium-offset-1  laptop-12">
+                            <h1>@Html.Raw(Model.Content.Content)</h1>
+                        </div>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+        @if (Model.Content.OverlaidImage != null)
+        {
+            <div class="carousel-logo">
+                <img src="@Model.Content.OverlaidImage.Url()">
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(Model.Content.OverlaidText))
+        {
+            <div class="carousel-text-overlay @darkOverlay">
+                @Html.Raw(Model.Content.OverlaidText)
+            </div>
+        }
+    }
+
+    private void RenderContentCHE_Home(string bgImg)
+    {
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="cell">
+                    <h1>
+                        @Html.Raw(Model.Content.Content ?? "")
+                    </h1>
+                    <figure class="orbit-figure">
+                        <img class="orbit-image" src="@bgImg" alt="@Model.Content.Content">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    }
+
+    private void RenderContentCOL_Home(string bgImg)
+    {
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="cell">
+                    <figure class="orbit-figure">
+                        <img class="orbit-image" src="@bgImg" alt="@Model.Content.Content">
+                        <figcaption class="orbit-caption">
+
+                            <div class="grid-x align-middle">
+                                <div class="cell  medium-22 medium-offset-1 text-center">
+                                    <h1>@Html.Raw(Model.Content.Content ?? "")</h1>
+
+                                    <div class="sysco text-center">
+                                        @if (!string.IsNullOrEmpty(Model.Content.OverlaidText))
+                                        {
+                                            <h3>@Html.Raw(Model.Content.OverlaidText)</h3>
+                                        }
+                                        @if (Model.Content.OverlaidImage != null)
+                                        {
+                                            <p>
+                                                <img alt="Sysco Logo" src="@Model.Content.OverlaidImage?.Url()" />
+                                            </p>
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    }
+
+    private void RenderContentCOL(string bgImg)
+    {
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="cell">
+                    <figure class="orbit-figure">
+                        <img class="orbit-image" src="@bgImg" alt="@Model.Content.Content">
+                        <figcaption class="orbit-caption align-center-middle">
+
+                            <div class="grid-x">
+                                <div class="cell  medium-22 medium-offset-1 text-center">
+
+
+                                    @if (Model.Content.OverlaidImage != null)
+                                    {
+                                        <p>
+                                            <img class="hero-icon" alt="@Model.Content.OverlaidImage?.Name" src="@Model.Content.OverlaidImage?.Url()" />
+                                        </p>
+                                    }
+
+                                    <h1>@Html.Raw(Model.Content.Content ?? "")</h1>
+
+                                    @if (!string.IsNullOrEmpty(Model.Content.OverlaidText))
+                                    {
+                                        <p>@Html.Raw(Model.Content.OverlaidText)</p>
+                                    }
+
+
+                                </div>
+                            </div>
+
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    }
+
+    private void RenderContentCHE(string bgImg)
+    {
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="cell">
+                    <figure class="orbit-figure">
+                        <img class="orbit-image" src="@bgImg" alt="@Model.Content.Content">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<!--
+    * Original:    https://www.cheneybrotherspoultry.com/the-perdue-difference/
+    * New:        https://localhost:44369/the-perdue-difference/
+-->

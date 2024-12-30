@@ -1,0 +1,73 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ImageBottomFeature>>
+
+<style>
+    table.bvTable td img { width: auto; height: 90px; }
+</style>
+
+
+@{
+    //Instantiate variables
+    var cmModel = Model.Content;
+    string bgImg = "";
+    string cssHeight = "500px";
+
+
+    //Obtain background image is available.
+    if (cmModel.ImageFullWidthImage is not null)
+    {
+        bgImg = cmModel.ImageFullWidthImage?.GetCropUrl(Common.Crop.Hero_1903x1000, UrlMode.Absolute) ?? string.Empty;
+    }
+    else
+    {
+        bgImg = "Missing image";
+    }
+}
+
+
+
+<div class="bottom-feature imageCover" style="height:@cssHeight; max-height:@cssHeight; background-image:url('@bgImg');">
+    <div class="grid-container">
+        <div class="grid-x grid-margin-y grid-padding-y align-middle" style="height:@cssHeight; max-height:@cssHeight;">
+            @if (!string.IsNullOrWhiteSpace(cmModel.ImageFullHeadline))
+            {
+                <div class="cell small-offset-2 small-20">
+
+
+                    <div class="grid-x grid-margin-x">
+                        <div class="cell small-24 laptop-16 large-12">
+
+                            <div class="callout large">
+                                @if (!string.IsNullOrWhiteSpace(cmModel.ImageFullIntroHeadline))
+                                {
+                                    <p class="feature-type">@cmModel.ImageFullIntroHeadline</p>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(cmModel.ImageFullHeadline))
+                                {
+                                    <h4>@cmModel.ImageFullHeadline</h4>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(cmModel.ImageFullSubHeadline))
+                                {
+                                    <h5>@cmModel.ImageFullSubHeadline</h5>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(cmModel.ImageFullIntroText))
+                                {
+                                    <p>@cmModel.ImageFullIntroText</p>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(cmModel.ImageFullCallToAction?.Name))
+                                {
+                                    <p><a class="read-more" target="@cmModel.ImageFullCallToAction.Target" href="@cmModel.ImageFullCallToAction.Url">@cmModel.ImageFullCallToAction.Name</a></p>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

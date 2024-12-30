@@ -1,0 +1,35 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend><strong>Image Link</strong></legend>
+
+        <br />
+
+        {{mediaItem = (block.data.image[0].mediaKey | mediaItemResolver); ""}}
+        {{linkName = (block.data.link[0].name); ""}}
+        {{linkUrl = (block.data.link[0].url); ""}}
+
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Link to</td>
+                    <td>
+                        <span>{{linkName}}</span>
+                        <span ng-if="linkUrl">&nbsp;&nbsp;⇒&nbsp;&nbsp;<em>{{linkUrl}}</em></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    <td>
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width: 50px; height:auto;" />
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

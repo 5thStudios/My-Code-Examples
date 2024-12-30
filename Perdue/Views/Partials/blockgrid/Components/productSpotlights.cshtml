@@ -1,0 +1,136 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ProductSpotlights>>
+@using ContentModels = www.Models.PublishedModels;
+@using Umbraco.Cms.Core.Models;
+@using www.Models;
+
+
+<section class="product-spotlight">
+    <div class="grid-container" data-equalizer="featuretxt" data-equalize-on="large">
+        <div class="grid-x grid-margin-x grid-margin-y" data-equalizer="searchbox" data-equalize-on="medium">
+            <div class="cell laptop-12">
+
+                @if (string.IsNullOrEmpty(Model.Content.SpotlightTitle?.Url))
+                {
+                    <br />
+                }
+                else
+                {
+                    <a href="@Model.Content.SpotlightTitle?.Url">
+                        <h2 class="text-center  SpotlightTitle">@Model.Content.SpotlightTitle?.Name<img src="/images/icons/caret-right-solid.svg" class="svg-btn primaryColor" /></h2>
+                    </a>
+                }
+
+
+                @if (Model.Content.BrandList != null && Model.Content.BrandList?.Count() > 0)
+                {
+                    <div class="grid-x grid-margin-x  grid-padding-y   align-middle    related-brands-searchbox" data-equalizer-watch="searchbox">
+                        <div class="cell laptop-14">
+                            <div class="grid-x small-up-@Model.Content.BrandList?.Count()  grid-margin-x ">
+                                @foreach (LinkWithImage brand in Model.Content.BrandList!.Select(x => x.Content).OfType<LinkWithImage>())
+                                {
+                                    <div class="cell">
+                                        <a href="@brand.Link?.Url">
+                                            <img src="@brand.Image?.Url()" alt="@brand.Link?.Name" class="brand-logo-icon">
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="cell laptop-10   align-self-center">
+                            <div class="">
+                                <form action="/products/">
+
+                                    <div class="grid-x search-pnl">
+                                        <div class="cell auto">
+                                            <input id="search-field" type="text" placeholder="keyword/product code" name="productkeyword" value="">
+                                        </div>
+                                        <div class="cell shrink">
+                                            <button class="btn btn-secondary rounded-0    align-center-middle" type="submit">
+                                                
+                                                <img src="/images/icons/magnifying-glass-solid.svg" class="svg-btn" />
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+                <div class="grid-x">
+                    <div class="cell  featured-cta">
+                        <img alt="Product Spotlight" src="@Model.Content.SpotlightBgImg?.GetCropUrl(Common.Crop.Spotlight_760x600)" />
+
+                        <div class="featured-cta-heading">
+                            <a href="@Model.Content.SpotlightProduct?.Url()">
+                                <h5>Product Spotlight</h5>
+                                <h4 data-equalizer-watch="featuretxt">@Html.Raw(Model.Content.SpotlightDescription)</h4>
+                                <div><span class="btn">View Product</span></div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="cell laptop-12">
+
+                @if (string.IsNullOrEmpty(Model.Content.FeaturedTitle?.Url))
+                {
+                    <br />
+                }
+                else
+                {
+                    <a href="@Model.Content.FeaturedTitle?.Url">
+                        <h2 class="text-center  FeaturedTitle">@Model.Content.FeaturedTitle?.Name<img src="/images/icons/caret-right-solid.svg" class="svg-btn primaryColor " /></h2>
+                    </a>
+                }
+
+                @if (Model.Content.CategoryList != null && Model.Content.CategoryList?.Count() > 0)
+                {
+
+                    <div class="grid-x grid-padding-x   align-middle    featured-dish-sub" data-equalizer-watch="searchbox">
+                        @{
+                            List<Umbraco.Cms.Core.Models.Link> lstCategories = Model.Content.CategoryList!.ToList();
+                        }
+
+                        <div class="cell auto text-right">
+                            <h3><a href="@lstCategories[0].Url">@lstCategories[0].Name<img src="/images/icons/caret-right-solid.svg" class="svg-btn primaryColor " /></a></h3>
+                        </div>
+                        <div class="cell shrink text-center">
+                            <h3><a href="@lstCategories[1].Url">@lstCategories[1].Name<img src="/images/icons/caret-right-solid.svg" class="svg-btn primaryColor " /></a></h3>
+                        </div>
+                        <div class="cell auto text-left">
+                            <h3><a href="@lstCategories[2].Url">@lstCategories[2].Name<img src="/images/icons/caret-right-solid.svg" class="svg-btn primaryColor " /></a></h3>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div  data-equalizer-watch="searchbox">&nbsp;</div>
+                }
+
+
+                <div class="grid-x">
+                    <div class="cell  featured-cta">
+                        <img alt="Featured Dish" src="@Model.Content.FeaturedBgImg?.GetCropUrl(Common.Crop.Spotlight_760x600)" />
+
+                        <div class="featured-cta-heading">
+                            <a href="@Model.Content.FeaturedDish?.Url()">
+                                <h5>Featured Dish</h5>
+                                <h4 data-equalizer-watch="featuretxt">@Html.Raw(Model.Content.FeaturedDescription)</h4>
+                                <div><span class="btn">View Menu Idea</span></div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>

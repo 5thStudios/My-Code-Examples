@@ -1,0 +1,80 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.ViewModel;
+@using ECMC_Umbraco.Models;
+@using Newtonsoft.Json;
+@using System.Linq;
+@model ComposedPageViewModel<ContentModels.Grants, GrantItemsViewModel>
+@{
+    Layout = "MasterFnd.cshtml";
+}
+@section Footer {
+    <script type="text/javascript" src="/js/paginathing/paginathing.min.js"></script>
+}
+
+
+
+@await Html.GetBlockGridHtmlAsync(Model.Page?.HeroBlockGrid)
+@await Html.GetBlockGridHtmlAsync(Model.Page?.ContentBlockGrid)
+
+
+<div class="grants grid-container" style="margin-top: 30px;">
+    <div class="grid-x   def-margin-b">
+        <div class="cell small-20 small-offset-2">
+
+            @using (Html.BeginUmbracoForm<www.Controllers.SurfaceControllers.GrantSearchController>(nameof(www.Controllers.SurfaceControllers.GrantSearchController.Search)))
+            {
+                @await Html.PartialAsync(Common.Partial.GrantsFilter, Model.ViewModel)
+                <br />
+
+                <div class="list-type grants-list">
+                    <div class="grid-x">
+                        @foreach (var grant in Model.ViewModel?.LstGrantItems)
+                        {
+                            <div class="cell">
+                                <h3>@grant.GrantName</h3>
+
+                                <div class="grid-x laptop-up-3  grid-padding-y">
+                                    <div class="cell">
+                                        <div><strong>Grantee</strong></div>
+                                        <p class="highlight">@grant.Organization</p>
+                                    </div>
+                                    <div class="cell">
+                                        <div><strong>Amount</strong></div>
+                                        <p class="highlight">@grant.Amount</p>
+                                    </div>
+                                    <div class="cell">
+                                        <div><strong>Locations</strong></div>
+                                        <p>@grant.Location</p>
+                                    </div>
+                                    <div class="cell">
+                                        <div><strong>Status</strong></div>
+                                        <p>@grant.Status</p>
+                                    </div>
+                                    <div class="cell">
+                                        <div><strong>Year</strong></div>
+                                        <p>@grant.FiscalYear</p>
+                                    </div>
+                                    <div class="cell">
+                                        <div><strong>Focus</strong></div>
+                                        <p>@grant.Focus</p>
+                                    </div>
+                                </div>
+
+                                <div><strong>Overview</strong></div>
+                                <p>@grant.Overview</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <br />
+                @await Html.PartialAsync(Common.Partial.GrantsPagination, Model.ViewModel)
+            }
+            <br />
+        </div>
+    </div>
+</div>
+
+
+@await Html.GetBlockGridHtmlAsync(Model.Page?.ContentBottomBlockGrid)

@@ -1,0 +1,46 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<BillboardWithVideoSmallVsn>>
+
+
+
+<section class="billboard-with-Video smaller-vsn" data-blockgrid="blockgrid/Components/billboardWithVideo">
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x grid-margin-y grid-padding-x grid-padding-y    align-middle">
+
+            
+            @if (!Model.Content.VideoLocatedOnThe) 
+            {
+                //Video on left
+                <div class="cell laptop-8 laptop-offset-4">
+                    <div class="responsive-embed widescreen">
+                        <iframe src="@Model.Content.VideoEmbedUrl" height="315" frameborder="0" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+                <div class="cell laptop-8">
+                    @Html.Raw(Model.Content.Content)
+                </div>
+            }
+            else
+            {
+                //Video on right
+                <div class="cell laptop-8 laptop-offset-4">
+                    @Html.Raw(Model.Content.Content)
+                </div>
+                <div class="cell laptop-8">
+                    <div class="responsive-embed widescreen">
+                        <iframe src="@Model.Content.VideoEmbedUrl" height="315" frameborder="0" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+            }
+
+            @* <div class="cell laptop-8 laptop-offset-4">
+                <p class="h5">Matrix Trade Institute's Service Advisor Technical training bootcamp has been successful in growing careers from the novice to the most experienced advisor. Nicole Wilkerson from Infiniti of Beachwood was impressed with the training and instructors.</p>
+            </div>
+            <div class="cell laptop-8">
+                <div class="responsive-embed widescreen">
+                    <iframe height="315" src="https://www.youtube.com/embed/g2PWrlSkHpc" frameborder="0" allowfullscreen=""></iframe>
+                </div>
+            </div> *@
+        </div>
+    </div>
+</section>

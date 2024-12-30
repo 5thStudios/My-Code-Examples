@@ -1,0 +1,188 @@
+﻿@using www.Models;
+@using www.ViewModels;
+@model FooterViewModel;
+
+
+
+@if (Model.IsListOfHomePgs)
+{
+    <footer>
+        <section class="footer-description">
+            <div class="grid-container">
+                <div class="grid-x">
+                    <div class="cell">
+                        <div class="grid-x grid-padding-x grid-padding-y grid-margin-y align-middle">
+                            <div class="cell large-7 large-offset-2  text-center medium-text-left">
+                                <a href="/" target="_self">
+                                    <img alt="@Model.Logo.Title" src="@Model.Logo.ImgUrl" />
+                                </a>
+                            </div>
+                            <div class="cell large-13  text-center medium-text-left">
+                                @Html.Raw(Model.Description)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="footer-social hidden-print">
+            <div class="grid-container">
+                <div class="grid-x grid-padding-y grid-margin-y">
+                    <nav class="cell text-center">
+                        <ul class="social-icons">
+                            @foreach (var link in Model.LstSocialLinks)
+                            {
+                                <li>
+                                    <a href="@link.Url" target="@link.Target" title="@link.Title" class="@link.Class"></a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="footer-minor-nav">
+            <div class="grid-container">
+                <div class="grid-x grid-padding-y">
+                    <div class="cell small-24 laptop-auto       laptop-text-left text-center">
+                        <nav>
+                            @foreach (var link in Model.LstMinorNav)
+                            {
+                                <h6><a href="@link.Url" @link.Target>@link.Title</a></h6>
+                                if (link != Model.LstMinorNav.LastOrDefault())
+                                {
+                                    <span>&nbsp;|&nbsp;</span>
+                                }
+                            }
+                        </nav>
+                    </div>
+                    <div class="cell small-24 laptop-shrink     text-center laptop-text-right">
+                        <h6>
+                            &copy; @DateTime.Today.Year Cleveland Construction, Inc. All rights reserved.
+                        </h6>
+                    </div>
+                </div>
+                <div class="grid-x">
+                    <div class="cell text-center">
+                        <br>
+                        <a href="#top" class="back-to-top">Back to Top</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+}
+else
+{
+    <footer>
+        <section class="footer-description">
+            <div class="grid-container">
+                <div class="grid-x">
+                    <div class="cell">
+                        <div class="grid-x grid-padding-x grid-padding-y align-middle">
+                            <div class="cell medium-12 laptop-7 laptop-offset-2     text-center medium-text-left">
+                                <a href="/" target="_self">
+                                    <img alt="@Model.Logo.Title" src="@Model.Logo.ImgUrl" />
+                                </a>
+                            </div>
+                            <div class="cell medium-12 laptop-13     text-center medium-text-left">
+                                @Html.Raw(Model.Description)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="footer-services">
+            <div class="grid-container">
+                <div class="grid-x grid-padding-y">
+                    <nav class="cell large-20 large-offset-2 text-center">
+
+                        @foreach (var link in Model.LstMainNav)
+                        {
+                            <a href="@link.Url" @link.Target>@link.Title</a>
+                            if (link != Model.LstMainNav.LastOrDefault())
+                            {
+                                <span class="bullet">•</span>
+                            }
+                        }
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="footer-social hidden-print">
+            <div class="grid-container">
+                <div class="grid-x grid-padding-y">
+                    <nav class="cell text-center">
+                        <ul class="social-icons">
+                            @foreach (var link in Model.LstSocialLinks)
+                            {
+                                <li>
+                                    <a href="@link.Url" target="@link.Target" title="@link.Title" class="@link.Class"></a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="footer-locations">
+            <div class="grid-container">
+                <div class="grid-x grid-padding-y">
+                    <nav class="cell large-20 large-offset-2 text-center">
+                        <h2>Locations: </h2>
+
+                        @foreach (var link in Model.LstLocations)
+                        {
+                            <a href="@link.Url" @link.Target>@link.Title</a>
+                            if (link != Model.LstLocations.LastOrDefault())
+                            {
+                                <span class="bullet">•</span>
+                            }
+                        }
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="footer-minor-nav">
+            <div class="grid-container">
+                <div class="grid-x grid-padding-y">
+                    <div class="cell laptop-10 laptop-offset-2 text-center laptop-text-left">
+                        <nav>
+                            @foreach (var link in Model.LstMinorNav)
+                            {
+                                <h6><a href="@link.Url" @link.Target>@link.Title</a></h6>
+                                if (link != Model.LstMinorNav.LastOrDefault())
+                                {
+                                    <span>&nbsp;|&nbsp;</span>
+                                }
+                            }
+                        </nav>
+                    </div>
+                    <div class="cell laptop-10 text-center laptop-text-right">
+                        <h6>
+                            &copy; @DateTime.Today.Year Cleveland Construction, Inc. All rights reserved.
+                        </h6>
+                    </div>
+                </div>
+                <div class="grid-x">
+                    <div class="cell text-center">
+                        <br />
+                        <a href="#top" class="back-to-top">Back to Top</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+}
+
+

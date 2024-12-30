@@ -1,0 +1,145 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using System.Text;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.LocationPage>
+@{
+    Layout = "TopLevel.cshtml";
+
+
+    //Create address string
+    StringBuilder sbAddress = new StringBuilder();
+    if (!string.IsNullOrWhiteSpace(Model.Address))
+    {
+        sbAddress.AppendLine(Model.Address?.Trim() + "<br />");
+    }
+    if (!string.IsNullOrEmpty(Model.City))
+    {
+        sbAddress.Append(Model.City.Trim() + ", ");
+    }
+    if (!string.IsNullOrEmpty(Model.State))
+    {
+        sbAddress.Append(Model.State.Trim() + " ");
+    }
+    sbAddress.Append(Model.ZipCode?.Trim());
+
+
+    //Create phone number strings
+    string? phoneNo = null;
+    if (!string.IsNullOrWhiteSpace(Model.PhoneNumber))
+    {
+        phoneNo = string.Concat(Model.PhoneNumber?.Where(Char.IsDigit));
+        if (phoneNo.Length == 10)
+        {
+            phoneNo = "1" + phoneNo;
+        }
+    }
+
+}
+
+
+<div class="grid-container">
+    <div class="grid-x   grid-margin-y grid-padding-x grid-padding-y ">
+        <div class="cell laptop-9 laptop-offset-3">
+            <img src="@Model.LocationImage?.GetCropUrl(Common.Crop.Card_1100x600)" alt="@Model.Name" />
+        </div>
+        <div class="cell laptop-9">
+            @if (!string.IsNullOrEmpty(sbAddress.ToString()))
+            {
+                <address itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+                    @Html.Raw(sbAddress.ToString())
+                </address>
+            }
+            @if (!string.IsNullOrEmpty(phoneNo))
+            {
+                <div>tel: <a href="tel:@phoneNo">@Model.PhoneNumber</a></div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@await Html.GetBlockGridHtmlAsync(Model.MainContent)
+
+<div class="grid-container">
+    <div class="grid-x">
+        <div class="cell text-center">
+            <a href="@Model.Parent.Url()">Return to Locations</a>
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+
+
+@if (Model.Contacts.Any())
+{
+    <section>
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="cell laptop-18 laptop-offset-3">
+                    <h2 class="text-center">Contacts</h2>
+                    <div class="grid-x laptop-up-3 grid-margin-x">
+                        @foreach (var ipBio in Model.Contacts)
+                        {
+                            <div class="cell">
+                                <partial name="@Common.Partial.BioCard" model="ipBio" />
+                            </div>
+                        }
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+@if (Model.RelatedProjects.Any())
+{
+    <section class="bg-light-grey">
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="cell laptop-18 laptop-offset-3">
+                    <h2 class="text-center">Related Projects</h2>
+                    <div class="grid-x laptop-up-3 grid-margin-x">
+                        @foreach (var ipProj in Model.RelatedProjects)
+                        {
+                            <div class="cell">
+                                <partial name="@Common.Partial.ProjectCard" model="ipProj" />
+                            </div>
+                        }
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+<section>
+    <div class="grid-container">
+        <div class="grid-x">
+            <div class="cell laptop-18 laptop-offset-3    text-center ">
+                <h2 class="text-center">News from Cleveland Construction in ...</h2>
+                <h3>&mdash; TO BE BUILT &mdash;</h3>
+                @* <div class="grid-x laptop-up-3 grid-margin-x">
+
+                @foreach (var ipProj in Model.)
+                {
+                <div class="cell">
+                <partial name="@Common.Partial.NewsCard" model="ip" />
+                </div>
+                }
+                </div>
+                *@
+                <div>
+                    <a class="button" href="/general-contracting/about-us/current-news?category=orlando">View All News</a>
+                </div>
+                <p><a href="/general-contracting/blog">Check out our blog.</a></p>
+                <br />
+            </div>
+        </div>
+    </div>
+</section>

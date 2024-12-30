@@ -1,0 +1,59 @@
+﻿@using Dragonfly
+@using Dragonfly.NetHelpers
+@using Dragonfly.UmbracoModels
+@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@model RecipesListingViewModel;
+
+
+
+<div id="recipe-filters" style="display: block;">
+
+    <div style="margin-bottom: 10px;">
+        <div id="clear-filters" style="cursor: pointer">
+            <a href="@Model.PageUrl" class="btn btn-blue">Show All Recipes</a>
+        </div>
+        <br>
+    </div>
+
+    <div class="checks-group" data-filter-group="MealType">
+        <h5 class="filter-section-title">Meal Type&nbsp;
+            <span class="fas fa-caret-right">
+                <img src="/images/icons/caret-right-solid.svg" class="svg-btn caret-right" />
+                <img src="/images/icons/caret-down-solid.svg" class="svg-btn caret-down" />
+            </span>
+            </h5>
+        <div class="filter-items-group" style="display: none; opacity: 0;">
+            @foreach (var tag in Model.LstTags_MealTypes.OrderBy(x => x.Value))
+            {
+                <div class="parentContainer">
+                    <input type="checkbox" data-filter="@tag.Key" value="@tag.Key" class="col-1 align-top filter-item @tag.Key" id="@tag.Key" />
+                    <label for="@tag.Key" class="col-11 text-left pl-1">@tag.Value</label>
+                </div>
+            }
+        </div>
+        <hr width="100%">
+    </div>
+
+    <div class="checks-group" data-filter-group="ProductCategory">
+        <h5 class="filter-section-title">Product Category&nbsp;
+            <span class="fas fa-caret-right">
+                <img src="/images/icons/caret-right-solid.svg" class="svg-btn caret-right" />
+                <img src="/images/icons/caret-down-solid.svg" class="svg-btn caret-down" />
+            </span>
+            </h5>
+        <div class="col-12 filter-items-group" style="display: none; opacity: 0;">
+            @foreach (var tag in Model.LstTags_ProductCategories.OrderBy(x => x.Value))
+            {
+                <input type="checkbox" data-filter="@tag.Key" value="@tag.Key" class="col-1 align-top filter-item @tag.Key" id="@tag.Key" />
+                <label for="@tag.Key" class="col-11 text-left pl-1">@tag.Value</label>
+                <br />
+            }
+        </div>
+        <hr width="100%">
+    </div>
+
+</div>

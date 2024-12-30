@@ -1,0 +1,20 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<VideoPanel>>
+
+
+
+<div class="videoPanel  gallery  grid-container	@Html.Raw(Model.Content?.OuterMostClass)" @Html.Raw(Model.Content?.OuterMostAttributes)>
+    @Html.Raw(Model.Content.CustomScripts)
+    <div class="@Html.Raw(Model.Content?.ContainerClasses)" @Html.Raw(Model.Content?.ContainerAttributes)>
+        <div class="grid-x grid-margin-y grid-padding-x grid-padding-y">
+            <div class="cell medium-12 align-center-middle">
+                <a rel="noopener prettyPhoto" class="video-anchor" title="@Model.Content.VideoLink?.Name" href="@Model.Content.VideoLink?.Url">
+                <span class="video-play-btn">Watch Video</span>
+                    <img alt="" src="@Model.Content.VideoImage?.GetCropUrl(www.Models.Common.Crop.Portrait_600x400)" />
+                </a>
+            </div>
+            <div class="cell medium-12 align-center-middle">
+                @Html.Raw(Model.Content.Content)
+            </div>
+        </div>
+    </div>
+</div>

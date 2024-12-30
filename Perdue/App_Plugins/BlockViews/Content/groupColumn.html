@@ -1,0 +1,47 @@
+﻿<style>
+    legend { color: #ff1600; }
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Group Column</legend>
+        <!--{{block.data}}-->
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>{{block.data.navigationElements.contentData.length}} Records</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!--<table class="bvTable" cellspacing="0" cellpadding="0" border="0" ng-repeat="record in block.data.navigationElements.contentData track by $index" ng-value="{{$index}}">
+            <tbody>
+                <tr>
+                    <td class="type">Attribute {{$index + 1}}</td>
+                    <td>
+                        <table>
+                            <tbody>
+
+                                <tr>
+                                    <td>Link</td>
+                                    <td>
+                                        {{linkName = (record.link[0].name); ""}}
+                                        {{linkUrl = (record.link[0].url); ""}}
+                                        <span>{{linkName}}</span>
+                                        <span ng-if="linkUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{linkUrl}}</em></span>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>-->
+
+        <br />
+    </fieldset>
+</div>
+<br />

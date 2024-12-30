@@ -1,0 +1,44 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<Testimonials>>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+
+@{
+    var slideCount = 3; // Model.Content.NumberOfSlidesToShowOnScreen ?? "1";
+}
+<input type="hidden" id="hfldSlideCount" value="@slideCount" />
+
+
+
+
+
+@* See app.js for function jsSlickSlider_Testimonial() *@
+<div data-blockgrid="Components/testimonials" class="testimonials">
+
+    <div class="grid-x">
+        <div class="cell">
+
+            <section class="testimonial_slider ">
+                <div>
+                    <img src="http://placehold.it/350x300?text=1" width="350" height="300">
+                </div>
+                <div>
+                    <img src="http://placehold.it/200x300?text=2" width="350" height="300">
+                </div>
+                <div>
+                    <img src="http://placehold.it/100x300?text=3" width="350" height="300">
+                </div>
+            </section>
+
+
+
+            <br />
+            <br />
+            <img src="/images/temp/testimonials-screenshot.jpg" style="width:100%; height:auto;" />
+            <br />
+            <br />
+
+
+
+        </div>
+    </div>
+</div>

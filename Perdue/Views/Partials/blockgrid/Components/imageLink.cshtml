@@ -1,0 +1,13 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ImageLink>>
+@using ContentModels = www.Models.PublishedModels;
+
+
+
+@if (string.IsNullOrEmpty(Model.Content.Crop))
+{
+    <img style="width:100%;height:auto;" alt="@Model.Content.Image?.Name" src="@Model.Content.Image?.Url()" />
+}
+else
+{
+    <img style="width:100%;height:auto;" alt="@Model.Content.Image?.Name" src="@Model.Content.Image?.GetCropUrl(Model.Content.Crop)" />
+}

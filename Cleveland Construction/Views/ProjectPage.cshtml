@@ -1,0 +1,151 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using cm = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@model ComposedPageViewModel<cm.ProjectPage, ProjectViewModel>
+@{
+    Layout = "TopLevel.cshtml";
+}
+
+
+@*
+For the project page hero, maybe just an oversized Hero image and add a image carousel option to include as a new “Card”?
+Something similar to what Moss does here: https://moss.com/projects/boca-raton-resorts-renovations/?pm=&pt=
+ *@
+
+
+
+
+<section class="grid-container">
+    <div class="grid-x      grid-padding-x grid-margin-x     grid-margin-y">
+        <div class="cell laptop-6">
+            <div class="sidebar">
+                <div class="header">
+
+                    <h3>Overview</h3>
+                    <div class="project-detail-widget">
+                        <ul>
+                            @if (!string.IsNullOrWhiteSpace(Model.Page?.Location))
+                            {
+                                <li>
+                                    <dl>
+                                        <dt>Location</dt>
+                                        <dd>@Model.Page?.Location</dd>
+                                    </dl>
+                                </li>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(Model.Page?.Owner))
+                            {
+                                <li>
+                                    <dl>
+                                        <dt>Owner</dt>
+                                        <dd>@Model.Page?.Owner</dd>
+                                    </dl>
+                                </li>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(Model.Page?.Architect))
+                            {
+                                <li>
+                                    <dl>
+                                        <dt>Architect</dt>
+                                        <dd>@Model.Page?.Architect</dd>
+                                    </dl>
+                                </li>
+                            }
+
+                                <li>
+                                    <dl>
+                                        <dt>Completion Date</dt>
+                                        <dd>@Model.ViewModel!.CompletionDate</dd>
+                                    </dl>
+                                </li>
+                            
+                        </ul>
+                    </div>
+
+                    @if (Model.ViewModel.LstIndustries.Any())  
+                    {
+                        <h3>Industries</h3>
+                        <div class="project-detail-widget">
+                            <ul>
+                                @foreach (var link in Model.ViewModel.LstIndustries)
+                                {
+                                    <li><a href="@link.Url">@link.Title</a></li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    @if (Model.ViewModel.LstScopes.Any())  
+                    {
+                        <h3>Scope of Work</h3>
+                        <div class="project-detail-widget">
+                            <ul>
+                                @foreach (var link in Model.ViewModel.LstScopes)
+                                {
+                                    <li><a href="@link.Url">@link.Title</a></li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    @if (Model.ViewModel.LstServicesProvided.Any()) 
+                    {
+                        <h3>Services Provided</h3>
+                        <div class="project-detail-widget">
+                            <ul>
+                                @foreach (var _service in Model.ViewModel.LstServicesProvided)
+                                {
+                                    <li>@_service</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="cell laptop-18">
+            @if (!string.IsNullOrWhiteSpace(Model.Page!.OverviewTitle))
+            {
+                <h3 class="headline">@Model.Page!.OverviewTitle</h3>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.Page!.ProjectHeadline))
+            {
+                <h2 class="headline">@Model.Page!.ProjectHeadline</h2>
+            }
+            <div class="grid-x ">
+                @await Html.GetBlockGridHtmlAsync(Model.Page?.MainContent)
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+@await Html.GetBlockGridHtmlAsync(Model.Page?.SecondaryContent)
+
+
+@if (Model.Page?.RelatedProjects?.Any() == true)
+{
+    <section class="bg-light-grey">
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="cell laptop-18 laptop-offset-3">
+                    <h2 class="text-center">Related Projects</h2>
+                    <div class="grid-x laptop-up-3 grid-margin-x">
+                        @foreach (var ipProj in Model.Page?.RelatedProjects)
+                        {
+                            <div class="cell">
+                                <partial name="@Common.Partial.ProjectCard" model="ipProj" />
+                            </div>
+                        }
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </section>
+}

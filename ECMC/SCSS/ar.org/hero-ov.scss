@@ -1,0 +1,54 @@
+﻿@import'../common-B/_variables-com';
+
+body {
+    .hero {
+        h1 { font-size: $h1_size; }
+        h2 { font-size: $h2_size; }
+    }
+    .home {
+        .hero {
+            h1 { font-size: $h1_size; }
+            h2 { font-size: $h2_size; }
+        }
+    }
+
+    @media only screen and (min-width:$bp_tablet_min) and (max-width: $bp_tablet) {
+        .hero {
+            h1 { font-size: $h1_size - 10px !important; }
+            h2 { font-size: $h2_size - 10px !important; }
+        }
+        .home {
+            .hero {
+                h1 { font-size: $h1_size - 10px !important; }
+                h2 { font-size: $h2_size - 10px !important; }
+            }
+        }
+    }
+    @media only screen and (min-width: $bp_lap_min) and (max-width: $bp_lap) {
+        .hero {
+            h1 { font-size: $h1_size !important; }
+            h2 { font-size: $h2_size !important; }
+        }
+        .home {
+            .hero {
+                h1 { font-size: $h1_size !important; }
+                h2 { font-size: $h2_size !important; }
+            }
+        }
+    }
+
+    @media only screen and (min-width: $bp_large-min) and (max-width: $bp_large) {
+
+        .home {
+            .hero {
+                h1 { font-size: $h1_size !important; }
+                h2 { font-size: $h2_size !important; }
+            }
+            .hero {
+
+                h1 { font-size: $h1_size !important; }
+                h2 { font-size: $h2_size !important; }
+            }
+        }
+    }
+}

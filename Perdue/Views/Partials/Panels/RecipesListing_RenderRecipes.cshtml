@@ -1,0 +1,28 @@
+﻿@using Dragonfly
+@using Dragonfly.NetHelpers
+@using Dragonfly.UmbracoModels
+@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@model RecipesListingViewModel;
+
+
+
+
+<a name="top" id="top"></a>
+<div class="recipes-list">
+    <div class="grid-x" id="recipes">
+
+        @foreach (var listing in Model.LstRecipeListings)
+        {
+            <div class="cell recipe-block bg-light item @string.Join(" ", listing.LstAttribClasses) 1">
+                <a href="@listing.Recipe.Url" title="@listing.Recipe.Title">
+                    <img src="@listing.Image.ImgUrl" alt="@listing.Image.Title" />
+                    <p>@listing.Title</p>
+                </a>
+            </div>
+        }
+    </div>
+</div>

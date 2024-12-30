@@ -1,0 +1,55 @@
+﻿@import'_variables-com';
+
+/* Pagination
+----------------------------------------------------------*/
+.pagination-container { margin-top: 36px;
+    ul.pagination {
+        li { display: inline-block; box-sizing: border-box; vertical-align: top; font-size: 20px; margin-right: 1px; background-color: $color_glob_navy; transition: all .25s ease-in-out; border-radius: 0; padding: 10px;
+            a { color: $color_glob_white; background-color: transparent; text-decoration: none; }
+            &:hover { background-color: rgb(9 50 102 / 75%);
+                a { background-color: transparent; text-decoration: none; }
+            }
+
+            &.page { }
+            &.first { }
+            &.prev { }
+            &.next { }
+            &.last { }
+            &.active { background: transparent;
+                a { color: $color_glob_navy; }
+            }
+            &.disabled { background-color: rgb(9 50 102 / 75%); cursor: not-allowed;
+                a { cursor: not-allowed; }
+            }
+        }
+    }
+}
+
+.grants {
+    .pagination-container { margin-top: 36px;
+        ul.pagination {
+            li { cursor: pointer; display: inline-block; box-sizing: border-box; vertical-align: top; font-size: 20px; margin-right: 1px; background-color: $color_glob_navy; transition: all .25s ease-in-out; border-radius: 0; padding: 10px;
+                button { cursor: pointer; color: $color_glob_white; background-color: $color_glob_navy; }
+                &:hover { opacity: .75;
+                    button { }
+                }
+
+                &.page { }
+                &.first { }
+                &.prev { }
+                &.next { }
+                &.last { }
+                &.active { background: transparent;
+                    button { color: $color_glob_navy; background-color: transparent;
+                        &:hover { }
+                    }
+                }
+                &.disabled { cursor: not-allowed; opacity: .75;
+                    button { cursor: not-allowed;
+                        &:hover { }
+                    }
+                }
+            }
+        }
+    }
+}

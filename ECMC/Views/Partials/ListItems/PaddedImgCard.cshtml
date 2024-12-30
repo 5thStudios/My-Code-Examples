@@ -1,0 +1,91 @@
+﻿@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ECMC_Umbraco.Models;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@model PaddedImageCard;
+
+
+@{
+    //Obtain image
+    string imgUrl = Model.Logo?.Url();
+
+    //Determine if card content panel should be displayed
+    bool showContent = false;
+    if (!string.IsNullOrEmpty(Model.Title) || (Model.Summary != null && !string.IsNullOrWhiteSpace(Model.Summary.ToString())))
+    {
+        showContent = true;
+    }
+}
+
+
+
+@{
+    <figure data-blockgrid="Components/paddedImgCardCentered" class="card text-center   img-slide-down">
+        <div data-equalizer-watch="primary">
+            @if (Model.Link == null)
+            {
+                RenderCard(imgUrl ?? "", showContent);
+            }
+            else
+            {
+                <a href="@Model.Link?.Url" target="@Model.Link?.Target">
+                    @{
+                        RenderCard(imgUrl ?? "", showContent, true);
+                    }
+                </a>
+            }
+        </div>
+    </figure>
+}
+
+
+
+@functions {
+    private void RenderCard(string _imgUrl, bool _showContent, bool _showBtn = false)
+    {
+        <div>
+            <div class="grid-x grid-padding-x grid-padding-y grid-margin-y">
+                <div class="cell">
+
+                    <img src="@_imgUrl" alt="@Model.Title">
+
+                    @if (!string.IsNullOrWhiteSpace(@Model.HoverTitle))
+                    {
+                        <figcaption>
+                            <h3>@Model.HoverTitle</h3>
+
+                            @if (Model.HoverTip != null && !string.IsNullOrWhiteSpace(Model.HoverTip.ToString()))
+                            {
+                                <div>
+                                    @Html.Raw(Model.HoverTip)
+                                </div>
+                            }
+                            @if (_showBtn)
+                            {
+
+                                <div class="read-more btn dark align-center">
+                                    @Model.Link?.Name
+                                </div>
+                            }
+                        </figcaption>
+                    }
+                </div>
+            </div>
+        </div>
+        @if (_showContent)
+        {
+            <div class="card-content text-center">
+                @if (!string.IsNullOrEmpty(Model.Title))
+                {
+                    <h3>@Model.Title</h3>
+                }
+                @if (Model.Summary != null)
+                {
+                    <div>
+                        @Html.Raw(Model.Summary)
+                    </div>
+                }
+            </div>
+        }
+    }
+}

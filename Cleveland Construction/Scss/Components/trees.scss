@@ -1,0 +1,50 @@
+/* TREES
+----------------------------------------------------------*/
+@media only screen and (min-width: 64.063em) {
+    .tree { display: flex; align-items: center; flex-direction: column;
+        &.align-left { align-items: flex-start; }
+        ul { padding: 20px 0 0 0; margin-left: 0; padding-inline-start: 0; position: relative; transition: all 0.5s; -webkit-transition: all 0.5s; -moz-transition: all 0.5s;
+            ul {
+                &::before { content: ''; position: absolute; top: 0; left: 50%; border-left: 1px solid #b4b2b2; width: 0; height: 20px; }
+            }
+        }
+        li { float: left; text-align: center; list-style-type: none; position: relative; padding: 20px 5px 0 5px; transition: all 0.5s; -webkit-transition: all 0.5s; -moz-transition: all 0.5s;
+            &::after { right: auto; left: 50%; border-left: 1px solid #b4b2b2; }
+            &:only-child { padding-top: 0; }
+            &:last-child {
+                &::before { border-right: 1px solid #b4b2b2; border-radius: 0 5px 0 0; -webkit-border-radius: 0 5px 0 0; -moz-border-radius: 0 5px 0 0; }
+            }
+            &:first-child {
+                &::after { border-radius: 5px 0 0 0; -webkit-border-radius: 5px 0 0 0; -moz-border-radius: 5px 0 0 0; }
+            }
+            span { font-family: 'UnitedSansCdBd',Arial,sans-serif; border: 1px solid #b4b2b2; padding: 10px 20px; text-decoration: none; display: inline-block; transition: all 0.5s; -webkit-transition: all 0.5s; -moz-transition: all 0.5s; }
+        }
+    }
+        .tree li::before, .tree li::after { content: ''; position: absolute; top: 0; right: 50%; border-top: 1px solid #b4b2b2; width: 50%; height: 20px; }
+        .tree li:only-child::after, .tree li:only-child::before { display: none; }
+        .tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+        .tree li span:hover, .tree li span:hover + ul li span { background: #cd0202; color: #FFFFFF; border: 1px solid #8b0000; }
+            .tree li span:hover + ul li::after, .tree li span:hover + ul li::before, .tree li span:hover + ul::before, .tree li span:hover + ul ul::before { border-color: #8b0000; }
+}
+
+
+/* TIMELINES
+----------------------------------------------------------*/
+@media only screen and (min-width: 64.063em) {
+    .timeline {
+        ul { margin: 0; padding: 0; padding-inline-start: 0; }
+        li { position: relative; float: left; width: 14.28%; min-height: 70px; margin: 0; padding: 0; list-style: none; text-align: center; border-bottom: 1px solid #b4b2b2; font-size: 15px; line-height: 17px;
+            &:after { content: ''; position: absolute; left: 0; bottom: -6px; width: 50%; height: 11px; border-right: 1px solid #b4b2b2; }
+            &:nth-child(2):after { background-color: #ffffff; }
+            &:last-child {
+                &:after { left: auto; right: 0; border-left: 1px solid #b4b2b2; border-right: none; background-color: #ffffff; }
+            }
+            &.title { padding-top: 15px; font-family: 'UnitedSansCdBd',Arial,sans-serif; color: #000000; text-align: left; border: none;
+                &:after { display: none; }
+            }
+        }
+        dl { clear: both; padding-top: 15px; }
+        dt { clear: left; display: block; float: left; width: 35.7%; margin-bottom: 5px; line-height: 30px; }
+        dd { display: block; float: left; margin-bottom: 5px; padding-right: 15px; background-color: #b4b2b2; text-align: right; line-height: 30px; color: #ffffff; }
+    }
+}

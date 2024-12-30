@@ -1,0 +1,81 @@
+/* HEADER
+----------------------------------------------------------*/
+header {
+    nav { z-index: 100;
+        ul { margin: 0; list-style: none; display: inline-flex; flex-direction: row; transition: all 0.25s ease-in-out;
+            li { transition: all 0.25s ease-in-out;
+                a { white-space: nowrap; transition: all 0.25s ease-in-out; }
+            }
+        }
+    }
+    ul.minor-nav { padding-inline-start: 0;
+        li { font-size: 13px; padding: 0 12px; line-height: 60px;
+            a { padding: 0 10px; }
+            ul { display: none; background-color: transparent; text-align: left; opacity: 0; transition: all 0.25s ease-in-out; margin-left: -12px; padding-inline-start: 0;
+                li { background-color: transparent; transition: all 0.25s ease-in-out; line-height: 40px; font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 17px;
+                    a { color: #fff; transition: all 0.25s ease-in-out; }
+                }
+            }
+            &.childLinks:hover { background-color: #222222;
+                a { color: #ffffff; width: 100%; }
+                ul { position: absolute; display: block; background-color: #222222; opacity: 1; padding-inline-start: 0;
+                    li {
+                        a { color: #ffffff; width: 100%; }
+                        &:hover { background-color: #cd0202;
+                            a { }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ul.social-icons { padding-inline-start: 0;
+        li { color: #222222; font-size: 13px; line-height: 28px; padding: 0 2px;
+            a { background-color: #b4b2b2; color: #FFFFFF; padding: 0; display: inline-block; border-radius: 50%; text-align: center; transition: all 0.25s ease-in-out; height: 30px; width: 30px; margin: 0 2px; font-size: 16px; line-height: 30px;
+                &[class^="icon-"]:before,
+                &[class*=" icon-"]:before { font-family: "fontello"; font-style: normal; font-weight: normal; speak: none; display: inline-block; text-decoration: inherit; width: 1em; text-align: center; font-variant: normal; text-transform: none; line-height: 1em }
+                &.icon-youtube:before { content: '\e800' }
+                &.icon-twitter:before { content: '\e801' }
+                &.icon-facebook:before { content: '\e802' }
+                &.icon-linkedin:before { content: '\e803' }
+                &.icon-instagram:before { content: '\e804' }
+
+                &:hover { text-decoration: none; }
+                &.facebook:hover { background-color: #3B5998; }
+                &.twitter:hover { background-color: #4099FF; }
+                &.linkedin:hover { background-color: #0e76a8; }
+                &.youtube:hover { background-color: #cd0202; }
+                &.instagram:hover { background-color: #E5C527; }
+            }
+        }
+    }
+    ul.main-nav { padding-inline-start: 0;
+        li { position: relative; transition: all 0.25s ease-in-out;
+            a { display: inline-block; color: #cd0202; font-size: 18px; padding: 8px; text-transform: uppercase; font-family: "UnitedSansCdBd", Arial, sans-serif; transition: all 0.25s ease-in-out; }
+            ul { display: none; background-color: transparent; text-align: left; opacity: 0; transition: all 0.25s ease-in-out; padding-inline-start: 0;
+                li { background-color: transparent; transition: all 0.25s ease-in-out;
+                    a { color: #fff; transition: all 0.25s ease-in-out; text-transform: capitalize; }
+                }
+            }
+            &:hover { background-color: #222222;
+                a { color: #ffffff; width: 100%; }
+                ul { position: absolute; display: block; background-color: #222222; opacity: 1; padding-inline-start: 0;
+                    li {
+                        a { }
+                        &:hover { background-color: #cd0202;
+                            a { }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .tagline { font-family: 'Open Sans', sans-serif; color: #222222; display: inline-block; font-size: 14px; }
+    .logo { max-width: 280px; width: 100%; height: auto; }
+    hr { margin: 0.5rem auto; }
+    &.listOfHomePgs {
+        @media only screen and (min-width: 40.063em) {
+            ul.minor-nav { border-width: 0 1px 0 0; border-style: solid; border-color: #676767; }
+        }
+    }
+}

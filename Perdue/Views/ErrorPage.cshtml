@@ -1,0 +1,16 @@
+﻿@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@model ComposedPageViewModel<ContentModels.ErrorPage, ErrorPageViewModel>
+@{
+    Layout = Common.Layout.TopLevelPER;
+}
+
+
+<div class="Text-Page">
+    <partial name="@Common.Partial.HeroCarousel" model="Model.Page?.HeroSlides" view-data='@new ViewDataDictionary(ViewData) { { "ipPage", Model.Page } }' />
+    @await Html.GetBlockGridHtmlAsync(Model.Page?.MainContent)
+</div>

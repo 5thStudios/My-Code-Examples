@@ -1,0 +1,148 @@
+/* PRODUCTS
+----------------------------------------------------------*/
+.Product {
+    .lSAction {
+        .lSPrev, .lSNext { width: 76px; height: 76px; background-repeat: no-repeat; background-position: center; background-color: rgb(0 0 0 / 15%); }
+        .lSPrev { background-image: url(/images/icons/controls-left.png); margin-left: -9px; }
+        .lSNext { background-image: url(/images/icons/controls-right.png); margin-right: -9px; }
+    }
+
+    h2 { text-transform: uppercase; font-weight: 700; margin-top: 9px; color: #254B66; }
+    @media only screen and (max-width: 40em) {
+        h2 { font-size: 18px; line-height: 26px; }
+    }
+    .product-code { font-size: 1em; color: #FFF; background-color: #254B66; padding: .35em; display: inline-block }
+    .product-photo-container { margin: 0 auto; text-align: center;
+        .product-photos { border: 1px solid #CCC; padding: 20px }
+        .product-photos ul { list-style: none; }
+    }
+
+    .product-search {
+        h1 { display: contents; }
+    }
+    .product-photo-print, .product-nutrition-print { display: none; }
+    .product-title { text-transform: uppercase; margin: 1.5em; font-size: 24px; line-height: 30px; margin-left: 2em; }
+    .brand-logo { float: none; max-width: 145px; width: 100%; height: auto; }
+    .product {
+        h2 { margin-top: 1em; }
+    }
+    .product-utility-divider { border-top: 2px solid #527382; width: 100%; margin: 16px 0; }
+    .product-utilities { text-align: center; text-transform: uppercase; display: flex; color: rgba(0,0,0,.5); font-size: .75em; flex-direction: row; justify-content: space-around;
+        a { color: rgba(0,0,0,.5);
+            &:hover { color: #ffbe00; }
+        }
+    }
+    .lSSlideOuter {
+        .lightSlider { /*width: 3672px; transform: translate3d(-612px, 0px, 0px); height: 645px; padding-bottom: 0%;*/ }
+        .lslide { position: relative;
+            img { border-style: none; }
+            .product-search-icon { color: #666; font-size: 18px; position: absolute; top: 18px; right: 24px; background-color: #fff; padding: 6px; border-radius: 50px; }
+        }
+        .lSgallery {
+            .lSPager { margin: 0 auto; }
+        }
+    }
+    .product-icon-group { white-space: nowrap; font-size: 18px; font-weight: 900; margin: 16px 0;
+        .fa-circle-check { color: #50aa4b; height: 19px; margin-top: -3px; filter: invert(52%) sepia(100%) saturate(278%) hue-rotate(69deg) brightness(91%) contrast(89%); }
+    }
+    .table {
+        td, th { border-top: 0; background-color: transparent; padding: .25rem; vertical-align: top; /*border-top: 1px solid #dee2e6;*/ padding-left: 18px; background-color: #fff;
+            &.prod-spectable-a { background-color: #D6D4D5; font-size: 18px; }
+            &.prod-spectable-b { background-color: #EAEAEA; font-size: 18px; }
+            &.prod-spectable-c { background-color: #FFF; font-size: 18px; }
+        }
+    }
+    .product-specs {
+        > .grid-container {
+            > .grid-x { background-color: #F1F1F1; }
+        }
+    }
+    .prod-specs-head { font-size: 20px; font-weight: 600; color: #527382; justify-content: left; text-align: left; text-transform: uppercase; margin-bottom: 0px; }
+
+    .serving-selector {
+        .fa-toggle-on { font-size: 1.75em; top: 5px; position: relative; }
+        .fa-toggle-off { font-size: 1.75em; top: 5px; position: relative; }
+    }
+
+    #nutrition-serving {
+        table {
+            &.table {
+                tbody {
+                    tr {
+                        td { font-size: 18px; line-height: 22px; }
+                        &:nth-child(1) { font-weight: 900; }
+                        &:nth-child(2) { font-weight: 900; }
+                        &:nth-child(3) { border-top: 5px solid #D6D4D5;
+                            h5 { color: #646464; font-weight: 900; text-align: left; justify-content: left; text-transform: uppercase; }
+                        }
+                        &:nth-child(15) { }
+                    }
+                }
+            }
+        }
+    }
+    .date-disclaimer { font-size: 16px; margin: 12px 0 0 0; }
+    #nutrition-100gram { display: none;
+        table {
+            &.table {
+                tbody {
+                    tr {
+                        td { font-size: 18px; line-height: 22px; }
+                        &:nth-child(1) { font-weight: 900; }
+                        &:nth-child(2) { font-weight: 900; }
+                        &:nth-child(3) { border-top: 5px solid #D6D4D5;
+                            h5 { color: #646464; font-weight: 900; text-align: left; justify-content: left; text-transform: uppercase; }
+                        }
+                        &:nth-child(15) { }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ProductsSection {
+    #products { margin: 0 auto; width: 100% !important; max-width: 1112px;
+        .item { overflow: hidden; text-overflow: ellipsis;
+            img { width: auto; height: 180px; object-fit: cover; }
+        }
+    }
+    .product-block { width: 260px; min-width: 260px; height: 360px; float: left; margin: 12px 0; padding: 12px; text-align: center; background-color: #f8f9fa;
+        img { width: 250px; height: 180px; }
+        p { padding: 0; font-size: .85em; line-height: 1.25em; text-align: center; font-size: 16px; }
+    }
+    @media only screen and (max-width: 774px) {
+        .product-block { height: unset; }
+    }
+    .mobile-filter-toggle { display: block; }
+    .pager { background: #ccc; border-radius: .8em; -moz-border-radius: .8em; -webkit-border-radius: .8em; color: #fff; display: inline-block; font-weight: 700; line-height: 1.6em; margin-right: 15px; text-align: center; width: 1.6em; margin: 3px;
+        &:hover { color: #FFF; background: #70A0B4; }
+    }
+    .pager-current { background: #70A0B4; }
+    #next-page, .next-page { font-size: 28px; position: relative; top: 1px; color: #70A0B4; filter: invert(61%) sepia(19%) saturate(613%) hue-rotate(152deg) brightness(95%) contrast(92%); margin-bottom: 8px; height: 32px; }
+    #prev-page, .prev-page { font-size: 28px; position: relative; top: 1px; color: #70A0B4; filter: invert(61%) sepia(19%) saturate(613%) hue-rotate(152deg) brightness(95%) contrast(92%); margin-bottom: 8px; height: 32px; }
+    #product-filters { display: none;
+        .checks-group { margin: 3px 0; }
+        h5 { text-align: left; font-weight: 700; text-transform: uppercase; display: block; color: #527382; }
+    }
+
+
+    .filter-item { cursor: pointer }
+    .filter-section-title { cursor: pointer;
+        img { height: 20px; filter: invert(20%) sepia(25%) saturate(4610%) hue-rotate(182deg) brightness(102%) contrast(102%); }
+    }
+    .filter-items-group { cursor: pointer;
+        label { top: -6px; display: inline; }
+        .parentContainer { margin-left: 24px; }
+    }
+    .filteritem-subtype { margin-left: 20px; }
+    .filteritem-type label { font-weight: bold; }
+
+    h1 { margin: 0 0 9px; }
+    .search-pnl {
+        input { margin: 0; border-radius: 4px; height: 48px; }
+        button { margin: 0 0 0 12px; border-radius: 4px; height: 48px; color: #fff; background-color: #6c757d; border-color: #6c757d; padding: .375rem .75rem; transition: background-color .3s, color .3s;
+            &:hover { background-color: #5a6268; border-color: #545b62; }
+        }
+    }
+}

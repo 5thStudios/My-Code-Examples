@@ -1,0 +1,8 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<RichTextStyle>>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var cmModel = Model.Content;
+    var styleClass = cmModel.RichTextStyleOption;
+}
+
+<div data-blockgrid="Components/introStyle" class="rich-text @styleClass">@cmModel.RichTextStyleContent</div>

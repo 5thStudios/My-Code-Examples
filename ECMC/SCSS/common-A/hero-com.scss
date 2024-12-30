@@ -1,0 +1,53 @@
+﻿@import'_variables-com';
+
+/* Hero - Start
+----------------------------------------------------------*/
+.hero { overflow: hidden; position: relative; margin-top: 40px; margin-bottom: 70px;
+    &.empty { margin-top: 70px; }
+    &.no-bottom-margin { margin-bottom: 0 !important; }
+    video { position: absolute; z-index: -1; }
+    .slide { }
+    .content { margin-top: 100px; }
+    h1 { margin: 0; }
+    a.link-button, a.link-button:hover { }
+    &.heroNoImage { margin-top: 140px;
+        h1 { color: $color_glob_green }
+    }
+    h2 { color: $def_font_color; font-size: 24px; line-height: 1.1em; margin: 10px 0 0 0; font-weight: $weight_Book }
+}
+
+
+@media only screen and (max-width: $bp_sm) {
+    .hero {
+        h1 { font-size: $h1_size - 5px; }
+        .content { margin-top: initial; }
+        a.link-button, a.link-button:hover { padding: 0.10em 0.5em; font-size: 15px }
+    }
+
+
+}
+
+
+@media only screen and (min-width:$bp_tablet_min) and (max-width: $bp_tablet) {
+    .hero {
+        h1 { font-size: $h1_size; }
+        .content { margin-top: initial; margin-top: 100px; }
+        a.link-button, a.link-button:hover { padding: 0.25em 1em; font-size: 15px }
+
+    }
+
+
+}
+
+@media only screen and (min-width: $bp_lap_min) and (max-width: $bp_lap) {
+
+
+}
+
+@media only screen and (min-width: $bp_large-min) and (max-width: $bp_large) {
+
+
+}
+
+/* Hero - End
+----------------------------------------------------------*/

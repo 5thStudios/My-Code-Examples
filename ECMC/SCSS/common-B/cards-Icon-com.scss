@@ -1,0 +1,100 @@
+﻿@import'_variables-com';
+
+
+/* Cards Icon
+----------------------------------------------------------*/
+
+
+
+
+figure.card.icon-card { padding: 0; border-radius: 0;
+
+ background: rgb(82,160,76); background: linear-gradient(90deg, rgba(82,160,76,1) 0%, rgba(22,139,149,1) 100%); background-position: center; color: $color_glob_white;
+
+        img { height: 50px; max-height: 50px; filter: brightness(0) invert(1); }
+        h1, h2, h3, h4, h5, h6, p, div { color: $color_glob_white; }
+        h2 { font-size: $h2_size - 5px }
+        .card-content { padding: 12px 48px; }
+        .height-minus-h2 { height: calc(100% - (74px * 2)); }
+        .iconCard-height { height: 375px; }
+  
+
+
+
+
+
+    .card-content { padding: 18px; background-color: transparent; }
+
+    a { text-decoration: none;
+        .card-content { padding: 24px; }
+        img { width: 100%; height: auto; }
+        p { color: $def_font_color; margin: 0; }
+
+    }
+
+
+
+
+
+
+
+    figure { border: none; }
+
+    figure[class*=img-] {
+        figcaption { top: 1px; }
+        &:hover figcaption { top: 0px; }
+    }
+
+    &[class*=img-] figcaption { padding: 0 13%; color: $color_glob_white; }
+
+    figcaption {
+        h1, h2, h3, h4, h5, h6, p, div { color: $color_glob_white !important; }
+        .vertical-align-middle { display: flex !important; flex-direction: column; justify-content: center; }
+    }
+}
+
+
+
+
+
+@media only screen and (min-width: $bp_lap_min) and (max-width: $bp_lap) {
+    figure.card.icon-card {
+    
+            h2 { font-size: 35px; }
+     
+    }
+}
+
+@media only screen and (min-width: $bp_tablet_min) and (max-width: $bp_tablet) {
+    figure.card.icon-card { background-repeat: no-repeat; background-size: auto;
+        .iconCard-height { height: 200px; }
+        img { height: 25px; max-height: 25px; margin: 24px 0 0 0; }
+        .card-content { padding: 12px 24px 24px 24px; }
+        h2 { font-size: 25px; }
+
+        figcaption.mbl { transform: translateY(0%); position: unset; display: flex; flex-direction: column; padding: 24px;
+            p, div, li { font-size: 14px; line-height: 20px; }
+            span.medium { font-size: 15px; line-height: 21px; }
+            span.large { font-size: 20px; line-height: 25px; }
+        }
+
+        ul { margin: 0 0 0 16px; }
+    }
+}
+
+@media only screen and (max-width: $bp_sm) {
+    figure.card.icon-card { background-repeat: no-repeat; background-size: auto;
+        .iconCard-height { height: 200px; }
+        img { height: 25px; max-height: 25px; margin: 24px 0 0 0; }
+        h2 { font-size: 30px; }
+        .card-content { padding: 12px 24px 24px 24px; }
+
+        figcaption.mbl { transform: translateY(0%); position: unset; display: flex; flex-direction: column; padding: 24px;
+            p, div, li { font-size: 14px; line-height: 20px; }
+            span.medium { font-size: 15px; line-height: 21px; }
+            span.large { font-size: 16px; line-height: 22px; }
+        }
+    }
+
+
+}

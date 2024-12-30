@@ -1,0 +1,95 @@
+﻿@using www.Models;
+@using www.ViewModels;
+@model HeroViewModel;
+
+
+
+@if (Model.IsProjectPg)
+{
+    <section id="hero" class="project-pg" style="background-image: url('@Model.BgImageUrl'); ">
+
+        @if (Model.ShowVideoBg)
+        {
+            <video autoplay="" muted="" loop="" poster="@Model.BgImageUrl">
+                <source type="video/mp4" src="@Model.BgVideoSrc">
+            </video>
+        }
+
+        <div class="bgImgOverlay" style="background-color: rgba(0, 0, 0, 0.25) !important;position: absolute;top: 0;bottom: 0;left: 0;right: 0;"></div>
+
+        <div class="grid-container">
+            <div class="grid-y align-right">
+                <div class="cell">
+                    <div class="grid-x text-left">
+                        <div class="cell">
+                            @if (!string.IsNullOrEmpty(Model.Title))
+                            {
+                                <h1>@Model.Title</h1>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Subtitle))
+                            {
+                                <h3>@Model.Subtitle</h3>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section id="hero" class="" style="background-image: url('@Model.BgImageUrl'); ">
+
+        @if (Model.ShowVideoBg)
+        {
+            <video autoplay="" muted="" loop="" poster="@Model.BgImageUrl">
+                <source type="video/mp4" src="@Model.BgVideoSrc">
+            </video>
+        }
+
+        <div class="bgImgOverlay" style="background-color: rgba(0, 0, 0, 0.25) !important;position: absolute;top: 0;bottom: 0;left: 0;right: 0;"></div>
+
+        <div class="grid-container">
+            <div class="grid-y align-center-middle">
+                <div class="cell">
+                    <div class="grid-x">
+                        <div class="cell text-center">
+                            @if (!string.IsNullOrEmpty(Model.Title))
+                            {
+                                @*  if (Model.IsHomePg)
+                        { *@
+                                <h1>@Model.Title</h1>
+                                @*   }
+                        else
+                        {
+                        <h2>@Model.Title</h2>
+                        } *@
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Subtitle))
+                            {
+                                <h3>@Model.Subtitle</h3>
+                            }
+                            @if (Model.Button != null)
+                            {
+                                <a class="button" href="@Model.Button.Url" target="@Model.Button.Target">@Model.Button.Title</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*     @if (Model.ShowBottomBanner)
+    {
+    <div class="grid-x title-pnl">
+    <div class="cell shrink">
+    <h1>@Model.PgName</h1>
+    </div>
+    <div class="cell auto">&nbsp;</div>
+    </div>
+    } *@
+
+    </section>
+}
+

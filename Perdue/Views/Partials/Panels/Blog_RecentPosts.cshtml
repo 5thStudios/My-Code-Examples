@@ -1,0 +1,88 @@
+﻿@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@model List<Link>;
+
+
+
+<ul class="sidebarList">
+    @foreach (var link in Model)
+    {
+        <li>
+            <a href="@link.Url">@link.Title</a>
+            <div class="publication-date">@link.Summary</div>
+        </li>
+    }
+
+    @* <li>
+    <a href="/resources/trends-insights/power-your-menu-with-chicken/">Power Your Menu With Chicken</a>
+    <div class="publication-date">12/18/2023</div>
+    </li>
+    <li>
+    <a href="/resources/trends-insights/meet-the-booming-demand-for-boneless-chicken/">Meet the Booming Demand for Boneless Chicken</a>
+    <div class="publication-date">11/09/2023</div>
+    </li>
+    <li>
+    <a href="/resources/trends-insights/4-ways-to-enhance-your-healthcare-operation-in-2024/">4 Ways To Enhance Your Healthcare Operation in 2024</a>
+    <div class="publication-date">10/27/2023</div>
+    </li>
+    <li>
+    <a href="/resources/trends-insights/elevate-your-breakfast-menu/">Elevate Your Breakfast Menu</a>
+    <div class="publication-date">10/20/2023</div>
+    </li>
+    <li>
+    <a href="/resources/trends-insights/the-power-of-poultry-with-a-story/">The Power of Poultry with a Story</a>
+    <div class="publication-date">10/06/2023</div>
+    </li> *@
+</ul>
+
+
+
+@* @using Dragonfly.Umbraco7Helpers
+@using Dragonfly.UmbracoModels
+@using PerdueFS.Helpers
+@using PerdueFS.Models
+@inherits UmbracoViewPage<IBaseModel> *@
+
+@*
+    Expected View Data:
+    -------------------
+    NumPosts (number)
+
+    Example Usage:
+    --------------
+    @{Html.RenderPartial("~/Themes/PerdueFoodService/Views/Partials/Blog_RecentPosts.cshtml", Model,
+                        new ViewDataDictionary{{ "NumPosts", 5 }});}
+
+*@
+
+@* @{
+    var Testing = umbraco.library.RequestQueryString("Test") == "true" ? true : false;
+    var NumPosts = Mvc.GetSafeViewDataInt(ViewData, "NumPosts", 5);
+
+    var posts = BlogHelper.GetRecentPosts(Model.Page, NumPosts).OrderByDescending(n=> n.PublishedDate).ToList();
+} *@
+
+@*
+@if (posts.Any())
+{
+    <ul class="sidebarList">
+        @foreach (var post in posts)
+        {
+            var dateFormatted = post.PublishedDate.ToString("MM/dd/yyyy");
+            var hasDate = post.PublishedDate != DateTime.MinValue;
+        <li>
+            <a href="@post.Url">@post.Name</a>
+            @if (hasDate)
+            {
+                <div class="publication-date">@dateFormatted</div>
+            }
+        </li>
+        }
+    </ul>
+}
+
+
+ *@

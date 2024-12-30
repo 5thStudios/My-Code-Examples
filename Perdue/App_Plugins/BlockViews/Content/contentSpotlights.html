@@ -1,0 +1,135 @@
+﻿<style>
+    legend { color: #ff1600; }
+    .group-title { text-align: center; font-weight: 900; text-decoration: underline; }
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Content Spotlights</legend>
+
+
+        <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+            <tbody>
+                <tr>
+                    <td width="50%">
+                        <div class="group-title">Product Spotlight</div>
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td>Bg Image</td>
+                                    <td>
+                                        {{sl_bgImg = (block.data.spotlightBgImg[0].mediaKey | mediaItemResolver); ""}}
+                                        <img ng-src="{{sl_bgImg.mediaLink}}" style="max-width: 140px; height:auto;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Banner Title</td>
+                                    <td>
+                                        <span>{{block.data.spotlightBannerTitle}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Banner Icon</td>
+                                    <td>
+                                        {{sl_bnrIcon = (block.data.spotlightBannerIcon[0].mediaKey | mediaItemResolver); ""}}
+                                        <img ng-src="{{sl_bnrIcon.mediaLink}}" style="max-width: 36px; height: auto; padding: 6px; background-color: rgb(0 0 0 / 10%);" />
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>Description Title</td>
+                                    <td>
+                                        <span>{{block.data.spotlightDescriptionTitle}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+                                    <td ng-bind-html="block.data.spotlightDescription"></td>
+                                </tr>
+
+
+
+
+                                <tr>
+                                    <td>Link To</td>
+                                    <td>
+                                        {{sl_titleName = (block.data.spotlightContent[0].name); ""}}
+                                        {{sl_titleUrl = (block.data.spotlightContent[0].url); ""}}
+                                        <span>{{sl_titleName}}</span>
+                                        <span ng-if="sl_titleUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{sl_titleUrl}}</em></span>
+                                    </td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+                    </td>
+                    <td width="50%">
+                        <div class="group-title">Featured Dish</div>
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td>Bg Image</td>
+                                    <td>
+                                        {{ft_bgImg = (block.data.featuredBgImg[0].mediaKey | mediaItemResolver); ""}}
+                                        <img ng-src="{{ft_bgImg.mediaLink}}" style="max-width: 140px; height:auto;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Banner Title</td>
+                                    <td>
+                                        <span>{{block.data.featuredBannerTitle}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Banner Icon</td>
+                                    <td>
+                                        {{ft_bnrIcon = (block.data.featuredBannerIcon[0].mediaKey | mediaItemResolver); ""}}
+                                        <img ng-src="{{ft_bnrIcon.mediaLink}}" style="max-width: 36px; height: auto; padding: 6px; background-color: rgb(0 0 0 / 10%);" />
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>Description Title</td>
+                                    <td>
+                                        <span>{{block.data.featuredDescriptionTitle}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+                                    <td ng-bind-html="block.data.featuredDescription"></td>
+                                </tr>
+
+
+
+
+                                <tr>
+                                    <td>Link To</td>
+                                    <td>
+                                        {{ft_titleName = (block.data.featuredContent[0].name); ""}}
+                                        {{ft_titleUrl = (block.data.featuredContent[0].url); ""}}
+                                        <span>{{ft_titleName}}</span>
+                                        <span ng-if="ft_titleUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{ft_titleUrl}}</em></span>
+                                    </td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <br />
+    </fieldset>
+</div>
+<br />

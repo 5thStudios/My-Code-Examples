@@ -1,0 +1,200 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Divider Teasers &nbsp;&nbsp;&nbsp;&nbsp;<strong>[E451]</strong></legend>
+
+
+        {{mediaItem = (block.data.backgroundImage[0].mediaKey | mediaItemResolver); ""}}
+        <table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 75%; vertical-align: top;">
+
+
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0" ng-if="block.data.outerMostClass || block.data.outerMostAttributes || block.data.containerClasses || block.data.containerAttributes">
+                            <tbody>
+
+                                <tr>
+                                    <td> </td>
+                                    <td colspan="4">
+                                        <div style="color: rgb(120 144 157); text-align: left; font-weight: 900; margin: 12px 0 0; "><strong>Custom Properties</strong></div>
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="block.data.outerMostClass || block.data.outerMostAttributes">
+                                    <td>Outer-Most Data </td>
+                                    <td> Class: </td>
+                                    <td style="text-align: left; color: black;">{{block.data.outerMostClass}}</td>
+                                    <td> Attributes: </td>
+                                    <td style="text-align: left; color: black;">{{block.data.outerMostAttributes}}</td>
+                                </tr>
+
+                                <tr ng-if="block.data.containerClasses || block.data.containerAttributes">
+                                    <td>Container Data </td>
+                                    <td> Class: </td>
+                                    <td style="text-align: left; color: black;">{{block.data.containerClasses}}</td>
+                                    <td> Attributes: </td>
+                                    <td style="text-align: left; color: black;">{{block.data.containerAttributes}}</td>
+                                </tr>
+
+                                <tr ng-if="block.data.customScripts">
+                                    <td>Content</td>
+                                    <td colspan="4">
+                                        <textarea rows="4" style="width: 100%;">{{block.data.customScripts}}</textarea>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td> </td>
+                                    <td colspan="3">
+                                        <div style="color: rgb(120 144 157); text-align: left; font-weight: 900; margin: 12px 0 0; "><strong>Design Properties</strong></div>
+                                    </td>
+                                </tr>
+                                <tr ng-if="mediaItem">
+                                    <td>Background Image</td>
+                                    <td colspan="3">
+                                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width: 150px; height:auto;" />
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.overlayColor">
+                                    <td>Overlay Color</td>
+                                    <td colspan="3">
+                                        <span class="colorBlock" style="background-color: {{block.data.overlayColor}};"></span> {{block.data.overlayColor}}
+                                    </td>
+                                </tr>
+                                <tr ng-if="block.data.overlayGradientColorA">
+                                    <td>Gradient Direction</td>
+                                    <td colspan="3" ng-If="block.data.gradientDirection == 0">Horizontal</td>
+                                    <td colspan="3" ng-If="block.data.gradientDirection == 1">Vertical</td>
+                                </tr>
+                                <tr ng-if="block.data.overlayGradientColorA">
+                                    <td style="width: 25%;">Overlay Gradient Color- A</td>
+                                    <td style="width: 25%;">
+                                        <div>
+                                            <span class="colorBlock" style="background-color: {{block.data.overlayGradientColorA}};"></span> {{block.data.overlayGradientColorA}}
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%;">Overlay Gradient Color- B</td>
+                                    <td style="width: 25%;">
+                                        <div>
+                                            <span class="colorBlock" style="background-color: {{block.data.overlayGradientColorB}};"></span> {{block.data.overlayGradientColorB}}
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td> </td>
+                                    <td>
+                                        <div style="color: rgb(120 144 157); text-align: left; font-weight: 900; margin: 12px 0 0; "><strong>Blocks per Row</strong></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Blocks per Row- Small</td>
+                                    <td>{{block.data.blocksPerRowSmall}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Blocks per Row- Medium</td>
+                                    <td>{{block.data.blocksPerRowMedium}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Blocks per Row- Large</td>
+                                    <td>{{block.data.blocksPerRowLarge}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                        <table ng-repeat="record in block.data.teaserBlocks.contentData" class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+
+
+                                <tr style="background-color: rgb(85 107 47 / 30%);">
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <h4 style=" margin: 12px 0 0;"><strong>Teaser Panel</strong></h4>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="2">
+                                        <div style="color: rgb(120 144 157); text-align: left; font-weight: 900; "><strong>Panel Content</strong></div>
+                                    </td>
+                                </tr>
+                                <tr ng-if="record.title">
+                                    <td>Title</td>
+                                    <td>{{record.title}}</td>
+                                </tr>
+                                <tr ng-if="record.subtitle">
+                                    <td>Subtitle</td>
+                                    <td>{{record.subtitle}}</td>
+                                </tr>
+                                <tr ng-if="record.content">
+                                    <td>Content</td>
+                                    <td>{{record.content}}</td>
+                                </tr>
+
+
+
+                                <tr ng-if="record.cellClass || record.cellAttributes">
+                                    <td colspan="2">
+                                        <div style="color: rgb(120 144 157); text-align: left; font-weight: 900;  "><strong>Cell Properties</strong></div>
+                                    </td>
+                                </tr>
+                                <tr ng-if="record.cellClass">
+                                    <td>Cell Classes</td>
+                                    <td>{{record.cellClass}}</td>
+                                </tr>
+                                <tr ng-if="record.cellAttributes">
+                                    <td>Cell Attributes</td>
+                                    <td>{{record.cellAttributes}}</td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+
+                    </td>
+                    <td style="width: 25%; vertical-align: top; text-align: center;">
+                        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        <h4>Examples from E451</h4>
+                                        <div>
+                                            <img ng-src="/images/screenshots/dividerTeaser01.jpg" style="width: 250px; max-width: 250px; height: auto;" />
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <div>
+                                            <img ng-src="/images/screenshots/dividerTeaser02.jpg" style="width: 250px; max-width: 250px; height: auto;" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </fieldset>
+</div>
+<br />

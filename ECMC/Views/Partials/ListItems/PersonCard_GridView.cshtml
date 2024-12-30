@@ -1,0 +1,127 @@
+﻿@using ECMC_Umbraco.ViewModel;
+@model ListItemViewModel;
+
+@{
+    //Determine if card needs a hover state
+    string hoverClass = "img-slide-down";
+    if (!Model.ShowHoverContent)
+    { hoverClass = string.Empty; }
+}
+
+
+
+<div class="card person cell medium-8 laptop-6" data-aos="@Model.InViewAnimation" data-areas-of-interest="@Model.jsonAreasOfInterest" data-staff="@Model.jsonStaff" data-audience="@Model.jsonAudience" data-title="@Model.Title" data-subtitle="@Model.Subtitle" data-summary="@Model.EncodedSummary">
+    @if (Model.Link == null)
+    {
+        RenderCard(hoverClass);
+    }
+    else
+    {
+        <a href="@Model.Link?.Url" target="@Model.Link?.Target">
+            @{
+                RenderCard(hoverClass, true);
+            }
+        </a>
+    }
+    @{
+        RenderCardContent();
+    }
+</div>
+
+
+
+
+
+@functions {
+    private void RenderCard(string _hoverClass, bool _showBtn = false)
+    {
+        <figure class="@_hoverClass">
+
+            <img src="@Model.PrimaryImgUrl" alt="@Model.Title">
+
+            @if (!string.IsNullOrWhiteSpace(_hoverClass))
+            {
+                <figcaption>
+
+                    <div class="grid-y">
+                        <div class="cell auto vertical-align-middle">
+                            @if (!string.IsNullOrWhiteSpace(Model.HoverTitle))
+                            {
+                                <h3>@Model.HoverTitle</h3>
+                            }
+                            @if (Model.HoverTip != null)
+                            {
+                                <div>
+                                    @Html.Raw(Model.HoverTip)
+                                </div>
+                            }
+                        </div>
+                        <div class="cell shrink">
+                            @if (_showBtn)
+                            {
+                                <div class="read-more btn">Learn More</div>
+                            }
+                        </div>
+                    </div>
+
+                </figcaption>
+            }
+
+
+        </figure>
+    }
+
+
+    private void RenderCardContent()
+    {
+        @if (Model.ShowCardContent)
+        {
+            <div class="card-content">
+
+                @if (Model.Link == null)
+                {
+                    @if (!string.IsNullOrEmpty(Model.Title))
+                    {
+                        <h4>@Model.Title</h4>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Subtitle))
+                    {
+                        <h6>@Model.Subtitle</h6>
+                    }
+                }
+                else
+                {
+
+                    @if (!string.IsNullOrEmpty(Model.Title))
+                    {
+                        <h4>
+                            <a href="@Model.Link?.Url" target="@Model.Link?.Target">
+                                @Model.Title
+                            </a>
+                        </h4>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Subtitle))
+                    {
+                        <h6>@Model.Subtitle</h6>
+                    }
+
+                }
+
+                <div class="social">
+                    @if (!string.IsNullOrEmpty(Model.LinkedInUrl))
+                    {
+                        <a target="_blank" href="@Model.LinkedInUrl">
+                            <img src="/media/3majc550/social-icon_linkedin-gray.svg" alt="Follow us on LinkedIn">
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.FacebookUrl))
+                    {
+                        <a target="_blank" href="@Model.FacebookUrl">
+                            <img src="/media/ox0hobti/social-icon_facebook-gray.svg" alt="Follow us on Facebook">
+                        </a>
+                    }
+                </div>
+            </div>
+        }
+    }
+}

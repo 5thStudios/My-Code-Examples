@@ -1,0 +1,26 @@
+﻿@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@model ComposedPageViewModel<BrandsListing, BrandsListingViewModel>
+@{
+    //Determine proper toplevel to use.
+    if (Model.ViewModel.IsPerdue)
+    {
+        Layout = Common.Layout.TopLevelPER;
+    }
+    else if (Model.ViewModel.IsCheney)
+    {
+        Layout = Common.Layout.TopLevelCHE;
+    }
+    else if (Model.ViewModel.IsColeman)
+    {
+        Layout = Common.Layout.TopLevelCOL;
+    }
+}
+
+
+<div class="BrandsListing">
+    <partial name="@Common.Partial.HeroCarousel" model="Model.Page?.HeroSlides" view-data='@new ViewDataDictionary(ViewData) { { "ipPage", Model.Page } }' />
+    @await Html.GetBlockGridHtmlAsync(Model.Page?.MainContent)
+</div>

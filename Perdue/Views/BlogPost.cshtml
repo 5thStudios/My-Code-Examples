@@ -1,0 +1,56 @@
+﻿@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+@inject IPublishedValueFallback PublishedValueFallback
+@model ComposedPageViewModel<ContentModels.BlogPost, BlogPostViewModel>
+@{
+    Layout = Common.Layout.TopLevelPER;
+}
+@section Footer {
+    <script type="text/javascript" src="/js/jquery/jssocials.js"></script>
+}
+
+
+<div class="BlogPost">
+    <div class="grid-container">
+        <div class="grid-x blog-header">
+            <div class="cell">
+                <h1>@Model.Page?.Name</h1>
+                @if (Model.Page?.PublishedDate != DateTime.MinValue)
+                {
+                    <p class="publication-date">Published on: @Model.Page?.PublishedDate.ToString("MM/dd/yyyy") in @string.Join(", ", Model.Page?.Categories)</p>
+                }
+            </div>
+        </div>
+        <div class="grid-x grid-margin-x">
+            <div class="cell laptop-16 blog-content">
+                @if (Model.Page?.PostCoverImage != null)
+                {
+                    <div class="post-image">
+                        <img class="img-fluid" src="@Model.Page?.PostCoverImage.Url()" alt="@Model.Page?.PostCoverImage.Name">
+                    </div>
+                }
+                @await Html.GetBlockGridHtmlAsync(Model.Page?.MainContent)
+            </div>
+            <div class="cell laptop-8 blog-navigation">
+                <div class="share-fields no-print text-center">
+                    <h3>Share</h3>
+                    <div id="share"></div>
+                    <br />
+                    <br />
+                </div>
+
+                <div id="postSidebar">
+                    <h3 class="text-center">Recent Posts</h3>
+                    <partial name="@Common.Partial.BlogRecentPosts" model="Model.ViewModel?.LstRecentPosts" />
+                    <br />
+                    <h3 class="text-center">Categories</h3>
+                    <partial name="@Common.Partial.BlogAllCategories" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

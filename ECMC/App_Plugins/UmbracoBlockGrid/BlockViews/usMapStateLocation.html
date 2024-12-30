@@ -1,0 +1,23 @@
+﻿<style>
+    fieldset { border: 1px solid grey; }
+    
+</style>
+
+
+<fieldset>
+    <div ng-click="block.edit()" ng-focus="block.focus">
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+
+                <tr>
+                    <td>Location:</td>
+                    <td>{{block.data.uSStateAbbr}} - {{block.data.uSStateDescription}}</td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+<br />

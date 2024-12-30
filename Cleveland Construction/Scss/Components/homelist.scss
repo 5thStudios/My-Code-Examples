@@ -1,0 +1,46 @@
+/* Styles for List of Home Pages
+----------------------------------------------------------*/
+.listofhomepgs {
+    .banner_btn { background: #fff; padding: 150px 30px; cursor: pointer;
+        h3 { font-size: 36px; color: #e72623; line-height: 40px; margin: 0; }
+
+        &.active { background: #e72623;
+            h3 { color: #fff; }
+        }
+    }
+    .banner { height: 100%; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; background-position: center; background-repeat: no-repeat; background-size: cover; }
+
+    .btnExplore { background: #e72623; color: #fff; font-family: "UnitedSansCdBd",Arial,sans-serif; font-size: 24px; padding: 18px 45px 13px; line-height: 36px; border-radius: 8px; letter-spacing: 2px; display: inline; position: relative;
+        &:after { content: ""; background: url(/Images/btn_icon.png); width: 53px; height: 40px; position: absolute; right: -20px; top: 8px; }
+    }
+
+    h1 { margin: 0; font-size: 70px; line-height: 76px; }
+
+
+
+    header { background-color: #161616;
+        a { color: #b4b2b2; }
+        .sub-header {
+            background-image: url(/Images/header_bg1.jpg);
+            .ptext { font-family: 'UnitedSansCdBd', Arial, sans-serif; font-size: 29px; color: #151714; line-height: 36px;
+                .red-text { color: #e72623; }
+            }
+            @media only screen and (max-width: 40em) {
+                .ptext { position: relative; font-size: 24px; line-height: 30px;
+                    &::before { content: ""; width: 100px; background: #b4b2b2; height: 4px; position: absolute; top: 0; }
+                }
+            }
+        }
+        .left-border { border-left: 4px solid #b4b2b2; }
+    }
+
+    @media only screen and (max-width: 40em) {
+        .banner_btn { padding: 24px 12px; text-align: center;
+            h3 { font-size: 36px; line-height: 40px; margin: 0; }
+        }
+        .btnExplore { font-size: 20px; padding: 18px 45px 13px; line-height: 36px;
+            &:after { width: 53px; height: 40px; right: -20px; top: 5px; }
+        }
+        h1 { margin: 12px; font-size: 40px; line-height: 40px; }
+    }
+}

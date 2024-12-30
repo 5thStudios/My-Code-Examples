@@ -1,0 +1,124 @@
+﻿@using Umbraco.Cms.Core.WebAssets;
+@using Umbraco.Cms.Core.Web;
+@using Smidge;
+@using Microsoft.Extensions.Options
+@using Umbraco.Cms.Core.Configuration.Models
+@using www.Models;
+@inject IUmbracoContextAccessor context;
+@inject IOptions<HostingSettings> hostingSettings
+@{
+    Layout = null;
+
+
+    //create body class
+    IPublishedContent ipModel = context.GetRequiredUmbracoContext().PublishedRequest!.PublishedContent!;
+    string doctype = ipModel.ContentType.Alias.ToLower();
+
+    //
+    if (ipModel.HasProperty(Common.Property.PageCssClass) && ipModel.HasValue(Common.Property.PageCssClass))
+    {
+        doctype = doctype + " " + ipModel.Value<string>(Common.Property.PageCssClass);
+    }
+
+    //Bundle JS files
+    SmidgeHelper.CreateJsBundle("inline-js-bundle-che").RequiresJs(
+                    "~/js/jquery/jquery-3.7.1.js",
+                    "~/js/slick/slick.js",
+                    "~/js/paginathing/paginathing.min.js",
+                    "~/js/zurb/what-input.js",
+                    "~/js/zurb/foundation.js",
+                    "~/js/vendor/zoom.js",
+                    "~/js/custom/accordion.js",
+                    "~/js/light/lightslider.min.js",
+                    "~/js/perdue-library/jquery.perduelibrary.js",
+                    "~/js/vendor/imageCoverIE.js",
+                    "~/js/jquery/jquery.cookies.2.2.0.min.js",
+                    "~/js/custom/cookie-msgs.js",
+                    "~/js/custom/sign-up-here.js");
+
+
+
+    //Bundle CSS files
+    SmidgeHelper.CreateCssBundle("inline-css-bundle-che").RequiresCss(
+        "~/css/vendor/hubspot.css",
+        "~/css/vendor/lightslider.css",
+        "~/css/vendor/perduelibrary.css",
+        "~/css/zurb/foundation.css");
+
+
+
+    //Determine if site is running in debug mode
+    bool debugMode = hostingSettings.Value.Debug;
+}
+
+
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script type="text/javascript">
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5H9ZNH2');
+    </script> 
+    <!--End Google Tag Manager -->
+
+
+    @await Component.InvokeAsync(www.Models.Common.ViewComponent.Meta, new { ipModel = ipModel })
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6160113741.js" crossorigin="anonymous"></script>
+
+
+    @await SmidgeHelper.JsHereAsync("inline-js-bundle-che", @debugMode)
+    <script type="text/javascript" src="/js/app.js?v=02"></script>
+    @await SmidgeHelper.CssHereAsync("inline-css-bundle-che", @debugMode)
+    <link rel="stylesheet" href="/css/site-che.css?v=06" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
+
+    @RenderSection("Header", false)
+
+
+    @if (ipModel.HasProperty(Common.Property.CustomStyles) && ipModel.HasValue(Common.Property.CustomStyles))
+    {
+        <style>@Html.Raw(ipModel.Value<string>(Common.Property.CustomStyles))</style>
+    }
+</head>
+<body class="@doctype @Common.Site.Cheney" data-site="@Common.Site.Cheney">
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5H9ZNH2" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+
+    <div class="off-canvas-content" data-off-canvas-content>
+        @await Component.InvokeAsync(www.Models.Common.ViewComponent.MainNav, new { ipModel = ipModel, isMobile = true })
+        @await Component.InvokeAsync(www.Models.Common.ViewComponent.Header, new { ipModel = ipModel, site = Common.Site.Cheney })
+        <main>
+            @RenderBody()
+        </main>
+        @await Component.InvokeAsync(www.Models.Common.ViewComponent.Footer, new { ipModel = ipModel, site = Common.Site.Cheney })
+
+        @RenderSection("Footer", false)
+    </div>
+    
+    @if (ipModel.HasProperty(Common.Property.CustomScripts) && ipModel.HasValue(Common.Property.CustomScripts))
+    {
+        <script type="text/javascript">@Html.Raw(ipModel.Value<string>(Common.Property.CustomScripts))</script>
+    }
+</body>
+</html>

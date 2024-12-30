@@ -1,0 +1,67 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@using ECMC_Umbraco.ViewModel;
+@using Newtonsoft.Json;
+@using System.Linq;
+@model ComposedPageViewModel<ContentModels.NewsCardEif, NewsCardViewModel>
+@{
+    Layout = "MasterEIF.cshtml";
+}
+
+
+
+<div class="grid-container news-and-events-landing-pg">
+
+    <div class="grid-x" style="margin-top: 210px;">
+        <div class="cell small-20 small-offset-2 ">
+            @if (!string.IsNullOrWhiteSpace(Model.Page?.Title))
+            {
+                <h1>@Model.ViewModel?.PrefixTitle@Model.Page?.Title</h1>
+            }
+            else
+            {
+                <h1>@Model.ViewModel?.PrefixTitle@Model.Page?.Name</h1>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(Model.Page?.Subtitle))
+            {
+                <h2>@Model.Page?.Subtitle</h2>
+            }
+
+
+            <p>@Model.Page?.PostDate.ToString("MMM d, yyyy")</p>
+
+        </div>
+    </div>
+</div>
+
+@await Html.GetBlockGridHtmlAsync(Model.Page?.ContentBlockGrid)
+
+<div class="grid-container news-and-events-landing-pg">
+    <div class="grid-x def-margin-b">
+        <div class="cell small-20 small-offset-2 border-top">
+
+
+            @if (!string.IsNullOrWhiteSpace(Model.ViewModel?.LearnMoreTitle))
+            {
+                <h2>@Model.ViewModel?.LearnMoreTitle</h2>
+            }
+
+            <div class="list-type grid-view">
+                <div class="grid-x   grid-margin-x   grid-margin-y">
+                    @if (Model.ViewModel?.LstListItems != null && Model.ViewModel.LstListItems.Any())
+                    {
+                        foreach (ListItemViewModel item in Model.ViewModel.LstListItems)
+                        {
+                            @await Html.PartialAsync(Common.Partial.NewsAndEventCard_GridView, item)
+                        }
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+

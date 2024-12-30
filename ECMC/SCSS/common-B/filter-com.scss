@@ -1,0 +1,34 @@
+﻿@import'_variables-com';
+
+/* Filters
+----------------------------------------------------------*/
+.filter-pnl { background-color: $color_glob_gray_200; margin-bottom: 20px;
+    input[type=radio] { position: absolute; z-index: -1000; left: -1000px; overflow: hidden; clip: rect(0 0 0 0); height: 1px; width: 1px; margin: -1px; padding: 0; border: 0;
+        + label { font-size: 13px; line-height: 22px; font-weight: 500; color: $color_glob_gray_500; margin-bottom: 0px;
+            span { background-image: url(/images/icons/ListGridViews.png); background-repeat: no-repeat; width: 41px; height: 41px; display: inline-block; vertical-align: middle; }
+        }
+        + label.rbListView {
+            span { background-position: -40px 0; }
+        }
+        + label.rbGridView {
+            span { background-position: 0 0; }
+        }
+        &:checked {
+            + label.rbListView { color: $color_glob_green; /*span { background-position: -40px -41px; }*/ }
+            + label.rbGridView { color: $color_glob_green; /*span { background-position: 0 -41px; }*/ }
+        }
+    }
+}
+
+
+.grants {
+    .filter-pnl {
+        select { height: 40px; }
+        button { height: 40px; }
+        input { height: 40px;
+            &[type=text] { }
+            &[type=submit] { margin-top: -3px; }
+        }
+        a { height: 40px; margin-top: -3px; }
+    }
+}

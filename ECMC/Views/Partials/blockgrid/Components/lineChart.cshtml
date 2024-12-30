@@ -1,0 +1,35 @@
+@using Umbraco.Extensions;
+@using System.Text.Json;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<LineChart>> 
+@{
+    //
+    string? title = Model.Content.Title;
+
+
+
+    //Create random string to attach to canvas name.  [allows multiple canvases on single page.]
+    string chartName = "chartPnl-";
+    Random rand = new Random();
+    int stringlen = rand.Next(6, 10);
+    for (int i = 0; i < stringlen; i++)
+    {
+        // Generating random character by converting a random number into character and append the letter to string.
+        chartName = chartName + Convert.ToChar(rand.Next(0, 26) + 65);
+    }
+}
+
+
+
+<script type="text/javascript">
+    //Initialize Chart.js Utilities
+    var Utils = ChartUtils.init();
+</script>
+
+
+@{
+    <div data-blockgrid="Components/bar-chart">
+        @await Component.InvokeAsync(Common.Action.LineChart, Model)
+    </div>
+}

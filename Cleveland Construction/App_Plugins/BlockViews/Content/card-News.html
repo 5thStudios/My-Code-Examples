@@ -1,0 +1,31 @@
+﻿<link href="/css/Umbraco RTE.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus" ng-controller="newsCardController as vm">
+    <fieldset class="blockContent">
+        <legend>News Card</legend>
+
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr ng-if="vm.ImgUrl">
+                    <td>Image</td>
+                    <td><img ng-src="{{vm.ImgUrl}}" style="max-width: 100px; height:auto;" /></td>
+                </tr>
+                <tr>
+                    <td>Date Posted</td>
+                    <td>{{vm.DatePosted}}</td>
+                </tr>
+                <tr>
+                    <td>Title</td>
+                    <td>{{vm.Title}}</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>{{vm.Description}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br />

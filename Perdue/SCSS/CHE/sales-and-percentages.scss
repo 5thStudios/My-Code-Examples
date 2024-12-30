@@ -1,0 +1,16 @@
+/*===================================================================================*/
+/*  Sales & Percentages Panel   */
+/*===================================================================================*/
+.sales-and-percentages {
+    h5 { font-family: 'Open Sans', sans-serif; font-size: 22px !important; font-weight: 400; line-height: 30px !important; color: #6D757D !important; display: block; text-align: initial; }
+    img { max-width: 215px; height: auto; }
+
+    @media screen and (max-width: 39.9375em) {
+        h5 { font-size: 22px !important; font-weight: 400; line-height: 30px !important; color: #6D757D !important; display: block; text-align: initial; }
+        img { margin-top: 48px; }
+    }
+
+    @media screen and (min-width: 40em) and (max-width: 63.9375em) {
+        img { margin-top: 48px; }
+    }
+}

@@ -1,0 +1,15 @@
+@using Umbraco.Extensions;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ContentModels.AccordionItemB>>
+
+
+<div data-section="title" >
+    <h3>@Model.Content.AccordionTitle</h3>
+    <div>@Model.Content.LeadInText</div> 
+</div>
+
+
+<div data-section="content">
+    @await Html.GetBlockGridHtmlAsync(Model.Content.ContentGrid)
+</div>
+

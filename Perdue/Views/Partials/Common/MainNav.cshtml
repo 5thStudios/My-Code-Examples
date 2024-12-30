@@ -1,0 +1,69 @@
+﻿@using www.Models;
+@model MainNavigation;
+
+
+<nav id="mainNav" class="cell laptop-offset-2 laptop-22">
+    <ul class="menu" data-dropdown-menu>
+
+        @foreach (var NavGroup in Model.LstNavGroups)
+        {
+            <li class="mega-menu">
+                @if (!NavGroup.LstColumns.Any())
+                {
+                    <a href="@NavGroup.Link?.Url" target="@NavGroup.Link?.Target">@Html.Raw(NavGroup.Link?.Title)</a>
+                }
+                else
+                {
+                    <a data-toggle="@NavGroup.Link?.Summary" href="#">@Html.Raw(NavGroup.Link?.Title)</a>
+
+                    <div class="dropdown-pane bottom" id="@NavGroup.Link?.Summary" data-dropdown data-options="closeOnClick:true; hover: true; hoverPane: true; vOffset:0">
+                        <div class="grid-x grid-padding-x">
+                            @foreach (var GroupColumn in NavGroup.LstColumns)
+                            {
+                                <div class="cell shrink">
+                                    <ul class="menu vertical">
+                                        @foreach (var NavElement in GroupColumn.LstElements)
+                                        {
+                                            if (NavElement.IsHeader)
+                                            {
+                                                if (string.IsNullOrEmpty(NavElement.Link?.Title))
+                                                {
+                                                    <li>&nbsp;</li>
+                                                }
+                                                else
+                                                {
+                                                    <li>
+                                                        @Html.Raw(NavElement.Link?.Title)
+                                                        <img src="/images/icons/caret-down-solid.svg" class="svg-btn" />
+                                                    </li>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a href="@NavElement.Link?.Url" target="@NavElement.Link?.Target">@Html.Raw(NavElement.Link?.Title)</a>
+                                                </li>
+
+                                                @if (NavElement.LstChildLinks.Any())
+                                                {
+                                                    foreach (var childLink in NavElement.LstChildLinks)
+                                                    {
+                                                        <li class="child-link">
+                                                            <a href="@childLink.Url" target="@childLink.Target">@Html.Raw(childLink.Title)</a>
+                                                        </li>
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </li>
+        }
+
+    </ul>
+</nav>

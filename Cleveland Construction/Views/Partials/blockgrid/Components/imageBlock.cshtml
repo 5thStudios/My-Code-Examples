@@ -1,0 +1,5 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ImageBlock>>
+@using www.Models.PublishedModels;
+
+
+<img alt="@Model.Content.Image?.Name" src="@Model.Content.Image?.Url()" style="width:100%;height:auto;" />

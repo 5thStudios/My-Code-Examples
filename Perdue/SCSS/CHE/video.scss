@@ -1,0 +1,28 @@
+/*  Video Section   */
+/*----------------------------------------------------------*/
+.video-section {
+    p { font-size: 26px !important; line-height: 34px !important; /*padding: 24px 14px 12px 24px;*/ color: #ffffff; padding: 32px 0 12px 18px; }
+    @media screen and (min-width: 768px) and (max-width: 1524px) {
+        p { font-size: 1.5vw !important; line-height: 2.5vw !important; padding: 12px; }
+        .video-pnl { margin-top: 0px; }
+    }
+}
+
+
+
+
+
+
+/*  Video Panel   */
+/*----------------------------------------------------------*/
+.video-pnl {
+    position: relative;
+    background-position: center;
+    .bgImg { min-height: 400px; }
+    .full-size { padding: 0; margin: 0; position: absolute; top: 0; bottom: 0; left: 0; right: 0;
+        a { position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: center; }
+    }
+    @media only screen and (max-width: 40em) {
+        .full-size { display: none; }
+    }
+}

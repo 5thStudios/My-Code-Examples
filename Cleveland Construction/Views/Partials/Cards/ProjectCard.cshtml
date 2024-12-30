@@ -1,0 +1,27 @@
+﻿@model IPublishedContent;
+@inject IPublishedValueFallback PublishedValueFallback
+@using www.Models.PublishedModels;
+@using www.Models;
+@{
+    ProjectPage cmProject = new ProjectPage(Model, PublishedValueFallback);
+    string imgUrl = cmProject.HeroBackgroundImage?.GetCropUrl(Common.Crop.Card_1100x600) ?? "";
+}
+
+
+<a href="@cmProject.Url()">
+    <div class="card project" data-equalizer-watch="card">
+        <div class="card-image">
+            <img src="@imgUrl">
+        </div>
+        <div class="card-header">
+            <span>View Project</span>
+        </div>
+        <div class="card-section">
+            <div class="title">@cmProject.Name?.Trim()</div>
+            @if (!string.IsNullOrWhiteSpace(cmProject.Location))
+            {
+                <div class="content">@cmProject.Location?.Trim()</div>
+            }
+        </div>
+    </div>
+</a>

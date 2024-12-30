@@ -1,0 +1,175 @@
+/* Small screens | max-width 640px, mobile-only styles */
+@media only screen and (max-width: 40em) {
+}
+
+/* Medium screens | min-width 641px */
+@media only screen and (min-width: 40.063em) {
+}
+
+/* Medium screens | min-width 641px and max-width 1024px  */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+}
+
+/* Laptop screens | min-width 1025px*/
+@media only screen and (min-width: 64.063em) {
+}
+
+/* Laptop screens | min-width 1025px and max-width 1440px  */
+@media only screen and (min-width: 64.063em) and (max-width: 90em) {
+}
+
+/* Large screens | min-width 1441px */
+@media only screen and (min-width: 90.063em) {
+}
+
+/* Large screens | min-width 1441px and max-width 1920px */
+@media only screen and (min-width: 90.063em) and (max-width: 120em) {
+}
+
+/* XLarge screens | min-width 1921px */
+@media only screen and (min-width: 120.063em) {
+}
+
+
+
+
+/*  Color Palette
+----------------------------------------------------------*/
+COLORS { color: #527382; color: #70A0B4; color: #1a5937; color: #00843d; color: #e92c2c; color: #a4560a; color: #ffbe00; color: #646464; color: #7f7f7f; color: #D6D4D5; color: #F1F1F1; }
+
+
+
+
+
+/*  Font Families
+----------------------------------------------------------*/
+FONTS { font-family: 'Montserrat', sans-serif; font-family: 'Open Sans'; }
+
+
+
+
+/* GENERAL
+----------------------------------------------------------*/
+html, body { height: 100%; margin: 0; font-size: 20px; line-height: 30px; font-weight: 400; font-family: 'Open Sans'; color: #212529; background-color: #fff; background-image: url(/images/col/specs-bg.jpg); background-repeat: repeat; }
+body { overflow-x: hidden; }
+abbr, address, article, aside, audio, b, blockquote, canvas, caption, cite, code, dd, del, details, dfn, div, dl, dt, em, fieldset, figcaption, figure, footer, form,
+h1, h2, h3, h4, h5, h6, header, hgroup, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, p, pre, q, samp, section, small, span, strong, sub, summary, sup,
+table, tbody, td, tfoot, th, thead, time, tr, ul, var, video { /*margin: 0;*/ padding: 0; border: 0; outline: 0; /*vertical-align: baseline;*/ background: transparent }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block }
+
+p, div, li { font-size: 20px; line-height: 26px; font-weight: 400; color: #231f20; /*font-size: 20px; line-height: 30px;*/ }
+p { margin-bottom: 24px; }
+    p.small { font-size: 14px; line-height: 17px; }
+    p.smaller { font-size: 12px; line-height: 16px; }
+    p.smallest { font-size: 10px; line-height: 15px; }
+
+h1, h2, h3, .h1, .h2, .h3 { font-family: 'Montserrat', sans-serif; }
+h4, h5, h6, .h4, .h5, .h6 { font-family: 'Open Sans'; }
+
+h1, .h1 { font-size: 3.35vw; line-height: 3.3vw; font-weight: 700; color: #fff; text-transform: uppercase; }
+h2, .h2 { font-size: 39px; line-height: 48px; font-weight: 500; color: #231f20; margin-bottom: 8px; }
+h3, .h3 { font-size: 34px; line-height: 40px; font-weight: 500; color: #231f20; margin-bottom: 24px; }
+h4, .h4 { font-size: 16px; line-height: 21px; font-weight: 600; color: #231f20; }
+h5, .h5 { font-size: 16px; line-height: 21px; font-weight: 500; color: #231f20; }
+h6, .h6 { font-size: 11px; line-height: 13px; font-weight: 400; color: #231f20; }
+
+@media only screen and (max-width: 40em) {
+    h1, .h1 { font-size: 7vw; line-height: 7vw; }
+    h2, .h2 { font-size: 32px; line-height: 38px; }
+}
+
+label { color: #527382; }
+a { transition: .3s ease all; color: #004b7e; }
+    a:hover { color: #cb7e12; text-decoration: none; }
+
+ul, ol { margin-left: 24px; }
+li { }
+    li li { }
+select { }
+strong { font-weight: 700; }
+sup { top: -10px !important; }
+
+::placeholder { color: #cacaca; opacity: 1; /* Firefox */ }
+::-ms-input-placeholder { color: #cacaca; /* Edge 12 -18 */ }
+/*input {
+    &::placeholder { color: #788087; }
+}*/
+
+
+
+
+/*===================================================================================*/
+/*  General Color Overrides   */
+/*===================================================================================*/
+.text-white {
+    h1, h2, h3, h4, h5, h6, p, div, li { color: #fff; }
+}
+
+
+/*===================================================================================*/
+/*  Buttons   */
+/*===================================================================================*/
+.btn, a.btn { display: inline-flex; font-size: 16px; line-height: 24px; font-weight: 600; font-family: "Open Sans"; padding: 10px 20px; color: #FFF; background-color: #70A0B4; border-radius: 4px; cursor: pointer; border: 1px solid #70A0B4; text-transform: uppercase;
+    &:hover { }
+}
+.button { color: #FFF; background-color: #70A0B4; border: 1px solid #70A0B4; border-radius: 4px; font-size: 21px; line-height: 24px; font-weight: 500; font-family: "Open Sans"; padding: 10px 20px; cursor: pointer; text-transform: uppercase; margin: 0;
+    &:hover { background-color: #FFF; color: #70A0B4; }
+    &.secondary { color: #FFF; background-color: #00843d; border-color: #00843d;
+        &:hover { background-color: #FFF; color: #00843d; }
+    }
+    &.tertiary { color: #FFF; background-color: #a4560a; border-color: #a4560a;
+        &:hover { background-color: #FFF; color: #a4560a; }
+    }
+    &.quaternary { color: #FFF; background-color: #ffbe00; border-color: #ffbe00;
+        &:hover { background-color: #FFF; color: #ffbe00; }
+    }
+    &.quinary { color: #FFF; background-color: #000; border-color: #000;
+        &:hover { background-color: #FFF; color: #000; }
+    }
+}
+
+
+
+
+/* SECTION PADDING AND MARGINS
+----------------------------------------------------------*/
+section { padding-top: 0; padding-bottom: 0;
+    &.padding-top-only { padding-top: 32px; padding-bottom: 0; }
+    &.padding-bottom-only { padding-top: 0; padding-bottom: 32px; }
+    &.padding-both { padding-top: 32px; padding-bottom: 32px; }
+    &.padding-none { padding-top: 0; padding-bottom: 0; }
+    /* &.layout:not(.negate-layout) {
+        > .grid-container {
+            > .grid-x { padding-left: 130px; padding-right: 130px; }
+        }
+    }*/ }
+
+
+section { margin-top: 0; margin-bottom: 0;
+    &.margin-top-only { margin-top: 32px; margin-bottom: 0; }
+    &.margin-bottom-only { margin-top: 0; margin-bottom: 32px; }
+    &.margin-both { margin-top: 32px; margin-bottom: 32px; }
+    &.margin-none { margin-top: 0; margin-bottom: 0; }
+}
+
+
+
+.ResourcesSection {
+    a.button { background-color: unset; }
+}
+
+
+
+.offersCTA {
+    span { display: block }
+    h4 { margin: 3% 9%; color: #004b7e; }
+    h2 { color: #004b7e; font-size: 48px; line-height: 48px; }
+}
+
+
+
+
+
+/* CONTACT US
+----------------------------------------------------------*/
+.hs-submit { margin-top: 32px; }

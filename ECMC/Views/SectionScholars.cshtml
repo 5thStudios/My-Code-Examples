@@ -1,0 +1,104 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.ViewModel;
+@using ECMC_Umbraco.Models;
+@using Newtonsoft.Json;
+@using System.Linq;
+@using Umbraco.Cms.Core.Web;
+@inject IUmbracoContextAccessor context;
+@model ComposedPageViewModel<ContentModels.SectionScholars, SectionScholarsViewModel>
+@{
+    Layout = "MasterScholars.cshtml";
+}
+
+
+<div class="section">
+    @await Html.GetBlockGridHtmlAsync(Model.Page?.HeroBlockGrid)
+
+    <section>
+        <div class="grid-container">
+            <div class="grid-x grid-padding-y">
+                <div class="cell small-offset-2 small-20  ">
+                    <div class="breadcrumb-container">
+                        <ul>
+                            @{
+                                var lst = GetBreadcrumbList(Model.Page);
+                                for (int i = lst.Count(); i > 0; i--)
+                                {
+                                    <li><a href="@lst[i - 1].Url">@lst[i - 1].Title</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-x grid-padding-y">
+                <div class="cell small-offset-2 small-20  ">
+                    @await Html.GetBlockGridHtmlAsync(Model.Page?.ContentBlockGrid)
+
+                    <div class="grid-x grid-margin-x">
+                        <div class="cell laptop-17">
+                            <div class="article-container">
+                                <div class="grid-x grid-margin-x grid-margin-y grid-padding-y">
+
+                                    @foreach (var _link in Model.ViewModel?.LstContent!)
+                                    {
+                                        <div class="cell medium-12">
+                                            <div class="headline-panel">
+                                                <h2>@_link.Title</h2>
+                                                <p>@_link.Summary</p>
+                                                <a class="link-text" target="" href="@_link.Url">Learn More</a>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+
+                            @await Html.GetBlockGridHtmlAsync(Model.Page?.ContentBottomBlockGrid)
+
+
+                        </div>
+                        <div class="cell laptop-7">
+
+                            <div class="sidebar">
+                                @await Html.GetBlockListHtmlAsync(Model.Page?.SidebarList)
+                            </div>
+                            <br />
+                            <br />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+
+                        
+@functions {
+    private List<UmbracoProject.Models.Link> GetBreadcrumbList(IPublishedContent ip)
+    {
+        //Instanatiate variable
+        List<UmbracoProject.Models.Link> lst = new List<UmbracoProject.Models.Link>();
+
+        //Add page to list of links
+        lst.Add(new UmbracoProject.Models.Link()
+            {
+                Url = ip.Url(),
+                Title = (ip == ip.Root()) ? "Home" : ip.Name
+            });
+
+        //If not root, add parent page to list.
+        if (ip != ip.Root())
+        {
+            lst.AddRange(GetBreadcrumbList(ip.Parent!));
+        }
+
+        return lst;
+    }
+}

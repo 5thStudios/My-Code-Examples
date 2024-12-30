@@ -1,0 +1,25 @@
+﻿<style>
+    legend { color: #ff1600; }
+</style>
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset>
+        <legend>Signup Panel</legend>
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Title</td>
+                    <td>{{block.data.title}}</td>
+                </tr>
+                <tr>
+                    <td>Content</td>
+                    <td>{{block.data.content}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+    </fieldset>
+</div>
+<br />

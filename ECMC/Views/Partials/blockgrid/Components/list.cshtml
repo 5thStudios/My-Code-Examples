@@ -1,0 +1,20 @@
+@using Umbraco.Extensions;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<List>>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var title = Model.Content.Title;
+    var itemData = (ContentModels.List)Model.Content;
+}
+
+
+<ul data-blockgrid="Components/list">
+    @{
+
+        @foreach (var data in itemData.ListItem)
+        {
+            var ChartItem = (ContentModels.ListItem)data.Content;
+
+            <li>@ChartItem.Question @ChartItem.Intro @ChartItem.Answer</li>
+        }
+    }
+</ul>

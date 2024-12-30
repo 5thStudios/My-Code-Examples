@@ -1,0 +1,9 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using www.Models.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<FeaturedProducts>
+@{
+	Layout = null;
+
+    //Redirect to child pg.
+    Context.Response.Redirect(Model.Children().FirstOrDefault()?.Url() ?? "/");
+}

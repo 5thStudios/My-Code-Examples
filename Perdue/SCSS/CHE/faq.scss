@@ -1,0 +1,106 @@
+/* FAQs
+----------------------------------------------------------*/
+.faqs {
+    #intro { text-align: center;
+        h1 { text-transform: none; }
+        .copy { max-width: 410px; margin: 0 auto; padding: 15px 0 30px; }
+    }
+    .border { text-align: center; }
+    .info { border-top: 1px solid #333; padding: 40px 0 20px; margin: 20px; }
+    @media only screen and (max-width: 40em) {
+        .info { margin-left: 0; margin-right: 0; }
+    }
+    .faq-question { font-family: 'Univers Bold Condensed',sans-serif; font-size: 28px; line-height: 35px; text-align: center; text-transform: uppercase; margin-bottom: 15px; cursor: pointer; }
+    .faq-answer { text-align: center; display: none;
+        p { padding-bottom: 20px; }
+    }
+    .expand { cursor: pointer; border-radius: 50%; width: 30px; height: 30px; color: #fff; padding: 0px 6px 0 7px; font-family: 'Univers Bold Condensed',sans-serif; font-size: 27px; line-height: 30px; margin: 0 auto; }
+    #tabs-1 { color: #00843d;
+        .expand { background-color: #00843d; }
+    }
+    #tabs-2 { color: #ffbe00;
+        .expand { background-color: #ffbe00; }
+    }
+    #tabs-3 { color: #e92c2c;
+        .expand { background-color: #e92c2c; }
+    }
+    #organic {
+        a { color: #00843d;
+            &:hover { color: #00843d; }
+        }
+        &.ui-tabs-active { background-color: #1a5937;
+            .arrow-up { border-top: 20px solid #1a5937; }
+            a { color: #fff;
+                &:hover { color: #fff; }
+            }
+        }
+    }
+    #farmRaised {
+        a { color: #ffbe00;
+            &:hover { color: #ffbe00; }
+        }
+        &.ui-tabs-active { background-color: #ffbe00;
+            .arrow-up { border-top: 20px solid #ffbe00; }
+            a { color: #fff;
+                &:hover { color: #fff; }
+            }
+        }
+    }
+    #products {
+        a { color: #e92c2c;
+            &:hover { color: #e92c2c; }
+        }
+        &.ui-tabs-active { background-color: #e92c2c;
+            .arrow-up { border-top: 20px solid #e92c2c; }
+            a { color: #fff;
+                &:hover { color: #fff; }
+            }
+        }
+    }
+    .arrow-up { width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 20px solid #fff; position: relative; top: 50px; left: 50%; margin-left: -20px; }
+
+
+
+
+
+    .ui-tabs {
+        position: relative;
+        padding: .2em;
+
+        .ui-tabs-nav {
+            margin: 0 auto;
+            padding: 0 0 35px 0;
+            max-width: 1020px;
+            li { list-style: none; float: left; position: relative; top: 0; margin: 0; border-bottom-width: 0; padding: 0; white-space: nowrap; padding-top: 7px; width: 33.3%; font-family: 'Univers Bold Condensed'; text-transform: uppercase; font-size: 36px; line-height: 42px;
+                &.ui-tabs-active {
+                    a { color: #FFF; }
+                }
+            }
+            @media only screen and (max-width: 40em) {
+                li { font-size: 15px; }
+            }
+            @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+                li { font-size: 26px; }
+            }
+            .ui-tabs-anchor { float: left; padding: 5px; text-decoration: none; text-align: center; margin: 0 auto; width: 100%; }
+        }
+
+        .ui-tabs-panel { display: block; border-width: 0; padding: 1em 1em; background: none; }
+        @media only screen and (max-width: 40em) {
+            .ui-tabs-panel { padding-left: 0; padding-right: 0; }
+        }
+    }
+
+        .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
+        .ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
+        .ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor { cursor: text; }
+    .ui-tabs-collapsible {
+        .ui-tabs-nav {
+            li {
+                &.ui-tabs-active {
+                    .ui-tabs-anchor { cursor: pointer; }
+                }
+            }
+        }
+    }
+}

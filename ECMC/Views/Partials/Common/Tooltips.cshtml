@@ -1,0 +1,19 @@
+﻿@using ECMC_Umbraco.Models;
+@using Umbraco.Cms.Core.Models;
+@model List<TooltipsViewModel>;
+
+
+@{string json = Newtonsoft.Json.JsonConvert.SerializeObject(Model); }
+
+<input type="hidden" id="hfldTooltip" value="@json" />
+
+
+
+
+
+
+<script type="text/javascript">
+    //var tooltips = json;
+
+    // var jsonModel = Html.Raw(jsonModel);   ???
+</script>

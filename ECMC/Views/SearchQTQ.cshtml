@@ -1,0 +1,57 @@
+﻿@using ECMC_Umbraco.ViewModel
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@model ComposedPageViewModel<ContentModels.SearchQtq, List<SearchResultViewModel>>
+@{
+    Layout = "MasterQTQ.cshtml";
+
+
+    //Obtain search query
+    string? searchFor = Context.Request.Query["search"];
+}
+
+
+@await Html.GetBlockGridHtmlAsync(Model.Page!.HeroBlockGrid)
+@await Html.GetBlockGridHtmlAsync(Model.Page.ContentBlockGrid)
+
+
+
+<div class="grid-container search-console">
+    <div class="grid-x">
+        <div class="cell small-20 small-offset-2">
+
+            <h2>Search Results for “@searchFor”</h2>
+
+            <div class="grid-x grid-padding-y">
+                @if (Model.ViewModel != null && Model.ViewModel.Any())
+                {
+                    foreach (SearchResultViewModel record in Model.ViewModel)
+                    {
+                        <div class="cell">
+                            <h3><a href="@record.Url">@record.Title</a></h3>
+                            <p>
+                                @Html.ReplaceLineBreaks(record.Summary ?? "")
+                            </p>
+                            <p><a class="read-more" href="@record.Url">Read More</a></p>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="cell">
+                        <br />
+                        <h3>No Results Found</h3>
+                    </div>
+                }
+
+            </div>
+
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+
+
+
+@await Html.GetBlockGridHtmlAsync(Model.Page.ContentBottomBlockGrid)

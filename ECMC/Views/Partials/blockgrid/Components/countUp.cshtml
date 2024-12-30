@@ -1,0 +1,81 @@
+﻿@using System.Collections.Generic;
+@using System.Text.Json;
+@using Umbraco.Extensions;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<CountUp>>
+@{
+
+    var cmModel = Model.Content;
+    string? fontStyle = cmModel.CountUpstyleClass;
+    decimal? endValueInt = cmModel.CountUpendValue;
+    string? endValue = string.Format("{0:#,0}", endValueInt);
+    string? prefix = cmModel.CountUpPrefix;
+    string? suffix = cmModel.CountUpsuffix;
+    string? speed = "";
+    string? decimalPlace = "";
+
+    string sliderId = "slider-";  //cmModel.Key.ToString();
+    var perc = endValue + "%";
+
+    //Obtain max-height if it exists
+    if (!string.IsNullOrEmpty(cmModel.CountUpSpeed))
+    {
+        speed = cmModel.CountUpSpeed;
+    }
+
+    //Obtain decimalPlace if it exists
+    if (!string.IsNullOrEmpty(cmModel.DecimalPlaces.ToString()))
+    {
+        decimalPlace = cmModel.DecimalPlaces.ToString();
+    }
+    string countName = "counter-";
+
+    Random rand = new Random();
+    int stringlen = rand.Next(6, 10);
+
+    string randVal = "";
+
+    for (int i = 0; i < stringlen; i++)
+    {
+        var randChar = Convert.ToChar(rand.Next(0, 26) + 65).ToString();
+        randVal = randVal + randChar;
+        countName = countName + randChar;
+        sliderId = sliderId + randChar;
+    }
+
+    bool showOption2Pnl = false;
+    if (fontStyle == "Count-Option-2")
+    {
+        showOption2Pnl = true;
+    }
+}
+
+
+@*
+    https://inorganik.github.io/countUp.js/
+    https://codepen.io/Denzy/pen/LazpQQ
+*@
+
+
+<p data-blockgrid="Components/countUp" class="@fontStyle counter-block">
+    <span class="prefix">@prefix</span>
+    <span data-value="@endValueInt" data-speed="@speed" data-decimal="@decimalPlace" id="@countName" data-id="@randVal" class="countValue">0</span>
+    <span class="suffix">@suffix</span>
+</p>
+
+
+@if (showOption2Pnl)
+{
+    <style>
+        @@keyframes @randVal {
+            0% { clip-path: inset(0 0 0 0%); }
+            100% { clip-path: inset(0 0 0 @perc); }
+        }
+    </style>
+    <div class="option2pnl">
+        <br />
+        <div class="percent-bar"></div>
+        <div class="slide-bar" id="@randVal" data-id="@randVal" data-pnl-perc="@perc"  data-updated=""></div>
+    </div>
+}

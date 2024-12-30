@@ -1,0 +1,53 @@
+﻿<style>
+    
+</style>
+
+
+<fieldset>
+    <legend>Video Player - Vimeo</legend>
+    <div ng-click="block.edit()" ng-focus="block.focus">
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td>Embed Id</td>
+                    <td>{{block.data.videovemioOrYouTubeURLToVideo}}</td>
+                </tr>
+                <tr>
+                    <td>Format</td>
+                    <td>{{block.data.widescreen == true ? "Widescreen 16:9" : "Formatted 4:3"}}</td>
+                </tr>
+                <tr>
+                    <td>CC</td>
+                    <td>{{block.data.videoClosedCaptioningAternative}}</td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="2">- - Video Controls - -</td>
+                </tr>
+
+
+                <tr>
+                    <td>Auto Play</td>
+                    <td>{{block.data.videoAutoPlay == true ? "True" : "False"}}</td>
+                </tr>
+                <tr>
+                    <td>Loop</td>
+                    <td>{{block.data.videoLoop == true ? "True" : "False"}}</td>
+                </tr>
+                <tr>
+                    <td>Mute</td>
+                    <td>{{block.data.videoMute == true ? "True" : "False"}}</td>
+                </tr>
+                <tr>
+                    <td>Show Controls</td>
+                    <td>{{block.data.hideControls == true ? "True" : "False"}}</td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+<br />

@@ -1,0 +1,29 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ContactForm>>
+
+
+<section class="contact-form">
+    <div class="grid-container">
+        <div class="grid-x  grid-margin-x  grid-padding-x" data-blockgrid="blockgrid/Components/contactForm">
+            <div class="cell laptop-8 laptop-offset-8 ">
+                <script src="//embed-forms.451.io/bundle.min.js"></script>
+                <script>
+                    ! function () {
+                        window.__lum_config__ = {
+                            formId: "matrixtrade.forms.2631",
+                            apiUrl: "https://matrixtrade.api.451.io/v2/",
+                            accessToken: "cq89e7uZfAoLlATElBKoygSvx98gEs0SkrTWuM6q",
+                            featureToken: "cDEbJrdkF8F7WUQKKXQ9Ltn8DFts1ff5J8RG2qww",
+                            analyticsToken: "fOdSHXR9rBKViuvN0gZ1cruZJHAee1dF1S2pYC8V",
+                            sourceUrl: encodeURIComponent(window.location.href)
+                        }
+                    }();
+                </script>
+                <lum-root>Loading...</lum-root>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>
+</section>

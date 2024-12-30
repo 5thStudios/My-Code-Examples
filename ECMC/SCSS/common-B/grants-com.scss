@@ -1,0 +1,18 @@
+﻿@import'_variables-com';
+
+.grants {
+    .grants-list {
+        h3 { color: #69be28; }
+        p {
+            &.highlight { color: #69be28; }
+        }
+
+        > .grid-x {
+            > .cell { padding: 36px; }
+            > .cell:nth-child(even) { background-color: #f6f6f6; }
+        }
+    }
+    .filter-pnl {
+        a.button { text-decoration: none; color: #fff; }
+    }
+}

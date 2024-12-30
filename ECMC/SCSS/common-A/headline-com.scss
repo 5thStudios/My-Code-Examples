@@ -1,0 +1,20 @@
+﻿@import'_variables-com';
+
+.headline {
+    h2 { color: #13818b; padding-bottom: 5px; margin-bottom: .5em; font-size: 30px; }
+    p { font-size: 16px; font-weight: 300; margin-bottom: .25em; }
+    a { color: #303133; font-size: 16px; margin-bottom: .25em; text-decoration: none;
+        &.link-text { font-weight: $weight_Book; }
+        &:after { display: inline-block; position: relative; content: ""; font-family: "Font Awesome 6 Pro"; font-weight: $weight_Book; background-image: none; margin-left: .5em; bottom: 1px; height: auto; font-size: 14px; }
+    }
+    img { float: left; margin-left: 0; margin-bottom: 0; max-width: 50%; }
+}
+
+.headline-panel {
+    h2 { border-bottom: solid 1px #13818b; color: #13818b; padding-bottom: 5px; margin-bottom: .5em; font-size: 20px; }
+    p { font-size: 16px; font-weight: 300; margin-bottom: .25em; }
+    a { color: #303133; font-size: 16px; margin-bottom: .25em; text-decoration: none;
+        &.link-text { font-weight: $weight_Book; }
+        &:after { display: inline-block; position: relative; content: ""; font-family: "Font Awesome 6 Pro"; font-weight: $weight_Medium; background-image: none; margin-left: .5em; bottom: 1px; height: auto; font-size: 14px; }
+    }
+}

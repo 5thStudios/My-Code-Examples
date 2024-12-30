@@ -1,0 +1,82 @@
+﻿@import'_variables-com';
+
+.form-background { background-color: $color_glob_gray_200; }
+
+div.umbraco-forms-form {
+    form { margin: 0 0 $def_margin 0; padding: 0px;
+        .umbraco-forms-field { margin: 0; }
+        .button { background-color: $color_glob_teal; color: $color_glob_white; font-weight: $weight_Normal; text-transform: none; text-decoration: none; border-radius: 0;
+            &:hover { background-color: $color_glob_green; color: $color_glob_white; }
+        }
+        fieldset { border: none; padding-right: 0; padding-left: 0; }
+        label { font-size: $def_font_size_B - 4px; color: $def_font_color; font-weight: $weight_light; }
+        p { font-size: 16px }
+
+        input[type=text],
+        input[type=password],
+        input[type=number],
+        input[type=tel],
+        input[type=email],
+        textarea { -webkit-appearance: none; -webkit-border-radius: 0px; box-sizing: border-box; width: 100%; border: solid 1px $color_glob_gray_500; border-radius: 0px; padding: 0.5em 1.0em; margin: 0; font-size: $def_font_size_B - 4px; font-weight: $weight_light; background-color: $color_glob_white; font-family: $def_font; -webkit-box-shadow: none; box-shadow: none }
+
+        input::-webkit-input-placeholder,
+        textarea::-webkit-input-placeholder { font-size: $def_font_size_B - 4px; font-family: $def_font; color: $color_glob_gray_500; font-style: italic; }
+
+        input:-moz-placeholder,
+        textarea:-moz-placeholder { font-size: $def_font_size_B - 4px; font-family: $def_font; color: $color_glob_gray_500; font-style: italic; opacity: 1; }
+
+        input::-moz-placeholder,
+        textarea::-moz-placeholder { font-size: $def_font_size_B - 4px; font-family: $def_font; color: $color_glob_gray_500; font-style: italic; opacity: 1; }
+
+        input:-ms-input-placeholder,
+        textarea:-ms-input-placeholder { font-size: $def_font_size_B - 4px; font-family: $def_font; color: $color_glob_gray_500; font-style: italic; }
+        label input[type="checkbox"] { font-family: $def_font; font-size: 2rem; font-weight: $weight_Normal; line-height: 1.1; display: grid; grid-template-columns: 1em auto; gap: 0.5em; }
+
+        label input[type="checkbox"] + label input[type="checkbox"] { margin-top: 1em; }
+        label input[type="checkbox"]:disabled { color: $color_glob_gray_300; cursor: not-allowed; }
+        input[type="checkbox"] { /* Add if not using autoprefixer */ -webkit-appearance: none; /* Remove most all native input styles */ appearance: none; /* For iOS < 15 */ background-color: $color_glob_white; /* Not removed via appearance */ margin: 0; font: inherit; color: $def_font_color; width: 0.75em; height: 0.75em; border: 1px solid $color_glob_gray_500; border-radius: 0; transform: translateY(0.35em); display: grid; place-content: center; }
+        input[type="checkbox"]::before { content: ""; width: 0.75em; height: 0.75em; clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); transform: scale(0); transform-origin: bottom left; transition: 120ms transform ease-in-out; /* Windows High Contrast Mode */ background-color: $def_font_color; }
+        input[type="checkbox"]:checked::before { transform: scale(1); }
+        input[type="checkbox"]:disabled { --form-control-color: $color_glob_gray_300; color: $color_glob_gray_300; cursor: not-allowed; }
+
+        label input[type="radio"] { font-family: $def_font; font-size: 2rem; font-weight: $weight_Normal; line-height: 1.1; display: grid; grid-template-columns: 1em auto; gap: 0.5em; }
+        label input[type="radio"] + label input[type="radio"] { margin-top: 1em; }
+        label input[type="radio"]:focus-within { color: $def_font_color }
+        input[type="radio"] { -webkit-appearance: none; appearance: none; background-color: $color_glob_white; margin: 0; font: inherit; color: $def_font_color; width: 0.75em; height: 0.75em; border: 1px solid $color_glob_gray_500; border-radius: 50%; transform: translateY(0.35em); display: grid; place-content: center; }
+        input[type="radio"]::before { content: ""; width: 0.75em; height: 0.75em; border-radius: 50%; transform: scale(0); transform-origin: bottom left; transition: 120ms transform ease-in-out; background-color: $def_font_color; }
+        input[type="radio"]:checked::before { transform: scale(1); }
+
+        select { border: 1px solid $color_glob_gray_500; border-radius: 0px; background-color: $color_glob_white; font-family: inherit; font-size: 1rem; font-weight: $weight_Normal; line-height: 1.5; color: $def_font_color; }
+
+        .field-validation-error { color: $color_glob_alert; }
+        .validation-summary-errors { color: $color_glob_alert; padding: 0 0 0 40px; }
+
+
+        h4 { font-family: "ff-meta-web-pro-condensed"; color: $color_glob_teal; font-size: 30px; font-weight: 500; margin-bottom: 0.25em; }
+        .checkbox { }
+        .singlechoice { /*.radiobuttonlist { display: flex; flex-direction: row; justify-content: flex-start; align-items: flex-end; }*/ }
+        .multiplechoice { /*.checkboxlist { display: flex; flex-direction: row; justify-content: flex-start; align-items: flex-end; }*/ }
+
+
+        .umbraco-forms-field-wrapper {
+            .checkboxlist {
+                .checkbox-group { display: flex; flex-direction: row; margin-bottom: 0px; }
+            }
+
+            .radiobuttonlist {
+                .radiobox-group { display: flex; flex-direction: row; margin-bottom: 0px; }
+            }
+        }
+
+
+        .dropdown {
+            &.alternating { }
+        }
+        input[type=submit], input[type=button] { padding: 12px 36px; }
+
+        .umbraco-forms-label { font-weight: $weight_Normal }
+    }
+}
+    /*https://moderncss.dev/pure-css-custom-checkbox-style/ */
+
+

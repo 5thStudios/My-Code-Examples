@@ -1,0 +1,27 @@
+﻿@model IPublishedContent;
+@inject IPublishedValueFallback PublishedValueFallback;
+@using www.Models.PublishedModels;
+@using www.Models;
+@{
+    Bio cmBio = new Bio(Model, PublishedValueFallback);
+    string imgUrl = cmBio.BioImage?.GetCropUrl(Common.Crop.Card_1000x1000) ?? "";
+}
+
+
+<a href="@cmBio.Url()">
+    <div class="card bio" data-equalizer-watch="card">
+        <div class="card-image">
+            <img src="@imgUrl">
+        </div>
+        <div class="card-header">
+            <span>View Bio</span>
+        </div>
+        <div class="card-section">
+            <div class="title">@cmBio.Name.Trim()</div>
+            @if (!string.IsNullOrWhiteSpace(cmBio.Title))
+            {
+                <div class="content">@cmBio.Title?.Trim()</div>
+            }
+        </div>
+    </div>
+</a>

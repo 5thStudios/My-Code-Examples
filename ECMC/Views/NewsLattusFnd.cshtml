@@ -1,0 +1,98 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ECMC_Umbraco.ViewModel;
+@using ECMC_Umbraco.Models;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@model ComposedPageViewModel<ContentModels.NewsLattusFnd, NewsListViewModel>
+@{
+    Layout = "MasterFnd.cshtml";
+}
+@section Footer {
+    <script type="text/javascript" src="/js/paginathing/paginathing.min.js"></script>
+}
+
+<input type="hidden" id="hfldPaginationCount" name="hfldPaginationCount" value="@Model.ViewModel?.PaginationCount" />
+
+
+<div id="newsLattus">
+    <partial name="@Common.Partial.SecondaryNav" model="Model.Page" />
+    @await Html.GetBlockGridHtmlAsync(Model.Page?.ContentBlockGrid)
+    <div class="grid-container">
+        <div class="grid-x   def-margin-b">
+            <div class="cell small-20 small-offset-2">
+
+
+                @if (Model.Page?.ShowFilterPanel == true)
+                {
+                    @await Html.PartialAsync(Common.Partial.Filter, Model.ViewModel?.filterViewModel)
+
+
+                }
+
+
+                <div class="list-type grid-view">
+                    <div class="grid-x   grid-margin-x  grid-margin-y       @(Model.ViewModel.ShowPagination == true ? "paginate" : "") ">
+                        @if (Model.ViewModel.LstListItems != null && Model.ViewModel.LstListItems.Any())
+                        {
+                            foreach (ListItemViewModel item in Model.ViewModel.LstListItems)
+                            {
+                                @await Html.PartialAsync(Common.Partial.NewsCard_GridView, item)
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="list-type list-view    grid-x   grid-margin-x  grid-margin-y grid-padding-y   hide">
+                    <div class="cell">
+                        <div class="@(Model.ViewModel.ShowPagination == true ? "paginate" : "") ">
+
+                            @if (Model.ViewModel.LstListItems != null && Model.ViewModel.LstListItems.Any())
+                            {
+                                foreach (var item in Model.ViewModel.LstListItems)
+                                {
+                                    @await Html.PartialAsync(Common.Partial.NewsCard_ListView, item)
+
+                                    @* <div class="card" data-areas-of-interest="@item.jsonAreasOfInterest" data-staff="@item.jsonStaff" data-audience="@item.jsonAudience" data-title="@item.Title" data-subtitle="@item.Subtitle?" data-summary="@item.EncodedSummary">
+                            <div class="grid-x grid-margin-x grid-margin-y grid-padding-y">
+                            <div class="cell small-4">
+                            <a href="@item.Link.Url">
+                            <img src="@item.PrimaryImgUrl" alt="@item.Title">
+                            </a>
+                            </div>
+                            <div class="cell small-20">
+                            <div class="grid-y">
+                            <div class="cell  auto">
+                            <h4><a href="@item.Link.Url">@item.Title</a></h4>
+                            @if (!string.IsNullOrEmpty(item.Subtitle))
+                            {
+                            <h6><a href="@item.Link.Url">@item.Subtitle</a></h6>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(item.PostDate))
+                            {
+                            <h6 class="date">@item.PostDate</h6>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Summary))
+                            {
+                            <p>@item.Summary</p>
+                            }
+                            </div>
+                            <div class="cell shrink">
+                            <h5><a href="@item.Link.Url" title="Read More" class="read-more">READ MORE</a></h5>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div> *@
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <partial name="@Common.Partial.SecondaryNavMbl" model="Model.Page" />
+</div>
+
+

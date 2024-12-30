@@ -1,0 +1,189 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.ViewModels;
+@model ComposedPageViewModel<ContentModels.ViewAllProducts, ViewAllProductsViewModel>
+@{
+    Layout = "TopLevelMinimum.cshtml";
+}
+
+
+@using (Html.BeginUmbracoForm<www.Controllers.SurfaceControllers.scViewAllProductsController>(nameof(www.Controllers.SurfaceControllers.scViewAllProductsController.RetrieveList)))
+{
+    <!-- ===================================== -->
+    <!-- Store fields to retun to controllers. -->
+    @for (var i = 0; i < Model.ViewModel!.LstSites.Count(); i++)
+    {
+        @Html.HiddenFor(x => x.ViewModel!.LstSites[i].Name)
+        @Html.HiddenFor(x => x.ViewModel!.LstSites[i].ProductsNodeId)
+        @Html.HiddenFor(x => x.ViewModel!.LstSites[i].IsActive)
+    }
+    <!-- ===================================== -->
+
+
+
+
+
+
+    <div id="perdue-tools">
+        <div class="grid-x grid-padding-x grid-padding-y">
+            <div class="cell">
+                <h2>View All Products</h2>
+                <div class="grid-x grid-margin-x grid-padding-x">
+                    <div class="cell shrink">
+                        <h4>Show Images?</h4>
+                        <div class="image-toggle-rbl">
+                            <input type="radio" name="btnShowImages" id="rbInclude" value="true" @(Model.ViewModel.ShowImages ? "checked" : "")>
+                            <label for="rbInclude">Include Images</label>
+
+                            <input type="radio" name="btnShowImages" id="rbExclude" value="false" @(!Model.ViewModel.ShowImages ? "checked" : "")>
+                            <label for="rbExclude">exclude Images</label>
+                        </div>
+                    </div>
+                    <div class="cell shrink">
+                        <h4>Select a Site to View Products</h4>
+                        @foreach (var site in Model.ViewModel!.LstSites)
+                        {
+                            if (site.IsActive)
+                            {
+                                <button type="submit" name="btnProductListId" value="@site.ProductsNodeId" class="button small tertiary active">@site.Name</button>
+                            }
+                            else
+                            {
+                                <button type="submit" name="btnProductListId" value="@site.ProductsNodeId" class="button small tertiary">@site.Name</button>
+                            }
+                        }
+                    </div>
+                </div>
+                <br />
+                @Html.ValidationSummary()
+                <br />
+                <br />
+
+
+                @if (Model.ViewModel.ShowList)
+                {
+                    <div class="grid-x grid-padding-x grid-padding-y">
+                        <div class="cell">
+                            <h2>Products for Site '<strong>@Model.ViewModel.LstSites.FirstOrDefault(x => x.IsActive)?.Name</strong>'</h2>
+                            <p>Total Products Returned: <strong>@Model.ViewModel.LstProducts.Count()</strong></p>
+
+
+                            @if (Model.ViewModel.LstProducts.Any())
+                            {
+                                <div class="grid-x grid-padding-x">
+                                    <div class="cell shrink">
+                                        <a href="/umbraco/backoffice/Api/PrivateApi/ExportAllProducts?ProductsNode=@Model.ViewModel.LstSites.FirstOrDefault(x => x.IsActive)?.ProductsNodeId" class="button" target="_blank">DOWNLOAD CSV</a>
+                                    </div>
+                                    @* <div class="cell shrink" style=" display: flex; flex-direction: row; align-items: center;">
+                        <span>Search: &nbsp;</span>
+                        <span><input type="search" class=""></span>
+                        </div> *@
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <br />
+
+                    @if (Model.ViewModel.LstProducts.Any())
+                    {
+                        <table class="hover" valign="top">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Actions</th>
+                                    <th>Product</th>
+                                    <th>Attributes</th>
+                                    <th>IDs</th>
+                                    <th>Dates</th>
+                                    @if (Model.ViewModel!.ShowImages)
+                                    {
+                                        <th>Primary Image</th>
+                                        <th>Product Images</th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int index = 0;
+                                }
+                                @foreach (var product in Model.ViewModel!.LstProducts)
+                                {
+                                    index++;
+                                    <tr>
+                                        <td>@index</td>
+                                        <td>
+                                            <a target="_blank" href="@product.EditUrl">Edit</a><br />
+                                            <a target="_blank" href="@product.ViewUrl">View</a><br />
+                                            <a target="_blank" href="@product.ViewJsonUrl">Json</a>
+                                        </td>
+                                        <td>
+                                            <div><strong><u>Name</u></strong></div>
+                                            <div>@product.ProductName</div>
+                                            <br />
+                                            <div><strong><u>Code</u></strong></div>
+                                            <div>@product.ProductCode</div>
+                                            <br />
+                                            <div><strong><u>Type &raquo; SubType</u></strong></div>
+                                            <div>@product.ProductType <strong>&raquo;</strong> @product.ProductSubtype</div>
+
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                @foreach (var attr in product.LstAttributes)
+                                                {
+                                                    <li>@attr</li>
+                                                }
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <div><strong><u>Gtin</u></strong></div>
+                                            <div>@product.Gtin</div>
+                                            <br />
+                                            <div><strong><u>Node Id</u></strong></div>
+                                            <div>@product.NodeId</div>
+                                            <br />
+                                        </td>
+                                        <td>
+                                            <div><strong><u>Db Last Updated</u></strong></div>
+                                            <div>@product.LastChanged</div>
+                                            <br />
+                                            <div><strong><u>Node Created</u></strong></div>
+                                            <div>@product.Created</div>
+                                            <br />
+                                            <div><strong><u>Node Updated</u></strong></div>
+                                            <div>@product.Updated</div>
+                                            <br />
+                                        </td>
+                                        @if (Model.ViewModel!.ShowImages)
+                                        {
+                                            <td>
+                                                <div><a target="_blank" href="@product.PrimaryImgLink?.ImgUrl">@product.PrimaryImgLink?.Url</a></div>
+                                                <br />
+                                                <div><img alt="@product.ProductName" src="@product.PrimaryImgLink?.ImgUrl" class="x200" /></div>
+                                            </td>
+                                            <td>
+                                                <div class="grid-x grid-padding-x grid-margin-y">
+                                                    @foreach (var imgLink in product.LstImgLinks)
+                                                    {
+                                                        <div class="cell large-12 text-center">
+                                                            <div><strong>@imgLink.Summary</strong></div>
+                                                            <img alt="@product.ProductName" src="@imgLink.ImgUrl" class="x100" />
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+
+
+}

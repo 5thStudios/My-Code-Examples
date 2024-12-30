@@ -1,0 +1,27 @@
+@import'../common-B/_variables-com';
+
+body {
+    main {
+        h1 { color: $color_glob_green_ADA; }
+        h2 { color: $color_glob_green_ADA; }
+        h3 { color: $color_glob_green_ADA; }
+        h4 { color: $color_glob_navy; font-weight: $weight_Bold }
+        h5 { color: $color_glob_navy; font-weight: $weight_Bold }
+
+
+        a, a:visited { color: $color_glob_navy;
+            &:hover, &:focus { color: $color_glob_green_ADA; }
+            cite { text-decoration: none; }
+        }
+        a.link-button { color: $color_glob_navy; font-weight: $weight_Book; border: 2px solid $color_glob_navy; display: inline-block; padding: .5em 2em; margin: 0; text-decoration: none; background-color: $color_glob_white;
+            &:hover, &:focus { color: $color_glob_white; background-color: $color_glob_navy; }
+        }
+
+        a.link-button-dark { color: $color_glob_white; font-weight: $weight_Book; border: none; display: inline-block; padding: .5em 2em; margin: 0; text-decoration: none; background-color: $color_glob_navy;
+            &:hover, &:focus { color: $color_glob_white; background-color: $color_glob_green_ADA; }
+        }
+    }
+
+    footer .copyright { margin: 55px 0 30px 0; }
+}
+

@@ -1,0 +1,61 @@
+﻿@model Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ReadMoreCard>
+@using www.Models.PublishedModels;
+@using www.Models;
+@{
+    string imgUrl = Model.Content.Image?.GetCropUrl(Common.Crop.Card_1100x600) ?? "";
+    bool showAsLink = !string.IsNullOrWhiteSpace(Model.Content.LinkTo?.Url);
+}
+
+
+@if (showAsLink)
+{
+    <a href="@Model.Content.LinkTo?.Url" target="@Model.Content.LinkTo?.Target">
+        <div class="card readmore" data-equalizer-watch="card">
+            <div class="card-image">
+                <img src="@imgUrl">
+            </div>
+            <div class="card-header">
+                <span>Read More</span>
+            </div>
+            <div class="card-section">
+                @if (!string.IsNullOrWhiteSpace(Model.Content.PreTitle))
+                {
+                    <div class="pretitle">@Model.Content.PreTitle?.Trim()</div>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Content.Title))
+                {
+                    <div class="title">@Model.Content.Title?.Trim()</div>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Content.Content))
+                {
+                    <div class="content">@Model.Content.Content?.Trim()</div>
+                }
+            </div>
+        </div>
+    </a>
+}
+else
+{
+    <div class="card readmore" data-equalizer-watch="card">
+        <div class="card-image">
+            <img src="@imgUrl">
+        </div>
+        <div class="card-header">
+            <span>Read More</span>
+        </div>
+        <div class="card-section">
+            @if (!string.IsNullOrWhiteSpace(Model.Content.PreTitle))
+            {
+                <div class="pretitle">@Model.Content.PreTitle?.Trim()</div>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.Content.Title))
+            {
+                <div class="title">@Model.Content.Title?.Trim()</div>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.Content.Content))
+            {
+                <div class="content">@Model.Content.Content?.Trim()</div>
+            }
+        </div>
+    </div>
+}

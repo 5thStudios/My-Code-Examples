@@ -1,0 +1,15 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Robotstxt>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = null;
+    Context.Response.ContentType = "text/txt";
+
+    string sitemap = "";
+    if (Model.Sitemap != null)
+    {
+        sitemap = "Sitemap: " + Model.Sitemap.Url(mode: UrlMode.Absolute);
+    }    
+}
+@Html.Raw(Model.Content)
+@Html.Raw(sitemap)

@@ -1,0 +1,88 @@
+﻿@using ECMC_Umbraco.Models;
+@using UmbracoProject.Models;
+@model FooterViewModel;
+
+
+<footer>
+    <div class="grid-container"> 
+        <div class="grid-x">
+            <div class="small-offset-2 small-20 def-padding-t  ">
+                <div class="grid-x grid-margin-x">
+                    <div class="cell small-24 medium-8">
+                        <a href="/">
+                            <img src="@Model.SiteLogoUrl" alt="@Model.SiteName" class="logo">
+                        </a>
+                    </div>
+           
+                    <div class="cell small-24 medium-8">
+                        @if (!string.IsNullOrEmpty(Model.SocialHeadline))
+                        {
+                            <h2>@Model.SocialHeadline</h2>
+                        }
+                        <div class="social">
+                            @foreach (var _link in Model.LstSocialMediaLinks)
+                            {
+                                <a target="_blank" href="@_link.Url">
+                                    <img src="@_link.ImgUrl" alt="@_link.Title">
+                                </a>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="cell small-24 medium-8">
+                        @if (!string.IsNullOrEmpty(Model.ContactHeadline))
+                        {
+                            <h2>@Model.ContactHeadline</h2>
+                        }
+ 
+                        @if (!string.IsNullOrEmpty(Model.ContactName))
+                        {
+                            <p>@Model.ContactName</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.ContactEmail))
+                        {
+                            <p><a class="email" href="mailto:@Model.ContactEmail">@Model.ContactEmail</a></p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Phone))
+                        {
+                            <p><a class="phone" href="tel:@Model.Phone">@Model.PhoneTel</a></p>
+                        }
+                        @if (Model.Address != null && !string.IsNullOrEmpty(Model.Address.ToString()))
+                        {
+                            <address>@Html.Raw(Model.Address)</address>
+                        }
+                    </div>
+
+
+                    <div class="cell small-24 text-center">
+                            <p class="copyright">
+                                © @DateTime.Today.Year @Model.SiteName. <br class="show-for-small-only" />All Rights Reserved.
+
+                                <span class="seperator  show-for-laptop">|</span>
+                                <br class="hide-for-laptop" />
+
+                                @{
+                                    var isFirst = true;
+                                    foreach (var _link in Model.LstFooterNavLinks)
+                                    {
+                                        if (isFirst)
+                                        {
+                                            isFirst = false;
+                                        }
+                                        else
+                                        {
+                                            <span class="seperator">|</span>
+                                        }
+
+                                        <a href="@_link.Url" target="@_link.Target">@_link.Title</a>
+                                    }
+                                }
+
+                            </p>
+                        </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+</footer>

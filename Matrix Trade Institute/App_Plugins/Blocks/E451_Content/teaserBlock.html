@@ -1,0 +1,70 @@
+﻿<link href="/css/Umbraco.css" rel="stylesheet" />
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset class="blockContent">
+        <legend>Teaser Block &nbsp;&nbsp;&nbsp;&nbsp;<strong>[E451]</strong></legend>
+
+
+        {{mediaItem = (block.data.backgroundImage[0].mediaKey | mediaItemResolver); ""}}
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+
+                <tr>
+                    <td colspan="2">
+                        <div style="color: rgb(120 144 157); text-align: center; font-weight: 900; margin: 12px 0 0; "><strong>Panel Content</strong></div>
+                    </td>
+                </tr>
+                <tr ng-if="block.data.backgroundColor">
+                    <td>Background Color</td>
+                    <td>
+                        <span class="colorBlock" style="background-color: {{block.data.backgroundColor}};"></span> {{block.data.backgroundColor}}
+                    </td>
+                </tr>
+                <tr ng-if="block.data.content">
+                    <td>Content</td>
+                    <td>{{block.data.content}}</td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+                        <br />
+                        <div style="color: rgb(120 144 157); text-align: center; font-weight: 900; margin: 0; "><strong>Panel Background Image</strong></div>
+                    </td>
+                </tr>
+                <tr ng-if="mediaItem">
+                    <td>Background Image</td>
+                    <td>
+                        <img ng-src="{{mediaItem.mediaLink}}" style="max-width: 150px; height:auto;" />
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+                        <div style="color: rgb(120 144 157); text-align: center; font-weight: 900; margin: 12px 0 0; "><strong>Cell Properties</strong></div>
+                    </td>
+                </tr>
+                <tr ng-if="block.data.cellClass">
+                    <td>Cell Classes</td>
+                    <td>{{block.data.cellClass}}</td>
+                </tr>
+                <tr ng-if="block.data.cellAttributes">
+                    <td>Cell Attributes</td>
+                    <td>{{block.data.cellAttributes}}</td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+
+
+    </fieldset>
+</div>
+<br />

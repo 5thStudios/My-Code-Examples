@@ -1,0 +1,71 @@
+﻿@using Dragonfly.UmbracoHelpers
+@using www.Models.PublishedModels;
+@using ContentModels = www.Models.PublishedModels;
+@using www.Models;
+@using www.ViewModels;
+
+@model ComposedPageViewModel<ContentModels.ProductsSection, ProductsSectionViewModel>
+@{
+    //Determine proper toplevel to use.
+    if (Model.ViewModel.IsPerdue)
+    {
+        Layout = Common.Layout.TopLevelPER;
+    }
+    else if (Model.ViewModel.IsCheney)
+    {
+        Layout = Common.Layout.TopLevelCHE;
+    }
+    else if (Model.ViewModel.IsColeman)
+    {
+        Layout = Common.Layout.TopLevelCOL;
+    }
+
+
+    //Pass search query to other views/components
+    ViewData["SearchQuery"] = Model.ViewModel?.SearchQuery;
+}
+@section Header {
+    <!--JavaScript for Filtering -->
+    <script type="text/javascript" src="/js/Isotope/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="/js/jquery/jquery.session.js"></script>
+    <script type="text/javascript" src="/js/custom/Filters-ProductListing.js?v=03"></script>
+}
+
+@* 
+<hr />
+<img alt="" src="https://dam.catalog.1worldsync.com/im/dwn/GCP-5942545047617536" />
+<hr /> *@
+
+<div class="ProductsSection">
+    @if (Model.ViewModel.IsColeman || Model.ViewModel.IsCheney)
+    {
+        <div class="grid-container">
+            <partial name="@Common.Partial.HeroCarouselSearch" model="Model.Page?.HeroSlides" view-data="ViewData" />
+        </div>
+    }
+    else
+    {
+        <partial name="@Common.Partial.HeroCarouselSearch" model="Model.Page?.HeroSlides" view-data="ViewData" />
+    }
+
+
+    <br class="show-for-medium" />
+    <br class="show-for-laptop" />
+
+    <div class="grid-container">
+        <br>
+        <div class="grid-x grid-padding-x">
+            <div class="cell medium-9 laptop-6">
+                <partial name="@Common.Partial.ProductListing_RenderFilters" model="Model" />
+            </div>
+            <div class="cell medium-auto">
+                <partial name="@Common.Partial.ProductListing_RenderProduct" model="Model.ViewModel" />
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    @await Html.GetBlockGridHtmlAsync(Model.Page?.MainContent)
+</div>

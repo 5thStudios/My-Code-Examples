@@ -1,0 +1,92 @@
+﻿@import'_variables-com';
+
+/* Hero - Start
+----------------------------------------------------------*/
+
+body {
+    main {
+        .hero { overflow: hidden; position: relative; margin-top: 40px; margin-bottom: 70px;
+
+            &.empty { margin-top: 140px; }
+            &.no-bottom-margin { margin-bottom: 0 !important; }
+
+            video { position: absolute; z-index: -1; }
+            .slide { }
+            .content { margin-top: 100px; }
+
+            a.link-button { background-color: transparent; border: 2px solid $color_glob_white; color: $color_glob_white;
+                &:hover, &:focus { background-color: transparent; text-decoration: underline }
+            }
+            &.heroNoImage { margin-top: 140px;
+                h1 { color: $color_glob_green }
+            }
+
+            h1 { color: $color_glob_white; margin-bottom: 12px;  }
+            h2 { color: $color_glob_white; margin-bottom: 12px; }
+        }
+
+        .home {
+            .hero {
+                h1 { font-size: $h1_size; margin-bottom: 12px; color: $color_glob_white; }
+                h2 { font-size: $h2_size; margin-bottom: 12px; color: $color_glob_white; }
+            }
+        }
+
+        @media only screen and (max-width: $bp_sm) {
+            .hero { margin-top: 140px;
+                h1 { font-size: $h2_size; }
+                h2 { font-size: $h4_size; }
+                .content { margin-top: 0px; }
+                a.link-button, a.link-button:hover { padding: 0.10em 0.5em; font-size: 15px }
+                &.empty { margin-top: 70px; }
+            }
+
+            .home {
+                .hero {
+                    h1 { font-size: $h2_size; }
+                    h2 { font-size: $h4_size; }
+                }
+            }
+        }
+
+
+        @media only screen and (min-width:$bp_tablet_min) and (max-width: $bp_tablet) {
+            .hero { margin-top: 140px;
+                h1 { font-size: $h1_size - 10px; }
+                .content { margin-top: 0px; }
+                a.link-button, a.link-button:hover { padding: 0.25em 1em; font-size: 15px }
+                &.empty { margin-top: 90px; background-color: red }
+            }
+
+            .home {
+                .hero {
+                    h1 { font-size: $h2_size; }
+                    h2 { font-size: $h3_size; }
+                }
+            }
+        }
+
+        @media only screen and (min-width: $bp_lap_min) and (max-width: $bp_lap) {
+
+            .home {
+                .hero {
+                    h1 { font-size: $h1_size - 15px; }
+                    h2 { font-size: $h2_size - 10px; }
+                }
+            }
+        }
+
+        @media only screen and (min-width: $bp_large-min) and (max-width: $bp_large) {
+
+            .home {
+                .hero {
+
+                    h1 {  }
+                    h2 {  }
+                }
+            }
+        }
+    }
+}
+    /* Hero - End
+----------------------------------------------------------*/

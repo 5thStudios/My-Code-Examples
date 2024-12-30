@@ -1,0 +1,47 @@
+/*===================================================================================*/
+/*   Broker Locator  */
+/*===================================================================================*/
+.broker-locator {
+    .brokerLocator-nav { margin: 0;
+        h1 { font-weight: 700; font-size: 3em; margin: 0; }
+        & > div {
+            &:nth-child(2) {
+                & > a { margin: 2px 0; }
+            }
+        }
+    }
+    .brokerLocator { margin: 1.5% 0;
+        & > div {
+            &:nth-child(2) {
+                & > div { margin: 1% 0 .85%; font-size: .9em; }
+                a { color: #004b7e; }
+            }
+            &:first-child { border-bottom: 1px solid #707070; margin: 0 0 1%;
+                & > div {
+                    &:nth-child(1) { text-align: left; padding: 0; display: flex; }
+                    &:nth-child(2) {
+                        text-align: right;
+                        padding: 0 1.5% 0 0;
+                        display: flex;
+                        a { font-size: .8em; font-weight: 600; line-height: 1.8em; align-self: flex-end; margin-left: auto;
+                            &:before { /*content: "\f0d8";*/ font-family: Font Awesome\ 5 Free; font-weight: 900; font-size: 90%; margin: 0 4px 0 0; }
+                        }
+                        @media only screen and (max-width: 40em) {
+                            a { font-size: .65em; }
+                        }
+                    }
+                }
+            }
+        }
+        h2 { font-size: 1.5em !important; line-height: 1.4em !important; font-weight: 600; margin: 0; align-self: flex-end;
+            &:before { display: inline-block; width: 26px; height: 26px; content: ""; background: url(/media/1684/mappinicon.jpg) no-repeat 0 0; background-size: 100%; margin: 0 0 -3px !important; }
+        }
+        .broker-content { line-height: 24px; }
+        .broker-head { font-weight: 700; }
+    }
+    .breadcrumb-pnl { background-color: #004b7e;
+        .grid-container { max-width: unset;
+            ul { margin-bottom: -8px !important; }
+        }
+    }
+}

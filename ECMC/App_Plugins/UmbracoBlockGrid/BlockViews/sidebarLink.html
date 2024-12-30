@@ -1,0 +1,28 @@
+﻿<style>
+    
+</style>
+
+
+
+<div ng-click="block.edit()" ng-focus="block.focus">
+    <fieldset style="border-color: rgb(211 211 211 / 30%); border-style: solid;">
+        <legend><strong>Link</strong></legend>
+
+        {{linkName = (block.data.link[0].name); ""}}
+        {{linkUrl = (block.data.link[0].url); ""}}
+
+
+        <table class="bvTable" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 0 32px;">
+            <tbody>
+
+                <tr>
+                    <td>
+                        <span>{{linkName}}</span>
+                        <span ng-if="linkUrl">&nbsp;&nbsp;==>&nbsp;&nbsp;<em>{{linkUrl}}</em></span>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </fieldset>
+</div>

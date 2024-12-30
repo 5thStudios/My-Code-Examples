@@ -1,0 +1,55 @@
+﻿@using ECMC_Umbraco.ViewModel;
+@using ECMC_Umbraco.Models;
+@model List<ListItemViewModel>
+
+
+
+@foreach (ListItemViewModel item in Model)
+{
+    @if (item.DocType == Common.Doctype.PartnerCardEIF ||
+    item.DocType == Common.Doctype.PartnerCardEG ||
+    item.DocType == Common.Doctype.PartnerCardAR ||
+    item.DocType == Common.Doctype.PartnerCardScholars ||
+    item.DocType == Common.Doctype.PartnerCardSol)
+    {
+        @await Html.PartialAsync(Common.Partial.PartnerCard_GridView, item)
+    }
+
+    else if (item.DocType == Common.Doctype.PersonLandingPageEIF ||
+     item.DocType == Common.Doctype.PersonLandingPageEG ||
+     item.DocType == Common.Doctype.PersonLandingPageAR ||
+     item.DocType == Common.Doctype.PersonLandingPageScholars ||
+     item.DocType == Common.Doctype.PersonLandingPageSol)
+    {
+        @await Html.PartialAsync(Common.Partial.PersonCard_ListView, item)
+    }
+
+    else if (item.DocType == Common.Doctype.DocumentCardEIF ||
+    item.DocType == Common.Doctype.DocumentCardEG ||
+    item.DocType == Common.Doctype.DocumentCardAR ||
+    item.DocType == Common.Doctype.DocumentCardScholars ||
+    item.DocType == Common.Doctype.DocumentCardSol)
+    {
+        @await Html.PartialAsync(Common.Partial.DocumentCard_ListView, item)
+    }
+
+    else if (item.DocType == Common.Doctype.NewsAndEventsLandingPageEIF ||
+     item.DocType == Common.Doctype.NewsAndEventsLandingPageEG ||
+     item.DocType == Common.Doctype.NewsAndEventsLandingPageAR ||
+     item.DocType == Common.Doctype.NewsAndEventsLandingPageScholars ||
+     item.DocType == Common.Doctype.NewsAndEventsLandingPageSol)
+    {
+        @await Html.PartialAsync(Common.Partial.NewsAndEventCard_ListView, item)
+    }
+
+    else if (item.DocType == Common.Doctype.IconCardCompEIF ||
+   item.DocType == Common.Doctype.IconCardCompEG ||
+   item.DocType == Common.Doctype.IconCardCompAR ||
+   item.DocType == Common.Doctype.IconCardCompScholars ||
+   item.DocType == Common.Doctype.IconCardCompSol)
+    {
+        <div class="cell medium-8 laptop-6">
+            @await Html.PartialAsync(Common.Partial.IconCard_ListView, item.IconCard)
+        </div>
+    }
+}

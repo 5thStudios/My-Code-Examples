@@ -1,0 +1,65 @@
+﻿@inherits UmbracoViewPage<IPublishedContent>
+@{
+
+    IPublishedContent siteRoot = Model.Root();
+}
+<ul>
+    @foreach (IPublishedContent childSection in siteRoot.Children)
+    {
+        if (!childSection.Value<bool>("HideInMenu"))
+        {
+            List<string> childSectionClasses = new List<string>();
+
+            string? headline = childSection.Value<string>(@"headline");
+
+            if (string.IsNullOrEmpty(headline))
+            {
+                headline = childSection.Name;
+            }
+
+            if (childSection.IsAncestorOrSelf(Model))
+            {
+                childSectionClasses.Add(@"active-link");
+            }
+
+            <li>
+                <a class="@Html.Raw(string.Join(" ", childSectionClasses))" href="@childSection.Url()">@Html.Raw(headline)</a>
+
+                @{
+                    IEnumerable<IPublishedContent> children = childSection.Children.Where(o => !o.Value<bool>("HideInMenu"));
+                  
+                    if ((children != null && children.Count() != 0) )
+                    {
+                        <ul class="child-menu">
+
+                                @foreach (IPublishedContent childContent in childSection.Children)
+                                {
+                                    bool isHidden = childContent.Value<bool>("HideInMenu");
+                                    if (!isHidden){
+                                            List<string> childContentClasses = new List<string>();
+
+                                            if (childContent.IsAncestorOrSelf(Model))
+                                            {
+                                                childContentClasses.Add(@"active-link");
+                                            }
+
+                                            <li>
+                                                <a class="@Html.Raw(string.Join(" ", childContentClasses))" href="@childContent.Url()">@childContent.Name</a>
+                                            </li>
+                                    }
+                                }
+                            
+
+
+
+                        </ul>
+                    }
+                }
+
+            </li>
+
+        }
+
+    }
+    <li class="grantee-portal"><a target="_blank" rel="noopener nofollow noreferrer" href="https://ecmcfoundation.fluxx.io">Grantee Portal</a></li>
+</ul>

@@ -1,0 +1,82 @@
+﻿@using Umbraco.Extensions
+@using www.Models.PublishedModels;
+@using www.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@{
+    if (Model?.Areas.Any() != true) { return; }
+
+
+    //Variables
+    ColumnSettings? settings = Model?.Settings as ColumnSettings;
+    List<string> lstRowSpacing = new List<string>();
+    string optRowClasses = string.Empty;
+    string optVertAlignClass = string.Empty;
+    bool IsFullWidth = false;
+    string bgColorClass = string.Empty;
+    string LayoutName = string.Empty;
+
+
+    //Pull settings from Model
+    if (settings != null)
+    {
+        //Extract extended settings
+        LayoutName = settings.LayoutName;
+        IsFullWidth = settings.IsFullWidth;
+
+
+        //Create row classes
+        if (settings.RowSpacing != null)
+        {
+            foreach (string value in settings.RowSpacing)
+            {
+                lstRowSpacing.Add(Common.ConvertRowSpacing(value));
+            }
+            optRowClasses = String.Join(" ", lstRowSpacing.ToArray());
+        }
+
+        //Vertical alignment class
+        if (!string.IsNullOrEmpty(settings.VerticallyAlignContent))
+        {
+            optVertAlignClass = Common.ConvertToClass(settings.VerticallyAlignContent);
+        }
+
+        //Create background color class if applicable.
+        if (!string.IsNullOrEmpty(settings.BackgroundColor))
+        {
+            bgColorClass = Common.ConvertBgColorClass(settings.BackgroundColor ?? "");
+        }
+    }
+}
+
+
+
+<section data-blockgrid="@LayoutName" class="@bgColorClass" data-equalizer="card">
+    @if (IsFullWidth)
+    {
+        <div class="grid-x" data-jf="JF1">
+            <div class="cell">
+                <div class="grid-x   @optRowClasses   @optVertAlignClass   ">
+                    @foreach (var area in Model.Areas)
+                    {
+                        @await Html.GetBlockGridItemAreaHtmlAsync(area)
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="grid-container">
+            <div class="grid-x" data-jf="JF2">
+                <div class="cell">
+                    <div class="grid-x   @optRowClasses   @optVertAlignClass   ">
+                        @foreach (var area in Model.Areas)
+                        {
+                            @await Html.GetBlockGridItemAreaHtmlAsync(area)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
